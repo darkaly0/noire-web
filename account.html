@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Account</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: linear-gradient(to bottom right, #fff, #f9f9f6);
+      border: 1px solid #c9a646;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+    .icon {
+      font-size: 2rem;
+      color: #c9a646;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #eee;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background: #f9f9f6;
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body>
+<header><h1>Your Account</h1></header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="routine.html">Routine Builder</a>
+  <a href="account.html">Account</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<div class="profile-container">
+  <!-- Profile Info -->
+  <div class="card">
+    <span class="icon">👤</span>
+    <h2>Profile Information</h2>
+    <p><strong>Name:</strong> Yanna Claire</p>
+    <p><strong>Email:</strong> yanna@example.com</p>
+  </div>
+
+  <!-- Skin Type -->
+  <div class="card">
+    <span class="icon">✨</span>
+    <h2>Skin Type</h2>
+    <p>Combination</p>
+  </div>
+
+  <!-- Skin Condition -->
+  <div class="card">
+    <span class="icon">🌸</span>
+    <h2>Skin Condition</h2>
+    <p>Occasional dryness, mild acne-prone areas</p>
+  </div>
+
+  <!-- Order History -->
+  <div class="card">
+    <span class="icon">🛒</span>
+    <h2>Order History</h2>
+    <table>
+      <tr><th>Order ID</th><th>Product</th><th>Date</th><th>Status</th></tr>
+      <tr><td>#2001</td><td>Hydrating Cleanser</td><td>Aug 10, 2026</td><td>Delivered</td></tr>
+      <tr><td>#2002</td><td>Oil Control Gel</td><td>Aug 12, 2026</td><td>Shipped</td></tr>
+      <tr><td>#2003</td><td>Glow Serum</td><td>Aug 15, 2026</td><td>Pending</td></tr>
+    </table>
+  </div>
+</div>
+
+<footer><p>&copy; 2026 Noiré Skincare</p></footer>
+</body>
+</html>

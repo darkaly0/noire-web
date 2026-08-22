@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Routine Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>Routine Builder</h1></header>
+<nav>...same nav links...</nav>
+<section class="hero">
+  <h2>Find Your Routine</h2>
+  <p>Answer a few questions to discover products tailored to your skin.</p>
+</section>
+
+<section class="grid">
+  <form id="skinQuiz">
+    <label>What best describes your skin?</label><br>
+    <select id="skinType">
+      <option value="dry">Dry</option>
+      <option value="oily">Oily</option>
+      <option value="combination">Combination</option>
+      <option value="sensitive">Sensitive</option>
+      <option value="normal">Normal</option>
+    </select><br><br>
+    <button type="button" class="cta" onclick="recommendProducts()">Get Recommendations</button>
+  </form>
+</section>
+
+<section id="recommendations" class="grid"></section>
+
+<script>
+function recommendProducts() {
+  const type = document.getElementById('skinType').value;
+  const recSection = document.getElementById('recommendations');
+  recSection.innerHTML = ""; // clear old results
+
+  const products = {
+    dry: ["Hydrating Cleanser", "Ceramide Cream", "Nourishing Oil"],
+    oily: ["Oil-Control Gel", "Mattifying Moisturizer", "Lightweight Cleanser"],
+    combination: ["Balancing Toner", "Adaptive Moisturizer", "Dual-Action Serum"],
+    sensitive: ["Fragrance-Free Cleanser", "Soothing Serum", "Calming Cream"],
+    normal: ["Glow Serum", "Daily Moisturizer", "Gentle Cleanser"]
+  };
+
+  products[type].forEach(p => {
+    recSection.innerHTML += `
+      <div class="product">
+        <h3>${p}</h3>
+        <p>Recommended for ${type} skin.</p>
+        <button class="cta" onclick="addToCart('${p}')">Add to Cart</button>
+      </div>`;
+  });
+}
+
+let cart = [];
+function addToCart(product) {
+  cart.push(product);
+  alert(product + " added to cart!");
+}
+</script>
+
+<footer>
+  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
