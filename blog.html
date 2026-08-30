@@ -4,6 +4,94 @@
   <meta charset="UTF-8">
   <title>Noiré Blog</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --charcoal: #000000;
+      --ivory: #F9F9F6;
+      --champagne: #F7E7CE;
+      --rose-gold: #B76E79;
+      --sage: #A8B5A2;
+    }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background: var(--champagne);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 2px solid var(--rose-gold);
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--rose-gold);
+      margin: 0;
+    }
+
+    nav {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--rose-gold);
+    }
+
+    .grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem auto;
+      max-width: 1000px;
+    }
+    .product {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 2rem;
+      text-align: center;
+      width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .product h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin-bottom: 1rem;
+    }
+    .product p {
+      font-size: 0.95rem;
+      margin: 0.5rem 0;
+    }
+
+    footer {
+      background: var(--champagne);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 2px solid var(--rose-gold);
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+    }
+  </style>
 </head>
 <body>
 <header><h1>Noiré Blog</h1></header>
@@ -17,15 +105,24 @@
   <a href="account.html">Account</a>
   <a href="cart.html">Cart</a>
 </nav>
-  
+
 <section class="grid">
-    <div class="product"><h3>Glow Guides</h3><p>Tips for radiant skin.</p></div>
-    <div class="product"><h3>Ingredient Science</h3><p>Deep dives into actives like niacinamide.</p></div>
-    <div class="product"><h3>Lifestyle & Wellness</h3><p>Skincare meets self-care rituals.</p></div>
-  </section>
-  
-  <footer>
-    <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
-  </footer>
+  <div class="product">
+    <h3>Glow Guides</h3>
+    <p>Tips for radiant skin.</p>
+  </div>
+  <div class="product">
+    <h3>Ingredient Science</h3>
+    <p>Deep dives into actives like niacinamide.</p>
+  </div>
+  <div class="product">
+    <h3>Lifestyle & Wellness</h3>
+    <p>Skincare meets self-care rituals.</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
+</footer>
 </body>
 </html>
