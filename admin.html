@@ -5,34 +5,125 @@
   <title>Noiré Admin Panel</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body { background: linear-gradient(to bottom right, #f9f9f6, #fff); }
-    .tabs { display:flex; justify-content:center; margin:1rem 0; }
-    .tab-btn {
-      background:#fff; border:1px solid #c9a646; padding:1rem 2rem;
-      cursor:pointer; font-family:'Playfair Display', serif;
-      transition: all 0.3s ease; margin:0 0.5rem; border-radius:8px;
+    :root {
+      --charcoal: #000000;
+      --ivory: #F9F9F6;
+      --champagne: #F7E7CE;
+      --rose-gold: #B76E79;
+      --sage: #A8B5A2;
     }
-    .tab-btn.active { background:#c9a646; color:#fff; }
-    .tab-content { display:none; padding:2rem; animation: fadeIn 0.5s ease; }
-    .tab-content.active { display:block; }
-    .card { background:#fff; border:1px solid #c9a646; border-radius:12px;
-      padding:1.5rem; box-shadow:0 6px 15px rgba(0,0,0,0.08); margin-bottom:1rem; }
-    table { width:100%; border-collapse:collapse; margin-top:1rem; }
-    th, td { border:1px solid #eee; padding:0.75rem; text-align:left; }
-    th { background:#f9f9f6; font-family:'Playfair Display', serif; }
-    .btn { background:#c9a646; color:#fff; padding:0.5rem 1rem; border:none;
-      cursor:pointer; border-radius:6px; transition: all 0.3s ease; }
-    .btn:hover { background:#000; box-shadow:0 0 10px #c9a646; }
+
+    body {
+      background: linear-gradient(to bottom right, var(--ivory), #fff);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    header, footer {
+      background: var(--champagne);
+      text-align: center;
+      padding: 1.5rem;
+      border-bottom: 2px solid var(--rose-gold);
+    }
+    header h1, footer p {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin: 0;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .tab-btn {
+      background: #fff;
+      border: 1px solid var(--rose-gold);
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      transition: all 0.3s ease;
+      margin: 0 0.5rem;
+      border-radius: 8px;
+      color: var(--charcoal);
+    }
+    .tab-btn.active {
+      background: var(--rose-gold);
+      color: var(--ivory);
+    }
+    .tab-btn:hover {
+      background: var(--champagne);
+      color: var(--rose-gold);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      background: linear-gradient(to bottom right, #fff, var(--ivory));
+      border: 1px solid var(--champagne);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #eee;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background: var(--ivory);
+      font-family: 'Playfair Display', serif;
+      color: var(--charcoal);
+    }
+
+    .btn {
+      background: var(--rose-gold);
+      color: var(--ivory);
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background: var(--sage);
+      transform: translateY(-2px);
+    }
+
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
   </style>
 </head>
 <body>
 <header>
-  <h1 style="font-family:'Playfair Display', serif;">Noiré Admin Panel</h1>
+  <h1>Noiré Admin Panel</h1>
   <p>Noiré Control Suite</p>
 </header>
 
-<!-- Tabs -->
 <div class="tabs">
   <button class="tab-btn active" onclick="openTab('dashboard')">Dashboard</button>
   <button class="tab-btn" onclick="openTab('products')">Products</button>
@@ -41,73 +132,57 @@
 </div>
 
 <div id="dashboard" class="tab-content active">
-    <div class="stats">
-      <!-- Users -->
-      <div class="card">
-        <h3>Total Users</h3>
-        <p id="userCount">120</p>
-        <div class="progress">
-          <div class="progress-bar" style="width:80%"></div>
-        </div>
-        <p>+12% growth this month</p>
-      </div>
-  
-      <!-- Orders -->
-      <div class="card">
-        <h3>Total Orders</h3>
-        <p id="orderCount">45</p>
-        <div class="progress">
-          <div class="progress-bar" style="width:60%"></div>
-        </div>
-        <p>+8% compared to last week</p>
-      </div>
-  
-      <!-- Revenue -->
-      <div class="card">
-        <h3>Revenue</h3>
-        <p id="revenue">₱56,000</p>
-        <div class="progress">
-          <div class="progress-bar" style="width:70%"></div>
-        </div>
-        <p>+15% increase this quarter</p>
-      </div>
-    </div>
+  <div class="card">
+    <h3>Total Users</h3>
+    <p id="userCount">120</p>
+    <p>+12% growth this month</p>
   </div>
-  
-  <div id="products" class="tab-content">
-    <h2>Manage Products</h2>
-    <button class="btn" onclick="addProduct()">+ Add Product</button>
-    <table>
-      <tr><th>Name</th><th>Category</th><th>Status</th><th>Actions</th></tr>
-      <tr>
-        <td>Hydrating Cleanser</td><td>Dry Skin</td><td>Active</td>
-        <td><button class="btn" onclick="editProduct()">Edit</button>
-            <button class="btn" onclick="deleteProduct()">Delete</button></td>
-      </tr>
-    </table>
+  <div class="card">
+    <h3>Total Orders</h3>
+    <p id="orderCount">45</p>
+    <p>+8% compared to last week</p>
   </div>
-  
-  <div id="users" class="tab-content">
-    <h2>Manage Users</h2>
-    <table>
-      <tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr>
-      <tr>
-        <td>Maria Santos</td><td>maria@example.com</td><td>Active</td>
-        <td><button class="btn" onclick="banUser()">Ban</button></td>
-      </tr>
-    </table>
+  <div class="card">
+    <h3>Revenue</h3>
+    <p id="revenue">₱56,000</p>
+    <p>+15% increase this quarter</p>
   </div>
-  
-  <div id="orders" class="tab-content">
-    <h2>Manage Orders</h2>
-    <table>
-      <tr><th>Order ID</th><th>User</th><th>Status</th><th>Actions</th></tr>
-      <tr>
-        <td>#1001</td><td>Juan Dela Cruz</td><td>Pending</td>
-        <td><button class="btn" onclick="updateOrder()">Mark Shipped</button></td>
-      </tr>
-    </table>
-  </div>
+</div>
+
+<div id="products" class="tab-content">
+  <h2>Manage Products</h2>
+  <button class="btn" onclick="addProduct()">+ Add Product</button>
+  <table>
+    <tr><th>Name</th><th>Category</th><th>Status</th><th>Actions</th></tr>
+    <tr>
+      <td>Hydrating Cleanser</td><td>Dry Skin</td><td>Active</td>
+      <td><button class="btn" onclick="editProduct()">Edit</button>
+          <button class="btn" onclick="deleteProduct()">Delete</button></td>
+    </tr>
+  </table>
+</div>
+
+<div id="users" class="tab-content">
+  <h2>Manage Users</h2>
+  <table>
+    <tr><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+    <tr>
+      <td>Maria Santos</td><td>maria@example.com</td><td>Active</td>
+      <td><button class="btn" onclick="banUser()">Ban</button></td>
+    </tr>
+  </table>
+</div>
+
+<div id="orders" class="tab-content">
+  <h2>Manage Orders</h2>
+  <table>
+    <tr><th>Order ID</th><th>User</th><th>Status</th><th>Actions</th></tr>
+    <tr>
+      <td>#1001</td><td>Juan Dela Cruz</td><td>Pending</td>
+      <td><button class="btn" onclick="updateOrder()">Mark Shipped</button></td>
+    </tr>
+  </table>
+</div>
 
 <footer><p>&copy; 2026 Noiré Admin</p></footer>
 
@@ -118,14 +193,11 @@ function openTab(tabId) {
   document.querySelector(`.tab-btn[onclick="openTab('${tabId}')"]`).classList.add('active');
   document.getElementById(tabId).classList.add('active');
 }
-
-// Demo functions
 function addProduct(){ alert("Add Product form here"); }
 function editProduct(){ alert("Edit Product form here"); }
 function deleteProduct(){ alert("Product deleted"); }
 function banUser(){ alert("User banned"); }
 function updateOrder(){ alert("Order status updated"); }
 </script>
-
 </body>
 </html>
