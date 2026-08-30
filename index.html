@@ -4,6 +4,125 @@
   <meta charset="UTF-8">
   <title>Noiré Skincare</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --charcoal: #000000;
+      --ivory: #F9F9F6;
+      --champagne: #F7E7CE;
+      --rose-gold: #B76E79;
+      --sage: #A8B5A2;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--ivory);
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: var(--champagne);
+      border-bottom: 2px solid var(--rose-gold);
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--rose-gold);
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--rose-gold);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--champagne), var(--ivory), var(--rose-gold));
+      text-align: center;
+      padding: 4rem 2rem;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 900px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--rose-gold);
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .cta {
+      background: var(--rose-gold);
+      color: var(--ivory);
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .cta:hover {
+      background: var(--sage);
+      transform: translateY(-2px);
+    }
+
+    .grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem auto;
+      max-width: 1000px;
+    }
+    .product {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 1rem;
+      text-align: center;
+      width: 250px;
+    }
+    .product h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin-top: 1rem;
+    }
+    .product p {
+      font-size: 0.95rem;
+      margin: 0.5rem 0;
+    }
+
+    footer {
+      background: var(--champagne);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 2px solid var(--rose-gold);
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -22,37 +141,37 @@
 </nav>
 
 <section class="hero">
-    <h2>Timeless Radiance, For Every Skin</h2>
-    <p>Inclusive, minimalist care designed for dry, oily, combination, sensitive, and normal skin types.</p>
-    <button class="cta">Shop Now</button>
-  </section>
-  
-  <section class="grid">
-    <div class="product">
-      <img src="images/cleanser.jpg" alt="Cleanser" width="200">
-      <h3>Hydrating Cleanser</h3>
-      <p>Gentle formula for dry skin.</p>
-      <button class="cta">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="images/gel.jpg" alt="Gel" width="200">
-      <h3>Oil Control Gel</h3>
-      <p>Lightweight gel for oily skin.</p>
-      <button class="cta">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="images/serum.jpg" alt="Serum" width="200">
-      <h3>Soothing Serum</h3>
-      <p>Calms sensitive skin.</p>
-      <button class="cta">Add to Cart</button>
-    </div>
-  </section>
-  
-  <section class="hero">
-    <h2>Why Choose Noiré?</h2>
-    <p>Luxury ingredients, dermatologist-tested, cruelty-free, and tailored to your skin type.</p>
-  </section>
-  
+  <h2>Timeless Radiance, For Every Skin</h2>
+  <p>Inclusive, minimalist care designed for dry, oily, combination, sensitive, and normal skin types.</p>
+  <button class="cta">Shop Now</button>
+</section>
+
+<section class="grid">
+  <div class="product">
+    <img src="images/cleanser.jpg" alt="Cleanser" width="200">
+    <h3>Hydrating Cleanser</h3>
+    <p>Gentle formula for dry skin.</p>
+    <button class="cta">Add to Cart</button>
+  </div>
+  <div class="product">
+    <img src="images/gel.jpg" alt="Gel" width="200">
+    <h3>Oil Control Gel</h3>
+    <p>Lightweight gel for oily skin.</p>
+    <button class="cta">Add to Cart</button>
+  </div>
+  <div class="product">
+    <img src="images/serum.jpg" alt="Serum" width="200">
+    <h3>Soothing Serum</h3>
+    <p>Calms sensitive skin.</p>
+    <button class="cta">Add to Cart</button>
+  </div>
+</section>
+
+<section class="hero">
+  <h2>Why Choose Noiré?</h2>
+  <p>Luxury ingredients, dermatologist-tested, cruelty-free, and tailored to your skin type.</p>
+</section>
+
 <footer>
   <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
 </footer>
