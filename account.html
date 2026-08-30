@@ -5,15 +5,63 @@
   <title>Your Account</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    :root {
+      --charcoal: #000000;
+      --ivory: #F9F9F6;
+      --champagne: #F7E7CE;
+      --rose-gold: #B76E79;
+      --sage: #A8B5A2;
+      --blush: #F2D6D0;
+    }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    header, footer {
+      background: var(--champagne);
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--rose-gold);
+    }
+    header h1, footer p {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin: 0;
+    }
+
+    nav {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--rose-gold);
+    }
+
     .profile-container {
       padding: 2rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
+      max-width: 1100px;
+      margin: 2rem auto;
     }
+
     .card {
-      background: linear-gradient(to bottom right, #fff, #f9f9f6);
-      border: 1px solid #c9a646;
+      background: linear-gradient(to bottom right, #fff, var(--ivory));
+      border: 1px solid var(--champagne);
       border-radius: 16px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.08);
       padding: 2rem;
@@ -24,18 +72,21 @@
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
+
     .card h2 {
       font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
       margin-bottom: 1rem;
-      color: #000;
     }
+
     .icon {
       font-size: 2rem;
-      color: #c9a646;
+      color: var(--rose-gold);
       position: absolute;
       top: 1rem;
       right: 1rem;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -47,13 +98,17 @@
       text-align: left;
     }
     th {
-      background: #f9f9f6;
+      background: var(--ivory);
       font-family: 'Playfair Display', serif;
+      color: var(--charcoal);
+    }
+    td {
+      color: var(--charcoal);
     }
   </style>
 </head>
 <body>
-<header><h1>Your Account</h1></header>
+<header><h1>Noiré</h1></header>
 <nav>
   <a href="index.html">Home</a>
   <a href="shop.html">Shop</a>
@@ -63,7 +118,6 @@
 </nav>
 
 <div class="profile-container">
-  <!-- Profile Info -->
   <div class="card">
     <span class="icon">👤</span>
     <h2>Profile Information</h2>
@@ -71,21 +125,18 @@
     <p><strong>Email:</strong> yanna@example.com</p>
   </div>
 
-  <!-- Skin Type -->
   <div class="card">
     <span class="icon">✨</span>
     <h2>Skin Type</h2>
-    <p>Combination</p>
+    <p id="skinTypeValue">Loading...</p>
   </div>
 
-  <!-- Skin Condition -->
   <div class="card">
     <span class="icon">🌸</span>
     <h2>Skin Condition</h2>
     <p>Occasional dryness, mild acne-prone areas</p>
   </div>
 
-  <!-- Order History -->
   <div class="card">
     <span class="icon">🛒</span>
     <h2>Order History</h2>
@@ -99,5 +150,9 @@
 </div>
 
 <footer><p>&copy; 2026 Noiré Skincare</p></footer>
+<script>
+  const savedSkinType = localStorage.getItem("userSkinType");
+  document.getElementById("skinTypeValue").textContent = savedSkinType || "Not set yet";
+</script>
 </body>
 </html>
