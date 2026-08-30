@@ -3,75 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <title>Routine Builder</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- ✅ Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --charcoal: #000000;
+      --ivory: #F9F9F6;
+      --champagne: #F7E7CE;
+      --rose-gold: #B76E79;
+      --sage: #A8B5A2;
+      --blush: #F2D6D0;
+    }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    header, footer {
+      background: var(--champagne);
+      text-align: center;
+      padding: 1.5rem;
+      border-bottom: 2px solid var(--rose-gold);
+    }
+    header h1, footer p {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin: 0;
+    }
+
+    nav {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--rose-gold);
+    }
+
+    .card {
+      background: linear-gradient(to bottom right, #fff, var(--ivory));
+      border: 1px solid var(--champagne);
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      padding: 2rem;
+      max-width: 650px;
+      margin: 2rem auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      background-color: var(--rose-gold);
+    }
+
+    .btn-primary {
+      background-color: var(--rose-gold);
+      border: none;
+      color: var(--ivory);
+    }
+    .btn-primary:hover {
+      background-color: var(--sage);
+    }
+    .btn-secondary {
+      background-color: var(--blush);
+      border: none;
+      color: var(--charcoal);
+    }
+    .btn-secondary:hover {
+      background-color: var(--sage);
+      color: var(--ivory);
+    }
+
+    .result {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 25px;
+      text-align: center;
+      color: var(--rose-gold);
+    }
+  </style>
 </head>
 <body>
 <header><h1>Routine Builder</h1></header>
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html">About</a>
   <a href="shop.html">Shop</a>
   <a href="routine.html">Routine Builder</a>
-  <a href="blog.html">Blog</a>
-  <a href="contact.html">Contact</a>
   <a href="account.html">Account</a>
   <a href="cart.html">Cart</a>
 </nav>
-  <section class="hero">
-  <h2>Find Your Routine</h2>
-  <p>Answer a few questions to discover products tailored to your skin.</p>
-</section>
 
-<section class="grid">
-  <form id="skinQuiz">
-    <label>What best describes your skin?</label><br>
-    <select id="skinType">
-      <option value="dry">Dry</option>
-      <option value="oily">Oily</option>
-      <option value="combination">Combination</option>
-      <option value="sensitive">Sensitive</option>
-      <option value="normal">Normal</option>
-    </select><br><br>
-    <button type="button" class="cta" onclick="recommendProducts()">Get Recommendations</button>
-  </form>
-</section>
+<div class="container">
+  <div class="card">
+    <h2>Find Your Routine 🧴</h2>
+    <p class="text-center">Answer 10 quick questions to discover products tailored to your skin.</p>
 
-<section id="recommendations" class="grid"></section>
+    <!-- ✅ Progress bar -->
+    <div class="progress mb-3">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+    </div>
 
+    <form id="skinQuiz">
+      <div id="question-container"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="prevBtn" class="btn btn-secondary" disabled>Previous</button>
+        <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
+      </div>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+</div>
+
+<footer><p>&copy; 2026 Noiré Skincare</p></footer>
+
+<!-- ✅ Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-function recommendProducts() {
-  const type = document.getElementById('skinType').value;
-  const recSection = document.getElementById('recommendations');
-  recSection.innerHTML = ""; // clear old results
+/* same quiz logic as before */
+const questions = [
+  { q: "How does your skin feel after washing?", options: {
+      "Feels tight/dry":"Dry","Feels greasy":"Oily","Red/irritated":"Sensitive",
+      "Dry in some areas, oily in others":"Combination","Feels fine":"Normal"
+  }},
+  { q: "How often do you get breakouts?", options: {
+      "Rarely":"Normal","Frequently":"Oily","Sometimes":"Combination",
+      "Triggered by products":"Sensitive","When skin is dry":"Dry"
+  }},
+  { q: "How does your skin react to moisturizer?", options: {
+      "Absorbs quickly":"Dry","Feels greasy":"Oily","Works in some areas":"Combination",
+      "Stings or burns":"Sensitive","Feels fine":"Normal"
+  }},
+  { q: "Do you experience redness or irritation?", options: {
+      "Yes, often":"Sensitive","Sometimes":"Combination","Rarely":"Normal",
+      "Only when dry":"Dry","Only when oily":"Oily"
+  }},
+  { q: "How shiny does your skin get midday?", options: {
+      "Not at all":"Dry","Very shiny":"Oily","T-zone only":"Combination",
+      "Red and shiny":"Sensitive","Balanced":"Normal"
+  }},
+  { q: "Do you feel tightness during the day?", options: {
+      "Yes":"Dry","No":"Normal","Sometimes":"Combination",
+      "With irritation":"Sensitive","With oiliness":"Oily"
+  }},
+  { q: "How visible are your pores?", options: {
+      "Small":"Dry","Large":"Oily","Mixed":"Combination",
+      "Inflamed":"Sensitive","Balanced":"Normal"
+  }},
+  { q: "Does your skin react to weather changes?", options: {
+      "Gets dry":"Dry","Gets oily":"Oily","Both":"Combination",
+      "Red/irritated":"Sensitive","No change":"Normal"
+  }},
+  { q: "How often do you need blotting papers?", options: {
+      "Never":"Normal","Daily":"Oily","Sometimes":"Combination",
+      "When irritated":"Sensitive","When dry":"Dry"
+  }},
+  { q: "How does your skin look without products?", options: {
+      "Dull":"Dry","Shiny":"Oily","Mixed":"Combination",
+      "Red/Irritated":"Sensitive","Balanced":"Normal"
+  }}
+];
 
-  const products = {
-    dry: ["Hydrating Cleanser", "Ceramide Cream", "Nourishing Oil"],
-    oily: ["Oil-Control Gel", "Mattifying Moisturizer", "Lightweight Cleanser"],
-    combination: ["Balancing Toner", "Adaptive Moisturizer", "Dual-Action Serum"],
-    sensitive: ["Fragrance-Free Cleanser", "Soothing Serum", "Calming Cream"],
-    normal: ["Glow Serum", "Daily Moisturizer", "Gentle Cleanser"]
-  };
+let currentQuestion = 0;
+let answers = [];
 
-  products[type].forEach(p => {
-    recSection.innerHTML += `
-      <div class="product">
-        <h3>${p}</h3>
-        <p>Recommended for ${type} skin.</p>
-        <button class="cta" onclick="addToCart('${p}')">Add to Cart</button>
+function showQuestion(index) {
+  const container = document.getElementById("question-container");
+  const q = questions[index];
+  container.innerHTML = `<h5>${index+1}. ${q.q}</h5>`;
+  Object.keys(q.options).forEach(opt => {
+    container.innerHTML += `
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="q${index}" value="${q.options[opt]}">
+        <label class="form-check-label">${opt}</label>
       </div>`;
   });
+  updateProgress();
 }
 
-let cart = [];
-function addToCart(product) {
-  cart.push(product);
-  alert(product + " added to cart!");
+function updateProgress() {
+  const progress = ((currentQuestion) / questions.length) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
 }
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+  if (!selected) { alert("Please select an answer!"); return; }
+  answers[currentQuestion] = selected.value;
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    showQuestion(currentQuestion);
+    document.getElementById("prevBtn").disabled = false;
+    if (currentQuestion === questions.length - 1) {
+      document.getElementById("nextBtn").textContent = "Finish";
+    }
+  } else { calculateResult(); }
+});
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion(currentQuestion);
+    if (currentQuestion === 0) document.getElementById("prevBtn").disabled = true;
+    document.getElementById("nextBtn").textContent = "Next";
+  }
+});
+
+function calculateResult() {
+  let counts = {Dry:0,Oily:0,Sensitive:0,Combination:0,Normal:0};
+  answers.forEach(ans => { if (counts[ans] !== undefined) counts[ans]++; });
+  let skinType = Object.keys(counts).reduce((a,b) => counts[a] > counts[b] ? a : b);
+  document.getElementById("result").textContent = "✨ Your skin type is: " + skinType + " ✨";
+  localStorage.setItem("userSkinType", skinType);
+  document.getElementById("question-container").innerHTML = "";
+  document.getElementById("nextBtn").style.display = "none";
+  document.getElementById("prevBtn").style.display = "none";
+  document.getElementById("progressBar").style.width = "100%";
+}
+
+showQuestion(currentQuestion);
 </script>
-
-<footer>
-  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
-</footer>
-
 </body>
 </html>
