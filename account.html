@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Account</title>
+
   <link rel="stylesheet" href="style.css">
+
   <style>
     :root {
       --charcoal: #000000;
@@ -27,6 +30,7 @@
       text-align: center;
       border-bottom: 2px solid var(--rose-gold);
     }
+
     header h1, footer p {
       font-family: 'Playfair Display', serif;
       color: var(--rose-gold);
@@ -39,6 +43,7 @@
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
+
     nav a {
       margin: 0 15px;
       text-decoration: none;
@@ -46,6 +51,7 @@
       color: var(--charcoal);
       transition: color 0.3s ease;
     }
+
     nav a:hover {
       color: var(--rose-gold);
     }
@@ -68,6 +74,7 @@
       position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.12);
@@ -92,23 +99,59 @@
       border-collapse: collapse;
       margin-top: 1rem;
     }
+
     th, td {
       border: 1px solid #eee;
       padding: 0.75rem;
       text-align: left;
     }
+
     th {
       background: var(--ivory);
       font-family: 'Playfair Display', serif;
       color: var(--charcoal);
     }
+
     td {
       color: var(--charcoal);
     }
+
+    .loading {
+      color: #777;
+    }
+
+    .logout-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: var(--rose-gold);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: var(--sage);
+    }
+
+    .empty-orders {
+      color: #777;
+      font-style: italic;
+      margin-top: 1rem;
+    }
   </style>
+
 </head>
+
 <body>
-<header><h1>Noiré</h1></header>
+
+<header>
+  <h1>Noiré</h1>
+</header>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="shop.html">Shop</a>
@@ -118,41 +161,311 @@
 </nav>
 
 <div class="profile-container">
-  <div class="card">
-    <span class="icon">👤</span>
-    <h2>Profile Information</h2>
-    <p><strong>Name:</strong> Yanna Claire</p>
-    <p><strong>Email:</strong> yanna@example.com</p>
-  </div>
+
+  <!-- PROFILE INFORMATION -->
 
   <div class="card">
-    <span class="icon">✨</span>
-    <h2>Skin Type</h2>
-    <p id="skinTypeValue">Loading...</p>
+
+```
+<span class="icon">👤</span>
+
+<h2>Profile Information</h2>
+
+<p>
+  <strong>Name:</strong>
+  <span id="usernameValue" class="loading">
+    Loading...
+  </span>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <span id="emailValue" class="loading">
+    Loading...
+  </span>
+</p>
+
+<button id="logoutBtn" class="logout-btn">
+  Logout
+</button>
+```
+
   </div>
 
-  <div class="card">
-    <span class="icon">🌸</span>
-    <h2>Skin Condition</h2>
-    <p>Occasional dryness, mild acne-prone areas</p>
-  </div>
+  <!-- SKIN TYPE -->
 
   <div class="card">
-    <span class="icon">🛒</span>
-    <h2>Order History</h2>
-    <table>
-      <tr><th>Order ID</th><th>Product</th><th>Date</th><th>Status</th></tr>
-      <tr><td>#2001</td><td>Hydrating Cleanser</td><td>Aug 10, 2026</td><td>Delivered</td></tr>
-      <tr><td>#2002</td><td>Oil Control Gel</td><td>Aug 12, 2026</td><td>Shipped</td></tr>
-      <tr><td>#2003</td><td>Glow Serum</td><td>Aug 15, 2026</td><td>Pending</td></tr>
-    </table>
+
+```
+<span class="icon">✨</span>
+
+<h2>Skin Type</h2>
+
+<p id="skinTypeValue">
+  Loading...
+</p>
+```
+
   </div>
+
+  <!-- SKIN CONDITION -->
+
+  <div class="card">
+
+```
+<span class="icon">🌸</span>
+
+<h2>Skin Condition</h2>
+
+<p id="skinConditionValue">
+  Not set yet
+</p>
+```
+
+  </div>
+
+  <!-- ORDER HISTORY -->
+
+  <div class="card">
+
+```
+<span class="icon">🛒</span>
+
+<h2>Order History</h2>
+
+<p class="empty-orders">
+  No orders yet.
+</p>
+
+<!--
+ORDER HISTORY WILL BE ADDED HERE LATER
+ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
+-->
+```
+
+  </div>
+
 </div>
 
-<footer><p>&copy; 2026 Noiré Skincare</p></footer>
-<script>
-  const savedSkinType = localStorage.getItem("userSkinType");
-  document.getElementById("skinTypeValue").textContent = savedSkinType || "Not set yet";
+<footer>
+  <p>&copy; 2026 Noiré Skincare</p>
+</footer>
+
+<!-- ==============================
+     FIREBASE
+============================== -->
+
+<script type="module">
+
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  import {
+    getDatabase,
+    ref,
+    get
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+  // ==============================
+  // FIREBASE CONFIG
+  // ==============================
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+
+    authDomain: "noire-17ed6.firebaseapp.com",
+
+    databaseURL:
+      "https://noire-17ed6-default-rtdb.firebaseio.com",
+
+    projectId: "noire-17ed6",
+
+    storageBucket:
+      "noire-17ed6.appspot.com",
+
+    messagingSenderId:
+      "559789891078",
+
+    appId:
+      "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+
+  };
+
+
+  // ==============================
+  // INITIALIZE FIREBASE
+  // ==============================
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getDatabase(app);
+
+
+  // ==============================
+  // CHECK CURRENT USER
+  // ==============================
+
+  onAuthStateChanged(auth, async (user) => {
+
+    if (user) {
+
+      console.log("Currently logged in:", user.uid);
+
+
+      try {
+
+        // Get the user's database record
+
+        const userRef =
+          ref(db, "users/" + user.uid);
+
+        const snapshot =
+          await get(userRef);
+
+
+        if (snapshot.exists()) {
+
+          const userData =
+            snapshot.val();
+
+
+          // ==============================
+          // DISPLAY USERNAME
+          // ==============================
+
+          document.getElementById("usernameValue")
+            .textContent =
+              userData.username || "No username";
+
+
+          // ==============================
+          // DISPLAY EMAIL
+          // ==============================
+
+          document.getElementById("emailValue")
+            .textContent =
+              userData.email || user.email || "No email";
+
+
+          // ==============================
+          // DISPLAY SKIN TYPE
+          // ==============================
+
+          document.getElementById("skinTypeValue")
+            .textContent =
+              userData.skinType || "Not set yet";
+
+
+          // ==============================
+          // DISPLAY SKIN CONDITION
+          // ==============================
+
+          document.getElementById("skinConditionValue")
+            .textContent =
+              userData.skinCondition || "Not set yet";
+
+
+        } else {
+
+          console.log(
+            "No profile found in Realtime Database."
+          );
+
+          document.getElementById("usernameValue")
+            .textContent =
+              user.displayName || "User";
+
+          document.getElementById("emailValue")
+            .textContent =
+              user.email || "No email";
+
+        }
+
+
+      } catch (error) {
+
+        console.error(
+          "Error loading account:",
+          error
+        );
+
+        document.getElementById("usernameValue")
+          .textContent =
+            "Unable to load";
+
+        document.getElementById("emailValue")
+          .textContent =
+            "Unable to load";
+
+      }
+
+
+    } else {
+
+      // ==============================
+      // NO USER LOGGED IN
+      // ==============================
+
+      console.log("No user logged in.");
+
+      alert("Please log in first.");
+
+      window.location.href =
+        "signuplogin.html";
+
+    }
+
+  });
+
+
+  // ==============================
+  // LOGOUT
+  // ==============================
+
+  document.getElementById("logoutBtn")
+    .addEventListener("click", async () => {
+
+      try {
+
+        await signOut(auth);
+
+        alert("You have been logged out. 💗");
+
+        window.location.href =
+          "signuplogin.html";
+
+      } catch (error) {
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+        alert(error.message);
+
+      }
+
+    });
+
+
+  // ==============================
+  // SKIN TYPE FROM LOCAL STORAGE
+  // ==============================
+
 </script>
+
 </body>
 </html>
+
