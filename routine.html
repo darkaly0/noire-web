@@ -137,109 +137,801 @@
 
 <!-- ✅ Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-/* same quiz logic as before */
-const questions = [
-  { q: "How does your skin feel after washing?", options: {
-      "Feels tight/dry":"Dry","Feels greasy":"Oily","Red/irritated":"Sensitive",
-      "Dry in some areas, oily in others":"Combination","Feels fine":"Normal"
-  }},
-  { q: "How often do you get breakouts?", options: {
-      "Rarely":"Normal","Frequently":"Oily","Sometimes":"Combination",
-      "Triggered by products":"Sensitive","When skin is dry":"Dry"
-  }},
-  { q: "How does your skin react to moisturizer?", options: {
-      "Absorbs quickly":"Dry","Feels greasy":"Oily","Works in some areas":"Combination",
-      "Stings or burns":"Sensitive","Feels fine":"Normal"
-  }},
-  { q: "Do you experience redness or irritation?", options: {
-      "Yes, often":"Sensitive","Sometimes":"Combination","Rarely":"Normal",
-      "Only when dry":"Dry","Only when oily":"Oily"
-  }},
-  { q: "How shiny does your skin get midday?", options: {
-      "Not at all":"Dry","Very shiny":"Oily","T-zone only":"Combination",
-      "Red and shiny":"Sensitive","Balanced":"Normal"
-  }},
-  { q: "Do you feel tightness during the day?", options: {
-      "Yes":"Dry","No":"Normal","Sometimes":"Combination",
-      "With irritation":"Sensitive","With oiliness":"Oily"
-  }},
-  { q: "How visible are your pores?", options: {
-      "Small":"Dry","Large":"Oily","Mixed":"Combination",
-      "Inflamed":"Sensitive","Balanced":"Normal"
-  }},
-  { q: "Does your skin react to weather changes?", options: {
-      "Gets dry":"Dry","Gets oily":"Oily","Both":"Combination",
-      "Red/irritated":"Sensitive","No change":"Normal"
-  }},
-  { q: "How often do you need blotting papers?", options: {
-      "Never":"Normal","Daily":"Oily","Sometimes":"Combination",
-      "When irritated":"Sensitive","When dry":"Dry"
-  }},
-  { q: "How does your skin look without products?", options: {
-      "Dull":"Dry","Shiny":"Oily","Mixed":"Combination",
-      "Red/Irritated":"Sensitive","Balanced":"Normal"
-  }}
-];
+<script type="module">
 
-let currentQuestion = 0;
-let answers = [];
-
-function showQuestion(index) {
-  const container = document.getElementById("question-container");
-  const q = questions[index];
-  container.innerHTML = `<h5>${index+1}. ${q.q}</h5>`;
-  Object.keys(q.options).forEach(opt => {
-    container.innerHTML += `
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="q${index}" value="${q.options[opt]}">
-        <label class="form-check-label">${opt}</label>
-      </div>`;
-  });
-  updateProgress();
-}
-
-function updateProgress() {
-  const progress = ((currentQuestion) / questions.length) * 100;
-  document.getElementById("progressBar").style.width = progress + "%";
-}
-
-document.getElementById("nextBtn").addEventListener("click", () => {
-  const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-  if (!selected) { alert("Please select an answer!"); return; }
-  answers[currentQuestion] = selected.value;
-  currentQuestion++;
-  if (currentQuestion < questions.length) {
-    showQuestion(currentQuestion);
-    document.getElementById("prevBtn").disabled = false;
-    if (currentQuestion === questions.length - 1) {
-      document.getElementById("nextBtn").textContent = "Finish";
+  /* =========================================
+     FIREBASE IMPORTS
+  ========================================= */
+  
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  
+  import {
+    getAuth,
+    onAuthStateChanged
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  
+  import {
+    getDatabase,
+    ref,
+    get,
+    update
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  
+  
+  /* =========================================
+     FIREBASE CONFIG
+  ========================================= */
+  
+  const firebaseConfig = {
+  
+    apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+  
+    authDomain: "noire-17ed6.firebaseapp.com",
+  
+    databaseURL:
+      "https://noire-17ed6-default-rtdb.firebaseio.com",
+  
+    projectId: "noire-17ed6",
+  
+    storageBucket:
+      "noire-17ed6.appspot.com",
+  
+    messagingSenderId:
+      "559789891078",
+  
+    appId:
+      "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+  };
+  
+  
+  /* =========================================
+     INITIALIZE FIREBASE
+  ========================================= */
+  
+  const app = initializeApp(firebaseConfig);
+  
+  const auth = getAuth(app);
+  
+  const db = getDatabase(app);
+  
+  
+  /* =========================================
+     QUIZ QUESTIONS
+  ========================================= */
+  
+  const questions = [
+  
+    {
+      q: "How does your skin feel after washing?",
+      options: {
+        "Feels tight/dry": "Dry",
+        "Feels greasy": "Oily",
+        "Red/irritated": "Sensitive",
+        "Dry in some areas, oily in others": "Combination",
+        "Feels fine": "Normal"
+      }
+    },
+  
+    {
+      q: "How often do you get breakouts?",
+      options: {
+        "Rarely": "Normal",
+        "Frequently": "Oily",
+        "Sometimes": "Combination",
+        "Triggered by products": "Sensitive",
+        "When skin is dry": "Dry"
+      }
+    },
+  
+    {
+      q: "How does your skin react to moisturizer?",
+      options: {
+        "Absorbs quickly": "Dry",
+        "Feels greasy": "Oily",
+        "Works in some areas": "Combination",
+        "Stings or burns": "Sensitive",
+        "Feels fine": "Normal"
+      }
+    },
+  
+    {
+      q: "Do you experience redness or irritation?",
+      options: {
+        "Yes, often": "Sensitive",
+        "Sometimes": "Combination",
+        "Rarely": "Normal",
+        "Only when dry": "Dry",
+        "Only when oily": "Oily"
+      }
+    },
+  
+    {
+      q: "How shiny does your skin get midday?",
+      options: {
+        "Not at all": "Dry",
+        "Very shiny": "Oily",
+        "T-zone only": "Combination",
+        "Red and shiny": "Sensitive",
+        "Balanced": "Normal"
+      }
+    },
+  
+    {
+      q: "Do you feel tightness during the day?",
+      options: {
+        "Yes": "Dry",
+        "No": "Normal",
+        "Sometimes": "Combination",
+        "With irritation": "Sensitive",
+        "With oiliness": "Oily"
+      }
+    },
+  
+    {
+      q: "How visible are your pores?",
+      options: {
+        "Small": "Dry",
+        "Large": "Oily",
+        "Mixed": "Combination",
+        "Inflamed": "Sensitive",
+        "Balanced": "Normal"
+      }
+    },
+  
+    {
+      q: "Does your skin react to weather changes?",
+      options: {
+        "Gets dry": "Dry",
+        "Gets oily": "Oily",
+        "Both": "Combination",
+        "Red/irritated": "Sensitive",
+        "No change": "Normal"
+      }
+    },
+  
+    {
+      q: "How often do you need blotting papers?",
+      options: {
+        "Never": "Normal",
+        "Daily": "Oily",
+        "Sometimes": "Combination",
+        "When irritated": "Sensitive",
+        "When dry": "Dry"
+      }
+    },
+  
+    {
+      q: "How does your skin look without products?",
+      options: {
+        "Dull": "Dry",
+        "Shiny": "Oily",
+        "Mixed": "Combination",
+        "Red/Irritated": "Sensitive",
+        "Balanced": "Normal"
+      }
     }
-  } else { calculateResult(); }
-});
-
-document.getElementById("prevBtn").addEventListener("click", () => {
-  if (currentQuestion > 0) {
-    currentQuestion--;
-    showQuestion(currentQuestion);
-    if (currentQuestion === 0) document.getElementById("prevBtn").disabled = true;
-    document.getElementById("nextBtn").textContent = "Next";
+  
+  ];
+  
+  
+  /* =========================================
+     QUIZ VARIABLES
+  ========================================= */
+  
+  let currentQuestion = 0;
+  
+  let answers = [];
+  
+  
+  /* =========================================
+     CURRENT FIREBASE USER
+  ========================================= */
+  
+  let currentUser = null;
+  
+  
+  onAuthStateChanged(auth, (user) => {
+  
+    if (user) {
+  
+      currentUser = user;
+  
+      console.log(
+        "Quiz user:",
+        currentUser.uid
+      );
+  
+    } else {
+  
+      alert("Please log in first.");
+  
+      window.location.href = "login.html";
+  
+    }
+  
+  });
+  
+  
+  /* =========================================
+     SHOW QUESTION
+  ========================================= */
+  
+  function showQuestion(index) {
+  
+    const container =
+      document.getElementById("question-container");
+  
+    const q = questions[index];
+  
+    container.innerHTML =
+      `<h5>${index + 1}. ${q.q}</h5>`;
+  
+  
+    Object.keys(q.options).forEach((opt) => {
+  
+      container.innerHTML += `
+  
+        <div class="form-check">
+  
+          <input
+            class="form-check-input"
+            type="radio"
+            name="q${index}"
+            value="${q.options[opt]}"
+          >
+  
+          <label class="form-check-label">
+            ${opt}
+          </label>
+  
+        </div>
+  
+      `;
+  
+    });
+  
+  
+    // Restore previous answer if user
+    // goes back to a previous question
+  
+    if (answers[index]) {
+  
+      const previousAnswer =
+        document.querySelector(
+          `input[name="q${index}"][value="${answers[index]}"]`
+        );
+  
+      if (previousAnswer) {
+        previousAnswer.checked = true;
+      }
+  
+    }
+  
+  
+    updateProgress();
+  
   }
-});
-
-function calculateResult() {
-  let counts = {Dry:0,Oily:0,Sensitive:0,Combination:0,Normal:0};
-  answers.forEach(ans => { if (counts[ans] !== undefined) counts[ans]++; });
-  let skinType = Object.keys(counts).reduce((a,b) => counts[a] > counts[b] ? a : b);
-  document.getElementById("result").textContent = "✨ Your skin type is: " + skinType + " ✨";
-  localStorage.setItem("userSkinType", skinType);
-  document.getElementById("question-container").innerHTML = "";
-  document.getElementById("nextBtn").style.display = "none";
-  document.getElementById("prevBtn").style.display = "none";
-  document.getElementById("progressBar").style.width = "100%";
-}
-
-showQuestion(currentQuestion);
-</script>
+  
+  
+  /* =========================================
+     PROGRESS BAR
+  ========================================= */
+  
+  function updateProgress() {
+  
+    const progress =
+      ((currentQuestion) / questions.length) * 100;
+  
+    document.getElementById("progressBar")
+      .style.width = progress + "%";
+  
+  }
+  
+  
+  /* =========================================
+     NEXT BUTTON
+  ========================================= */
+  
+  document
+    .getElementById("nextBtn")
+    .addEventListener("click", () => {
+  
+      const selected =
+        document.querySelector(
+          `input[name="q${currentQuestion}"]:checked`
+        );
+  
+  
+      if (!selected) {
+  
+        alert("Please select an answer!");
+  
+        return;
+  
+      }
+  
+  
+      answers[currentQuestion] =
+        selected.value;
+  
+  
+      currentQuestion++;
+  
+  
+      if (currentQuestion < questions.length) {
+  
+        showQuestion(currentQuestion);
+  
+        document.getElementById("prevBtn")
+          .disabled = false;
+  
+  
+        if (
+          currentQuestion ===
+          questions.length - 1
+        ) {
+  
+          document.getElementById("nextBtn")
+            .textContent = "Finish";
+  
+        }
+  
+      } else {
+  
+        calculateResult();
+  
+      }
+  
+    });
+  
+  
+  /* =========================================
+     PREVIOUS BUTTON
+  ========================================= */
+  
+  document
+    .getElementById("prevBtn")
+    .addEventListener("click", () => {
+  
+      if (currentQuestion > 0) {
+  
+        currentQuestion--;
+  
+        showQuestion(currentQuestion);
+  
+  
+        if (currentQuestion === 0) {
+  
+          document.getElementById("prevBtn")
+            .disabled = true;
+  
+        }
+  
+  
+        document.getElementById("nextBtn")
+          .textContent = "Next";
+  
+      }
+  
+    });
+  
+  
+  /* =========================================
+     CALCULATE SKIN TYPE
+  ========================================= */
+  
+  function calculateSkinType() {
+  
+    const counts = {
+  
+      Dry: 0,
+  
+      Oily: 0,
+  
+      Sensitive: 0,
+  
+      Combination: 0,
+  
+      Normal: 0
+  
+    };
+  
+  
+    answers.forEach((answer) => {
+  
+      if (counts[answer] !== undefined) {
+  
+        counts[answer]++;
+  
+      }
+  
+    });
+  
+  
+    return Object.keys(counts).reduce(
+      (a, b) =>
+        counts[a] > counts[b] ? a : b
+    );
+  
+  }
+  
+  
+  /* =========================================
+     CALCULATE SKIN CONDITION
+  ========================================= */
+  
+  function calculateSkinCondition() {
+  
+    let dryness = 0;
+  
+    let oiliness = 0;
+  
+    let irritation = 0;
+  
+    let breakouts = 0;
+  
+  
+    answers.forEach((answer, index) => {
+  
+      /*
+        Questions that indicate dryness
+      */
+  
+      if (
+        index === 0 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+      if (
+        index === 2 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+      if (
+        index === 5 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+      if (
+        index === 7 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+      if (
+        index === 8 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+      if (
+        index === 9 &&
+        answer === "Dry"
+      ) {
+        dryness++;
+      }
+  
+  
+      /*
+        Questions that indicate oiliness
+      */
+  
+      if (
+        index === 0 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 1 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+        breakouts++;
+      }
+  
+      if (
+        index === 2 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 4 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 5 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 6 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 7 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 8 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+      if (
+        index === 9 &&
+        answer === "Oily"
+      ) {
+        oiliness++;
+      }
+  
+  
+      /*
+        Questions that indicate sensitivity
+      */
+  
+      if (answer === "Sensitive") {
+  
+        irritation++;
+  
+      }
+  
+  
+      /*
+        Combination can also indicate
+        occasional breakouts
+      */
+  
+      if (
+        index === 1 &&
+        answer === "Combination"
+      ) {
+  
+        breakouts++;
+  
+      }
+  
+    });
+  
+  
+    /*
+      Determine the most noticeable condition
+    */
+  
+    if (irritation >= 2) {
+  
+      return "Redness / Irritation";
+  
+    }
+  
+    if (breakouts >= 1 && oiliness >= 2) {
+  
+      return "Acne-prone / Oily";
+  
+    }
+  
+    if (oiliness >= 3) {
+  
+      return "Excess Oiliness";
+  
+    }
+  
+    if (dryness >= 3) {
+  
+      return "Dryness";
+  
+    }
+  
+    if (breakouts >= 1) {
+  
+      return "Occasional Breakouts";
+  
+    }
+  
+    return "Balanced / Healthy";
+  
+  }
+  
+  
+  /* =========================================
+     SAVE RESULT TO FIREBASE
+  ========================================= */
+  
+  async function saveQuizResult(
+    skinType,
+    skinCondition
+  ) {
+  
+    if (!currentUser) {
+  
+      alert(
+        "You must be logged in to save your results."
+      );
+  
+      window.location.href = "login.html";
+  
+      return false;
+  
+    }
+  
+  
+    try {
+  
+      const userRef =
+        ref(
+          db,
+          "users/" + currentUser.uid
+        );
+  
+  
+      /*
+        Save the quiz results to the
+        currently logged-in user's account
+      */
+  
+      await update(userRef, {
+  
+        skinType: skinType,
+  
+        skinCondition: skinCondition
+  
+      });
+  
+  
+      console.log(
+        "Quiz results saved successfully:",
+        {
+          skinType,
+          skinCondition
+        }
+      );
+  
+  
+      return true;
+  
+  
+    } catch (error) {
+  
+      console.error(
+        "Error saving quiz result:",
+        error
+      );
+  
+      alert(
+        "We couldn't save your quiz results. Please try again."
+      );
+  
+      return false;
+  
+    }
+  
+  }
+  
+  
+  /* =========================================
+     CALCULATE FINAL RESULT
+  ========================================= */
+  
+  async function calculateResult() {
+  
+    const skinType =
+      calculateSkinType();
+  
+  
+    const skinCondition =
+      calculateSkinCondition();
+  
+  
+    const saved =
+      await saveQuizResult(
+        skinType,
+        skinCondition
+      );
+  
+  
+    if (!saved) {
+  
+      return;
+  
+    }
+  
+  
+    /*
+      Show result to the user
+    */
+  
+    document.getElementById("result").innerHTML = `
+  
+      ✨ Your results ✨
+  
+      <br><br>
+  
+      <strong>Skin Type:</strong>
+      ${skinType}
+  
+      <br>
+  
+      <strong>Skin Condition:</strong>
+      ${skinCondition}
+  
+      <br><br>
+  
+      Your results have been saved to your account. 💗
+  
+    `;
+  
+  
+    /*
+      Keep localStorage as an optional
+      temporary value for compatibility,
+      but Firebase is now the main source.
+    */
+  
+    localStorage.setItem(
+      "userSkinType",
+      skinType
+    );
+  
+  
+    /*
+      Hide quiz controls
+    */
+  
+    document.getElementById(
+      "question-container"
+    ).innerHTML = "";
+  
+  
+    document.getElementById(
+      "nextBtn"
+    ).style.display = "none";
+  
+  
+    document.getElementById(
+      "prevBtn"
+    ).style.display = "none";
+  
+  
+    document.getElementById(
+      "progressBar"
+    ).style.width = "100%";
+  
+  }
+  
+  
+  /* =========================================
+     START QUIZ
+  ========================================= */
+  
+  showQuestion(currentQuestion);
+  
+  </script>
+  
 </body>
 </html>
