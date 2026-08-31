@@ -25,11 +25,9 @@
     
     body {
         min-height: 100vh;
-    
         display: flex;
         justify-content: center;
         align-items: center;
-    
         background: linear-gradient(
             135deg,
             var(--champagne),
@@ -40,322 +38,205 @@
         font-family: 'Segoe UI', sans-serif;
         color: var(--charcoal);
     }
-
     .container {
         position: relative;
-    
         width: 850px;
         height: 550px;
-    
         background: #ffffff;
-    
         border-radius: 30px;
-    
         overflow: hidden;
-    
         box-shadow:
             0 6px 20px rgba(0, 0, 0, 0.12);
     }
- 
     .brand {
   position: absolute;
   top: 30px;               /* a bit lower for breathing space */
   left: 50%;               /* move to horizontal center */
   transform: translateX(-50%); /* shift back half its width */
-
   font-family: 'Playfair Display', serif;
   font-size: 48px;         /* bigger size */
   font-weight: 700;
   color: var(--rose-gold);
-
   z-index: 10;
   text-align: center;
 }
-
- 
     .form-box {
         position: absolute;
-    
         top: 0;
-    
         width: 50%;
         height: 100%;
-    
         display: flex;
         align-items: center;
-    
         padding: 40px;
-    
         background: #ffffff;
-    
         transition:
             left 0.6s ease-in-out,
             right 0.6s ease-in-out,
             opacity 0.4s ease-in-out;
-    
         z-index: 1;
     }
-
     .login {
         right: 0;
-    
         opacity: 1;
-    
         pointer-events: auto;
     }
- 
     .register {
         left: -50%;
-    
         opacity: 0;
-    
         pointer-events: none;
     }
-
     .container.active .login {
         right: -50%;
-    
         opacity: 0;
-    
         pointer-events: none;
     }
-    
     .container.active .register {
         left: 0;
-    
         opacity: 1;
-    
         pointer-events: auto;
     }
- 
     .form-box h1 {
         margin-bottom: 20px;
-    
         font-family: 'Playfair Display', serif;
-    
         font-size: 32px;
-    
         color: var(--rose-gold);
     }
- 
     .input-box {
         position: relative;
-    
         width: 100%;
-    
         margin: 25px 0;
     }
- 
     .input-box input {
         width: 100%;
-    
         padding: 13px 50px 13px 20px;
-    
         background: var(--ivory);
-    
         border: 1px solid #dddddd;
-    
         border-radius: 8px;
-    
         outline: none;
-    
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
         font-weight: 500;
-    
         color: var(--charcoal);
-    
         transition: 0.3s ease;
     }
-    
-    
     .input-box input:focus {
         border-color: var(--rose-gold);
-    
         box-shadow:
             0 0 0 2px rgba(183, 110, 121, 0.12);
     }
-    
     .input-box input::placeholder {
         color: #777777;
     }
-   
     .input-box i {
         position: absolute;
-    
         top: 50%;
         right: 20px;
-    
         transform: translateY(-50%);
-    
         font-size: 20px;
-    
         color: var(--rose-gold);
-    
         pointer-events: none;
     }
-   
     .btn {
         width: 100%;
         height: 48px;
-    
         border: none;
         border-radius: 8px;
-    
         background: var(--rose-gold);
-    
         color: var(--ivory);
-    
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
         font-weight: 600;
-    
         cursor: pointer;
-    
         transition:
             background 0.3s ease,
             transform 0.2s ease;
     }
-    
     .btn:hover {
         background: var(--sage);
-    
         transform: translateY(-1px);
     }
-    
-    
     .btn:active {
         transform: translateY(0);
     }
-    
     .google-btn {
         margin-top: 10px;
-    
         background: #ffffff;
-    
         color: var(--charcoal);
-    
         border: 1px solid #cccccc;
     }
-    
-    
     .google-btn:hover {
         background: var(--ivory);
     
         color: var(--charcoal);
     }
-    
-    
     .google-btn i {
         margin-right: 8px;
-    
         color: var(--rose-gold);
     }
-   
     .toggle-box {
         position: absolute;
-    
         inset: 0;
-    
         width: 100%;
         height: 100%;
-    
         z-index: 2;
-    
         pointer-events: none;
     }
-    
     .toggle-box::before {
         content: '';
-    
         position: absolute;
-    
         top: 0;
         left: 0;
-    
         width: 50%;
         height: 100%;
-    
         background: var(--champagne);
-    
         border-radius: 0 150px 150px 0;
-    
         z-index: 1;
-    
         transition:
             left 0.8s ease-in-out,
             border-radius 0.8s ease-in-out;
     }
-  
     .container.active .toggle-box::before {
         left: 50%;
         border-radius: 150px 0 0 150px;
     }
-  
     .toggle-panel {
         position: absolute;
-    
         top: 0;
-    
         width: 50%;
         height: 100%;
-    
         display: flex;
-    
         flex-direction: column;
-    
         justify-content: center;
-    
         align-items: center;
-    
         text-align: center;
-    
         padding: 30px;
-    
         color: #ffffff;
-    
         z-index: 2;
-    
         transition:
             opacity 0.4s ease-in-out;
-    
         pointer-events: auto;
     }
-   
     .toggle-left {
         left: 0;
-    
         opacity: 1;
     }
-   
     .toggle-right {
         right: 0;
-    
         opacity: 0;
-    
         pointer-events: none;
     }
-   
     .container.active .toggle-left {
         opacity: 0;
-    
         pointer-events: none;
     }
-    
-    
     .container.active .toggle-right {
         opacity: 1;
-    
         pointer-events: auto;
     }
-   
     .toggle-panel h1 {
         margin-bottom: 8px;
-    
         font-family: 'Playfair Display', serif;
-    
         font-size: 32px;
-    
         color: var(--ivory);
     }
     .toggle-panel p {
@@ -429,7 +310,6 @@
 <body>
 
 <div class="brand">Noiré Skin</div>
-
 <div class="container">
   <!-- Login Form -->
   <div class="form-box login">
@@ -488,8 +368,7 @@
     </div>
   </div>
 </div>
-
-<script type="module">
+<!--<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
   getAuth, 
@@ -504,9 +383,7 @@ import {
   set, 
   get, 
   child 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-  
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"; 
 const firebaseConfig = {
   apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
   authDomain: "noire-17ed6.firebaseapp.com",
@@ -516,12 +393,9 @@ const firebaseConfig = {
   messagingSenderId: "559789891078",
   appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
-
-  
     // Register
     document.querySelector(".register .btn").addEventListener("click", async () => {
       const username = document.querySelector(".register input[type=text]").value;
@@ -531,19 +405,16 @@ const db = getDatabase(app);
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-  
         // Save user data in Realtime DB
         await set(ref(db, "users/" + user.uid), {
           username: username,
           email: email
         });
-  
         alert("Registration successful!");
       } catch (error) {
         alert(error.message);
       }
     });
-  
     // Login
     document.querySelector(".login .btn").addEventListener("click", async () => {
       const email = document.querySelector(".login input[type=text]").value;
@@ -552,7 +423,6 @@ const db = getDatabase(app);
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-  
         // Fetch user data from DB
         const snapshot = await get(child(ref(db), "users/" + user.uid));
         if (snapshot.exists()) {
@@ -565,8 +435,7 @@ const db = getDatabase(app);
         alert(error.message);
       }
     });
-
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector('.container');
   const registerBtn = document.querySelector('.register-btn');
   const loginBtn = document.querySelector('.login-btn');
@@ -579,7 +448,356 @@ const db = getDatabase(app);
     container.classList.remove('active');
   });
 });
-  </script>
-  
+  </script>-->
+  <script type="module">
+
+    // ==============================
+    // FIREBASE IMPORTS
+    // ==============================
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        GoogleAuthProvider,
+        signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+        getDatabase,
+        ref,
+        set,
+        get
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+    // ==============================
+    // FIREBASE CONFIG
+    // ==============================
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+        authDomain: "noire-17ed6.firebaseapp.com",
+        databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
+        projectId: "noire-17ed6",
+        storageBucket: "noire-17ed6.appspot.com",
+        messagingSenderId: "559789891078",
+        appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+    };
+
+
+    // ==============================
+    // INITIALIZE FIREBASE
+    // ==============================
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getDatabase(app);
+
+    const googleProvider = new GoogleAuthProvider();
+
+
+    // ==============================
+    // REGISTER WITH EMAIL/PASSWORD
+    // ==============================
+
+    document.querySelector(".register .btn").addEventListener("click", async () => {
+
+        const username =
+            document.querySelector(".register input[type=text]").value.trim();
+
+        const email =
+            document.querySelector(".register input[type=email]").value.trim();
+
+        const password =
+            document.querySelector(".register input[type=password]").value;
+
+
+        if (!username || !email || !password) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+
+        try {
+
+            // Create Firebase Authentication account
+            const userCredential =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            const user = userCredential.user;
+
+
+            // Save additional information in Realtime Database
+            await set(
+                ref(db, "users/" + user.uid),
+                {
+                    username: username,
+                    email: email
+                }
+            );
+
+
+            alert("Registration successful! 🎉");
+
+            console.log("Registered user:", user.uid);
+
+        } catch (error) {
+
+            console.error("Registration error:", error);
+
+            alert(error.message);
+        }
+
+    });
+
+
+    // ==============================
+    // LOGIN WITH EMAIL/PASSWORD
+    // ==============================
+
+    document.querySelector(".login .btn").addEventListener("click", async () => {
+
+        const email =
+            document.querySelector(".login input[type=text]").value.trim();
+
+        const password =
+            document.querySelector(".login input[type=password]").value;
+
+
+        if (!email || !password) {
+            alert("Please enter your email and password.");
+            return;
+        }
+
+
+        try {
+
+            // STEP 1:
+            // Firebase Authentication checks the email/password
+
+            const userCredential =
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            const user = userCredential.user;
+
+            console.log("Firebase Auth successful:", user.uid);
+
+
+            // STEP 2:
+            // Get the user's information from Realtime Database
+
+            const userRef = ref(db, "users/" + user.uid);
+
+            const snapshot = await get(userRef);
+
+
+            // STEP 3:
+            // Check whether the user's database record exists
+
+            if (snapshot.exists()) {
+
+                const userData = snapshot.val();
+
+                console.log("User data:", userData);
+
+                alert(
+                    "Welcome back, " +
+                    userData.username +
+                    "! 💗"
+                );
+                 // Redirect to account page
+                window.location.href = "account.html";
+
+                // OPTIONAL:
+                // Redirect after successful login
+                //
+                // window.location.href = "home.html";
+
+
+            } else {
+
+                console.log("No database record found for:", user.uid);
+
+                alert(
+                    "Your account is authenticated, but no user profile was found."
+                );
+            }
+
+
+        } catch (error) {
+
+            console.error("Login error:", error);
+
+            // User-friendly Firebase errors
+
+            if (error.code === "auth/invalid-credential") {
+
+                alert("Incorrect email or password.");
+
+            } else if (error.code === "auth/user-not-found") {
+
+                alert("No account exists with this email.");
+
+            } else if (error.code === "auth/wrong-password") {
+
+                alert("Incorrect password.");
+
+            } else {
+
+                alert(error.message);
+            }
+
+        }
+
+    });
+
+
+    // ==============================
+    // GOOGLE SIGN-IN / SIGN-UP
+    // ==============================
+
+    const googleButtons =
+        document.querySelectorAll(".google-btn");
+
+
+    googleButtons.forEach((button) => {
+
+        button.addEventListener("click", async () => {
+
+            try {
+
+                // Open Google login window
+
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        googleProvider
+                    );
+
+
+                const user = result.user;
+
+                console.log("Google authentication successful:", user);
+
+
+                // Check whether this Google user
+                // already has a database profile
+
+                const userRef =
+                    ref(db, "users/" + user.uid);
+
+                const snapshot =
+                    await get(userRef);
+
+
+                if (!snapshot.exists()) {
+
+                    // First-time Google user
+                    // Create their database profile
+
+                    await set(
+                        userRef,
+                        {
+                            username:
+                                user.displayName || "Google User",
+
+                            email:
+                                user.email,
+
+                            photoURL:
+                                user.photoURL || ""
+                        }
+                    );
+
+
+                    alert(
+                        "Google account registered successfully! 🎉"
+                    );
+
+                    window.location.href = "account.html";
+
+                } else {
+
+                    // Existing Google user
+
+                    const userData =
+                        snapshot.val();
+
+                    alert(
+                        "Welcome back, " +
+                        userData.username +
+                        "! 💗"
+                    );
+
+                    window.location.href = "account.html";
+                }
+
+
+                // OPTIONAL:
+                // Redirect after Google login
+
+                // window.location.href = "home.html";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Google authentication error:",
+                    error
+                );
+
+                alert(error.message);
+            }
+
+        });
+
+    });
+
+
+    // ==============================
+    // LOGIN / REGISTER TOGGLE
+    // ==============================
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const container =
+            document.querySelector(".container");
+
+        const registerBtn =
+            document.querySelector(".register-btn");
+
+        const loginBtn =
+            document.querySelector(".login-btn");
+
+
+        registerBtn.addEventListener("click", () => {
+
+            container.classList.add("active");
+
+        });
+
+
+        loginBtn.addEventListener("click", () => {
+
+            container.classList.remove("active");
+
+        });
+
+    });
+
+</script>
 </body>
 </html>
