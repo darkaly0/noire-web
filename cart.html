@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Cart</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | Noiré Skincare</title>
+
+  <link rel="stylesheet" href="style.css">
+
   <style>
     :root {
       --charcoal: #000000;
@@ -11,6 +15,13 @@
       --champagne: #F7E7CE;
       --rose-gold: #B76E79;
       --sage: #A8B5A2;
+      --blush: #F2D6D0;
+      --white: #ffffff;
+      --soft-gray: #777;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -18,28 +29,42 @@
       color: var(--charcoal);
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
+      min-height: 100vh;
     }
 
+    /* ==============================
+       HEADER
+    ============================== */
+
     header {
-      background: var(--champagne);
-      padding: 2rem;
       text-align: center;
+      padding: 2rem;
+      background: var(--champagne);
       border-bottom: 2px solid var(--rose-gold);
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 700;
       color: var(--rose-gold);
       margin: 0;
+      letter-spacing: 1px;
     }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
 
     nav {
       text-align: center;
-      background: #fff;
+      background: var(--white);
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 5;
     }
+
     nav a {
       margin: 0 15px;
       text-decoration: none;
@@ -47,85 +72,450 @@
       color: var(--charcoal);
       transition: color 0.3s ease;
     }
+
     nav a:hover {
       color: var(--rose-gold);
     }
 
+    /* ==============================
+       HERO
+    ============================== */
+
     .hero {
-      background: linear-gradient(135deg, var(--champagne), var(--ivory), var(--rose-gold));
+      background:
+        linear-gradient(
+          135deg,
+          var(--champagne),
+          var(--ivory),
+          var(--blush)
+        );
+
       text-align: center;
-      padding: 3rem;
+      padding: 3.5rem 2rem;
       border-radius: 20px;
-      margin: 2rem auto;
-      max-width: 700px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      margin: 2.5rem auto 2rem;
+      max-width: 900px;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
+      border: 1px solid rgba(183,110,121,0.15);
     }
+
     .hero h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       color: var(--rose-gold);
-      margin-bottom: 1rem;
+      margin: 0 0 0.7rem;
+      letter-spacing: 0.5px;
     }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    /* ==============================
+       CART SECTION
+    ============================== */
+
+    .cart-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      padding: 0 20px;
+    }
+
+    .cart-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 2rem;
+
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.08);
+
+      border: 1px solid var(--champagne);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .cart-card:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.10);
+    }
+
+    /* ==============================
+       CART HEADER
+    ============================== */
+
+    .cart-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-heading h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      margin: 0;
+      font-size: 1.7rem;
+    }
+
+    .cart-heading span {
+      color: var(--soft-gray);
+      font-size: 0.9rem;
+    }
+
+    /* ==============================
+       PRODUCT ITEM
+    ============================== */
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      padding: 1.2rem;
+
+      background:
+        linear-gradient(
+          to right,
+          var(--ivory),
+          #ffffff
+        );
+
+      border: 1px solid #eee;
+      border-radius: 14px;
+
+      margin-bottom: 1.5rem;
+    }
+
+    .product-image {
+      width: 110px;
+      height: 110px;
+
+      border-radius: 12px;
+
+      background: var(--champagne);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 2.5rem;
+
+      flex-shrink: 0;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+
+      color: var(--rose-gold);
+
+      margin: 0 0 0.4rem;
+    }
+
+    .product-info p {
+      margin: 0.25rem 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .quantity {
+      display: inline-block;
+
+      margin-top: 0.5rem;
+      padding: 5px 12px;
+
+      background: var(--blush);
+
+      border-radius: 20px;
+
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* ==============================
+       CHECKOUT AREA
+    ============================== */
+
+    .cart-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+
+      padding-top: 1.5rem;
+
+      border-top: 1px solid #eee;
+    }
+
+    .total-label {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .total-price {
+      font-family: 'Playfair Display', serif;
+      color: var(--charcoal);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* ==============================
+       CHECKOUT BUTTON
+    ============================== */
 
     .btn-rose {
       background: var(--rose-gold);
       color: var(--ivory);
+
+      border: none;
       border-radius: 8px;
+
+      padding: 0.75rem 2rem;
+
+      font-size: 0.95rem;
       font-weight: 600;
-      transition: background 0.3s ease, transform 0.2s ease;
+
+      cursor: pointer;
+
+      transition:
+        background 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
     }
+
     .btn-rose:hover {
       background: var(--sage);
+      color: var(--ivory);
+
       transform: translateY(-2px);
+
+      box-shadow:
+        0 5px 12px rgba(0,0,0,0.12);
     }
+
+    /* ==============================
+       EMPTY CART MESSAGE
+    ============================== */
+
+    .cart-note {
+      text-align: center;
+      margin-top: 1.5rem;
+
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
 
     footer {
       background: var(--champagne);
       text-align: center;
       padding: 1rem;
+
       font-size: 0.9rem;
+
       border-top: 2px solid var(--rose-gold);
+
       font-family: 'Playfair Display', serif;
       color: var(--rose-gold);
-      width: 100%;
+
+      margin-top: 2rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+
+    @media (max-width: 700px) {
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      nav {
+        padding: 1rem 0.5rem;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        margin: 1.5rem 1rem;
+        padding: 2.5rem 1.5rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .cart-wrapper {
+        padding: 0 15px;
+      }
+
+      .cart-card {
+        padding: 1.3rem;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .product-info {
+        width: 100%;
+      }
+
+      .cart-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .btn-rose {
+        width: 100%;
+      }
     }
   </style>
+
 </head>
+
 <body>
-<header><h1>Your Cart</h1></header>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="shop.html">Shop</a>
-  <a href="routine.html">Routine Builder</a>
-  <a href="blog.html">Blog</a>
-  <a href="contact.html">Contact</a>
-  <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
-</nav>
 
-<section class="hero">
-  <h2>Your Cart</h2>
-  <p>Review items before checkout.</p>
-</section>
+  <!-- ==============================
+       HEADER
+  ============================== -->
 
-<div class="container my-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-sm p-4 text-center">
-        <h3 class="mb-3" style="font-family:'Playfair Display', serif; color:var(--rose-gold);">Hydrating Cleanser</h3>
-        <p>Qty: 1</p>
-        <button class="btn btn-rose">Checkout</button>
+  <header>
+    <h1>Noiré</h1>
+  </header>
+
+  <!-- ==============================
+       NAVIGATION
+  ============================== -->
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="routine.html">Routine Builder</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="account.html">Account</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+
+  <section class="hero">
+    <h2>Your Cart</h2>
+    <p>Review your selected skincare essentials before checkout.</p>
+  </section>
+
+  <!-- ==============================
+       CART
+  ============================== -->
+
+  <div class="cart-wrapper">
+
+<div class="cart-card">
+
+  <div class="cart-heading">
+    <h3>Shopping Bag</h3>
+    <span>1 item</span>
+  </div>
+
+  <!-- PRODUCT -->
+
+  <div class="cart-item">
+
+    <div class="product-image">
+      🧴
+    </div>
+
+    <div class="product-info">
+
+      <h4>Hydrating Cleanser</h4>
+
+      <p>
+        Gentle formula for dry and dehydrated skin.
+      </p>
+
+      <span class="quantity">
+        Qty: 1
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- CHECKOUT -->
+
+  <div class="cart-bottom">
+
+    <div>
+      <div class="total-label">
+        Total
+      </div>
+
+      <div class="total-price">
+        ₱0.00
       </div>
     </div>
+
+    <button class="btn-rose">
+      Proceed to Checkout
+    </button>
+
   </div>
+
+  <p class="cart-note">
+    ✨ Your skincare journey starts here.
+  </p>
+
 </div>
 
-<footer>
-  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
-</footer>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+
+  <footer>
+    <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
+
+
 
