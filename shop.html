@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Shop Noiré</title>
-  <!-- ✅ Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
     :root {
       --charcoal: #000000;
       --ivory: #F9F9F6;
       --champagne: #F7E7CE;
       --rose-gold: #B76E79;
       --sage: #A8B5A2;
+      --blush: #F2D6D0;
+      --white: #ffffff;
+      --soft-gray: #777;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -21,26 +44,39 @@
       margin: 0;
     }
 
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: var(--champagne);
       padding: 2rem;
       text-align: center;
       border-bottom: 2px solid var(--rose-gold);
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 700;
       color: var(--rose-gold);
       margin: 0;
+      letter-spacing: 1px;
     }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       text-align: center;
       background: #fff;
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 10;
     }
+
     nav a {
       margin: 0 15px;
       text-decoration: none;
@@ -48,112 +84,2462 @@
       color: var(--charcoal);
       transition: color 0.3s ease;
     }
+
     nav a:hover {
       color: var(--rose-gold);
     }
 
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
-      background: linear-gradient(135deg, var(--champagne), var(--ivory), var(--rose-gold));
+      background:
+        linear-gradient(
+          135deg,
+          var(--champagne),
+          var(--ivory),
+          var(--blush)
+        );
+
       text-align: center;
-      padding: 3rem;
+      padding: 3.5rem 2rem;
       border-radius: 20px;
-      margin: 2rem auto;
+      margin: 2.5rem auto 2rem;
       max-width: 900px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
+      border: 1px solid rgba(183,110,121,0.15);
     }
+
     .hero h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       color: var(--rose-gold);
+      margin: 0 0 0.7rem;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    /* =========================
+       SKIN TYPE CARDS
+    ========================= */
+
+    .skin-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+
+      padding: 2rem 1.5rem;
+
+      text-align: center;
+
+      height: 100%;
+      min-height: 170px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      border: 1px solid rgba(183,110,121,0.15);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .skin-card:hover {
+      transform: translateY(-6px);
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.11);
+
+      border-color:
+        rgba(183,110,121,0.4);
+    }
+
+    .skin-card.active {
+      border: 2px solid var(--rose-gold);
+
+      box-shadow:
+        0 10px 25px rgba(183,110,121,0.18);
+
+      background:
+        linear-gradient(
+          to bottom right,
+          #fff,
+          #fff8f7
+        );
+    }
+
+    .skin-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      font-size: 1.45rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .skin-card p {
+      color: #777;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+      max-width: 220px;
+    }
+
+    .skin-card::before {
+      content: "";
+
+      width: 35px;
+      height: 2px;
+
+      background: var(--rose-gold);
+
+      opacity: 0.5;
+
       margin-bottom: 1rem;
     }
 
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 2rem;
+    /* =========================
+       PRODUCTS HEADING
+    ========================= */
+
+    .products-heading {
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 4rem 0 2rem;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .card h3 {
+
+    .section-title {
       font-family: 'Playfair Display', serif;
       color: var(--rose-gold);
+      font-size: 2.4rem;
+      margin: 0;
+    }
+
+    .products-heading p {
+      color: #777;
+      margin-top: 8px;
+    }
+
+    .filter-status {
+      display: inline-block;
+
+      margin-top: 12px;
+
+      padding: 7px 16px;
+
+      border-radius: 20px;
+
+      background: var(--blush);
+
+      color: var(--rose-gold);
+
+      font-size: 0.85rem;
+
+      font-weight: 600;
+    }
+
+    /* =========================
+       PRODUCT CARD
+    ========================= */
+
+    .product-card {
+      background: #fff;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+
+      transition:
+        all 0.3s ease;
+
+      cursor: pointer;
+
+      height: 100%;
+
+      position: relative;
+
+      border:
+        1px solid rgba(183,110,121,0.12);
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.13);
+    }
+
+    .product-card.out-of-stock {
+      opacity: 0.72;
+    }
+
+    .product-image-wrapper {
+      position: relative;
+
+      width: 100%;
+      height: 250px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--champagne),
+          var(--ivory)
+        );
+
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 4rem;
+
+      color: var(--rose-gold);
+    }
+
+    /* =========================
+       STOCK BADGE
+    ========================= */
+
+    .stock-badge {
+      position: absolute;
+
+      bottom: 12px;
+      left: 12px;
+
+      padding: 6px 12px;
+
+      border-radius: 20px;
+
+      background: rgba(255,255,255,0.95);
+
+      color: #555;
+
+      font-size: 0.75rem;
+
+      font-weight: 600;
+
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .stock-badge.low {
+      color: var(--rose-gold);
+    }
+
+    .stock-badge.out {
+      background: var(--rose-gold);
+      color: white;
+    }
+
+    /* =========================
+       FAVORITE
+    ========================= */
+
+    .favorite-card-btn {
+      position: absolute;
+
+      top: 12px;
+      right: 12px;
+
+      width: 40px;
+      height: 40px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.95);
+
+      font-size: 1.3rem;
+
+      color: #555;
+
+      transition:
+        0.3s;
+
+      z-index: 5;
+
+      box-shadow:
+        0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .favorite-card-btn:hover {
+      transform: scale(1.1);
+
+      color: var(--rose-gold);
+    }
+
+    .favorite-card-btn.active {
+      color: var(--rose-gold);
+    }
+
+    /* =========================
+       PRODUCT INFO
+    ========================= */
+
+    .product-info {
+      padding: 1.3rem;
+    }
+
+    .product-category {
+      color: #777;
+
+      font-size: 0.8rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+
+      color: var(--rose-gold);
+
+      font-size: 1.35rem;
+
+      margin: 0.4rem 0;
+    }
+
+    .product-skin {
+      display: inline-block;
+
+      background: var(--blush);
+
+      color: var(--rose-gold);
+
+      border-radius: 20px;
+
+      padding: 4px 10px;
+
+      font-size: 0.75rem;
+
+      font-weight: 600;
+
+      margin-top: 4px;
+    }
+
+    .product-price {
+      font-weight: 700;
+
+      font-size: 1.15rem;
+
+      margin-top: 0.8rem;
+    }
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading-products {
+      text-align: center;
+
+      padding: 4rem 1rem;
+
+      color: #777;
+    }
+
+    .loading-products .spinner {
+      width: 35px;
+      height: 35px;
+
+      border: 3px solid var(--champagne);
+
+      border-top-color:
+        var(--rose-gold);
+
+      border-radius: 50%;
+
+      animation:
+        spin 0.8s linear infinite;
+
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty-products {
+      text-align: center;
+
+      padding: 4rem 1rem;
+
+      color: #777;
+    }
+
+    .empty-products .empty-icon {
+      font-size: 3rem;
+
       margin-bottom: 1rem;
     }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-content {
+      border: none;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.15);
+    }
+
+    .modal-product-image {
+      width: 100%;
+
+      height: 100%;
+
+      min-height: 400px;
+
+      object-fit: cover;
+
+      background: var(--champagne);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-product-category {
+      color: #777;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      font-size: 0.85rem;
+    }
+
+    .modal-product-title {
+      font-family: 'Playfair Display', serif;
+
+      color: var(--rose-gold);
+
+      font-size: 2.2rem;
+
+      margin: 0.5rem 0;
+    }
+
+    .modal-price {
+      font-size: 1.5rem;
+
+      font-weight: 700;
+
+      margin: 1rem 0;
+    }
+
+    .modal-description {
+      line-height: 1.7;
+
+      color: #555;
+    }
+
+    .product-details-list {
+      padding-left: 1.2rem;
+
+      color: #555;
+
+      line-height: 1.8;
+    }
+
+    .modal-stock {
+      display: inline-block;
+
+      padding: 6px 12px;
+
+      border-radius: 20px;
+
+      background: var(--blush);
+
+      color: var(--rose-gold);
+
+      font-size: 0.8rem;
+
+      font-weight: 600;
+
+      margin-bottom: 1rem;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .btn-noire {
+      background: var(--rose-gold);
+
+      color: white;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 0.75rem 1.3rem;
+
+      font-weight: 600;
+
+      transition: 0.3s;
+    }
+
+    .btn-noire:hover {
+      background: #9f5d68;
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    .btn-noire:disabled {
+      background: #bbb;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    .btn-favorite {
+      border: 2px solid var(--rose-gold);
+
+      color: var(--rose-gold);
+
+      background: white;
+
+      border-radius: 10px;
+
+      padding: 0.7rem 1.2rem;
+
+      font-weight: 600;
+
+      transition: 0.3s;
+    }
+
+    .btn-favorite:hover,
+    .btn-favorite.active {
+      background: var(--rose-gold);
+
+      color: white;
+    }
+
+    /* =========================
+       QUANTITY
+    ========================= */
+
+    .quantity-box {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      margin: 1rem 0;
+    }
+
+    .quantity-btn {
+      width: 35px;
+      height: 35px;
+
+      border: 1px solid #ccc;
+
+      background: white;
+
+      border-radius: 8px;
+
+      font-weight: bold;
+
+      transition: 0.2s;
+    }
+
+    .quantity-btn:hover {
+      border-color: var(--rose-gold);
+
+      color: var(--rose-gold);
+    }
+
+    .quantity-number {
+      min-width: 25px;
+
+      text-align: center;
+
+      font-weight: 600;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: var(--champagne);
+
       text-align: center;
+
       padding: 1rem;
+
       font-size: 0.9rem;
+
       border-top: 2px solid var(--rose-gold);
+
       font-family: 'Playfair Display', serif;
+
       color: var(--rose-gold);
+
       width: 100%;
+
+      margin-top: 4rem;
     }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      nav a {
+        display: inline-block;
+
+        margin: 5px 8px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .modal-product-image {
+        min-height: 280px;
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 <body>
-<header><h1>Shop</h1></header>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <h1>Noiré</h1>
+
+</header>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav>
+
   <a href="index.html">Home</a>
+
   <a href="about.html">About</a>
+
   <a href="shop.html">Shop</a>
+
   <a href="routine.html">Routine Builder</a>
+
   <a href="blog.html">Blog</a>
+
   <a href="contact.html">Contact</a>
+
   <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
+
+  <a href="cart.html">Cart 🛒</a>
+
 </nav>
 
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
+
   <h2>Shop by Skin Type</h2>
+
+  <p>
+    Discover skincare carefully selected
+    for your skin's unique needs.
+  </p>
+
 </section>
 
+
+<!-- =========================
+     SKIN TYPES
+========================= -->
+
 <div class="container my-4">
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card">
+
+  <div class="row g-4 justify-content-center">
+
+
+    <div class="col-md-4 col-sm-6">
+
+      <div
+        class="skin-card"
+        data-skin="Dry Skin"
+        onclick="filterProducts('Dry Skin')"
+      >
+
         <h3>Dry Skin</h3>
-        <p>Hydrating cleansers, ceramide creams.</p>
+
+        <p>
+          Hydrating products for soft,
+          comfortable and moisturized skin.
+        </p>
+
       </div>
+
     </div>
-    <div class="col-md-4">
-      <div class="card">
+
+
+    <div class="col-md-4 col-sm-6">
+
+      <div
+        class="skin-card"
+        data-skin="Oily Skin"
+        onclick="filterProducts('Oily Skin')"
+      >
+
         <h3>Oily Skin</h3>
-        <p>Oil-control cleansers, mattifying gels.</p>
+
+        <p>
+          Lightweight products designed
+          to help balance excess oil.
+        </p>
+
       </div>
+
     </div>
-    <div class="col-md-4">
-      <div class="card">
+
+
+    <div class="col-md-4 col-sm-6">
+
+      <div
+        class="skin-card"
+        data-skin="Combination Skin"
+        onclick="filterProducts('Combination Skin')"
+      >
+
         <h3>Combination Skin</h3>
-        <p>Balancing toners, adaptive moisturizers.</p>
+
+        <p>
+          Balancing skincare for areas
+          with different skin needs.
+        </p>
+
       </div>
+
     </div>
-    <div class="col-md-4">
-      <div class="card">
+
+
+    <div class="col-md-4 col-sm-6">
+
+      <div
+        class="skin-card"
+        data-skin="Sensitive Skin"
+        onclick="filterProducts('Sensitive Skin')"
+      >
+
         <h3>Sensitive Skin</h3>
-        <p>Fragrance-free cleansers, calming creams.</p>
+
+        <p>
+          Gentle products for delicate
+          and easily irritated skin.
+        </p>
+
       </div>
+
     </div>
-    <div class="col-md-4">
-      <div class="card">
+
+
+    <div class="col-md-4 col-sm-6">
+
+      <div
+        class="skin-card"
+        data-skin="Normal Skin"
+        onclick="filterProducts('Normal Skin')"
+      >
+
         <h3>Normal Skin</h3>
-        <p>Glow serums, daily moisturizers.</p>
+
+        <p>
+          Everyday skincare for maintaining
+          a healthy-looking glow.
+        </p>
+
       </div>
+
     </div>
+
+
   </div>
+
 </div>
 
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<div class="container">
+
+  <div class="products-heading">
+
+    <h2
+      id="productsTitle"
+      class="section-title"
+    >
+      Featured Products
+    </h2>
+
+    <p id="productsSubtitle">
+      Explore our skincare collection.
+    </p>
+
+    <span
+      id="filterStatus"
+      class="filter-status"
+      style="display:none;"
+    ></span>
+
+  </div>
+
+
+  <div
+    class="row g-4"
+    id="productContainer"
+  >
+
+    <div class="loading-products">
+
+      <div class="spinner"></div>
+
+      <p>
+        Loading our skincare collection...
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div
+  class="modal fade"
+  id="productModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered"
+  >
+
+    <div class="modal-content">
+
+      <div class="row g-0">
+
+
+        <div class="col-md-5">
+
+          <img
+            id="modalImage"
+            class="modal-product-image"
+            src=""
+            alt="Product"
+          >
+
+        </div>
+
+
+        <div class="col-md-7">
+
+          <div class="modal-body">
+
+
+            <div
+              id="modalCategory"
+              class="modal-product-category"
+            ></div>
+
+
+            <h2
+              id="modalTitle"
+              class="modal-product-title"
+            ></h2>
+
+
+            <div
+              id="modalRating"
+              class="rating"
+              style="color:var(--rose-gold);"
+            >
+              ★★★★★
+            </div>
+
+
+            <div
+              id="modalPrice"
+              class="modal-price"
+            ></div>
+
+
+            <div
+              id="modalStock"
+              class="modal-stock"
+            ></div>
+
+
+            <p
+              id="modalDescription"
+              class="modal-description"
+            ></p>
+
+
+            <h6>Benefits</h6>
+
+
+            <ul
+              id="modalBenefits"
+              class="product-details-list"
+            >
+
+              <li>
+                Carefully selected for your skincare routine
+              </li>
+
+              <li>
+                Designed for everyday use
+              </li>
+
+              <li>
+                Part of the Noiré collection
+              </li>
+
+            </ul>
+
+
+            <div class="quantity-box">
+
+              <button
+                class="quantity-btn"
+                onclick="changeQuantity(-1)"
+              >
+                −
+              </button>
+
+
+              <span
+                id="quantityNumber"
+                class="quantity-number"
+              >
+                1
+              </span>
+
+
+              <button
+                class="quantity-btn"
+                onclick="changeQuantity(1)"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <div class="d-flex gap-2 flex-wrap">
+
+
+              <button
+                id="favoriteButton"
+                class="btn-favorite"
+                onclick="toggleFavoriteFromModal()"
+              >
+                ♡ Favorite
+              </button>
+
+
+              <button
+                id="addCartButton"
+                class="btn-noire"
+                onclick="addCurrentProductToCart()"
+              >
+                🛒 Add to Cart
+              </button>
+
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
+
+  <p>
+    &copy; 2026 Noiré Skincare.
+    All rights reserved.
+  </p>
+
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  get
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+
+  authDomain:
+    "noire-17ed6.firebaseapp.com",
+
+  databaseURL:
+    "https://noire-17ed6-default-rtdb.firebaseio.com",
+
+  projectId:
+    "noire-17ed6",
+
+  storageBucket:
+    "noire-17ed6.appspot.com",
+
+  messagingSenderId:
+    "559789891078",
+
+  appId:
+    "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+
+};
+
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let products = [];
+let filteredProducts = [];
+let currentProduct = null;
+let currentQuantity = 1;
+let currentFilter = null;
+
+
+/* =========================================================
+   BOOTSTRAP MODAL
+========================================================= */
+
+const productModal =
+  new bootstrap.Modal(
+    document.getElementById("productModal")
+  );
+
+
+/* =========================================================
+   PRODUCT IMAGE STORAGE
+========================================================= */
+
+function getProductImage(productId) {
+
+  try {
+
+    const imageStorage =
+      JSON.parse(
+        localStorage.getItem("noire_product_images")
+      ) || {};
+
+    return imageStorage[productId] || "";
+
+  } catch (error) {
+
+    console.error(
+      "Error loading product image:",
+      error
+    );
+
+    return "";
+
+  }
+
+}
+
+
+/* =========================================================
+   GET PRODUCT PRICE
+========================================================= */
+
+function getProductPrice(product) {
+
+  /*
+    Firebase may store the price as:
+    - 299
+    - "299"
+    - "299.00"
+    - "₱299"
+    - "₱299.00"
+
+    This function cleans it before displaying it.
+  */
+
+  if (
+    product &&
+    product.price !== undefined &&
+    product.price !== null
+  ) {
+
+    let rawPrice =
+      String(product.price)
+        .replace(/₱/g, "")
+        .replace(/,/g, "")
+        .trim();
+
+    const price =
+      parseFloat(rawPrice);
+
+    if (
+      !isNaN(price)
+    ) {
+
+      return price.toLocaleString(
+        "en-PH",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      );
+
+    }
+
+  }
+
+  return "0.00";
+
+}
+
+
+/* =========================================================
+   GET NUMERIC PRICE
+========================================================= */
+
+function getNumericPrice(product) {
+
+  if (
+    !product ||
+    product.price === undefined ||
+    product.price === null
+  ) {
+
+    return 0;
+
+  }
+
+
+  let rawPrice =
+    String(product.price)
+      .replace(/₱/g, "")
+      .replace(/,/g, "")
+      .trim();
+
+
+  const price =
+    parseFloat(rawPrice);
+
+
+  return isNaN(price)
+    ? 0
+    : price;
+
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS FROM FIREBASE
+========================================================= */
+
+async function loadProducts() {
+
+  const container =
+    document.getElementById(
+      "productContainer"
+    );
+
+
+  container.innerHTML = `
+
+    <div class="loading-products">
+
+      <div class="spinner"></div>
+
+      <p>
+        Loading our skincare collection...
+      </p>
+
+    </div>
+
+  `;
+
+
+  try {
+
+    const productsRef =
+      ref(db, "products");
+
+
+    const snapshot =
+      await get(productsRef);
+
+
+    products = [];
+
+
+    if (snapshot.exists()) {
+
+      const data =
+        snapshot.val();
+
+
+      Object.entries(data).forEach(
+        ([id, product]) => {
+
+          /*
+            Only display active products.
+
+            If status does not exist,
+            product will still appear.
+          */
+
+          if (
+            product.status &&
+            String(product.status)
+              .toLowerCase() !== "active"
+          ) {
+
+            return;
+
+          }
+
+
+          products.push({
+
+            /*
+              Firebase ID
+            */
+
+            id: id,
+
+
+            /*
+              PRODUCT INFORMATION
+            */
+
+            name:
+              product.name ||
+              "Unnamed Product",
+
+            productType:
+              product.productType ||
+              "Skincare",
+
+            skinType:
+              product.skinType ||
+              "All Skin Types",
+
+
+            /*
+              ⭐ IMPORTANT ⭐
+
+              THIS WAS THE MISSING PART.
+
+              We are now getting the price
+              directly from Firebase.
+            */
+
+            price:
+              product.price !== undefined &&
+              product.price !== null
+                ? product.price
+                : 0,
+
+
+            /*
+              STOCK
+            */
+
+            stocks:
+              Number(product.stocks) || 0,
+
+
+            /*
+              STATUS
+            */
+
+            status:
+              product.status ||
+              "Active",
+
+
+            /*
+              IMAGE
+            */
+
+            image:
+              getProductImage(id),
+
+
+            /*
+              DESCRIPTION
+            */
+
+            description:
+              product.description ||
+              `${product.productType || "Skincare"} carefully selected for ${product.skinType || "all skin types"}.`,
+
+
+            /*
+              RATING
+            */
+
+            rating:
+              product.rating ||
+              "★★★★★",
+
+
+            /*
+              BENEFITS
+            */
+
+            benefits:
+
+              Array.isArray(product.benefits)
+
+                ? product.benefits
+
+                : [
+
+                    `Suitable for ${product.skinType || "all skin types"}`,
+
+                    `Designed as a ${product.productType || "skincare"} product`,
+
+                    "Part of the Noiré skincare collection"
+
+                  ]
+
+          });
+
+        }
+      );
+
+    }
+
+
+    /*
+      Newest products first
+    */
+
+    products.reverse();
+
+
+    filteredProducts =
+      [...products];
+
+
+    renderProducts();
+
+
+  } catch (error) {
+
+    console.error(
+      "Error loading products:",
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="empty-products col-12">
+
+        <div class="empty-icon">
+          ⚠️
+        </div>
+
+        <h4>
+          We couldn't load the products.
+        </h4>
+
+        <p>
+          Please refresh the page and try again.
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
+
+function renderProducts() {
+
+  const container =
+    document.getElementById(
+      "productContainer"
+    );
+
+
+  container.innerHTML = "";
+
+
+  if (
+    filteredProducts.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty-products col-12">
+
+        <div class="empty-icon">
+          🧴
+        </div>
+
+        <h4>
+          No products found
+        </h4>
+
+        <p>
+          There are currently no products
+          available for this category.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const favorites =
+    JSON.parse(
+      localStorage.getItem(
+        "noireFavorites"
+      )
+    ) || [];
+
+
+  filteredProducts.forEach(
+    product => {
+
+      const isFavorite =
+        favorites.includes(
+          product.id
+        );
+
+
+      const isOutOfStock =
+        product.stocks <= 0;
+
+
+      const cardColumn =
+        document.createElement(
+          "div"
+        );
+
+
+      cardColumn.className =
+        "col-lg-4 col-md-6";
+
+
+      cardColumn.innerHTML = `
+
+        <div
+          class="product-card ${
+            isOutOfStock
+              ? "out-of-stock"
+              : ""
+          }"
+          onclick="openProduct('${product.id}')"
+        >
+
+          <div class="product-image-wrapper">
+
+            <button
+              class="favorite-card-btn ${
+                isFavorite
+                  ? "active"
+                  : ""
+              }"
+              onclick="
+                event.stopPropagation();
+                toggleFavorite('${product.id}')
+              "
+            >
+
+              ${
+                isFavorite
+                  ? "♥"
+                  : "♡"
+              }
+
+            </button>
+
+
+            ${
+              product.image
+
+                ? `
+
+                  <img
+                    src="${product.image}"
+                    class="product-image"
+                    alt="${escapeHtml(product.name)}"
+                  >
+
+                `
+
+                : `
+
+                  <div class="image-placeholder">
+                    🧴
+                  </div>
+
+                `
+            }
+
+
+            ${
+              isOutOfStock
+
+                ? `
+
+                  <span class="stock-badge out">
+                    Out of Stock
+                  </span>
+
+                `
+
+                : product.stocks <= 5
+
+                ? `
+
+                  <span class="stock-badge low">
+                    Only ${product.stocks} left
+                  </span>
+
+                `
+
+                : `
+
+                  <span class="stock-badge">
+                    ${product.stocks} available
+                  </span>
+
+                `
+            }
+
+          </div>
+
+
+          <div class="product-info">
+
+            <div class="product-category">
+
+              ${escapeHtml(
+                product.productType
+              )}
+
+            </div>
+
+
+            <h3 class="product-name">
+
+              ${escapeHtml(
+                product.name
+              )}
+
+            </h3>
+
+
+            <span class="product-skin">
+
+              ${escapeHtml(
+                product.skinType
+              )}
+
+            </span>
+
+
+            <div
+              class="rating"
+              style="
+                color:var(--rose-gold);
+                margin-top:10px;
+              "
+            >
+              ★★★★★
+            </div>
+
+
+            <!-- ⭐ PRICE FROM FIREBASE ⭐ -->
+
+            <div class="product-price">
+
+              ₱${getProductPrice(product)}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        cardColumn
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   FILTER PRODUCTS BY SKIN TYPE
+========================================================= */
+
+window.filterProducts =
+  function(skinType) {
+
+    currentFilter =
+      skinType;
+
+
+    filteredProducts =
+      products.filter(
+        product => {
+
+          const productSkin =
+            String(
+              product.skinType || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+          const selectedSkin =
+            String(
+              skinType
+            )
+            .trim()
+            .toLowerCase();
+
+
+          return (
+            productSkin ===
+            selectedSkin
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(".skin-card")
+      .forEach(card => {
+
+        card.classList.remove(
+          "active"
+        );
+
+
+        if (
+          card.dataset.skin ===
+          skinType
+        ) {
+
+          card.classList.add(
+            "active"
+          );
+
+        }
+
+      });
+
+
+    document.getElementById(
+      "productsTitle"
+    ).textContent =
+      `${skinType} Products`;
+
+
+    document.getElementById(
+      "productsSubtitle"
+    ).textContent =
+      `Skincare selected for ${skinType.toLowerCase()}.`;
+
+
+    const status =
+      document.getElementById(
+        "filterStatus"
+      );
+
+
+    status.style.display =
+      "inline-block";
+
+
+    status.textContent =
+      `${filteredProducts.length} product${
+        filteredProducts.length !== 1
+          ? "s"
+          : ""
+      } found`;
+
+
+    renderProducts();
+
+  };
+
+
+/* =========================================================
+   SHOW ALL PRODUCTS
+========================================================= */
+
+function showAllProducts() {
+
+  currentFilter = null;
+
+  filteredProducts =
+    [...products];
+
+
+  document
+    .querySelectorAll(".skin-card")
+    .forEach(card => {
+
+      card.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  document.getElementById(
+    "productsTitle"
+  ).textContent =
+    "Featured Products";
+
+
+  document.getElementById(
+    "productsSubtitle"
+  ).textContent =
+    "Explore our skincare collection.";
+
+
+  document.getElementById(
+    "filterStatus"
+  ).style.display =
+    "none";
+
+
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   OPEN PRODUCT MODAL
+========================================================= */
+
+window.openProduct =
+  function(id) {
+
+    currentProduct =
+      products.find(
+        product =>
+          String(product.id) ===
+          String(id)
+      );
+
+
+    if (!currentProduct) {
+
+      return;
+
+    }
+
+
+    currentQuantity = 1;
+
+
+    /*
+      IMAGE
+    */
+
+    const image =
+      document.getElementById(
+        "modalImage"
+      );
+
+
+    if (currentProduct.image) {
+
+      image.src =
+        currentProduct.image;
+
+      image.style.display =
+        "block";
+
+    } else {
+
+      image.removeAttribute(
+        "src"
+      );
+
+      image.style.display =
+        "none";
+
+    }
+
+
+    /*
+      PRODUCT NAME
+    */
+
+    document.getElementById(
+      "modalTitle"
+    ).textContent =
+      currentProduct.name;
+
+
+    /*
+      CATEGORY
+    */
+
+    document.getElementById(
+      "modalCategory"
+    ).textContent =
+      `${currentProduct.skinType} • ${currentProduct.productType}`;
+
+
+    /*
+      RATING
+    */
+
+    document.getElementById(
+      "modalRating"
+    ).textContent =
+      currentProduct.rating;
+
+
+    /*
+      ⭐ PRICE FROM FIREBASE ⭐
+    */
+
+    document.getElementById(
+      "modalPrice"
+    ).textContent =
+      "₱" +
+      getProductPrice(
+        currentProduct
+      );
+
+
+    /*
+      DESCRIPTION
+    */
+
+    document.getElementById(
+      "modalDescription"
+    ).textContent =
+      currentProduct.description;
+
+
+    /*
+      QUANTITY
+    */
+
+    document.getElementById(
+      "quantityNumber"
+    ).textContent =
+      currentQuantity;
+
+
+    /*
+      STOCK
+    */
+
+    const stock =
+      document.getElementById(
+        "modalStock"
+      );
+
+
+    if (
+      currentProduct.stocks <= 0
+    ) {
+
+      stock.textContent =
+        "Out of Stock";
+
+      stock.style.background =
+        "#ead5d5";
+
+      stock.style.color =
+        "#9a4d4d";
+
+    } else {
+
+      stock.textContent =
+        `${currentProduct.stocks} available`;
+
+      stock.style.background =
+        "var(--blush)";
+
+      stock.style.color =
+        "var(--rose-gold)";
+
+    }
+
+
+    /*
+      BENEFITS
+    */
+
+    const benefits =
+      document.getElementById(
+        "modalBenefits"
+      );
+
+
+    benefits.innerHTML = "";
+
+
+    currentProduct.benefits
+      .forEach(
+        benefit => {
+
+          const li =
+            document.createElement(
+              "li"
+            );
+
+
+          li.textContent =
+            benefit;
+
+
+          benefits.appendChild(
+            li
+          );
+
+        }
+      );
+
+
+    updateFavoriteButton();
+
+    updateCartButton();
+
+
+    productModal.show();
+
+  };
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
+window.changeQuantity =
+  function(amount) {
+
+    if (!currentProduct) {
+
+      return;
+
+    }
+
+
+    currentQuantity +=
+      amount;
+
+
+    if (
+      currentQuantity < 1
+    ) {
+
+      currentQuantity = 1;
+
+    }
+
+
+    /*
+      Never exceed available stock.
+    */
+
+    if (
+      currentProduct.stocks > 0 &&
+      currentQuantity >
+        currentProduct.stocks
+    ) {
+
+      currentQuantity =
+        currentProduct.stocks;
+
+    }
+
+
+    document.getElementById(
+      "quantityNumber"
+    ).textContent =
+      currentQuantity;
+
+  };
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+window.toggleFavorite =
+  function(id) {
+
+    let favorites =
+      JSON.parse(
+        localStorage.getItem(
+          "noireFavorites"
+        )
+      ) || [];
+
+
+    if (
+      favorites.includes(id)
+    ) {
+
+      favorites =
+        favorites.filter(
+          productId =>
+            productId !== id
+        );
+
+    } else {
+
+      favorites.push(id);
+
+    }
+
+
+    localStorage.setItem(
+      "noireFavorites",
+      JSON.stringify(
+        favorites
+      )
+    );
+
+
+    renderProducts();
+
+    updateFavoriteButton();
+
+  };
+
+
+/* =========================================================
+   FAVORITE FROM MODAL
+========================================================= */
+
+window.toggleFavoriteFromModal =
+  function() {
+
+    if (!currentProduct) {
+
+      return;
+
+    }
+
+
+    toggleFavorite(
+      currentProduct.id
+    );
+
+  };
+
+
+/* =========================================================
+   UPDATE FAVORITE BUTTON
+========================================================= */
+
+function updateFavoriteButton() {
+
+  if (!currentProduct) {
+
+    return;
+
+  }
+
+
+  const favorites =
+    JSON.parse(
+      localStorage.getItem(
+        "noireFavorites"
+      )
+    ) || [];
+
+
+  const button =
+    document.getElementById(
+      "favoriteButton"
+    );
+
+
+  if (
+    favorites.includes(
+      currentProduct.id
+    )
+  ) {
+
+    button.textContent =
+      "♥ Favorited";
+
+    button.classList.add(
+      "active"
+    );
+
+  } else {
+
+    button.textContent =
+      "♡ Favorite";
+
+    button.classList.remove(
+      "active"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+window.addCurrentProductToCart =
+  function() {
+
+    if (!currentProduct) {
+
+      return;
+
+    }
+
+
+    if (
+      currentProduct.stocks <= 0
+    ) {
+
+      alert(
+        "Sorry, this product is currently out of stock."
+      );
+
+      return;
+
+    }
+
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem(
+          "noireCart"
+        )
+      ) || [];
+
+
+    const existingProduct =
+      cart.find(
+        item =>
+          String(item.id) ===
+          String(currentProduct.id)
+      );
+
+
+    const existingQuantity =
+      existingProduct
+        ? Number(
+            existingProduct.quantity
+          )
+        : 0;
+
+
+    if (
+      existingQuantity +
+        currentQuantity >
+      currentProduct.stocks
+    ) {
+
+      alert(
+        `Only ${currentProduct.stocks} item(s) are available.`
+      );
+
+      return;
+
+    }
+
+
+    /*
+      ⭐ ALWAYS GET THE CURRENT
+      NUMERIC PRICE FROM FIREBASE DATA
+    */
+
+    const productPrice =
+      getNumericPrice(
+        currentProduct
+      );
+
+
+    if (existingProduct) {
+
+      existingProduct.quantity +=
+        currentQuantity;
+
+
+      /*
+        Keep price synchronized
+      */
+
+      existingProduct.price =
+        productPrice;
+
+    } else {
+
+      cart.push({
+
+        id:
+          currentProduct.id,
+
+        name:
+          currentProduct.name,
+
+        /*
+          ⭐ PRICE IS NOW SAVED CORRECTLY ⭐
+        */
+
+        price:
+          productPrice,
+
+        image:
+          currentProduct.image,
+
+        quantity:
+          currentQuantity
+
+      });
+
+    }
+
+
+    localStorage.setItem(
+      "noireCart",
+      JSON.stringify(cart)
+    );
+
+
+    alert(
+      `${currentProduct.name} has been added to your cart! 🛒`
+    );
+
+
+    updateCartButton();
+
+  };
+
+
+/* =========================================================
+   UPDATE CART BUTTON
+========================================================= */
+
+function updateCartButton() {
+
+  const button =
+    document.getElementById(
+      "addCartButton"
+    );
+
+
+  if (!currentProduct) {
+
+    return;
+
+  }
+
+
+  if (
+    currentProduct.stocks <= 0
+  ) {
+
+    button.disabled = true;
+
+    button.textContent =
+      "Out of Stock";
+
+  } else {
+
+    button.disabled = false;
+
+    button.textContent =
+      "🛒 Add to Cart";
+
+  }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.textContent =
+    value || "";
+
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadProducts();
+
+
+</script>
+
 </body>
 </html>
