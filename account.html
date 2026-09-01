@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Account</title>
+  <title>Your Account | Noiré</title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -17,6 +18,10 @@
       --blush: #F2D6D0;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: var(--ivory);
       color: var(--charcoal);
@@ -24,18 +29,28 @@
       margin: 0;
     }
 
-    header, footer {
+    /* ==============================
+       HEADER
+    ============================== */
+
+    header {
       background: var(--champagne);
-      padding: 1.5rem;
+      padding: 2rem;
       text-align: center;
       border-bottom: 2px solid var(--rose-gold);
     }
 
-    header h1, footer p {
+    header h1 {
       font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
       color: var(--rose-gold);
       margin: 0;
     }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
 
     nav {
       text-align: center;
@@ -56,91 +71,236 @@
       color: var(--rose-gold);
     }
 
-    .profile-container {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 2rem auto;
+    /* ==============================
+       ACCOUNT TITLE
+    ============================== */
+
+    .account-title {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
     }
 
+    .account-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--rose-gold);
+      margin: 0 0 0.5rem;
+    }
+
+    .account-title p {
+      color: #666;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* ==============================
+       PROFILE CONTAINER
+    ============================== */
+
+    .profile-container {
+      padding: 1.5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ==============================
+       CARDS
+    ============================== */
+
     .card {
-      background: linear-gradient(to bottom right, #fff, var(--ivory));
+      background: linear-gradient(
+        to bottom right,
+        #ffffff,
+        var(--ivory)
+      );
+
       border: 1px solid var(--champagne);
       border-radius: 16px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+
+      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
+
       padding: 2rem;
       position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.11);
     }
 
     .card h2 {
       font-family: 'Playfair Display', serif;
       color: var(--rose-gold);
-      margin-bottom: 1rem;
+      margin: 0 0 1.3rem;
+      font-size: 1.6rem;
     }
+
+    /* ==============================
+       ICON
+    ============================== */
 
     .icon {
-      font-size: 2rem;
-      color: var(--rose-gold);
+      font-size: 1.8rem;
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 1.2rem;
+      right: 1.3rem;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
+    /* ==============================
+       PROFILE DETAILS
+    ============================== */
+
+    .profile-detail {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
     }
 
-    th, td {
-      border: 1px solid #eee;
-      padding: 0.75rem;
-      text-align: left;
+    .profile-detail:last-of-type {
+      border-bottom: none;
     }
 
-    th {
-      background: var(--ivory);
-      font-family: 'Playfair Display', serif;
-      color: var(--charcoal);
-    }
-
-    td {
-      color: var(--charcoal);
+    .profile-detail strong {
+      display: inline-block;
+      min-width: 65px;
+      color: #555;
     }
 
     .loading {
       color: #777;
     }
 
-    .logout-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: var(--rose-gold);
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s ease;
+    /* ==============================
+       SKIN INFORMATION
+    ============================== */
+
+    .skin-display {
+      background: var(--blush);
+      border-radius: 12px;
+      padding: 1.3rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      border: 1px solid rgba(183,110,121,0.12);
     }
 
-    .logout-btn:hover {
-      background: var(--sage);
+    .skin-display p {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--charcoal);
+      font-weight: 600;
     }
+
+    /* ==============================
+       ORDER HISTORY
+    ============================== */
 
     .empty-orders {
       color: #777;
       font-style: italic;
       margin-top: 1rem;
+
+      background: rgba(247,231,206,0.35);
+
+      padding: 1.5rem;
+
+      border-radius: 12px;
+
+      text-align: center;
+
+      border: 1px dashed var(--champagne);
+    }
+
+    /* ==============================
+       LOGOUT BUTTON
+    ============================== */
+
+    .logout-btn {
+      margin-top: 18px;
+      padding: 10px 20px;
+
+      border: none;
+      border-radius: 8px;
+
+      background: var(--rose-gold);
+      color: white;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        background 0.3s ease,
+        transform 0.2s ease;
+
+      width: 100%;
+    }
+
+    .logout-btn:hover {
+      background: var(--sage);
+      transform: translateY(-2px);
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    footer {
+      background: var(--champagne);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 2px solid var(--rose-gold);
+    }
+
+    footer p {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+
+    @media (max-width: 750px) {
+
+      .profile-container {
+        grid-template-columns: 1fr;
+        padding: 1rem 1.2rem 2rem;
+      }
+
+      nav {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .account-title h2 {
+        font-size: 2rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
     }
   </style>
 
@@ -160,35 +320,40 @@
   <a href="cart.html">Cart</a>
 </nav>
 
+<!-- ACCOUNT TITLE -->
+
+<section class="account-title">
+  <h2>Your Account</h2>
+  <p>View your profile and personalized skincare information.</p>
+</section>
+
 <div class="profile-container">
 
   <!-- PROFILE INFORMATION -->
 
   <div class="card">
 
-```
 <span class="icon">👤</span>
 
 <h2>Profile Information</h2>
 
-<p>
+<div class="profile-detail">
   <strong>Name:</strong>
   <span id="usernameValue" class="loading">
     Loading...
   </span>
-</p>
+</div>
 
-<p>
+<div class="profile-detail">
   <strong>Email:</strong>
   <span id="emailValue" class="loading">
     Loading...
   </span>
-</p>
+</div>
 
 <button id="logoutBtn" class="logout-btn">
   Logout
 </button>
-```
 
   </div>
 
@@ -196,15 +361,15 @@
 
   <div class="card">
 
-```
 <span class="icon">✨</span>
 
 <h2>Skin Type</h2>
 
-<p id="skinTypeValue">
-  Loading...
-</p>
-```
+<div class="skin-display">
+  <p id="skinTypeValue">
+    Loading...
+  </p>
+</div>
 
   </div>
 
@@ -212,15 +377,15 @@
 
   <div class="card">
 
-```
 <span class="icon">🌸</span>
 
 <h2>Skin Condition</h2>
 
-<p id="skinConditionValue">
-  Not set yet
-</p>
-```
+<div class="skin-display">
+  <p id="skinConditionValue">
+    Not set yet
+  </p>
+</div>
 
   </div>
 
@@ -228,7 +393,6 @@
 
   <div class="card">
 
-```
 <span class="icon">🛒</span>
 
 <h2>Order History</h2>
@@ -238,10 +402,9 @@
 </p>
 
 <!--
-ORDER HISTORY WILL BE ADDED HERE LATER
-ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
+  ORDER HISTORY WILL BE ADDED HERE LATER
+  ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
 -->
-```
 
   </div>
 
@@ -321,12 +484,13 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
 
     if (user) {
 
-      console.log("Currently logged in:", user.uid);
+      console.log(
+        "Currently logged in:",
+        user.uid
+      );
 
 
       try {
-
-        // Get the user's database record
 
         const userRef =
           ref(db, "users/" + user.uid);
@@ -341,40 +505,36 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
             snapshot.val();
 
 
-          // ==============================
-          // DISPLAY USERNAME
-          // ==============================
+          // USERNAME
 
           document.getElementById("usernameValue")
             .textContent =
               userData.username || "No username";
 
 
-          // ==============================
-          // DISPLAY EMAIL
-          // ==============================
+          // EMAIL
 
           document.getElementById("emailValue")
             .textContent =
-              userData.email || user.email || "No email";
+              userData.email ||
+              user.email ||
+              "No email";
 
 
-          // ==============================
-          // DISPLAY SKIN TYPE
-          // ==============================
+          // SKIN TYPE
 
           document.getElementById("skinTypeValue")
             .textContent =
-              userData.skinType || "Not set yet";
+              userData.skinType ||
+              "Not set yet";
 
 
-          // ==============================
-          // DISPLAY SKIN CONDITION
-          // ==============================
+          // SKIN CONDITION
 
           document.getElementById("skinConditionValue")
             .textContent =
-              userData.skinCondition || "Not set yet";
+              userData.skinCondition ||
+              "Not set yet";
 
 
         } else {
@@ -383,13 +543,27 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
             "No profile found in Realtime Database."
           );
 
+
           document.getElementById("usernameValue")
             .textContent =
-              user.displayName || "User";
+              user.displayName ||
+              "User";
+
 
           document.getElementById("emailValue")
             .textContent =
-              user.email || "No email";
+              user.email ||
+              "No email";
+
+
+          document.getElementById("skinTypeValue")
+            .textContent =
+              "Not set yet";
+
+
+          document.getElementById("skinConditionValue")
+            .textContent =
+              "Not set yet";
 
         }
 
@@ -401,11 +575,23 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
           error
         );
 
+
         document.getElementById("usernameValue")
           .textContent =
             "Unable to load";
 
+
         document.getElementById("emailValue")
+          .textContent =
+            "Unable to load";
+
+
+        document.getElementById("skinTypeValue")
+          .textContent =
+            "Unable to load";
+
+
+        document.getElementById("skinConditionValue")
           .textContent =
             "Unable to load";
 
@@ -414,13 +600,15 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
 
     } else {
 
-      // ==============================
-      // NO USER LOGGED IN
-      // ==============================
+      console.log(
+        "No user logged in."
+      );
 
-      console.log("No user logged in.");
 
-      alert("Please log in first.");
+      alert(
+        "Please log in first."
+      );
+
 
       window.location.href =
         "signuplogin.html";
@@ -441,10 +629,15 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
 
         await signOut(auth);
 
-        alert("You have been logged out. 💗");
+
+        alert(
+          "You have been logged out. 💗"
+        );
+
 
         window.location.href =
           "signuplogin.html";
+
 
       } catch (error) {
 
@@ -453,19 +646,16 @@ ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
           error
         );
 
-        alert(error.message);
+
+        alert(
+          error.message
+        );
 
       }
 
     });
 
-
-  // ==============================
-  // SKIN TYPE FROM LOCAL STORAGE
-  // ==============================
-
 </script>
 
 </body>
 </html>
-
