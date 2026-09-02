@@ -1,661 +1,1673 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Your Account | Noiré</title>
 
   <link rel="stylesheet" href="style.css">
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
+    /* =====================================================
+       NOIRÉ ACCOUNT PAGE
+    ===================================================== */
+
     :root {
-      --charcoal: #000000;
+      --charcoal: #111111;
+      --black: #000000;
       --ivory: #F9F9F6;
+      --white: #FFFFFF;
       --champagne: #F7E7CE;
       --rose-gold: #B76E79;
       --sage: #A8B5A2;
       --blush: #F2D6D0;
+      --muted: #777777;
+      --line: #EAE7E1;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       background: var(--ivory);
       color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      font-family: 'DM Sans', 'Segoe UI', sans-serif;
+      line-height: 1.6;
     }
 
-    /* ==============================
-       HEADER
-    ============================== */
+    /* =====================================================
+       ANNOUNCEMENT BAR
+    ===================================================== */
 
-    header {
-      background: var(--champagne);
-      padding: 2rem;
+    .announcement-bar {
+      background: var(--black);
+      color: white;
       text-align: center;
-      border-bottom: 2px solid var(--rose-gold);
+      padding: 9px 20px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
-    }
-
-    /* ==============================
+    /* =====================================================
        NAVIGATION
-    ============================== */
+    ===================================================== */
 
-    nav {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    .main-nav {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      height: 78px;
+      padding: 0 6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav a {
-      margin: 0 15px;
+    .logo {
       text-decoration: none;
-      font-weight: 600;
-      color: var(--charcoal);
-      transition: color 0.3s ease;
-    }
+      color: var(--black);
 
-    nav a:hover {
-      color: var(--rose-gold);
-    }
-
-    /* ==============================
-       ACCOUNT TITLE
-    ============================== */
-
-    .account-title {
-      text-align: center;
-      padding: 2.5rem 1rem 1rem;
-    }
-
-    .account-title h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+
+      font-size: 13px;
+      font-weight: 500;
+
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--rose-gold);
-      margin: 0 0 0.5rem;
     }
 
-    .account-title p {
-      color: #666;
-      margin: 0;
-      font-size: 1rem;
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    /* ==============================
-       PROFILE CONTAINER
-    ============================== */
+    .nav-icon {
+      width: 38px;
+      height: 38px;
 
-    .profile-container {
-      padding: 1.5rem 2rem 3rem;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+      color: var(--charcoal);
+
+      font-size: 16px;
+
+      transition: all 0.25s ease;
+    }
+
+    .nav-icon:hover {
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       PAGE HERO
+    ===================================================== */
+
+    .account-hero {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 330px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at 20% 30%,
+          rgba(242,214,208,0.65),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(247,231,206,0.8),
+          transparent 38%
+        ),
+        var(--ivory);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .account-hero::before {
+      content: "NOIRÉ";
+
+      position: absolute;
+      top: 15px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      font-family: 'Playfair Display', serif;
+      font-size: 150px;
+      font-weight: 700;
+
+      color: rgba(183,110,121,0.045);
+
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      max-width: 700px;
+      padding: 70px 20px 55px;
+    }
+
+    .eyebrow {
+      color: var(--rose-gold);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      margin-bottom: 15px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1;
+
+      font-weight: 600;
+      letter-spacing: -2px;
+
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 span {
+      color: var(--rose-gold);
+      font-style: italic;
+    }
+
+    .hero-content p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    /* =====================================================
+       MAIN CONTENT
+    ===================================================== */
+
+    .account-wrapper {
+      width: min(1180px, 92%);
       margin: 0 auto;
+
+      padding: 65px 0 90px;
     }
 
-    /* ==============================
-       CARDS
-    ============================== */
+    /* =====================================================
+       WELCOME CARD
+    ===================================================== */
 
-    .card {
-      background: linear-gradient(
-        to bottom right,
-        #ffffff,
-        var(--ivory)
-      );
+    .welcome-card {
+      background: var(--black);
+      color: white;
 
-      border: 1px solid var(--champagne);
-      border-radius: 16px;
+      border-radius: 24px;
 
-      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
+      padding: 34px 38px;
 
-      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 28px;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-card::after {
+      content: "";
+
+      width: 250px;
+      height: 250px;
+
+      border-radius: 50%;
+
+      position: absolute;
+      right: -90px;
+      top: -100px;
+
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 30px rgba(255,255,255,0.025),
+        0 0 0 60px rgba(255,255,255,0.018);
+    }
+
+    .welcome-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .welcome-text small {
+      display: block;
+
+      color: var(--champagne);
+
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      font-size: 10px;
+      font-weight: 600;
+
+      margin-bottom: 5px;
+    }
+
+    .welcome-text h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 29px;
+      font-weight: 500;
+
+      margin-bottom: 4px;
+    }
+
+    .welcome-text p {
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+    }
+
+    .welcome-mark {
+      position: relative;
+      z-index: 2;
+
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-style: italic;
+
+      color: rgba(247,231,206,0.8);
+      padding-right: 35px;
+    }
+
+    /* =====================================================
+       GRID
+    ===================================================== */
+
+    .account-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, 0.85fr);
+
+      gap: 28px;
+
+      align-items: stretch;
+    }
+
+    /* =====================================================
+       CARD
+    ===================================================== */
+
+    .account-card {
+      background: var(--white);
+
+      border: 1px solid var(--line);
+      border-radius: 22px;
+
+      padding: 32px;
+
       position: relative;
 
       transition:
         transform 0.3s ease,
-        box-shadow 0.3s ease;
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
     }
 
-    .card:hover {
+    .account-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.11);
+
+      border-color: rgba(183,110,121,0.25);
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,0.07);
     }
 
-    .card h2 {
+    .card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      margin-bottom: 26px;
+    }
+
+    .card-heading-left {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      background: var(--ivory);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+    }
+
+    .card-heading h2 {
       font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      margin: 0 0 1.3rem;
-      font-size: 1.6rem;
+
+      font-size: 22px;
+      font-weight: 600;
+
+      color: var(--charcoal);
     }
 
-    /* ==============================
-       ICON
-    ============================== */
-
-    .icon {
-      font-size: 1.8rem;
-      position: absolute;
-      top: 1.2rem;
-      right: 1.3rem;
+    .card-heading p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
     }
 
-    /* ==============================
-       PROFILE DETAILS
-    ============================== */
+    /* =====================================================
+       PROFILE
+    ===================================================== */
+
+    .profile-details {
+      border-top: 1px solid var(--line);
+    }
 
     .profile-detail {
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #eee;
-      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 17px 0;
+
+      border-bottom: 1px solid var(--line);
     }
 
-    .profile-detail:last-of-type {
-      border-bottom: none;
-    }
+    .profile-label {
+      color: #888;
 
-    .profile-detail strong {
-      display: inline-block;
-      min-width: 65px;
-      color: #555;
-    }
-
-    .loading {
-      color: #777;
-    }
-
-    /* ==============================
-       SKIN INFORMATION
-    ============================== */
-
-    .skin-display {
-      background: var(--blush);
-      border-radius: 12px;
-      padding: 1.3rem;
-      text-align: center;
-      margin-top: 0.5rem;
-      border: 1px solid rgba(183,110,121,0.12);
-    }
-
-    .skin-display p {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--charcoal);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       font-weight: 600;
     }
 
-    /* ==============================
-       ORDER HISTORY
-    ============================== */
-
-    .empty-orders {
-      color: #777;
-      font-style: italic;
-      margin-top: 1rem;
-
-      background: rgba(247,231,206,0.35);
-
-      padding: 1.5rem;
-
-      border-radius: 12px;
-
-      text-align: center;
-
-      border: 1px dashed var(--champagne);
-    }
-
-    /* ==============================
-       LOGOUT BUTTON
-    ============================== */
-
-    .logout-btn {
-      margin-top: 18px;
-      padding: 10px 20px;
-
-      border: none;
-      border-radius: 8px;
-
-      background: var(--rose-gold);
-      color: white;
+    .profile-value {
+      color: var(--charcoal);
 
       font-size: 14px;
       font-weight: 600;
 
+      text-align: right;
+
+      word-break: break-word;
+    }
+
+    .loading {
+      color: #aaa !important;
+      font-weight: 400;
+    }
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    .logout-btn {
+      width: 100%;
+
+      margin-top: 24px;
+
+      padding: 14px 20px;
+
+      background: transparent;
+      color: var(--charcoal);
+
+      border: 1px solid #D8D4CE;
+      border-radius: 10px;
+
+      font-family: 'DM Sans', sans-serif;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+
       cursor: pointer;
 
-      transition:
-        background 0.3s ease,
-        transform 0.2s ease;
-
-      width: 100%;
+      transition: all 0.3s ease;
     }
 
     .logout-btn:hover {
-      background: var(--sage);
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+
       transform: translateY(-2px);
     }
 
-    /* ==============================
+    /* =====================================================
+       SKIN TYPE CARD
+    ===================================================== */
+
+    .skin-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skin-display {
+      flex: 1;
+
+      min-height: 175px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blush),
+          var(--champagne)
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 30px;
+
+      border: 1px solid rgba(183,110,121,0.1);
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skin-display::before {
+      content: "";
+
+      position: absolute;
+
+      width: 120px;
+      height: 120px;
+
+      border: 1px solid rgba(183,110,121,0.18);
+
+      border-radius: 50%;
+
+      top: -50px;
+      right: -40px;
+    }
+
+    .skin-display::after {
+      content: "";
+
+      position: absolute;
+
+      width: 80px;
+      height: 80px;
+
+      border: 1px solid rgba(183,110,121,0.15);
+
+      border-radius: 50%;
+
+      bottom: -35px;
+      left: -30px;
+    }
+
+    .skin-symbol {
+      position: relative;
+      z-index: 2;
+
+      font-size: 28px;
+      margin-bottom: 9px;
+    }
+
+    .skin-display p {
+      position: relative;
+      z-index: 2;
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: 27px;
+      font-weight: 600;
+
+      color: var(--charcoal);
+
+      text-transform: capitalize;
+    }
+
+    .skin-display small {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 4px;
+
+      color: rgba(17,17,17,0.6);
+
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* =====================================================
+       SKIN CONDITION
+    ===================================================== */
+
+    .condition-display {
+      margin-top: 20px;
+
+      padding: 17px 20px;
+
+      background: var(--ivory);
+
+      border-radius: 12px;
+
+      border: 1px solid var(--line);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .condition-label {
+      color: #888;
+
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #skinConditionValue {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 17px;
+      font-weight: 600;
+
+      text-align: right;
+    }
+
+    /* =====================================================
+       ORDER HISTORY
+    ===================================================== */
+
+    .orders-card {
+      grid-column: 1 / -1;
+    }
+
+    .orders-empty {
+      min-height: 190px;
+
+      border: 1px dashed #DCD6CE;
+
+      border-radius: 17px;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 30px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(247,231,206,0.25),
+          rgba(242,214,208,0.15)
+        );
+    }
+
+    .orders-icon {
+      width: 54px;
+      height: 54px;
+
+      border-radius: 50%;
+
+      background: white;
+
+      border: 1px solid var(--line);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+
+      margin-bottom: 14px;
+    }
+
+    .orders-empty h3 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 20px;
+      font-weight: 600;
+
+      margin-bottom: 4px;
+    }
+
+    .orders-empty p {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin-bottom: 17px;
+    }
+
+    .shop-btn {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 11px 22px;
+
+      background: var(--black);
+      color: white;
+
+      text-decoration: none;
+
+      border-radius: 8px;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      transition: all 0.25s ease;
+    }
+
+    .shop-btn:hover {
+      background: var(--rose-gold);
+      transform: translateY(-2px);
+      color: white;
+    }
+
+    /* =====================================================
        FOOTER
-    ============================== */
+    ===================================================== */
 
     footer {
-      background: var(--champagne);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      border-top: 2px solid var(--rose-gold);
+      background: var(--black);
+      color: white;
+
+      padding: 55px 6% 30px;
     }
 
-    footer p {
-      margin: 0;
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 30px;
+
+      padding-bottom: 35px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-brand h2 {
       font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
+
+      font-size: 29px;
+      margin-bottom: 7px;
     }
 
-    /* ==============================
+    .footer-brand p {
+      color: rgba(255,255,255,0.55);
+
+      font-size: 12px;
+
+      max-width: 300px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.65);
+
+      text-decoration: none;
+
+      font-size: 11px;
+
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--champagne);
+    }
+
+    .copyright {
+      max-width: 1180px;
+      margin: 25px auto 0;
+
+      color: rgba(255,255,255,0.4);
+
+      font-size: 10px;
+
+      letter-spacing: 0.5px;
+    }
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    .fade-up {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.18s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.26s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.34s;
+    }
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    /* =====================================================
        RESPONSIVE
-    ============================== */
+    ===================================================== */
 
-    @media (max-width: 750px) {
+    @media (max-width: 900px) {
 
-      .profile-container {
+      .nav-links {
+        display: none;
+      }
+
+      .main-nav {
+        padding: 0 5%;
+      }
+
+      .account-grid {
         grid-template-columns: 1fr;
-        padding: 1rem 1.2rem 2rem;
       }
 
-      nav {
-        overflow-x: auto;
-        white-space: nowrap;
+      .orders-card {
+        grid-column: auto;
       }
 
-      nav a {
-        margin: 0 8px;
-      }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
 
-      header h1 {
-        font-size: 2.5rem;
+      .account-wrapper {
+        width: 90%;
+        padding: 40px 0 60px;
       }
 
-      .account-title h2 {
-        font-size: 2rem;
+      .account-hero {
+        min-height: 280px;
       }
 
-      .card {
-        padding: 1.5rem;
+      .hero-content {
+        padding: 55px 15px 45px;
       }
+
+      .hero-content h1 {
+        font-size: 43px;
+      }
+
+      .account-hero::before {
+        font-size: 90px;
+      }
+
+      .welcome-card {
+        padding: 26px;
+      }
+
+      .welcome-mark {
+        display: none;
+      }
+
+      .welcome-text h2 {
+        font-size: 24px;
+      }
+
+      .account-card {
+        padding: 24px;
+      }
+
+      .profile-detail {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .profile-value {
+        text-align: left;
+      }
+
+      .condition-display {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      #skinConditionValue {
+        text-align: left;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 15px;
+      }
+
     }
+
   </style>
-
 </head>
+
 
 <body>
 
-<header>
-  <h1>Noiré</h1>
-</header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="routine.html">Routine Builder</a>
-  <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
-</nav>
+  <!-- =====================================================
+       ANNOUNCEMENT
+  ====================================================== -->
 
-<!-- ACCOUNT TITLE -->
-
-<section class="account-title">
-  <h2>Your Account</h2>
-  <p>View your profile and personalized skincare information.</p>
-</section>
-
-<div class="profile-container">
-
-  <!-- PROFILE INFORMATION -->
-
-  <div class="card">
-
-<span class="icon">👤</span>
-
-<h2>Profile Information</h2>
-
-<div class="profile-detail">
-  <strong>Name:</strong>
-  <span id="usernameValue" class="loading">
-    Loading...
-  </span>
-</div>
-
-<div class="profile-detail">
-  <strong>Email:</strong>
-  <span id="emailValue" class="loading">
-    Loading...
-  </span>
-</div>
-
-<button id="logoutBtn" class="logout-btn">
-  Logout
-</button>
-
+  <div class="announcement-bar">
+    Free shipping on orders over ₱1,500 ✦
   </div>
 
-  <!-- SKIN TYPE -->
 
-  <div class="card">
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
 
-<span class="icon">✨</span>
+  <nav class="main-nav">
 
-<h2>Skin Type</h2>
-
-<div class="skin-display">
-  <p id="skinTypeValue">
-    Loading...
-  </p>
-</div>
-
-  </div>
-
-  <!-- SKIN CONDITION -->
-
-  <div class="card">
-
-<span class="icon">🌸</span>
-
-<h2>Skin Condition</h2>
-
-<div class="skin-display">
-  <p id="skinConditionValue">
-    Not set yet
-  </p>
-</div>
-
-  </div>
-
-  <!-- ORDER HISTORY -->
-
-  <div class="card">
-
-<span class="icon">🛒</span>
-
-<h2>Order History</h2>
-
-<p class="empty-orders">
-  No orders yet.
-</p>
-
-<!--
-  ORDER HISTORY WILL BE ADDED HERE LATER
-  ONCE THE PRODUCTS AND CART SYSTEM ARE DONE.
--->
-
-  </div>
-
-</div>
-
-<footer>
-  <p>&copy; 2026 Noiré Skincare</p>
-</footer>
-
-<!-- ==============================
-     FIREBASE
-============================== -->
-
-<script type="module">
-
-  import { initializeApp } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-  import {
-    getDatabase,
-    ref,
-    get
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    <a href="index.html" class="logo">
+      Noiré
+    </a>
 
 
-  // ==============================
-  // FIREBASE CONFIG
-  // ==============================
+    <div class="nav-links">
 
-  const firebaseConfig = {
+      <a href="index.html">
+        Home
+      </a>
 
-    apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+      <a href="about.html">
+        About
+      </a>
 
-    authDomain: "noire-17ed6.firebaseapp.com",
+      <a href="shop.html">
+        Shop
+      </a>
 
-    databaseURL:
-      "https://noire-17ed6-default-rtdb.firebaseio.com",
+      <a href="routine.html">
+        Routine Builder
+      </a>
 
-    projectId: "noire-17ed6",
+      <a href="blog.html">
+        Journal
+      </a>
 
-    storageBucket:
-      "noire-17ed6.appspot.com",
+      <a href="contact.html">
+        Contact
+      </a>
 
-    messagingSenderId:
-      "559789891078",
-
-    appId:
-      "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
-
-  };
-
-
-  // ==============================
-  // INITIALIZE FIREBASE
-  // ==============================
-
-  const app = initializeApp(firebaseConfig);
-
-  const auth = getAuth(app);
-
-  const db = getDatabase(app);
+    </div>
 
 
-  // ==============================
-  // CHECK CURRENT USER
-  // ==============================
+    <div class="nav-icons">
 
-  onAuthStateChanged(auth, async (user) => {
+      <a
+        href="account.html"
+        class="nav-icon"
+        title="Account"
+      >
+        ♡
+      </a>
 
-    if (user) {
+      <a
+        href="cart.html"
+        class="nav-icon"
+        title="Cart"
+      >
+        🛍
+      </a>
 
-      console.log(
-        "Currently logged in:",
-        user.uid
-      );
+    </div>
 
-
-      try {
-
-        const userRef =
-          ref(db, "users/" + user.uid);
-
-        const snapshot =
-          await get(userRef);
-
-
-        if (snapshot.exists()) {
-
-          const userData =
-            snapshot.val();
+  </nav>
 
 
-          // USERNAME
 
-          document.getElementById("usernameValue")
-            .textContent =
-              userData.username || "No username";
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="account-hero">
+
+    <div class="hero-content fade-up">
+
+      <div class="eyebrow">
+        Your Noiré Space
+      </div>
+
+      <h1>
+        Your skin,
+        <span>your ritual.</span>
+      </h1>
+
+      <p>
+        Everything you need to keep your skincare journey
+        beautifully personal, all in one place.
+      </p>
+
+    </div>
+
+  </section>
 
 
-          // EMAIL
 
-          document.getElementById("emailValue")
-            .textContent =
+  <!-- =====================================================
+       ACCOUNT CONTENT
+  ====================================================== -->
+
+  <main class="account-wrapper">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome-card fade-up">
+
+      <div class="welcome-text">
+
+        <small>
+          Welcome back
+        </small>
+
+        <h2 id="welcomeName">
+          Beautiful.
+        </h2>
+
+        <p>
+          Here's a little look at your Noiré profile.
+        </p>
+
+      </div>
+
+      <div class="welcome-mark">
+        N.
+      </div>
+
+    </div>
+
+
+
+    <div class="account-grid">
+
+
+      <!-- =================================================
+           PROFILE
+      ================================================== -->
+
+      <section class="account-card fade-up delay-1">
+
+        <div class="card-heading">
+
+          <div class="card-heading-left">
+
+            <div class="card-icon">
+              ♡
+            </div>
+
+            <div>
+
+              <h2>
+                Profile
+              </h2>
+
+              <p>
+                Your account information
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-details">
+
+
+          <div class="profile-detail">
+
+            <span class="profile-label">
+              Name
+            </span>
+
+            <span
+              id="usernameValue"
+              class="profile-value loading"
+            >
+              Loading...
+            </span>
+
+          </div>
+
+
+          <div class="profile-detail">
+
+            <span class="profile-label">
+              Email
+            </span>
+
+            <span
+              id="emailValue"
+              class="profile-value loading"
+            >
+              Loading...
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <button
+          id="logoutBtn"
+          class="logout-btn"
+        >
+          Log Out
+        </button>
+
+      </section>
+
+
+
+      <!-- =================================================
+           SKIN TYPE
+      ================================================== -->
+
+      <section class="account-card skin-card fade-up delay-2">
+
+        <div class="card-heading">
+
+          <div class="card-heading-left">
+
+            <div class="card-icon">
+              ✨
+            </div>
+
+            <div>
+
+              <h2>
+                Skin Profile
+              </h2>
+
+              <p>
+                Your personalized skin details
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="skin-display">
+
+          <div class="skin-symbol">
+            ✦
+          </div>
+
+          <p id="skinTypeValue">
+            Loading...
+          </p>
+
+          <small>
+            Skin Type
+          </small>
+
+        </div>
+
+
+        <div class="condition-display">
+
+          <span class="condition-label">
+            Current condition
+          </span>
+
+          <span id="skinConditionValue">
+            Not set yet
+          </span>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           ORDER HISTORY
+      ================================================== -->
+
+      <section class="account-card orders-card fade-up delay-3">
+
+        <div class="card-heading">
+
+          <div class="card-heading-left">
+
+            <div class="card-icon">
+              🛍
+            </div>
+
+            <div>
+
+              <h2>
+                Order History
+              </h2>
+
+              <p>
+                Your Noiré purchases
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="orders-empty">
+
+          <div class="orders-icon">
+            ♡
+          </div>
+
+          <h3>
+            No orders yet
+          </h3>
+
+          <p>
+            Your future skincare favorites will appear here.
+          </p>
+
+          <a
+            href="shop.html"
+            class="shop-btn"
+          >
+            Explore the Collection
+          </a>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+
+        <h2>
+          Noiré
+        </h2>
+
+        <p>
+          Thoughtfully formulated skincare
+          for your everyday ritual.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="shop.html">
+          Shop
+        </a>
+
+        <a href="routine.html">
+          Routine Builder
+        </a>
+
+        <a href="blog.html">
+          Journal
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Noiré Skincare. All rights reserved.
+    </div>
+
+  </footer>
+  
+
+  <!-- =====================================================
+       FIREBASE
+  ====================================================== -->
+
+  <script type="module">
+
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+      getDatabase,
+      ref,
+      get
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+    /* =====================================================
+       FIREBASE CONFIG
+    ====================================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+
+      authDomain:
+        "noire-17ed6.firebaseapp.com",
+
+      databaseURL:
+        "https://noire-17ed6-default-rtdb.firebaseio.com",
+
+      projectId:
+        "noire-17ed6",
+
+      storageBucket:
+        "noire-17ed6.appspot.com",
+
+      messagingSenderId:
+        "559789891078",
+
+      appId:
+        "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+
+    };
+
+
+    /* =====================================================
+       INITIALIZE FIREBASE
+    ====================================================== */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const db =
+      getDatabase(app);
+
+
+
+    /* =====================================================
+       LOAD ACCOUNT
+    ====================================================== */
+
+    onAuthStateChanged(auth, async (user) => {
+
+      if (user) {
+
+        console.log(
+          "Currently logged in:",
+          user.uid
+        );
+
+
+        try {
+
+          const userRef =
+            ref(db, "users/" + user.uid);
+
+          const snapshot =
+            await get(userRef);
+
+
+          if (snapshot.exists()) {
+
+            const userData =
+              snapshot.val();
+
+
+            /* ============================
+               USERNAME
+            ============================ */
+
+            const username =
+              userData.username ||
+              user.displayName ||
+              "User";
+
+
+            document.getElementById(
+              "usernameValue"
+            ).textContent = username;
+
+
+            document.getElementById(
+              "welcomeName"
+            ).textContent =
+              username + ".";
+
+
+            /* ============================
+               EMAIL
+            ============================ */
+
+            document.getElementById(
+              "emailValue"
+            ).textContent =
               userData.email ||
               user.email ||
               "No email";
 
 
-          // SKIN TYPE
+            /* ============================
+               SKIN TYPE
+            ============================ */
 
-          document.getElementById("skinTypeValue")
-            .textContent =
+            document.getElementById(
+              "skinTypeValue"
+            ).textContent =
               userData.skinType ||
               "Not set yet";
 
 
-          // SKIN CONDITION
+            /* ============================
+               SKIN CONDITION
+            ============================ */
 
-          document.getElementById("skinConditionValue")
-            .textContent =
+            document.getElementById(
+              "skinConditionValue"
+            ).textContent =
               userData.skinCondition ||
               "Not set yet";
 
 
-        } else {
+          } else {
 
-          console.log(
-            "No profile found in Realtime Database."
-          );
+            console.log(
+              "No profile found in Realtime Database."
+            );
 
 
-          document.getElementById("usernameValue")
-            .textContent =
+            const username =
               user.displayName ||
               "User";
 
 
-          document.getElementById("emailValue")
-            .textContent =
+            document.getElementById(
+              "usernameValue"
+            ).textContent =
+              username;
+
+
+            document.getElementById(
+              "welcomeName"
+            ).textContent =
+              username + ".";
+
+
+            document.getElementById(
+              "emailValue"
+            ).textContent =
               user.email ||
               "No email";
 
 
-          document.getElementById("skinTypeValue")
-            .textContent =
+            document.getElementById(
+              "skinTypeValue"
+            ).textContent =
               "Not set yet";
 
 
-          document.getElementById("skinConditionValue")
-            .textContent =
+            document.getElementById(
+              "skinConditionValue"
+            ).textContent =
               "Not set yet";
+
+          }
+
+
+        } catch (error) {
+
+          console.error(
+            "Error loading account:",
+            error
+          );
+
+
+          document.getElementById(
+            "usernameValue"
+          ).textContent =
+            "Unable to load";
+
+
+          document.getElementById(
+            "emailValue"
+          ).textContent =
+            "Unable to load";
+
+
+          document.getElementById(
+            "skinTypeValue"
+          ).textContent =
+            "Unable to load";
+
+
+          document.getElementById(
+            "skinConditionValue"
+          ).textContent =
+            "Unable to load";
 
         }
 
 
-      } catch (error) {
+      } else {
 
-        console.error(
-          "Error loading account:",
-          error
+        console.log(
+          "No user logged in."
         );
 
 
-        document.getElementById("usernameValue")
-          .textContent =
-            "Unable to load";
-
-
-        document.getElementById("emailValue")
-          .textContent =
-            "Unable to load";
-
-
-        document.getElementById("skinTypeValue")
-          .textContent =
-            "Unable to load";
-
-
-        document.getElementById("skinConditionValue")
-          .textContent =
-            "Unable to load";
-
-      }
-
-
-    } else {
-
-      console.log(
-        "No user logged in."
-      );
-
-
-      alert(
-        "Please log in first."
-      );
-
-
-      window.location.href =
-        "signuplogin.html";
-
-    }
-
-  });
-
-
-  // ==============================
-  // LOGOUT
-  // ==============================
-
-  document.getElementById("logoutBtn")
-    .addEventListener("click", async () => {
-
-      try {
-
-        await signOut(auth);
-
-
         alert(
-          "You have been logged out. 💗"
+          "Please log in first."
         );
 
 
         window.location.href =
           "signuplogin.html";
 
-
-      } catch (error) {
-
-        console.error(
-          "Logout error:",
-          error
-        );
-
-
-        alert(
-          error.message
-        );
-
       }
 
     });
 
-</script>
+
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          try {
+
+            await signOut(auth);
+
+
+            alert(
+              "You have been logged out. 💗"
+            );
+
+
+            window.location.href =
+              "signuplogin.html";
+
+
+          } catch (error) {
+
+            console.error(
+              "Logout error:",
+              error
+            );
+
+
+            alert(
+              error.message
+            );
+
+          }
+
+        }
+      );
+
+  </script>
+
 
 </body>
 </html>

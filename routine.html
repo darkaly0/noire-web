@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Routine Builder | Noiré</title>
+  <title>Routine Builder | Noiré Skincare</title>
 
-  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <style>
 
-    /* ==============================
-       NOIRÉ COLORS
-    ============================== */
+    /* =====================================================
+       NOIRÉ VARIABLES
+    ===================================================== */
 
     :root {
       --charcoal: #000000;
@@ -27,453 +31,1065 @@
       --rose-gold: #B76E79;
       --sage: #A8B5A2;
       --blush: #F2D6D0;
+      --white: #ffffff;
+      --soft-gray: #777;
+      --border: #e8e3dc;
     }
 
 
-    /* ==============================
+    /* =====================================================
        GENERAL
-    ============================== */
+    ===================================================== */
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--ivory);
+      margin: 0;
+      background: var(--ivory);
       color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      font-family: "DM Sans", sans-serif;
     }
 
 
-    /* ==============================
-       HEADER
-    ============================== */
+    /* =====================================================
+       ANNOUNCEMENT BAR
+    ===================================================== */
 
-    header {
-      background: var(--champagne);
+    .announcement {
+      background: var(--charcoal);
+      color: white;
+
       text-align: center;
-      padding: 2rem;
-      border-bottom: 2px solid var(--rose-gold);
+
+      padding: 9px 15px;
+
+      font-size: 11px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .navbar-noire {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+      height: 78px;
+
+      background: rgba(255,255,255,0.96);
+
+      border-bottom: 1px solid #eee;
+
+      backdrop-filter: blur(10px);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
     }
 
 
-    /* ==============================
-       NAVIGATION
-    ============================== */
+    .navbar-inner {
+      width: min(1250px, 92%);
 
-    nav {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 25px;
     }
 
-    nav a {
-      margin: 0 15px;
+
+    .logo {
       text-decoration: none;
-      font-weight: 600;
+
       color: var(--charcoal);
-      transition: color 0.3s ease;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 27px;
+
+      font-weight: 700;
+
+      letter-spacing: 5px;
     }
 
-    nav a:hover {
+
+    .nav-links {
+      display: flex;
+
+      align-items: center;
+
+      gap: 27px;
+    }
+
+
+    .nav-links a {
+      text-decoration: none;
+
+      color: #333;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      transition: 0.25s ease;
+    }
+
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--rose-gold);
     }
 
 
-    /* ==============================
-       PAGE INTRO
-    ============================== */
+    .nav-icons {
+      display: flex;
 
-    .routine-intro {
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .nav-icon {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: var(--ivory);
+
+      text-decoration: none;
+
+      color: var(--charcoal);
+
+      font-size: 16px;
+
+      transition: 0.25s ease;
+    }
+
+
+    .nav-icon:hover {
+      background: var(--blush);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .routine-hero {
+      width: min(1200px, 92%);
+
+      margin: 55px auto 45px;
+
+      min-height: 320px;
+
+      border-radius: 24px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
       text-align: center;
-      padding: 2.5rem 1rem 1rem;
+
+      padding: 60px 25px;
+
+      background:
+
+        radial-gradient(
+          circle at 15% 30%,
+          rgba(247,231,206,0.95),
+          transparent 35%
+        ),
+
+        radial-gradient(
+          circle at 85% 75%,
+          rgba(242,214,208,0.95),
+          transparent 38%
+        ),
+
+        linear-gradient(
+          135deg,
+          #ffffff,
+          var(--ivory)
+        );
+
+      border: 1px solid rgba(183,110,121,0.14);
     }
 
-    .routine-intro h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+
+    .routine-hero::before {
+      content: "RITUAL";
+
+      position: absolute;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 125px;
+
+      letter-spacing: 12px;
+
+      color: rgba(0,0,0,0.025);
+
+      white-space: nowrap;
+    }
+
+
+    .hero-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 700px;
+    }
+
+
+    .eyebrow {
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
       color: var(--rose-gold);
-      margin-bottom: 0.5rem;
+
+      margin-bottom: 12px;
     }
 
-    .routine-intro p {
+
+    .routine-hero h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(43px, 6vw, 67px);
+
+      line-height: 1.05;
+
+      margin: 0 0 15px;
+
+      font-weight: 600;
+    }
+
+
+    .routine-hero p {
       color: #666;
-      margin: 0;
-      font-size: 1rem;
+
+      font-size: 15px;
+
+      line-height: 1.7;
+
+      margin: 0 auto;
+
+      max-width: 560px;
     }
 
 
-    /* ==============================
-       MAIN QUIZ CARD
-    ============================== */
+    /* =====================================================
+       QUIZ INTRO
+    ===================================================== */
 
-    .quiz-card {
-      background: linear-gradient(
-        to bottom right,
-        #ffffff,
-        var(--ivory)
-      );
-
-      border: 1px solid var(--champagne);
-      border-radius: 18px;
-
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-
-      padding: 2.5rem;
+    .quiz-intro {
+      text-align: center;
 
       max-width: 700px;
 
-      margin: 1.5rem auto 3rem;
+      margin: 0 auto 30px;
 
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-    }
-
-    .quiz-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 9px 22px rgba(0,0,0,0.11);
+      padding: 0 20px;
     }
 
 
-    /* ==============================
-       QUIZ TITLE
-    ============================== */
+    .quiz-intro h2 {
+      font-family: "Playfair Display", serif;
 
-    .quiz-title {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
+      font-size: 30px;
 
-    .quiz-title h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .quiz-title p {
-      color: #666;
-      font-size: 0.95rem;
-      margin: 0;
+      margin: 0 0 10px;
     }
 
 
-    /* ==============================
-       PROGRESS
-    ============================== */
-
-    .progress-wrapper {
-      margin-bottom: 2rem;
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      font-size: 0.85rem;
+    .quiz-intro p {
       color: #777;
 
-      margin-bottom: 0.5rem;
+      font-size: 14px;
+
+      margin: 0;
+
+      line-height: 1.7;
     }
 
-    .progress {
-      height: 8px;
+
+    /* =====================================================
+       QUIZ CARD
+    ===================================================== */
+
+    .quiz-card {
+      width: min(760px, 92%);
+
+      margin: 0 auto 80px;
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 22px;
+
+      padding: 35px;
+
+      box-shadow:
+        0 12px 40px rgba(0,0,0,0.055);
+    }
+
+
+    /* =====================================================
+       QUIZ TOP
+    ===================================================== */
+
+    .quiz-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 10px;
+    }
+
+
+    .quiz-label {
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-weight: 700;
+
+      color: var(--rose-gold);
+    }
+
+
+    .quiz-number {
+      font-size: 12px;
+
+      color: #888;
+    }
+
+
+    /* =====================================================
+       PROGRESS
+    ===================================================== */
+
+    .progress-track {
+      height: 6px;
+
       background: #eee;
-      border-radius: 20px;
+
+      border-radius: 50px;
+
       overflow: hidden;
+
+      margin-bottom: 30px;
     }
 
-    .progress-bar {
-      background-color: var(--rose-gold);
-      border-radius: 20px;
+
+    .progress-fill {
+      width: 0%;
+
+      height: 100%;
+
+      background: var(--rose-gold);
+
+      border-radius: 50px;
+
       transition: width 0.4s ease;
     }
 
 
-    /* ==============================
+    /* =====================================================
        QUESTION
-    ============================== */
+    ===================================================== */
 
     #question-container {
-      background: rgba(247, 231, 206, 0.25);
+      background:
 
-      border: 1px solid rgba(247, 231, 206, 0.8);
+        linear-gradient(
+          135deg,
+          rgba(247,231,206,0.42),
+          rgba(249,249,246,0.65)
+        );
 
-      border-radius: 14px;
+      border: 1px solid rgba(247,231,206,0.8);
 
-      padding: 1.8rem;
+      border-radius: 17px;
 
-      min-height: 250px;
-    }
+      padding: 28px;
 
-    #question-container h5 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-
-      color: var(--charcoal);
-
-      margin-bottom: 1.5rem;
-
-      line-height: 1.5;
+      min-height: 340px;
     }
 
 
-    /* ==============================
-       ANSWER OPTIONS
-    ============================== */
+    #question-container h3 {
+      font-family: "Playfair Display", serif;
 
-    .form-check {
+      font-size: 25px;
+
+      font-weight: 600;
+
+      line-height: 1.4;
+
+      margin: 0 0 25px;
+    }
+
+
+    /* =====================================================
+       ANSWERS
+    ===================================================== */
+
+    .answer-option {
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      width: 100%;
+
+      background: white;
+
+      border: 1px solid #e8e5e0;
+
+      border-radius: 12px;
+
+      padding: 15px 17px;
+
+      margin-bottom: 11px;
+
+      cursor: pointer;
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+
+    .answer-option:hover {
+      border-color: var(--rose-gold);
+
       background: #fff;
 
-      border: 1px solid #eee;
-
-      border-radius: 10px;
-
-      padding: 0.85rem 1rem 0.85rem 2.7rem;
-
-      margin-bottom: 0.75rem;
-
-      cursor: pointer;
-
-      transition:
-        border-color 0.25s ease,
-        background 0.25s ease,
-        transform 0.2s ease;
-    }
-
-    .form-check:hover {
-      border-color: var(--rose-gold);
-      background: var(--ivory);
       transform: translateX(3px);
+
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.05);
     }
 
-    .form-check-input {
-      margin-top: 0.25rem;
-      cursor: pointer;
+
+    .answer-option.selected {
+      border-color: var(--rose-gold);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(242,214,208,0.35),
+          rgba(247,231,206,0.35)
+        );
+
+      box-shadow:
+        0 5px 15px rgba(183,110,121,0.08);
     }
 
-    .form-check-input:checked {
-      background-color: var(--rose-gold);
+
+    .answer-option input {
+      position: absolute;
+
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+
+    .radio-circle {
+      width: 19px;
+      height: 19px;
+
+      border: 1.5px solid #bbb;
+
+      border-radius: 50%;
+
+      margin-right: 13px;
+
+      flex-shrink: 0;
+
+      position: relative;
+    }
+
+
+    .answer-option.selected .radio-circle {
       border-color: var(--rose-gold);
     }
 
-    .form-check-input:focus {
-      box-shadow: 0 0 0 0.2rem rgba(183,110,121,0.15);
+
+    .answer-option.selected .radio-circle::after {
+      content: "";
+
+      position: absolute;
+
+      width: 9px;
+      height: 9px;
+
+      background: var(--rose-gold);
+
+      border-radius: 50%;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
     }
 
-    .form-check-label {
-      cursor: pointer;
-      font-size: 0.95rem;
-      width: 100%;
+
+    .answer-text {
+      font-size: 14px;
+
+      color: #333;
+
+      line-height: 1.4;
     }
 
 
-    /* ==============================
+    /* =====================================================
        BUTTONS
-    ============================== */
+    ===================================================== */
 
     .quiz-buttons {
-      margin-top: 1.5rem;
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 25px;
     }
 
-    .btn-primary {
-      background-color: var(--rose-gold);
+
+    .quiz-btn {
       border: none;
 
-      color: var(--ivory);
+      border-radius: 9px;
 
-      border-radius: 8px;
+      padding: 13px 23px;
 
-      padding: 0.65rem 1.7rem;
+      font-size: 13px;
 
-      font-weight: 600;
+      font-weight: 700;
 
-      transition:
-        background 0.3s ease,
-        transform 0.2s ease;
+      cursor: pointer;
+
+      transition: 0.25s ease;
     }
 
-    .btn-primary:hover {
-      background-color: var(--sage);
-      color: #fff;
-      transform: translateY(-2px);
+
+    .previous-btn {
+      background: var(--ivory);
+
+      color: #555;
+
+      border: 1px solid #e5e1dc;
     }
 
-    .btn-primary:focus {
-      background-color: var(--rose-gold);
-      box-shadow: 0 0 0 0.2rem rgba(183,110,121,0.2);
-    }
 
-    .btn-secondary {
-      background-color: var(--blush);
-      border: none;
+    .previous-btn:hover:not(:disabled) {
+      background: var(--blush);
 
       color: var(--charcoal);
-
-      border-radius: 8px;
-
-      padding: 0.65rem 1.5rem;
-
-      font-weight: 600;
-
-      transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        transform 0.2s ease;
     }
 
-    .btn-secondary:hover {
-      background-color: var(--sage);
-      color: #fff;
+
+    .next-btn {
+      background: var(--charcoal);
+
+      color: white;
+
+      min-width: 125px;
+    }
+
+
+    .next-btn:hover {
+      background: var(--rose-gold);
+
       transform: translateY(-2px);
     }
 
-    .btn-secondary:disabled {
-      background-color: #eee;
-      color: #aaa;
-      opacity: 0.7;
+
+    .previous-btn:disabled {
+      opacity: 0.4;
+
       cursor: not-allowed;
-      transform: none;
     }
 
 
-    /* ==============================
+    /* =====================================================
        RESULT
-    ============================== */
+    ===================================================== */
 
-    .result {
-      font-size: 1rem;
+    .result-card {
+      display: none;
 
-      margin-top: 2rem;
+      margin-top: 30px;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          var(--champagne),
+          var(--blush)
+        );
+
+      border-radius: 18px;
+
+      padding: 35px 25px;
 
       text-align: center;
 
-      color: var(--charcoal);
-
-      background: var(--blush);
-
-      border-radius: 14px;
-
-      padding: 1.5rem;
-
       border: 1px solid rgba(183,110,121,0.12);
 
-      line-height: 1.8;
-
-      animation: fadeIn 0.5s ease;
-    }
-
-    .result strong {
-      color: var(--rose-gold);
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      animation: resultFade 0.5s ease;
     }
 
 
-    @keyframes fadeIn {
+    @keyframes resultFade {
 
       from {
         opacity: 0;
-        transform: translateY(8px);
+
+        transform: translateY(12px);
       }
 
       to {
         opacity: 1;
+
         transform: translateY(0);
       }
 
     }
 
 
-    /* ==============================
-       FOOTER
-    ============================== */
+    .result-icon {
+      width: 65px;
+      height: 65px;
 
-    footer {
-      background: var(--champagne);
+      background: white;
 
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 18px;
+
+      font-size: 27px;
+
+      box-shadow:
+        0 7px 20px rgba(0,0,0,0.06);
+    }
+
+
+    .result-card h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 29px;
+
+      margin: 0 0 7px;
+    }
+
+
+    .result-subtitle {
+      color: #666;
+
+      font-size: 13px;
+
+      margin-bottom: 25px;
+    }
+
+
+    .result-details {
+      background: rgba(255,255,255,0.7);
+
+      border-radius: 13px;
+
+      padding: 20px;
+
+      max-width: 470px;
+
+      margin: 0 auto 25px;
+    }
+
+
+    .result-detail {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 10px 0;
+
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+
+      font-size: 13px;
+    }
+
+
+    .result-detail:last-child {
+      border-bottom: none;
+    }
+
+
+    .result-detail span:first-child {
+      color: #777;
+    }
+
+
+    .result-detail strong {
+      color: var(--rose-gold);
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 16px;
+    }
+
+
+    .result-message {
+      color: #555;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      max-width: 520px;
+
+      margin: 0 auto 25px;
+    }
+
+
+    .result-actions {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .result-btn {
+      display: inline-block;
+
+      text-decoration: none;
+
+      padding: 12px 20px;
+
+      border-radius: 8px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      transition: 0.25s ease;
+    }
+
+
+    .result-btn.primary {
+      background: var(--charcoal);
+
+      color: white;
+    }
+
+
+    .result-btn.primary:hover {
+      background: var(--rose-gold);
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+
+    .result-btn.secondary {
+      background: white;
+
+      color: var(--charcoal);
+
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+
+    .result-btn.secondary:hover {
+      background: var(--ivory);
+    }
+
+
+    /* =====================================================
+       HELPER TEXT
+    ===================================================== */
+
+    .quiz-note {
       text-align: center;
 
-      padding: 1rem;
+      color: #999;
 
-      font-size: 0.9rem;
+      font-size: 11px;
 
-      border-top: 2px solid var(--rose-gold);
-    }
+      margin-top: 20px;
 
-    footer p {
-      margin: 0;
-
-      font-family: 'Playfair Display', serif;
-
-      color: var(--rose-gold);
+      line-height: 1.6;
     }
 
 
-    /* ==============================
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      background: var(--charcoal);
+
+      color: white;
+
+      padding: 55px 20px 25px;
+    }
+
+
+    .footer-inner {
+      width: min(1200px, 92%);
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+      gap: 45px;
+
+      padding-bottom: 40px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+
+    .footer-brand h2 {
+      font-family: "Playfair Display", serif;
+
+      letter-spacing: 4px;
+
+      font-size: 25px;
+
+      margin: 0 0 13px;
+    }
+
+
+    .footer-brand p {
+      color: #aaa;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      max-width: 300px;
+    }
+
+
+    .footer-column h4 {
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      color: var(--champagne);
+
+      margin-bottom: 15px;
+    }
+
+
+    .footer-column a {
+      display: block;
+
+      color: #aaa;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      margin-bottom: 9px;
+
+      transition: 0.2s ease;
+    }
+
+
+    .footer-column a:hover {
+      color: white;
+
+      transform: translateX(2px);
+    }
+
+
+    .footer-bottom {
+      width: min(1200px, 92%);
+
+      margin: 20px auto 0;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      color: #777;
+
+      font-size: 11px;
+    }
+
+
+    /* =====================================================
        RESPONSIVE
-    ============================== */
+    ===================================================== */
 
-    @media (max-width: 750px) {
+    @media (max-width: 950px) {
 
-      nav {
-        overflow-x: auto;
-        white-space: nowrap;
+      .nav-links {
+        display: none;
       }
 
-      nav a {
-        margin: 0 8px;
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
       }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+      .navbar-noire {
+        height: 68px;
+      }
+
+
+      .logo {
+        font-size: 22px;
+      }
+
+
+      .routine-hero {
+        margin-top: 30px;
+
+        min-height: 260px;
+
+        padding: 45px 20px;
+      }
+
+
+      .routine-hero h1 {
+        font-size: 44px;
+      }
+
+
+      .routine-hero::before {
+        font-size: 80px;
+      }
+
 
       .quiz-card {
-        margin: 1rem 1rem 2rem;
-        padding: 1.5rem;
+        padding: 20px;
       }
 
-      .routine-intro h2 {
-        font-size: 2rem;
-      }
-
-    }
-
-
-    @media (max-width: 480px) {
-
-      header h1 {
-        font-size: 2.5rem;
-      }
-
-      .quiz-title h3 {
-        font-size: 1.5rem;
-      }
 
       #question-container {
-        padding: 1.2rem;
+        padding: 20px;
+
+        min-height: 0;
       }
 
-      #question-container h5 {
-        font-size: 1.15rem;
+
+      #question-container h3 {
+        font-size: 21px;
       }
+
 
       .quiz-buttons {
-        gap: 0.75rem;
+        flex-direction: column-reverse;
+
+        align-items: stretch;
       }
 
-      .btn-primary,
-      .btn-secondary {
-        padding: 0.6rem 1rem;
+
+      .quiz-btn {
+        width: 100%;
+      }
+
+
+      .result-detail {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 3px;
+      }
+
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+      }
+
+
+      .footer-bottom {
+        flex-direction: column;
+
+        text-align: center;
       }
 
     }
@@ -482,613 +1098,675 @@
 
 </head>
 
+
 <body>
 
-<!-- ==============================
-     HEADER
-============================== -->
 
-<header>
-  <h1>Noiré</h1>
-</header>
+  <!-- =====================================================
+       ANNOUNCEMENT
+  ====================================================== -->
 
-<!-- ==============================
-     NAVIGATION
-============================== -->
+  <div class="announcement">
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="routine.html">Routine Builder</a>
-  <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
-</nav>
-
-<!-- ==============================
-     PAGE INTRO
-============================== -->
-
-<section class="routine-intro">
-
-  <h2>Routine Builder</h2>
-
-  <p>
-    Discover a skincare routine tailored to your skin.
-  </p>
-
-</section>
-
-<!-- ==============================
-     QUIZ
-============================== -->
-
-<div class="container">
-
-  <div class="quiz-card">
-
-<div class="quiz-title">
-
-  <h3>Find Your Routine 🧴</h3>
-
-  <p>
-    Answer 10 quick questions to discover
-    products tailored to your skin.
-  </p>
-
-</div>
-
-
-<!-- PROGRESS -->
-
-<div class="progress-wrapper">
-
-  <div class="progress-label">
-
-    <span>Quiz Progress</span>
-
-    <span id="progressText">
-      0 / 10
-    </span>
+    ✦ FREE SHIPPING ON ORDERS OVER ₱1,500 ✦
 
   </div>
 
-  <div class="progress">
+
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+
+  <nav class="navbar-noire">
+
+    <div class="navbar-inner">
+
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        NOIRÉ
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="shop.html">
+          Shop
+        </a>
+
+        <a
+          href="routine.html"
+          class="active"
+        >
+          Routine Builder
+        </a>
+
+        <a href="blog.html">
+          Journal
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+
+      <div class="nav-icons">
+
+        <a
+          href="account.html"
+          class="nav-icon"
+          title="Account"
+        >
+          ♡
+        </a>
+
+
+        <a
+          href="cart.html"
+          class="nav-icon"
+          title="Cart"
+        >
+          🛒
+        </a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="routine-hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Your Skin, Your Ritual
+      </div>
+
+
+      <h1>
+        Routine Builder
+      </h1>
+
+
+      <p>
+        Discover a skincare ritual designed around
+        your skin's unique needs. Answer a few simple
+        questions and let Noiré help you find your match.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       INTRO
+  ====================================================== -->
+
+  <section class="quiz-intro">
+
+    <h2>
+      Find Your Skin's Rhythm
+    </h2>
+
+
+    <p>
+      Take our 10-question skin quiz to discover your
+      skin type and understand what your skin may need most.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       QUIZ
+  ====================================================== -->
+
+  <main class="quiz-card">
+
+
+    <!-- TOP -->
+
+    <div class="quiz-top">
+
+      <span class="quiz-label">
+        Skin Quiz
+      </span>
+
+
+      <span
+        class="quiz-number"
+        id="progressText"
+      >
+        1 / 10
+      </span>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-track">
+
+      <div
+        id="progressBar"
+        class="progress-fill"
+      ></div>
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div id="question-container"></div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="quiz-buttons">
+
+      <button
+        type="button"
+        id="prevBtn"
+        class="quiz-btn previous-btn"
+        disabled
+      >
+        ← Previous
+      </button>
+
+
+      <button
+        type="button"
+        id="nextBtn"
+        class="quiz-btn next-btn"
+      >
+        Next →
+      </button>
+
+    </div>
+
+
+    <!-- RESULT -->
 
     <div
-      id="progressBar"
-      class="progress-bar"
-      role="progressbar"
-      style="width: 0%"
+      id="result"
+      class="result-card"
     ></div>
 
-  </div>
 
-</div>
+    <div class="quiz-note">
 
+      Your answers are used to personalize your
+      Noiré skincare experience.
 
-<!-- FORM -->
+    </div>
 
-<form id="skinQuiz">
+  </main>
 
-  <div id="question-container"></div>
 
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
-  <div
-    class="quiz-buttons d-flex justify-content-between"
-  >
+  <footer>
 
-    <button
-      type="button"
-      id="prevBtn"
-      class="btn btn-secondary"
-      disabled
-    >
-      ← Previous
-    </button>
 
+    <div class="footer-inner">
 
-    <button
-      type="button"
-      id="nextBtn"
-      class="btn btn-primary"
-    >
-      Next →
-    </button>
 
-  </div>
+      <div class="footer-brand">
 
-</form>
+        <h2>
+          NOIRÉ
+        </h2>
 
 
-<!-- RESULT -->
+        <p>
+          Thoughtfully formulated skincare
+          for beautifully uncomplicated rituals.
+        </p>
 
-<div
-  id="result"
-  class="result"
-  style="display: none;"
-></div>
+      </div>
 
-  </div>
 
-</div>
+      <div class="footer-column">
 
-<!-- ==============================
-     FOOTER
-============================== -->
+        <h4>
+          Explore
+        </h4>
 
-<footer>
 
-  <p>
-    &copy; 2026 Noiré Skincare. All rights reserved.
-  </p>
+        <a href="index.html">
+          Home
+        </a>
 
-</footer>
 
-<!-- ==============================
-     BOOTSTRAP JS
-============================== -->
+        <a href="about.html">
+          Our Story
+        </a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script type="module">
+        <a href="shop.html">
+          Shop
+        </a>
 
-  /* =========================================
-     FIREBASE IMPORTS
-  ========================================= */
 
-  import { initializeApp } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        <a href="routine.html">
+          Routine Builder
+        </a>
 
-  import {
-    getAuth,
-    onAuthStateChanged
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      </div>
 
-  import {
-    getDatabase,
-    ref,
-    get,
-    update
-  } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+      <div class="footer-column">
 
-  /* =========================================
-     FIREBASE CONFIG
-  ========================================= */
+        <h4>
+          Journal
+        </h4>
 
-  const firebaseConfig = {
 
-    apiKey:
-      "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
-
-    authDomain:
-      "noire-17ed6.firebaseapp.com",
-
-    databaseURL:
-      "https://noire-17ed6-default-rtdb.firebaseio.com",
-
-    projectId:
-      "noire-17ed6",
-
-    storageBucket:
-      "noire-17ed6.appspot.com",
-
-    messagingSenderId:
-      "559789891078",
-
-    appId:
-      "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
-
-  };
-
-
-  /* =========================================
-     INITIALIZE FIREBASE
-  ========================================= */
-
-  const app =
-    initializeApp(firebaseConfig);
-
-  const auth =
-    getAuth(app);
-
-  const db =
-    getDatabase(app);
-
-
-  /* =========================================
-     QUIZ QUESTIONS
-  ========================================= */
-
-  const questions = [
-
-    {
-      q: "How does your skin feel after washing?",
-      options: {
-        "Feels tight/dry": "Dry",
-        "Feels greasy": "Oily",
-        "Red/irritated": "Sensitive",
-        "Dry in some areas, oily in others": "Combination",
-        "Feels fine": "Normal"
-      }
-    },
-
-    {
-      q: "How often do you get breakouts?",
-      options: {
-        "Rarely": "Normal",
-        "Frequently": "Oily",
-        "Sometimes": "Combination",
-        "Triggered by products": "Sensitive",
-        "When skin is dry": "Dry"
-      }
-    },
-
-    {
-      q: "How does your skin react to moisturizer?",
-      options: {
-        "Absorbs quickly": "Dry",
-        "Feels greasy": "Oily",
-        "Works in some areas": "Combination",
-        "Stings or burns": "Sensitive",
-        "Feels fine": "Normal"
-      }
-    },
-
-    {
-      q: "Do you experience redness or irritation?",
-      options: {
-        "Yes, often": "Sensitive",
-        "Sometimes": "Combination",
-        "Rarely": "Normal",
-        "Only when dry": "Dry",
-        "Only when oily": "Oily"
-      }
-    },
-
-    {
-      q: "How shiny does your skin get midday?",
-      options: {
-        "Not at all": "Dry",
-        "Very shiny": "Oily",
-        "T-zone only": "Combination",
-        "Red and shiny": "Sensitive",
-        "Balanced": "Normal"
-      }
-    },
-
-    {
-      q: "Do you feel tightness during the day?",
-      options: {
-        "Yes": "Dry",
-        "No": "Normal",
-        "Sometimes": "Combination",
-        "With irritation": "Sensitive",
-        "With oiliness": "Oily"
-      }
-    },
-
-    {
-      q: "How visible are your pores?",
-      options: {
-        "Small": "Dry",
-        "Large": "Oily",
-        "Mixed": "Combination",
-        "Inflamed": "Sensitive",
-        "Balanced": "Normal"
-      }
-    },
-
-    {
-      q: "Does your skin react to weather changes?",
-      options: {
-        "Gets dry": "Dry",
-        "Gets oily": "Oily",
-        "Both": "Combination",
-        "Red/irritated": "Sensitive",
-        "No change": "Normal"
-      }
-    },
-
-    {
-      q: "How often do you need blotting papers?",
-      options: {
-        "Never": "Normal",
-        "Daily": "Oily",
-        "Sometimes": "Combination",
-        "When irritated": "Sensitive",
-        "When dry": "Dry"
-      }
-    },
+        <a href="blog.html">
+          Glow Guides
+        </a>
 
-    {
-      q: "How does your skin look without products?",
-      options: {
-        "Dull": "Dry",
-        "Shiny": "Oily",
-        "Mixed": "Combination",
-        "Red/Irritated": "Sensitive",
-        "Balanced": "Normal"
-      }
-    }
 
-  ];
+        <a href="blog.html">
+          Ingredient Science
+        </a>
 
 
-  /* =========================================
-     QUIZ VARIABLES
-  ========================================= */
+        <a href="blog.html">
+          Lifestyle & Wellness
+        </a>
 
-  let currentQuestion = 0;
+      </div>
 
-  let answers = [];
 
+      <div class="footer-column">
 
-  /* =========================================
-     CURRENT FIREBASE USER
-  ========================================= */
+        <h4>
+          Help
+        </h4>
 
-  let currentUser = null;
 
+        <a href="contact.html">
+          Contact Us
+        </a>
 
-  onAuthStateChanged(auth, (user) => {
 
-    if (user) {
+        <a href="account.html">
+          My Account
+        </a>
 
-      currentUser = user;
 
-      console.log(
-        "Quiz user:",
-        currentUser.uid
-      );
+        <a href="cart.html">
+          Shopping Bag
+        </a>
 
-    } else {
+      </div>
 
-      alert(
-        "Please log in first."
-      );
+    </div>
 
-      window.location.href =
-        "login.html";
 
-    }
+    <div class="footer-bottom">
 
-  });
+      <span>
+        © 2026 Noiré Skincare.
+        All rights reserved.
+      </span>
 
 
-  /* =========================================
-     SHOW QUESTION
-  ========================================= */
+      <span>
+        Made for your ritual.
+      </span>
 
-  function showQuestion(index) {
+    </div>
 
-    const container =
-      document.getElementById(
-        "question-container"
-      );
+  </footer>
 
-    const q =
-      questions[index];
 
+  <!-- =====================================================
+       FIREBASE + QUIZ SCRIPT
+  ====================================================== -->
 
-    container.innerHTML =
-      `<h5>${index + 1}. ${q.q}</h5>`;
+  <script type="module">
 
 
-    Object.keys(q.options)
-      .forEach((opt) => {
+    /* =========================================
+       FIREBASE IMPORTS
+    ========================================= */
 
-        container.innerHTML += `
+    import {
+      initializeApp
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-          <div class="form-check">
 
-            <input
-              class="form-check-input"
-              type="radio"
-              name="q${index}"
-              value="${q.options[opt]}"
-            >
+    import {
+      getAuth,
+      onAuthStateChanged
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-            <label class="form-check-label">
-              ${opt}
-            </label>
 
-          </div>
+    import {
+      getDatabase,
+      ref,
+      update
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        `;
 
-      });
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================= */
 
+    const firebaseConfig = {
 
-    /* Restore previous answer */
+      apiKey:
+        "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
 
-    if (answers[index]) {
+      authDomain:
+        "noire-17ed6.firebaseapp.com",
 
-      const previousAnswer =
-        document.querySelector(
-          `input[name="q${index}"][value="${answers[index]}"]`
-        );
+      databaseURL:
+        "https://noire-17ed6-default-rtdb.firebaseio.com",
 
-      if (previousAnswer) {
+      projectId:
+        "noire-17ed6",
 
-        previousAnswer.checked =
-          true;
+      storageBucket:
+        "noire-17ed6.appspot.com",
 
-      }
+      messagingSenderId:
+        "559789891078",
 
-    }
-
-
-    updateProgress();
-
-  }
-
-
-  /* =========================================
-     PROGRESS BAR
-  ========================================= */
-
-  function updateProgress() {
-
-    const progress =
-      ((currentQuestion) /
-      questions.length) * 100;
-
-
-    document.getElementById(
-      "progressBar"
-    ).style.width =
-      progress + "%";
-
-
-    document.getElementById(
-      "progressText"
-    ).textContent =
-      `${Math.min(currentQuestion + 1, questions.length)} / ${questions.length}`;
-
-  }
-
-
-  /* =========================================
-     NEXT BUTTON
-  ========================================= */
-
-  document
-    .getElementById("nextBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        const selected =
-          document.querySelector(
-            `input[name="q${currentQuestion}"]:checked`
-          );
-
-
-        if (!selected) {
-
-          alert(
-            "Please select an answer!"
-          );
-
-          return;
-
-        }
-
-
-        answers[currentQuestion] =
-          selected.value;
-
-
-        currentQuestion++;
-
-
-        if (
-          currentQuestion <
-          questions.length
-        ) {
-
-          showQuestion(
-            currentQuestion
-          );
-
-
-          document.getElementById(
-            "prevBtn"
-          ).disabled = false;
-
-
-          if (
-            currentQuestion ===
-            questions.length - 1
-          ) {
-
-            document.getElementById(
-              "nextBtn"
-            ).textContent =
-              "Finish ✨";
-
-          }
-
-        } else {
-
-          calculateResult();
-
-        }
-
-      }
-    );
-
-
-  /* =========================================
-     PREVIOUS BUTTON
-  ========================================= */
-
-  document
-    .getElementById("prevBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        if (currentQuestion > 0) {
-
-          currentQuestion--;
-
-          showQuestion(
-            currentQuestion
-          );
-
-
-          if (
-            currentQuestion === 0
-          ) {
-
-            document.getElementById(
-              "prevBtn"
-            ).disabled = true;
-
-          }
-
-
-          document.getElementById(
-            "nextBtn"
-          ).textContent =
-            "Next →";
-
-        }
-
-      }
-    );
-
-
-  /* =========================================
-     CALCULATE SKIN TYPE
-  ========================================= */
-
-  function calculateSkinType() {
-
-    const counts = {
-
-      Dry: 0,
-      Oily: 0,
-      Sensitive: 0,
-      Combination: 0,
-      Normal: 0
+      appId:
+        "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
 
     };
 
 
-    answers.forEach(
-      (answer) => {
+    /* =========================================
+       INITIALIZE
+    ========================================= */
 
-        if (
-          counts[answer] !==
-          undefined
-        ) {
+    const app =
+      initializeApp(firebaseConfig);
 
-          counts[answer]++;
+
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getDatabase(app);
+
+
+    /* =========================================
+       QUESTIONS
+    ========================================= */
+
+    const questions = [
+
+      {
+        q: "How does your skin feel after washing?",
+
+        options: {
+
+          "Feels tight or dry": "Dry",
+
+          "Feels greasy": "Oily",
+
+          "Red or irritated": "Sensitive",
+
+          "Dry in some areas, oily in others":
+            "Combination",
+
+          "Feels fine": "Normal"
+
+        }
+
+      },
+
+
+      {
+        q: "How often do you get breakouts?",
+
+        options: {
+
+          "Rarely": "Normal",
+
+          "Frequently": "Oily",
+
+          "Sometimes": "Combination",
+
+          "Triggered by products": "Sensitive",
+
+          "When my skin is dry": "Dry"
+
+        }
+
+      },
+
+
+      {
+        q: "How does your skin react to moisturizer?",
+
+        options: {
+
+          "Absorbs quickly": "Dry",
+
+          "Feels greasy": "Oily",
+
+          "Works well in some areas":
+            "Combination",
+
+          "Stings or burns": "Sensitive",
+
+          "Feels fine": "Normal"
+
+        }
+
+      },
+
+
+      {
+        q: "Do you experience redness or irritation?",
+
+        options: {
+
+          "Yes, often": "Sensitive",
+
+          "Sometimes": "Combination",
+
+          "Rarely": "Normal",
+
+          "Only when my skin is dry": "Dry",
+
+          "Only when my skin is oily": "Oily"
+
+        }
+
+      },
+
+
+      {
+        q: "How shiny does your skin get midday?",
+
+        options: {
+
+          "Not at all": "Dry",
+
+          "Very shiny": "Oily",
+
+          "Mostly my T-zone": "Combination",
+
+          "Red and shiny": "Sensitive",
+
+          "Balanced": "Normal"
+
+        }
+
+      },
+
+
+      {
+        q: "Do you feel tightness during the day?",
+
+        options: {
+
+          "Yes": "Dry",
+
+          "No": "Normal",
+
+          "Sometimes": "Combination",
+
+          "Along with irritation": "Sensitive",
+
+          "Along with oiliness": "Oily"
+
+        }
+
+      },
+
+
+      {
+        q: "How visible are your pores?",
+
+        options: {
+
+          "Small": "Dry",
+
+          "Large": "Oily",
+
+          "Mixed": "Combination",
+
+          "Inflamed": "Sensitive",
+
+          "Balanced": "Normal"
+
+        }
+
+      },
+
+
+      {
+        q: "Does your skin react to weather changes?",
+
+        options: {
+
+          "Gets dry": "Dry",
+
+          "Gets oily": "Oily",
+
+          "Both": "Combination",
+
+          "Gets red or irritated": "Sensitive",
+
+          "No noticeable change": "Normal"
+
+        }
+
+      },
+
+
+      {
+        q: "How often do you need blotting papers?",
+
+        options: {
+
+          "Never": "Normal",
+
+          "Daily": "Oily",
+
+          "Sometimes": "Combination",
+
+          "When my skin feels irritated": "Sensitive",
+
+          "When my skin feels dry": "Dry"
+
+        }
+
+      },
+
+
+      {
+        q: "How does your skin look without products?",
+
+        options: {
+
+          "Dull": "Dry",
+
+          "Shiny": "Oily",
+
+          "Mixed": "Combination",
+
+          "Red or irritated": "Sensitive",
+
+          "Balanced": "Normal"
+
+        }
+
+      }
+
+    ];
+
+
+    /* =========================================
+       VARIABLES
+    ========================================= */
+
+    let currentQuestion = 0;
+
+    let answers = [];
+
+    let currentUser = null;
+
+
+    /* =========================================
+       AUTH STATE
+    ========================================= */
+
+    onAuthStateChanged(
+      auth,
+      (user) => {
+
+        if (user) {
+
+          currentUser = user;
+
+          console.log(
+            "Quiz user:",
+            currentUser.uid
+          );
+
+        } else {
+
+          alert(
+            "Please log in first to use the Routine Builder."
+          );
+
+          window.location.href =
+            "login.html";
 
         }
 
@@ -1096,408 +1774,750 @@
     );
 
 
-    return Object.keys(
-      counts
-    ).reduce(
-      (a, b) =>
-        counts[a] >
-        counts[b]
-          ? a
-          : b
-    );
-
-  }
-
-
-  /* =========================================
-     CALCULATE SKIN CONDITION
-  ========================================= */
-
-  function calculateSkinCondition() {
-
-    let dryness = 0;
-
-    let oiliness = 0;
-
-    let irritation = 0;
-
-    let breakouts = 0;
-
-
-    answers.forEach(
-      (answer, index) => {
-
-        /* DRYNESS */
-
-        if (
-          index === 0 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        if (
-          index === 2 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        if (
-          index === 5 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        if (
-          index === 7 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        if (
-          index === 8 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        if (
-          index === 9 &&
-          answer === "Dry"
-        ) dryness++;
-
-
-        /* OILINESS */
-
-        if (
-          index === 0 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 1 &&
-          answer === "Oily"
-        ) {
-
-          oiliness++;
-          breakouts++;
-
-        }
-
-
-        if (
-          index === 2 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 4 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 5 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 6 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 7 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 8 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        if (
-          index === 9 &&
-          answer === "Oily"
-        ) oiliness++;
-
-
-        /* SENSITIVITY */
-
-        if (
-          answer === "Sensitive"
-        ) {
-
-          irritation++;
-
-        }
-
-
-        /* BREAKOUTS */
-
-        if (
-          index === 1 &&
-          answer === "Combination"
-        ) {
-
-          breakouts++;
-
-        }
-
-      }
-    );
-
-
-    /* FINAL CONDITION */
-
-    if (
-      irritation >= 2
-    ) {
-
-      return "Redness / Irritation";
-
-    }
-
-
-    if (
-      breakouts >= 1 &&
-      oiliness >= 2
-    ) {
-
-      return "Acne-prone / Oily";
-
-    }
-
-
-    if (
-      oiliness >= 3
-    ) {
-
-      return "Excess Oiliness";
-
-    }
-
-
-    if (
-      dryness >= 3
-    ) {
-
-      return "Dryness";
-
-    }
-
-
-    if (
-      breakouts >= 1
-    ) {
-
-      return "Occasional Breakouts";
-
-    }
-
-
-    return "Balanced / Healthy";
-
-  }
-
-
-  /* =========================================
-     SAVE RESULT TO FIREBASE
-  ========================================= */
-
-  async function saveQuizResult(
-    skinType,
-    skinCondition
-  ) {
-
-    if (!currentUser) {
-
-      alert(
-        "You must be logged in to save your results."
-      );
-
-      window.location.href =
-        "login.html";
-
-      return false;
-
-    }
-
-
-    try {
-
-      const userRef =
-        ref(
-          db,
-          "users/" +
-          currentUser.uid
+    /* =========================================
+       SHOW QUESTION
+    ========================================= */
+
+    function showQuestion(index) {
+
+      const container =
+        document.getElementById(
+          "question-container"
         );
 
 
-      await update(
-        userRef,
-        {
-
-          skinType:
-            skinType,
-
-          skinCondition:
-            skinCondition
-
-        }
-      );
+      const question =
+        questions[index];
 
 
-      console.log(
-        "Quiz results saved successfully:",
-        {
-          skinType,
-          skinCondition
-        }
-      );
+      let html = `
+
+        <h3>
+          ${index + 1}. ${question.q}
+        </h3>
+
+      `;
 
 
-      return true;
+      Object.keys(question.options)
+        .forEach(
+          (option, optionIndex) => {
+
+            const value =
+              question.options[option];
 
 
-    } catch (error) {
-
-      console.error(
-        "Error saving quiz result:",
-        error
-      );
+            const isSelected =
+              answers[index] === value;
 
 
-      alert(
-        "We couldn't save your quiz results. Please try again."
-      );
+            html += `
+
+              <label
+                class="answer-option ${
+                  isSelected
+                    ? "selected"
+                    : ""
+                }"
+              >
+
+                <input
+                  type="radio"
+                  name="question${index}"
+                  value="${value}"
+                  ${
+                    isSelected
+                      ? "checked"
+                      : ""
+                  }
+                >
+
+                <span class="radio-circle"></span>
+
+                <span class="answer-text">
+                  ${option}
+                </span>
+
+              </label>
+
+            `;
+
+          }
+        );
 
 
-      return false;
+      container.innerHTML =
+        html;
+
+
+      /* Selection */
+
+      container
+        .querySelectorAll(
+          ".answer-option"
+        )
+        .forEach(
+          (option) => {
+
+            option.addEventListener(
+              "click",
+              () => {
+
+                container
+                  .querySelectorAll(
+                    ".answer-option"
+                  )
+                  .forEach(
+                    item =>
+                      item.classList.remove(
+                        "selected"
+                      )
+                  );
+
+
+                option.classList.add(
+                  "selected"
+                );
+
+
+                const input =
+                  option.querySelector(
+                    "input"
+                  );
+
+
+                input.checked =
+                  true;
+
+              }
+            );
+
+          }
+        );
+
+
+      updateProgress();
 
     }
 
-  }
+
+    /* =========================================
+       PROGRESS
+    ========================================= */
+
+    function updateProgress() {
+
+      const progress =
+        ((currentQuestion + 1) /
+        questions.length) * 100;
 
 
-  /* =========================================
-     FINAL RESULT
-  ========================================= */
-
-  async function calculateResult() {
-
-    const skinType =
-      calculateSkinType();
+      document.getElementById(
+        "progressBar"
+      ).style.width =
+        progress + "%";
 
 
-    const skinCondition =
-      calculateSkinCondition();
+      document.getElementById(
+        "progressText"
+      ).textContent =
+        `${currentQuestion + 1} / ${questions.length}`;
+
+    }
 
 
-    const saved =
-      await saveQuizResult(
-        skinType,
+    /* =========================================
+       NEXT BUTTON
+    ========================================= */
+
+    document
+      .getElementById("nextBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          const selected =
+            document.querySelector(
+              `input[name="question${currentQuestion}"]:checked`
+            );
+
+
+          if (!selected) {
+
+            alert(
+              "Please choose an answer before continuing."
+            );
+
+            return;
+
+          }
+
+
+          answers[currentQuestion] =
+            selected.value;
+
+
+          if (
+            currentQuestion <
+            questions.length - 1
+          ) {
+
+            currentQuestion++;
+
+            showQuestion(
+              currentQuestion
+            );
+
+
+            document.getElementById(
+              "prevBtn"
+            ).disabled = false;
+
+
+            if (
+              currentQuestion ===
+              questions.length - 1
+            ) {
+
+              document.getElementById(
+                "nextBtn"
+              ).textContent =
+                "Finish ✨";
+
+            }
+
+          } else {
+
+            calculateResult();
+
+          }
+
+        }
+      );
+
+
+    /* =========================================
+       PREVIOUS BUTTON
+    ========================================= */
+
+    document
+      .getElementById("prevBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          if (
+            currentQuestion > 0
+          ) {
+
+            currentQuestion--;
+
+            showQuestion(
+              currentQuestion
+            );
+
+
+            document.getElementById(
+              "prevBtn"
+            ).disabled =
+              currentQuestion === 0;
+
+
+            document.getElementById(
+              "nextBtn"
+            ).textContent =
+              "Next →";
+
+          }
+
+        }
+      );
+
+
+    /* =========================================
+       CALCULATE SKIN TYPE
+    ========================================= */
+
+    function calculateSkinType() {
+
+      const counts = {
+
+        Dry: 0,
+
+        Oily: 0,
+
+        Sensitive: 0,
+
+        Combination: 0,
+
+        Normal: 0
+
+      };
+
+
+      answers.forEach(
+        answer => {
+
+          if (
+            counts[answer] !==
+            undefined
+          ) {
+
+            counts[answer]++;
+
+          }
+
+        }
+      );
+
+
+      return Object.keys(
+        counts
+      ).reduce(
+        (a, b) =>
+          counts[a] >
+          counts[b]
+            ? a
+            : b
+      );
+
+    }
+
+
+    /* =========================================
+       CALCULATE SKIN CONDITION
+    ========================================= */
+
+    function calculateSkinCondition() {
+
+      let dryness = 0;
+
+      let oiliness = 0;
+
+      let irritation = 0;
+
+      let breakouts = 0;
+
+
+      answers.forEach(
+        (answer, index) => {
+
+
+          /* DRYNESS */
+
+          if (
+            index === 0 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          if (
+            index === 2 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          if (
+            index === 5 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          if (
+            index === 7 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          if (
+            index === 8 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          if (
+            index === 9 &&
+            answer === "Dry"
+          )
+            dryness++;
+
+
+          /* OILINESS */
+
+          if (
+            answer === "Oily"
+          )
+            oiliness++;
+
+
+          /* BREAKOUTS */
+
+          if (
+            index === 1 &&
+            (
+              answer === "Oily" ||
+              answer === "Combination"
+            )
+          ) {
+
+            breakouts++;
+
+          }
+
+
+          /* SENSITIVITY */
+
+          if (
+            answer === "Sensitive"
+          ) {
+
+            irritation++;
+
+          }
+
+        }
+      );
+
+
+      /* FINAL CONDITION */
+
+      if (
+        irritation >= 2
+      ) {
+
+        return "Redness / Irritation";
+
+      }
+
+
+      if (
+        breakouts >= 1 &&
+        oiliness >= 2
+      ) {
+
+        return "Acne-prone / Oily";
+
+      }
+
+
+      if (
+        oiliness >= 3
+      ) {
+
+        return "Excess Oiliness";
+
+      }
+
+
+      if (
+        dryness >= 3
+      ) {
+
+        return "Dryness";
+
+      }
+
+
+      if (
+        breakouts >= 1
+      ) {
+
+        return "Occasional Breakouts";
+
+      }
+
+
+      return "Balanced / Healthy";
+
+    }
+
+
+    /* =========================================
+       SAVE TO FIREBASE
+    ========================================= */
+
+    async function saveQuizResult(
+      skinType,
+      skinCondition
+    ) {
+
+
+      if (!currentUser) {
+
+        alert(
+          "You must be logged in to save your results."
+        );
+
+        window.location.href =
+          "login.html";
+
+        return false;
+
+      }
+
+
+      try {
+
+        const userRef =
+          ref(
+            db,
+            "users/" +
+            currentUser.uid
+          );
+
+
+        await update(
+          userRef,
+          {
+
+            skinType:
+              skinType,
+
+            skinCondition:
+              skinCondition
+
+          }
+        );
+
+
+        console.log(
+          "Quiz results saved:",
+          {
+            skinType,
+            skinCondition
+          }
+        );
+
+
+        return true;
+
+
+      } catch (error) {
+
+        console.error(
+          "Error saving quiz result:",
+          error
+        );
+
+
+        alert(
+          "We couldn't save your results. Please try again."
+        );
+
+
+        return false;
+
+      }
+
+    }
+
+
+    /* =========================================
+       RESULT
+    ========================================= */
+
+    async function calculateResult() {
+
+
+      const skinType =
+        calculateSkinType();
+
+
+      const skinCondition =
+        calculateSkinCondition();
+
+
+      const saved =
+        await saveQuizResult(
+          skinType,
+          skinCondition
+        );
+
+
+      if (!saved) {
+
+        return;
+
+      }
+
+
+      /* SAVE LOCALLY */
+
+      localStorage.setItem(
+        "userSkinType",
+        skinType
+      );
+
+
+      localStorage.setItem(
+        "userSkinCondition",
         skinCondition
       );
 
 
-    if (!saved) {
+      /* RESULT */
 
-      return;
+      const result =
+        document.getElementById(
+          "result"
+        );
+
+
+      result.innerHTML = `
+
+        <div class="result-icon">
+          ✨
+        </div>
+
+
+        <h2>
+          Your Noiré Match
+        </h2>
+
+
+        <div class="result-subtitle">
+          Your personalized skin profile is ready.
+        </div>
+
+
+        <div class="result-details">
+
+
+          <div class="result-detail">
+
+            <span>
+              Skin Type
+            </span>
+
+            <strong>
+              ${skinType}
+            </strong>
+
+          </div>
+
+
+          <div class="result-detail">
+
+            <span>
+              Skin Condition
+            </span>
+
+            <strong>
+              ${skinCondition}
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        <p class="result-message">
+
+          Your results have been saved to your account.
+          Explore products selected with your skin profile
+          in mind and create a ritual that feels uniquely yours. 💗
+
+        </p>
+
+
+        <div class="result-actions">
+
+
+          <a
+            href="shop.html?skin=${encodeURIComponent(
+              skinType
+            )}"
+            class="result-btn primary"
+          >
+            Shop for My Skin →
+          </a>
+
+
+          <a
+            href="account.html"
+            class="result-btn secondary"
+          >
+            View My Account
+          </a>
+
+
+        </div>
+
+      `;
+
+
+      result.style.display =
+        "block";
+
+
+      /* HIDE QUESTION */
+
+      document.getElementById(
+        "question-container"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "nextBtn"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "prevBtn"
+      ).style.display =
+        "none";
+
+
+      /* COMPLETE PROGRESS */
+
+      document.getElementById(
+        "progressBar"
+      ).style.width =
+        "100%";
+
+
+      document.getElementById(
+        "progressText"
+      ).textContent =
+        "Complete ✨";
+
+
+      /* SCROLL TO RESULT */
+
+      setTimeout(
+        () => {
+
+          result.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+        },
+        150
+      );
 
     }
 
 
-    /* SHOW RESULT */
+    /* =========================================
+       START
+    ========================================= */
 
-    const result =
-      document.getElementById(
-        "result"
-      );
-
-
-    result.innerHTML = `
-
-      ✨ <strong>Your Results</strong> ✨
-
-      <br><br>
-
-      <strong>Skin Type:</strong>
-      ${skinType}
-
-      <br>
-
-      <strong>Skin Condition:</strong>
-      ${skinCondition}
-
-      <br><br>
-
-      Your results have been saved
-      to your account. 💗
-
-    `;
-
-
-    result.style.display =
-      "block";
-
-
-    /* LOCAL STORAGE */
-
-    localStorage.setItem(
-      "userSkinType",
-      skinType
+    showQuestion(
+      currentQuestion
     );
 
-
-    /* HIDE QUIZ */
-
-    document.getElementById(
-      "question-container"
-    ).innerHTML = "";
-
-
-    document.getElementById(
-      "nextBtn"
-    ).style.display =
-      "none";
-
-
-    document.getElementById(
-      "prevBtn"
-    ).style.display =
-      "none";
-
-
-    /* COMPLETE PROGRESS */
-
-    document.getElementById(
-      "progressBar"
-    ).style.width =
-      "100%";
-
-
-    document.getElementById(
-      "progressText"
-    ).textContent =
-      "Complete ✨";
-
-  }
-
-
-  /* =========================================
-     START QUIZ
-  ========================================= */
-
-  showQuestion(
-    currentQuestion
-  );
-
-</script>
+  </script>
 
 </body>
+
 </html>

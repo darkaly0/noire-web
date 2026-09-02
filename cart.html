@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Your Cart | Noiré Skincare</title>
 
   <link rel="stylesheet" href="style.css">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
   <style>
+
     :root {
       --charcoal: #000000;
       --ivory: #F9F9F6;
@@ -18,193 +27,593 @@
       --blush: #F2D6D0;
       --white: #ffffff;
       --soft-gray: #777;
+      --border: #e9e5df;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      margin: 0;
       background: var(--ivory);
       color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      min-height: 100vh;
+      font-family: "DM Sans", sans-serif;
     }
 
-    /* ==============================
-       HEADER
-    ============================== */
+    /* =====================================================
+       ANNOUNCEMENT BAR
+    ===================================================== */
 
-    header {
+    .announcement {
+      background: var(--charcoal);
+      color: white;
       text-align: center;
-      padding: 2rem;
-      background: var(--champagne);
-      border-bottom: 2px solid var(--rose-gold);
+      padding: 9px 15px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
-      letter-spacing: 1px;
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .navbar-noire {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      height: 78px;
+      background: rgba(255,255,255,0.96);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-bottom: 1px solid #eee;
+
+      backdrop-filter: blur(10px);
     }
 
-    /* ==============================
-       NAVIGATION
-    ============================== */
-
-    nav {
-      text-align: center;
-      background: var(--white);
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      position: relative;
-      z-index: 5;
-    }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--charcoal);
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--rose-gold);
-    }
-
-    /* ==============================
-       HERO
-    ============================== */
-
-    .hero {
-      background:
-        linear-gradient(
-          135deg,
-          var(--champagne),
-          var(--ivory),
-          var(--blush)
-        );
-
-      text-align: center;
-      padding: 3.5rem 2rem;
-      border-radius: 20px;
-      margin: 2.5rem auto 2rem;
-      max-width: 900px;
-
-      box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
-
-      border: 1px solid rgba(183,110,121,0.15);
-    }
-
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--rose-gold);
-      margin: 0 0 0.7rem;
-      letter-spacing: 0.5px;
-    }
-
-    .hero p {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #444;
-    }
-
-    /* ==============================
-       CART SECTION
-    ============================== */
-
-    .cart-wrapper {
-      max-width: 1000px;
-      margin: 0 auto 3rem;
-      padding: 0 20px;
-    }
-
-    .cart-card {
-      background: var(--white);
-      border-radius: 18px;
-      padding: 2rem;
-
-      box-shadow:
-        0 6px 20px rgba(0,0,0,0.08);
-
-      border: 1px solid var(--champagne);
-
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-    }
-
-    .cart-card:hover {
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 10px 25px rgba(0,0,0,0.10);
-    }
-
-    /* ==============================
-       CART HEADER
-    ============================== */
-
-    .cart-heading {
+    .navbar-inner {
+      width: min(1250px, 92%);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 25px;
+    }
 
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+    .logo {
+      text-decoration: none;
+      color: var(--charcoal);
+
+      font-family: "Playfair Display", serif;
+      font-size: 27px;
+      font-weight: 700;
+
+      letter-spacing: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 27px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--rose-gold);
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-icon {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      background: var(--ivory);
+
+      text-decoration: none;
+      color: var(--charcoal);
+
+      font-size: 16px;
+
+      transition: 0.25s ease;
+    }
+
+    .nav-icon:hover {
+      background: var(--blush);
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .cart-hero {
+      width: min(1200px, 92%);
+      margin: 55px auto 45px;
+
+      min-height: 270px;
+
+      border-radius: 24px;
+
+      background:
+        radial-gradient(
+          circle at 15% 25%,
+          rgba(247,231,206,0.95),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(242,214,208,0.9),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #ffffff,
+          var(--ivory)
+        );
+
+      border: 1px solid rgba(183,110,121,0.15);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 50px 25px;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cart-hero::before {
+      content: "NOIRÉ";
+
+      position: absolute;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 130px;
+      letter-spacing: 15px;
+
+      color: rgba(0,0,0,0.025);
+
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 700;
+
+      color: var(--rose-gold);
+
+      margin-bottom: 12px;
+    }
+
+    .cart-hero h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(42px, 6vw, 65px);
+
+      font-weight: 600;
+
+      margin: 0 0 13px;
+
+      line-height: 1.05;
+    }
+
+    .cart-hero p {
+      color: #666;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    /* =====================================================
+       CART LAYOUT
+    ===================================================== */
+
+    .cart-container {
+      width: min(1200px, 92%);
+      margin: 0 auto 80px;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
+
+      gap: 30px;
+
+      align-items: start;
+    }
+
+    /* =====================================================
+       CART CARD
+    ===================================================== */
+
+    .cart-section {
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      padding: 28px;
+
+      box-shadow: 0 8px 30px rgba(0,0,0,0.045);
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-bottom: 20px;
+
+      border-bottom: 1px solid #eee;
+
+      margin-bottom: 20px;
+    }
+
+    .cart-header h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 25px;
+
+      margin: 0;
+    }
+
+    .item-count {
+      color: var(--soft-gray);
+      font-size: 13px;
+    }
+
+    /* =====================================================
+       CART ITEM
+    ===================================================== */
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns: 115px minmax(0, 1fr) auto;
+
+      gap: 20px;
+
+      align-items: center;
+
+      padding: 18px 0;
 
       border-bottom: 1px solid #eee;
     }
 
-    .cart-heading h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      margin: 0;
-      font-size: 1.7rem;
+    .cart-item:last-child {
+      border-bottom: none;
     }
 
-    .cart-heading span {
-      color: var(--soft-gray);
-      font-size: 0.9rem;
-    }
+    .cart-image {
+      width: 115px;
+      height: 115px;
 
-    /* ==============================
-       PRODUCT ITEM
-    ============================== */
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-
-      padding: 1.2rem;
+      border-radius: 16px;
 
       background:
         linear-gradient(
-          to right,
-          var(--ivory),
-          #ffffff
+          135deg,
+          var(--champagne),
+          var(--ivory)
         );
 
-      border: 1px solid #eee;
-      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      margin-bottom: 1.5rem;
+      overflow: hidden;
     }
 
-    .product-image {
-      width: 110px;
-      height: 110px;
+    .cart-image img {
+      width: 100%;
+      height: 100%;
 
-      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .placeholder {
+      font-size: 35px;
+    }
+
+    .cart-product-info h3 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 20px;
+
+      margin: 0 0 7px;
+
+      color: var(--charcoal);
+    }
+
+    .cart-product-info p {
+      margin: 0 0 9px;
+
+      color: #777;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+    .cart-price-mobile {
+      display: none;
+    }
+
+    .item-price {
+      font-weight: 700;
+      font-size: 16px;
+
+      color: var(--rose-gold);
+
+      margin-bottom: 12px;
+    }
+
+    /* =====================================================
+       QUANTITY
+    ===================================================== */
+
+    .quantity-control {
+      display: inline-flex;
+
+      align-items: center;
+
+      border: 1px solid #ddd;
+
+      border-radius: 30px;
+
+      overflow: hidden;
+
+      height: 38px;
+    }
+
+    .quantity-control button {
+      width: 36px;
+      height: 36px;
+
+      border: none;
+
+      background: white;
+
+      cursor: pointer;
+
+      font-size: 17px;
+
+      transition: 0.2s ease;
+    }
+
+    .quantity-control button:hover {
+      background: var(--blush);
+    }
+
+    .quantity-control span {
+      min-width: 35px;
+
+      text-align: center;
+
+      font-size: 13px;
+
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       ITEM TOTAL / REMOVE
+    ===================================================== */
+
+    .item-actions {
+      text-align: right;
+
+      min-width: 110px;
+    }
+
+    .item-total {
+      font-family: "Playfair Display", serif;
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+    }
+
+    .remove-btn {
+      border: none;
+      background: transparent;
+
+      color: #999;
+
+      font-size: 12px;
+
+      cursor: pointer;
+
+      text-decoration: underline;
+
+      transition: 0.2s ease;
+    }
+
+    .remove-btn:hover {
+      color: var(--rose-gold);
+    }
+
+    /* =====================================================
+       SUMMARY
+    ===================================================== */
+
+    .summary-card {
+      background: var(--charcoal);
+
+      color: white;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      position: sticky;
+      top: 105px;
+
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    }
+
+    .summary-card h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 27px;
+
+      margin: 0 0 25px;
+    }
+
+    .summary-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 12px 0;
+
+      color: #d4d4d4;
+
+      font-size: 13px;
+    }
+
+    .summary-row.total {
+      border-top: 1px solid rgba(255,255,255,0.15);
+
+      margin-top: 10px;
+
+      padding-top: 20px;
+
+      color: white;
+    }
+
+    .summary-row.total strong {
+      font-family: "Playfair Display", serif;
+
+      font-size: 24px;
+
+      color: var(--champagne);
+    }
+
+    .shipping-note {
+      background: rgba(247,231,206,0.09);
+
+      border: 1px solid rgba(247,231,206,0.15);
+
+      padding: 13px;
+
+      border-radius: 10px;
+
+      margin: 15px 0 22px;
+
+      color: #ddd;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+    }
+
+    .checkout-btn {
+      width: 100%;
+
+      border: none;
+
+      background: var(--champagne);
+
+      color: var(--charcoal);
+
+      padding: 15px 20px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.5px;
+
+      cursor: pointer;
+
+      transition: 0.25s ease;
+    }
+
+    .checkout-btn:hover {
+      background: var(--rose-gold);
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    .continue-shopping {
+      display: block;
+
+      text-align: center;
+
+      color: #aaa;
+
+      font-size: 12px;
+
+      margin-top: 18px;
+
+      text-decoration: none;
+    }
+
+    .continue-shopping:hover {
+      color: white;
+    }
+
+    /* =====================================================
+       EMPTY CART
+    ===================================================== */
+
+    .empty-cart {
+      text-align: center;
+
+      padding: 60px 20px;
+    }
+
+    .empty-icon {
+      width: 75px;
+      height: 75px;
+
+      border-radius: 50%;
 
       background: var(--champagne);
 
@@ -212,310 +621,1125 @@
       align-items: center;
       justify-content: center;
 
-      font-size: 2.5rem;
+      margin: 0 auto 20px;
 
-      flex-shrink: 0;
+      font-size: 30px;
     }
 
-    .product-info {
-      flex: 1;
+    .empty-cart h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 28px;
+
+      margin: 0 0 10px;
     }
 
-    .product-info h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
+    .empty-cart p {
+      color: #777;
 
-      color: var(--rose-gold);
+      font-size: 14px;
 
-      margin: 0 0 0.4rem;
+      margin-bottom: 25px;
     }
 
-    .product-info p {
-      margin: 0.25rem 0;
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    .quantity {
+    .shop-btn {
       display: inline-block;
 
-      margin-top: 0.5rem;
-      padding: 5px 12px;
+      padding: 13px 25px;
 
-      background: var(--blush);
+      background: var(--charcoal);
 
-      border-radius: 20px;
+      color: white;
 
-      font-size: 0.85rem;
+      text-decoration: none;
+
+      border-radius: 8px;
+
+      font-size: 13px;
+
       font-weight: 600;
+
+      transition: 0.25s ease;
     }
 
-    /* ==============================
-       CHECKOUT AREA
-    ============================== */
+    .shop-btn:hover {
+      background: var(--rose-gold);
 
-    .cart-bottom {
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      background: var(--charcoal);
+
+      color: white;
+
+      padding: 55px 20px 25px;
+    }
+
+    .footer-inner {
+      width: min(1200px, 92%);
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+      gap: 45px;
+
+      padding-bottom: 40px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-brand h2 {
+      font-family: "Playfair Display", serif;
+
+      letter-spacing: 4px;
+
+      font-size: 25px;
+
+      margin: 0 0 13px;
+    }
+
+    .footer-brand p {
+      color: #aaa;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      max-width: 300px;
+    }
+
+    .footer-column h4 {
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      color: var(--champagne);
+
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+
+      color: #aaa;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      margin-bottom: 9px;
+
+      transition: 0.2s ease;
+    }
+
+    .footer-column a:hover {
+      color: white;
+
+      transform: translateX(2px);
+    }
+
+    .footer-bottom {
+      width: min(1200px, 92%);
+
+      margin: 20px auto 0;
+
       display: flex;
+
       justify-content: space-between;
-      align-items: center;
 
       gap: 20px;
 
-      padding-top: 1.5rem;
-
-      border-top: 1px solid #eee;
-    }
-
-    .total-label {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 2px;
-    }
-
-    .total-price {
-      font-family: 'Playfair Display', serif;
-      color: var(--charcoal);
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    /* ==============================
-       CHECKOUT BUTTON
-    ============================== */
-
-    .btn-rose {
-      background: var(--rose-gold);
-      color: var(--ivory);
-
-      border: none;
-      border-radius: 8px;
-
-      padding: 0.75rem 2rem;
-
-      font-size: 0.95rem;
-      font-weight: 600;
-
-      cursor: pointer;
-
-      transition:
-        background 0.3s ease,
-        transform 0.2s ease,
-        box-shadow 0.3s ease;
-    }
-
-    .btn-rose:hover {
-      background: var(--sage);
-      color: var(--ivory);
-
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 5px 12px rgba(0,0,0,0.12);
-    }
-
-    /* ==============================
-       EMPTY CART MESSAGE
-    ============================== */
-
-    .cart-note {
-      text-align: center;
-      margin-top: 1.5rem;
-
       color: #777;
-      font-size: 0.9rem;
+
+      font-size: 11px;
     }
 
-    /* ==============================
-       FOOTER
-    ============================== */
+    /* =====================================================
+       TOAST
+    ===================================================== */
 
-    footer {
-      background: var(--champagne);
-      text-align: center;
-      padding: 1rem;
+    .toast-message {
+      position: fixed;
 
-      font-size: 0.9rem;
+      right: 25px;
+      bottom: 25px;
 
-      border-top: 2px solid var(--rose-gold);
+      background: var(--charcoal);
 
-      font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
+      color: white;
 
-      margin-top: 2rem;
+      padding: 14px 18px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+      opacity: 0;
+
+      transform: translateY(15px);
+
+      pointer-events: none;
+
+      transition: 0.3s ease;
+
+      z-index: 9999;
     }
 
-    footer p {
-      margin: 0;
+    .toast-message.show {
+      opacity: 1;
+
+      transform: translateY(0);
     }
 
-    /* ==============================
+    /* =====================================================
        RESPONSIVE
-    ============================== */
+    ===================================================== */
 
-    @media (max-width: 700px) {
+    @media (max-width: 950px) {
 
-      header h1 {
-        font-size: 2.5rem;
+      .nav-links {
+        display: none;
       }
 
-      nav {
-        padding: 1rem 0.5rem;
+      .cart-container {
+        grid-template-columns: 1fr;
       }
 
-      nav a {
-        display: inline-block;
-        margin: 5px 8px;
-        font-size: 0.9rem;
+      .summary-card {
+        position: static;
       }
 
-      .hero {
-        margin: 1.5rem 1rem;
-        padding: 2.5rem 1.5rem;
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .navbar-noire {
+        height: 68px;
       }
 
-      .hero h2 {
-        font-size: 2rem;
+      .logo {
+        font-size: 22px;
       }
 
-      .cart-wrapper {
-        padding: 0 15px;
+      .cart-hero {
+        margin-top: 30px;
+
+        min-height: 230px;
       }
 
-      .cart-card {
-        padding: 1.3rem;
+      .cart-hero h1 {
+        font-size: 43px;
+      }
+
+      .cart-section {
+        padding: 20px;
       }
 
       .cart-item {
-        flex-direction: column;
-        text-align: center;
+        grid-template-columns: 80px minmax(0, 1fr);
+
+        gap: 14px;
       }
 
-      .product-info {
+      .cart-image {
+        width: 80px;
+        height: 80px;
+      }
+
+      .cart-product-info h3 {
+        font-size: 17px;
+      }
+
+      .item-actions {
+        grid-column: 2;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
         width: 100%;
       }
 
-      .cart-bottom {
+      .item-total {
+        margin: 0;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+      }
+
+      .footer-bottom {
         flex-direction: column;
+
         text-align: center;
       }
 
-      .btn-rose {
-        width: 100%;
+      .toast-message {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        text-align: center;
       }
     }
-  </style>
 
+  </style>
 </head>
 
 <body>
 
-  <!-- ==============================
-       HEADER
-  ============================== -->
+  <!-- =====================================================
+       ANNOUNCEMENT
+  ====================================================== -->
 
-  <header>
-    <h1>Noiré</h1>
-  </header>
-
-  <!-- ==============================
-       NAVIGATION
-  ============================== -->
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="shop.html">Shop</a>
-    <a href="routine.html">Routine Builder</a>
-    <a href="blog.html">Blog</a>
-    <a href="contact.html">Contact</a>
-    <a href="account.html">Account</a>
-    <a href="cart.html">Cart</a>
-  </nav>
-
-  <!-- ==============================
-       HERO
-  ============================== -->
-
-  <section class="hero">
-    <h2>Your Cart</h2>
-    <p>Review your selected skincare essentials before checkout.</p>
-  </section>
-
-  <!-- ==============================
-       CART
-  ============================== -->
-
-  <div class="cart-wrapper">
-
-<div class="cart-card">
-
-  <div class="cart-heading">
-    <h3>Shopping Bag</h3>
-    <span>1 item</span>
+  <div class="announcement">
+    ✦ FREE SHIPPING ON ORDERS OVER ₱1,500 ✦
   </div>
 
-  <!-- PRODUCT -->
 
-  <div class="cart-item">
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
 
-    <div class="product-image">
-      🧴
+  <nav class="navbar-noire">
+
+    <div class="navbar-inner">
+
+      <a href="index.html" class="logo">
+        NOIRÉ
+      </a>
+
+      <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="shop.html">Shop</a>
+
+        <a href="routine.html">
+          Routine Builder
+        </a>
+
+        <a href="blog.html">
+          Journal
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+      <div class="nav-icons">
+
+        <a href="account.html"
+           class="nav-icon"
+           title="Account">
+          ♡
+        </a>
+
+        <a href="cart.html"
+           class="nav-icon"
+           title="Cart">
+          🛒
+        </a>
+
+      </div>
+
     </div>
 
-    <div class="product-info">
+  </nav>
 
-      <h4>Hydrating Cleanser</h4>
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="cart-hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Your Noiré Edit
+      </div>
+
+      <h1>
+        Your Cart
+      </h1>
 
       <p>
-        Gentle formula for dry and dehydrated skin.
+        A few beautiful essentials for your everyday ritual.
       </p>
 
-      <span class="quantity">
-        Qty: 1
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CART
+  ====================================================== -->
+
+  <main class="cart-container">
+
+    <!-- LEFT -->
+
+    <section class="cart-section">
+
+      <div class="cart-header">
+
+        <h2>
+          Shopping Bag
+        </h2>
+
+        <span
+          class="item-count"
+          id="itemCount">
+          0 items
+        </span>
+
+      </div>
+
+      <div id="cartItems">
+
+        <!-- Products will load here -->
+
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <aside class="summary-card">
+
+      <h2>
+        Order Summary
+      </h2>
+
+      <div class="summary-row">
+
+        <span>
+          Subtotal
+        </span>
+
+        <span id="subtotal">
+          ₱0.00
+        </span>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>
+          Shipping
+        </span>
+
+        <span id="shipping">
+          ₱0.00
+        </span>
+
+      </div>
+
+      <div class="shipping-note">
+
+        ✦ Free shipping on orders over
+        <strong>₱1,500</strong>.
+
+      </div>
+
+      <div class="summary-row total">
+
+        <span>
+          Total
+        </span>
+
+        <strong id="total">
+          ₱0.00
+        </strong>
+
+      </div>
+
+      <button
+        class="checkout-btn"
+        id="checkoutBtn"
+        onclick="checkout()">
+
+        Proceed to Checkout
+
+      </button>
+
+      <a
+        href="shop.html"
+        class="continue-shopping">
+
+        ← Continue Shopping
+
+      </a>
+
+    </aside>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+
+        <h2>
+          NOIRÉ
+        </h2>
+
+        <p>
+          Thoughtfully formulated skincare
+          for beautifully uncomplicated rituals.
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Explore
+        </h4>
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="about.html">
+          Our Story
+        </a>
+
+        <a href="shop.html">
+          Shop
+        </a>
+
+        <a href="routine.html">
+          Routine Builder
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Journal
+        </h4>
+
+        <a href="blog.html">
+          Glow Guides
+        </a>
+
+        <a href="blog.html">
+          Ingredient Science
+        </a>
+
+        <a href="blog.html">
+          Lifestyle & Wellness
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Help
+        </h4>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+        <a href="account.html">
+          My Account
+        </a>
+
+        <a href="cart.html">
+          Shopping Bag
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Noiré Skincare.
+        All rights reserved.
+      </span>
+
+      <span>
+        Made for your ritual.
       </span>
 
     </div>
 
-  </div>
-
-  <!-- CHECKOUT -->
-
-  <div class="cart-bottom">
-
-    <div>
-      <div class="total-label">
-        Total
-      </div>
-
-      <div class="total-price">
-        ₱0.00
-      </div>
-    </div>
-
-    <button class="btn-rose">
-      Proceed to Checkout
-    </button>
-
-  </div>
-
-  <p class="cart-note">
-    ✨ Your skincare journey starts here.
-  </p>
-
-</div>
-
-  </div>
-
-  <!-- ==============================
-       FOOTER
-  ============================== -->
-
-  <footer>
-    <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
   </footer>
 
+
+  <!-- TOAST -->
+
+  <div
+    class="toast-message"
+    id="toast">
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       CART STORAGE
+    ====================================================== */
+
+    const CART_KEY = "noireCart";
+
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(CART_KEY)
+        ) || [];
+
+      } catch (error) {
+
+        console.error(
+          "Unable to load cart:",
+          error
+        );
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveCart(cart) {
+
+      localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+      );
+
+    }
+
+
+    /* =====================================================
+       FORMAT PRICE
+    ====================================================== */
+
+    function formatPrice(price) {
+
+      const number =
+        Number(price) || 0;
+
+      return number.toLocaleString(
+        "en-PH",
+        {
+          style: "currency",
+          currency: "PHP"
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       LOAD CART
+    ====================================================== */
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+      const container =
+        document.getElementById(
+          "cartItems"
+        );
+
+      const itemCount =
+        document.getElementById(
+          "itemCount"
+        );
+
+      let totalItems = 0;
+
+      cart.forEach(item => {
+
+        totalItems +=
+          Number(item.quantity) || 0;
+
+      });
+
+
+      itemCount.textContent =
+        `${totalItems} ${
+          totalItems === 1
+            ? "item"
+            : "items"
+        }`;
+
+
+      /* EMPTY CART */
+
+      if (cart.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="empty-cart">
+
+            <div class="empty-icon">
+              🛍️
+            </div>
+
+            <h2>
+              Your bag is waiting.
+            </h2>
+
+            <p>
+              Discover something beautiful
+              for your skincare ritual.
+            </p>
+
+            <a
+              href="shop.html"
+              class="shop-btn">
+
+              Explore the Collection
+
+            </a>
+
+          </div>
+
+        `;
+
+        updateSummary();
+
+        return;
+
+      }
+
+
+      /* PRODUCTS */
+
+      container.innerHTML =
+        cart.map(
+          (item, index) => {
+
+            const price =
+              Number(item.price) || 0;
+
+            const quantity =
+              Number(item.quantity) || 1;
+
+            const itemTotal =
+              price * quantity;
+
+
+            const image =
+              item.image || "";
+
+
+            return `
+
+              <div class="cart-item">
+
+                <div class="cart-image">
+
+                  ${
+                    image
+                    ?
+                    `
+                    <img
+                      src="${escapeHtml(image)}"
+                      alt="${escapeHtml(item.name)}"
+                      onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'placeholder\\'>🧴</span>';"
+                    >
+                    `
+                    :
+                    `
+                    <span class="placeholder">
+                      🧴
+                    </span>
+                    `
+                  }
+
+                </div>
+
+
+                <div class="cart-product-info">
+
+                  <h3>
+                    ${escapeHtml(item.name || "Noiré Product")}
+                  </h3>
+
+                  <p>
+                    Your selected Noiré skincare essential.
+                  </p>
+
+                  <div class="item-price">
+
+                    ${formatPrice(price)}
+
+                  </div>
+
+
+                  <div class="quantity-control">
+
+                    <button
+                      onclick="changeQuantity(${index}, -1)"
+                      aria-label="Decrease quantity">
+
+                      −
+
+                    </button>
+
+                    <span>
+                      ${quantity}
+                    </span>
+
+                    <button
+                      onclick="changeQuantity(${index}, 1)"
+                      aria-label="Increase quantity">
+
+                      +
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <div class="item-actions">
+
+                  <div class="item-total">
+
+                    ${formatPrice(itemTotal)}
+
+                  </div>
+
+                  <button
+                    class="remove-btn"
+                    onclick="removeItem(${index})">
+
+                    Remove
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        ).join("");
+
+
+      updateSummary();
+
+    }
+
+
+    /* =====================================================
+       CHANGE QUANTITY
+    ====================================================== */
+
+    function changeQuantity(index, amount) {
+
+      const cart =
+        getCart();
+
+      if (!cart[index]) return;
+
+
+      let quantity =
+        Number(cart[index].quantity) || 1;
+
+
+      quantity += amount;
+
+
+      if (quantity <= 0) {
+
+        removeItem(index);
+
+        return;
+
+      }
+
+
+      cart[index].quantity =
+        quantity;
+
+
+      saveCart(cart);
+
+      renderCart();
+
+    }
+
+
+    /* =====================================================
+       REMOVE ITEM
+    ====================================================== */
+
+    function removeItem(index) {
+
+      const cart =
+        getCart();
+
+      if (!cart[index]) return;
+
+
+      const removed =
+        cart[index].name ||
+        "Item";
+
+
+      cart.splice(index, 1);
+
+      saveCart(cart);
+
+      renderCart();
+
+      showToast(
+        `${removed} removed from your bag.`
+      );
+
+    }
+
+
+    /* =====================================================
+       SUMMARY
+    ====================================================== */
+
+    function updateSummary() {
+
+      const cart =
+        getCart();
+
+
+      let subtotal = 0;
+
+
+      cart.forEach(item => {
+
+        const price =
+          Number(item.price) || 0;
+
+        const quantity =
+          Number(item.quantity) || 0;
+
+        subtotal +=
+          price * quantity;
+
+      });
+
+
+      /*
+        Free shipping over ₱1,500.
+        Otherwise ₱100 shipping.
+      */
+
+      const shipping =
+        subtotal === 0
+          ? 0
+          : subtotal >= 1500
+            ? 0
+            : 100;
+
+
+      const total =
+        subtotal + shipping;
+
+
+      document.getElementById(
+        "subtotal"
+      ).textContent =
+        formatPrice(subtotal);
+
+
+      document.getElementById(
+        "shipping"
+      ).textContent =
+        shipping === 0
+          ? "FREE"
+          : formatPrice(shipping);
+
+
+      document.getElementById(
+        "total"
+      ).textContent =
+        formatPrice(total);
+
+
+      const checkoutBtn =
+        document.getElementById(
+          "checkoutBtn"
+        );
+
+
+      checkoutBtn.disabled =
+        cart.length === 0;
+
+
+      checkoutBtn.style.opacity =
+        cart.length === 0
+          ? "0.45"
+          : "1";
+
+
+      checkoutBtn.style.cursor =
+        cart.length === 0
+          ? "not-allowed"
+          : "pointer";
+
+    }
+
+
+    /* =====================================================
+       CHECKOUT
+    ====================================================== */
+
+    function checkout() {
+
+      const cart =
+        getCart();
+
+
+      if (cart.length === 0) {
+
+        showToast(
+          "Your shopping bag is empty."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Front-end placeholder.
+
+        You can later connect this
+        to your checkout/payment system.
+      */
+
+      showToast(
+        "Checkout is coming soon ✨"
+      );
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      setTimeout(
+        () => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },
+        2500
+      );
+
+    }
+
+
+    /* =====================================================
+       INITIALIZE
+    ====================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        renderCart();
+
+      }
+    );
+
+  </script>
+
 </body>
+
 </html>
-
-
-

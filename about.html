@@ -1,153 +1,1297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <title>About Noiré</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About Noiré | Our Story</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
   <style>
+
+    /* =====================================================
+       NOIRÉ ABOUT PAGE
+    ===================================================== */
+
     :root {
-      --charcoal: #000000;
-      --ivory: #F9F9F6;
-      --champagne: #F7E7CE;
-      --rose-gold: #B76E79;
+      --black: #111111;
+      --ivory: #F9F7F3;
+      --white: #FFFFFF;
+      --champagne: #F3E5D0;
+      --rose: #B76E79;
       --sage: #A8B5A2;
+      --blush: #F3DCD7;
+      --muted: #77716C;
+      --border: #E9E3DC;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      font-family: 'DM Sans', sans-serif;
       background: var(--ivory);
-      color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      color: var(--black);
+      line-height: 1.6;
     }
 
-    header {
-      background: var(--champagne);
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--rose-gold);
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
-    }
-
-    nav {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    nav a {
-      margin: 0 15px;
+    a {
       text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* =====================================================
+       ANNOUNCEMENT BAR
+    ===================================================== */
+
+    .announcement {
+      background: var(--black);
+      color: white;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+    }
+
+    .announcement span {
+      color: var(--champagne);
       font-weight: 600;
-      color: var(--charcoal);
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: var(--rose-gold);
     }
 
-    .hero {
-      background: linear-gradient(135deg, var(--champagne), var(--ivory), var(--rose-gold));
-      text-align: center;
-      padding: 4rem 2rem;
-      border-radius: 20px;
-      margin: 2rem auto;
-      max-width: 900px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    }
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--rose-gold);
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
 
-    .grid {
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .navbar {
+      height: 78px;
+      background: rgba(255,255,255,0.96);
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin: 2rem auto;
-      max-width: 1000px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
-    .product {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 2rem;
-      text-align: center;
-      width: 280px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .product h3 {
+
+    .logo {
       font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      margin-bottom: 1rem;
+      font-size: 32px;
+      letter-spacing: 3px;
+      font-weight: 600;
     }
-    .product p {
-      font-size: 0.95rem;
-      margin: 0.5rem 0;
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
     }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--rose);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -7px;
+      left: 0;
+      background: var(--rose);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+    }
+
+    .nav-icon {
+      font-size: 19px;
+      transition: 0.3s;
+    }
+
+    .nav-icon:hover {
+      color: var(--rose);
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       ABOUT HERO
+    ===================================================== */
+
+    .about-hero {
+      min-height: 540px;
+      background:
+        linear-gradient(
+          120deg,
+          var(--champagne),
+          #f8eee3 50%,
+          var(--blush)
+        );
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .about-hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 12%;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .eyebrow {
+      color: var(--rose);
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1.05;
+      margin-bottom: 22px;
+    }
+
+    .about-hero h1 em {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .about-hero p {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .about-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 500px;
+    }
+
+    .visual-circle {
+      width: 390px;
+      height: 390px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.55);
+      position: absolute;
+    }
+
+    .visual-card {
+      width: 280px;
+      height: 360px;
+      position: relative;
+      z-index: 2;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #e9e3dc
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow:
+        0 30px 60px rgba(0,0,0,0.15);
+
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .visual-inner {
+      width: 210px;
+      height: 280px;
+
+      border: 1px solid rgba(0,0,0,0.1);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+    .visual-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 35px;
+      letter-spacing: 4px;
+    }
+
+    .visual-inner span {
+      font-size: 9px;
+      letter-spacing: 4px;
+      margin-top: 7px;
+    }
+
+
+    /* =====================================================
+       STORY SECTION
+    ===================================================== */
+
+    .story {
+      padding: 90px 8%;
+      background: var(--white);
+    }
+
+    .story-container {
+      max-width: 1100px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .story-label {
+      color: var(--rose);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
+
+    .story h2 em {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .story-text p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .story-quote {
+      margin-top: 30px;
+      padding-left: 20px;
+      border-left: 2px solid var(--rose);
+
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+
+    /* =====================================================
+       BRAND VALUES
+    ===================================================== */
+
+    .values {
+      padding: 90px 6%;
+      background: var(--ivory);
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 45px;
+      font-weight: 500;
+    }
+
+    .section-heading p {
+      max-width: 560px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .values-grid {
+      max-width: 1150px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .value-card {
+      background: var(--white);
+      padding: 38px 30px;
+      min-height: 270px;
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::after {
+      content: "";
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      border-radius: 50%;
+
+      background: var(--blush);
+
+      right: -35px;
+      top: -35px;
+
+      opacity: 0.5;
+    }
+
+    .value-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .value-number {
+      color: var(--rose);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .value-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      color: var(--muted);
+      font-size: 12px;
+      max-width: 280px;
+    }
+
+
+    /* =====================================================
+       PHILOSOPHY
+    ===================================================== */
+
+    .philosophy {
+      background: var(--black);
+      color: white;
+
+      padding: 100px 20px;
+
+      text-align: center;
+    }
+
+    .philosophy .eyebrow {
+      color: var(--champagne);
+    }
+
+    .philosophy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 500;
+      max-width: 850px;
+      margin: auto;
+      line-height: 1.15;
+    }
+
+    .philosophy h2 em {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .philosophy p {
+      color: #aaa;
+      max-width: 600px;
+      margin: 25px auto 0;
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       FEATURES
+    ===================================================== */
+
+    .features {
+      padding: 80px 6%;
+      background: white;
+    }
+
+    .feature-grid {
+      max-width: 1100px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 35px;
+
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .feature h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 7px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+
+    /* =====================================================
+       CTA
+    ===================================================== */
+
+    .about-cta {
+      padding: 90px 20px;
+      background: var(--champagne);
+      text-align: center;
+    }
+
+    .about-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 45px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .about-cta p {
+      color: var(--muted);
+      max-width: 500px;
+      margin: auto auto 28px;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+
+      background: var(--black);
+      color: white;
+
+      padding: 14px 30px;
+
+      border: 1px solid var(--black);
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     footer {
-      background: var(--champagne);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      border-top: 2px solid var(--rose-gold);
-      font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
+      background: #0b0b0b;
+      color: white;
+      padding: 50px 6% 25px;
     }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 35px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      letter-spacing: 3px;
+    }
+
+    .footer-description {
+      color: #999;
+      font-size: 12px;
+      max-width: 300px;
+      margin-top: 12px;
+    }
+
+    footer h4 {
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      color: var(--champagne);
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    footer li a:hover {
+      color: var(--rose);
+    }
+
+    .copyright {
+      border-top: 1px solid #222;
+      padding-top: 20px;
+      color: #666;
+      font-size: 11px;
+      text-align: center;
+    }
+
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    @keyframes float {
+
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
+
+    }
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 950px) {
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .story-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .about-hero-content {
+        padding: 70px 25px 30px;
+      }
+
+      .about-visual {
+        min-height: 400px;
+      }
+
+      .visual-circle {
+        width: 300px;
+        height: 300px;
+      }
+
+      .visual-card {
+        width: 220px;
+        height: 290px;
+      }
+
+      .visual-inner {
+        width: 165px;
+        height: 220px;
+      }
+
+      .story {
+        padding: 65px 25px;
+      }
+
+      .story h2 {
+        font-size: 38px;
+      }
+
+      .values {
+        padding: 65px 20px;
+      }
+
+      .section-heading h2 {
+        font-size: 38px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        min-height: auto;
+      }
+
+      .philosophy {
+        padding: 75px 25px;
+      }
+
+      .features {
+        padding: 65px 20px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 15px;
+      }
+
+      .about-cta {
+        padding: 70px 20px;
+      }
+
+      .about-cta h2 {
+        font-size: 36px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 <body>
-<header><h1>About Noiré</h1></header>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="shop.html">Shop</a>
-  <a href="routine.html">Routine Builder</a>
-  <a href="blog.html">Blog</a>
-  <a href="contact.html">Contact</a>
-  <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
+
+
+<!-- =====================================================
+     ANNOUNCEMENT BAR
+===================================================== -->
+
+<div class="announcement">
+  ✦ <span>FREE SHIPPING</span> on orders over ₱1,500 ✦
+</div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+  <a href="index.html" class="logo">
+    Noiré
+  </a>
+
+  <ul class="nav-links">
+
+    <li>
+      <a href="index.html">Home</a>
+    </li>
+
+    <li>
+      <a href="about.html">About</a>
+    </li>
+
+    <li>
+      <a href="shop.html">Shop</a>
+    </li>
+
+    <li>
+      <a href="routine.html">Routine Builder</a>
+    </li>
+
+    <li>
+      <a href="blog.html">Journal</a>
+    </li>
+
+    <li>
+      <a href="contact.html">Contact</a>
+    </li>
+
+  </ul>
+
+
+  <div class="nav-icons">
+
+    <a href="account.html" class="nav-icon">
+      ♙
+    </a>
+
+    <a href="cart.html" class="nav-icon">
+      🛍
+    </a>
+
+  </div>
+
 </nav>
 
-<section class="hero">
-  <h2>Our Story</h2>
-  <p>Noiré blends science, nature, and elegance to create skincare that adapts to every skin type.</p>
+
+<!-- =====================================================
+     ABOUT HERO
+===================================================== -->
+
+<section class="about-hero">
+
+  <div class="about-hero-content">
+
+    <div class="eyebrow">
+      The Noiré story
+    </div>
+
+    <h1>
+      Beauty in<br>
+      <em>simplicity.</em>
+    </h1>
+
+    <p>
+      Noiré was created with one belief at heart:
+      skincare should adapt to you — not the other way around.
+    </p>
+
+  </div>
+
+
+  <div class="about-visual">
+
+    <div class="visual-circle"></div>
+
+    <div class="visual-card">
+
+      <div class="visual-inner">
+
+        <h2>
+          NOIRÉ
+        </h2>
+
+        <span>
+          SKINCARE
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section class="grid">
-  <div class="product">
-    <h3>Science Meets Nature</h3>
-    <p>We use clinically proven actives with natural extracts.</p>
+
+<!-- =====================================================
+     OUR STORY
+===================================================== -->
+
+<section class="story">
+
+  <div class="story-container">
+
+
+    <div>
+
+      <div class="story-label">
+        Our Story
+      </div>
+
+      <h2>
+        Skincare should feel
+        <em>personal.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="story-text">
+
+      <p>
+        Noiré began with a simple idea: everyone deserves
+        skincare that understands their individual needs.
+      </p>
+
+      <p>
+        Instead of creating complicated routines filled with
+        unnecessary steps, we focus on thoughtfully formulated
+        essentials that work beautifully together.
+      </p>
+
+      <p>
+        From hydration to oil control, soothing care to everyday
+        maintenance, Noiré creates products designed to meet
+        your skin where it is.
+      </p>
+
+      <div class="story-quote">
+        "Your skin is unique. Your ritual should be, too."
+      </div>
+
+    </div>
+
   </div>
-  <div class="product">
-    <h3>Inclusive Beauty</h3>
-    <p>Formulated for diverse skin tones and concerns.</p>
-  </div>
-  <div class="product">
-    <h3>Minimalist Luxury</h3>
-    <p>Elegant routines that fit your lifestyle.</p>
-  </div>
+
 </section>
+
+
+<!-- =====================================================
+     BRAND VALUES
+===================================================== -->
+
+<section class="values">
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      What we believe
+    </div>
+
+    <h2>
+      The Noiré Philosophy
+    </h2>
+
+    <p>
+      Three principles guide everything we create.
+    </p>
+
+  </div>
+
+
+  <div class="values-grid">
+
+
+    <div class="value-card">
+
+      <div class="value-number">
+        01
+      </div>
+
+      <h3>
+        Science Meets Nature
+      </h3>
+
+      <p>
+        We combine thoughtfully selected active ingredients
+        with carefully chosen botanical extracts to create
+        effective yet comforting skincare.
+      </p>
+
+    </div>
+
+
+    <div class="value-card">
+
+      <div class="value-number">
+        02
+      </div>
+
+      <h3>
+        Inclusive Beauty
+      </h3>
+
+      <p>
+        Skin comes in countless forms. Our philosophy is to
+        create adaptable skincare for different skin types,
+        concerns, and lifestyles.
+      </p>
+
+    </div>
+
+
+    <div class="value-card">
+
+      <div class="value-number">
+        03
+      </div>
+
+      <h3>
+        Minimalist Luxury
+      </h3>
+
+      <p>
+        We believe luxury isn't about having more.
+        It's about having products that truly belong
+        in your routine.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     BRAND STATEMENT
+===================================================== -->
+
+<section class="philosophy">
+
+  <div class="eyebrow">
+    Our philosophy
+  </div>
+
+  <h2>
+    Less complexity.
+    More <em>confidence.</em>
+  </h2>
+
+  <p>
+    Noiré creates simple, intentional skincare rituals
+    that help you feel comfortable and confident in your skin.
+  </p>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section class="features">
+
+  <div class="feature-grid">
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ✦
+      </div>
+
+      <h3>
+        Thoughtfully Formulated
+      </h3>
+
+      <p>
+        Carefully selected ingredients for purposeful skincare.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ♡
+      </div>
+
+      <h3>
+        Cruelty-Free
+      </h3>
+
+      <p>
+        Beautiful skincare without compromising compassion.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ✧
+      </div>
+
+      <h3>
+        Skin-Focused
+      </h3>
+
+      <p>
+        Created around different skin needs and concerns.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ♢
+      </div>
+
+      <h3>
+        Effortlessly Elegant
+      </h3>
+
+      <p>
+        Simple rituals designed to fit beautifully into your life.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="about-cta">
+
+  <div class="eyebrow">
+    Your ritual starts here
+  </div>
+
+  <h2>
+    Meet your skin's new favorite.
+  </h2>
+
+  <p>
+    Explore the Noiré collection and discover skincare
+    designed around you.
+  </p>
+
+  <a href="shop.html" class="btn-primary">
+    EXPLORE THE COLLECTION
+  </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
-  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
+
+  <div class="footer-grid">
+
+
+    <div>
+
+      <div class="footer-logo">
+        Noiré
+      </div>
+
+      <p class="footer-description">
+        Luxury skincare that adapts to you.
+        Discover a ritual designed for your skin.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        SHOP
+      </h4>
+
+      <ul>
+
+        <li>
+          <a href="shop.html">
+            All Products
+          </a>
+        </li>
+
+        <li>
+          <a href="shop.html?category=cleanser">
+            Cleansers
+          </a>
+        </li>
+
+        <li>
+          <a href="shop.html?category=serum">
+            Serums
+          </a>
+        </li>
+
+        <li>
+          <a href="shop.html?category=moisturizer">
+            Moisturizers
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        DISCOVER
+      </h4>
+
+      <ul>
+
+        <li>
+          <a href="routine.html">
+            Routine Builder
+          </a>
+        </li>
+
+        <li>
+          <a href="blog.html">
+            Journal
+          </a>
+        </li>
+
+        <li>
+          <a href="about.html">
+            About Noiré
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        ACCOUNT
+      </h4>
+
+      <ul>
+
+        <li>
+          <a href="account.html">
+            My Account
+          </a>
+        </li>
+
+        <li>
+          <a href="cart.html">
+            Shopping Bag
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            Privacy
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            Terms
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="copyright">
+    © 2026 Noiré Skincare. All rights reserved.
+  </div>
+
 </footer>
+
+
 </body>
 </html>

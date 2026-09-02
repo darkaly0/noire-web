@@ -6,7 +6,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shop Noiré</title>
+  <title>Shop | Noiré Skincare</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <!-- Bootstrap -->
   <link
@@ -14,16 +23,14 @@
     rel="stylesheet"
   >
 
-  <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
   <style>
 
+    /* =========================================================
+       NOIRÉ DESIGN SYSTEM
+    ========================================================= */
+
     :root {
-      --charcoal: #000000;
+      --charcoal: #111111;
       --ivory: #F9F9F6;
       --champagne: #F7E7CE;
       --rose-gold: #B76E79;
@@ -31,227 +38,675 @@
       --blush: #F2D6D0;
       --white: #ffffff;
       --soft-gray: #777;
+      --border: rgba(183,110,121,0.14);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      margin: 0;
       background: var(--ivory);
       color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      font-family: 'DM Sans', 'Segoe UI', sans-serif;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    button,
+    a {
+      font-family: inherit;
+    }
 
-    header {
-      background: var(--champagne);
-      padding: 2rem;
+
+    /* =========================================================
+       ANNOUNCEMENT BAR
+    ========================================================= */
+
+    .announcement-bar {
+      background: var(--charcoal);
+      color: white;
       text-align: center;
-      border-bottom: 2px solid var(--rose-gold);
+      padding: 10px 15px;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
-      letter-spacing: 1px;
-    }
-
-    /* =========================
-       NAVIGATION
-    ========================= */
-
-    nav {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      position: relative;
-      z-index: 10;
-    }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
+    .announcement-bar span {
+      color: var(--champagne);
       font-weight: 600;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .main-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+
+      padding: 18px 5%;
+    }
+
+    .nav-inner {
+      max-width: 1250px;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      text-decoration: none;
       color: var(--charcoal);
+
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--rose-gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+
+      font-size: 0.88rem;
+      font-weight: 600;
+
+      position: relative;
       transition: color 0.3s ease;
     }
 
-    nav a:hover {
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--rose-gold);
+
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--rose-gold);
     }
 
-    /* =========================
-       HERO
-    ========================= */
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
 
-    .hero {
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-icon {
+      width: 40px;
+      height: 40px;
+
+      border-radius: 50%;
+      border: 1px solid #e8e3dc;
+
+      background: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+
+      color: var(--charcoal);
+      font-size: 1rem;
+
+      transition: all 0.3s ease;
+    }
+
+    .nav-icon:hover {
+      background: var(--charcoal);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       PAGE HERO
+    ========================================================= */
+
+    .shop-hero {
+      max-width: 1250px;
+      margin: 0 auto;
+
+      padding: 85px 5% 75px;
+
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 70px;
+
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      color: var(--rose-gold);
+
+      font-size: 0.75rem;
+      font-weight: 700;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      margin-bottom: 18px;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+
+      width: 32px;
+      height: 1px;
+
+      background: var(--rose-gold);
+    }
+
+    .shop-hero h1 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(3rem, 6vw, 5.4rem);
+
+      line-height: 0.98;
+
+      margin: 0 0 25px;
+
+      font-weight: 600;
+      letter-spacing: -1.5px;
+    }
+
+    .shop-hero h1 em {
+      color: var(--rose-gold);
+      font-style: italic;
+    }
+
+    .shop-hero p {
+      max-width: 540px;
+
+      color: #666;
+
+      font-size: 1rem;
+      line-height: 1.9;
+
+      margin-bottom: 30px;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      text-decoration: none;
+
+      background: var(--charcoal);
+      color: white;
+
+      padding: 14px 23px;
+
+      border-radius: 4px;
+
+      font-size: 0.85rem;
+      font-weight: 700;
+
+      letter-spacing: 0.5px;
+
+      transition: all 0.3s ease;
+    }
+
+    .hero-button:hover {
+      background: var(--rose-gold);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       HERO VISUAL
+    ========================================================= */
+
+    .hero-visual {
+      min-height: 390px;
+
+      position: relative;
+
+      border-radius: 30px;
+
       background:
         linear-gradient(
-          135deg,
+          145deg,
           var(--champagne),
-          var(--ivory),
+          #fff,
           var(--blush)
         );
 
-      text-align: center;
-      padding: 3.5rem 2rem;
-      border-radius: 20px;
-      margin: 2.5rem auto 2rem;
-      max-width: 900px;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
-
-      border: 1px solid rgba(183,110,121,0.15);
+        0 20px 60px rgba(0,0,0,0.08);
     }
 
-    .hero h2 {
+    .hero-visual::before {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.5);
+
+      top: -80px;
+      right: -50px;
+    }
+
+    .hero-visual::after {
+      content: "NOIRÉ";
+
+      position: absolute;
+
+      bottom: 25px;
+      right: 30px;
+
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--rose-gold);
-      margin: 0 0 0.7rem;
+
+      font-size: 0.7rem;
+
+      letter-spacing: 4px;
+
+      color: rgba(17,17,17,0.45);
     }
 
-    .hero p {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #444;
+    .hero-bottle {
+      width: 130px;
+      height: 205px;
+
+      border-radius: 16px 16px 22px 22px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #242424,
+          #111,
+          #333
+        );
+
+      position: relative;
+
+      box-shadow:
+        18px 20px 35px rgba(0,0,0,0.2);
+
+      transform: rotate(-5deg);
+
+      z-index: 2;
     }
 
-    /* =========================
-       SKIN TYPE CARDS
-    ========================= */
+    .hero-bottle::before {
+      content: "";
 
-    .skin-card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      position: absolute;
 
-      padding: 2rem 1.5rem;
+      width: 72px;
+      height: 42px;
+
+      top: -32px;
+      left: 29px;
+
+      border-radius: 6px 6px 2px 2px;
+
+      background: #1c1c1c;
+    }
+
+    .hero-bottle::after {
+      content: "N\nO\nI\nR\nÉ";
+
+      white-space: pre;
+
+      position: absolute;
+
+      top: 55px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      color: var(--champagne);
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: 1rem;
+
+      line-height: 1.25;
 
       text-align: center;
 
-      height: 100%;
-      min-height: 170px;
+      letter-spacing: 3px;
+    }
+
+    .hero-bottle-small {
+      position: absolute;
+
+      width: 85px;
+      height: 140px;
+
+      right: 105px;
+      bottom: 65px;
+
+      border-radius: 12px;
+
+      background: linear-gradient(
+        145deg,
+        #f7e7ce,
+        #fff
+      );
+
+      box-shadow:
+        10px 15px 25px rgba(0,0,0,0.12);
+
+      transform: rotate(7deg);
+
+      z-index: 1;
+    }
+
+
+    /* =========================================================
+       SKIN TYPE SECTION
+    ========================================================= */
+
+    .skin-section {
+      max-width: 1250px;
+      margin: 0 auto;
+
+      padding: 20px 5% 70px;
+    }
+
+    .section-intro {
+      margin-bottom: 30px;
+    }
+
+    .section-eyebrow {
+      color: var(--rose-gold);
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+
+      margin: 8px 0 10px;
+
+      font-weight: 600;
+    }
+
+    .section-description {
+      color: #777;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .skin-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      gap: 14px;
+    }
+
+    .skin-card {
+      background: white;
+
+      border: 1px solid var(--border);
+
+      min-height: 185px;
+
+      padding: 28px 18px;
 
       display: flex;
       flex-direction: column;
+
       justify-content: center;
       align-items: center;
 
-      border: 1px solid rgba(183,110,121,0.15);
+      text-align: center;
 
       cursor: pointer;
 
       transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease;
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease;
     }
 
     .skin-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-7px);
 
       box-shadow:
-        0 10px 25px rgba(0,0,0,0.11);
+        0 15px 35px rgba(0,0,0,0.08);
 
       border-color:
         rgba(183,110,121,0.4);
     }
 
     .skin-card.active {
-      border: 2px solid var(--rose-gold);
-
-      box-shadow:
-        0 10px 25px rgba(183,110,121,0.18);
-
       background:
         linear-gradient(
-          to bottom right,
-          #fff,
-          #fff8f7
+          145deg,
+          white,
+          #fff7f5
         );
+
+      border: 1.5px solid var(--rose-gold);
+
+      box-shadow:
+        0 15px 35px rgba(183,110,121,0.12);
+    }
+
+    .skin-icon {
+      width: 45px;
+      height: 45px;
+
+      border-radius: 50%;
+
+      background: var(--blush);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 1.15rem;
+
+      margin-bottom: 16px;
+
+      transition: transform 0.3s ease;
+    }
+
+    .skin-card:hover .skin-icon {
+      transform: scale(1.08);
     }
 
     .skin-card h3 {
       font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      font-size: 1.45rem;
-      margin-bottom: 0.7rem;
+
+      color: var(--charcoal);
+
+      font-size: 1.15rem;
+
+      margin: 0 0 8px;
     }
 
     .skin-card p {
-      color: #777;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      color: #888;
+
+      font-size: 0.78rem;
+
+      line-height: 1.55;
+
       margin: 0;
-      max-width: 220px;
     }
 
-    .skin-card::before {
-      content: "";
 
-      width: 35px;
-      height: 2px;
+    /* =========================================================
+       PRODUCT SECTION
+    ========================================================= */
 
-      background: var(--rose-gold);
+    .products-section {
+      background: white;
 
-      opacity: 0.5;
+      padding: 85px 5% 100px;
 
-      margin-bottom: 1rem;
+      margin-top: 20px;
     }
 
-    /* =========================
-       PRODUCTS HEADING
-    ========================= */
+    .products-inner {
+      max-width: 1250px;
+      margin: 0 auto;
+    }
 
     .products-heading {
-      text-align: center;
-      margin: 4rem 0 2rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 30px;
+
+      margin-bottom: 40px;
+
+      border-bottom: 1px solid #eee;
+
+      padding-bottom: 25px;
+    }
+
+    .products-heading-left {
+      max-width: 700px;
     }
 
     .section-title {
       font-family: 'Playfair Display', serif;
-      color: var(--rose-gold);
-      font-size: 2.4rem;
-      margin: 0;
+
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
+
+      font-weight: 600;
+
+      margin: 7px 0;
+
+      color: var(--charcoal);
     }
 
     .products-heading p {
       color: #777;
-      margin-top: 8px;
+      margin: 0;
+
+      line-height: 1.7;
     }
 
     .filter-status {
-      display: inline-block;
+      display: inline-flex;
 
-      margin-top: 12px;
+      margin-top: 15px;
 
-      padding: 7px 16px;
+      padding: 7px 15px;
 
-      border-radius: 20px;
+      border-radius: 30px;
 
       background: var(--blush);
 
       color: var(--rose-gold);
 
-      font-size: 0.85rem;
+      font-size: 0.78rem;
 
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    /* =========================
+    .clear-filter {
+      border: none;
+
+      background: transparent;
+
+      color: var(--rose-gold);
+
+      font-size: 0.8rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      margin-top: 12px;
+
+      display: none;
+    }
+
+    .clear-filter:hover {
+      text-decoration: underline;
+    }
+
+
+    /* =========================================================
        PRODUCT CARD
-    ========================= */
+       KEEPING YOUR ORIGINAL LOOK ❤️
+    ========================================================= */
+
+    .product-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 25px;
+    }
 
     .product-card {
       background: #fff;
@@ -291,7 +746,7 @@
       position: relative;
 
       width: 100%;
-      height: 250px;
+      height: 290px;
 
       background:
         linear-gradient(
@@ -332,10 +787,6 @@
       color: var(--rose-gold);
     }
 
-    /* =========================
-       STOCK BADGE
-    ========================= */
-
     .stock-badge {
       position: absolute;
 
@@ -366,10 +817,6 @@
       background: var(--rose-gold);
       color: white;
     }
-
-    /* =========================
-       FAVORITE
-    ========================= */
 
     .favorite-card-btn {
       position: absolute;
@@ -410,12 +857,8 @@
       color: var(--rose-gold);
     }
 
-    /* =========================
-       PRODUCT INFO
-    ========================= */
-
     .product-info {
-      padding: 1.3rem;
+      padding: 1.4rem;
     }
 
     .product-category {
@@ -431,9 +874,9 @@
     .product-name {
       font-family: 'Playfair Display', serif;
 
-      color: var(--rose-gold);
+      color: var(--charcoal);
 
-      font-size: 1.35rem;
+      font-size: 1.4rem;
 
       margin: 0.4rem 0;
     }
@@ -464,21 +907,24 @@
       margin-top: 0.8rem;
     }
 
-    /* =========================
+
+    /* =========================================================
        LOADING
-    ========================= */
+    ========================================================= */
 
     .loading-products {
+      grid-column: 1 / -1;
+
       text-align: center;
 
-      padding: 4rem 1rem;
+      padding: 80px 20px;
 
       color: #777;
     }
 
     .loading-products .spinner {
-      width: 35px;
-      height: 35px;
+      width: 38px;
+      height: 38px;
 
       border: 3px solid var(--champagne);
 
@@ -490,7 +936,7 @@
       animation:
         spin 0.8s linear infinite;
 
-      margin: 0 auto 1rem;
+      margin: 0 auto 18px;
     }
 
     @keyframes spin {
@@ -499,14 +945,12 @@
       }
     }
 
-    /* =========================
-       EMPTY
-    ========================= */
-
     .empty-products {
+      grid-column: 1 / -1;
+
       text-align: center;
 
-      padding: 4rem 1rem;
+      padding: 80px 20px;
 
       color: #777;
     }
@@ -514,22 +958,23 @@
     .empty-products .empty-icon {
       font-size: 3rem;
 
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
     }
 
-    /* =========================
-       MODAL
-    ========================= */
+
+    /* =========================================================
+       PRODUCT MODAL
+    ========================================================= */
 
     .modal-content {
       border: none;
 
-      border-radius: 20px;
+      border-radius: 22px;
 
       overflow: hidden;
 
       box-shadow:
-        0 15px 50px rgba(0,0,0,0.15);
+        0 25px 70px rgba(0,0,0,0.18);
     }
 
     .modal-product-image {
@@ -537,7 +982,7 @@
 
       height: 100%;
 
-      min-height: 400px;
+      min-height: 470px;
 
       object-fit: cover;
 
@@ -545,27 +990,31 @@
     }
 
     .modal-body {
-      padding: 2rem;
+      padding: 42px 38px;
     }
 
     .modal-product-category {
-      color: #777;
+      color: var(--rose-gold);
 
       text-transform: uppercase;
 
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
 
-      font-size: 0.85rem;
+      font-size: 0.72rem;
+
+      font-weight: 700;
     }
 
     .modal-product-title {
       font-family: 'Playfair Display', serif;
 
-      color: var(--rose-gold);
+      color: var(--charcoal);
 
-      font-size: 2.2rem;
+      font-size: 2.4rem;
 
-      margin: 0.5rem 0;
+      line-height: 1.1;
+
+      margin: 10px 0;
     }
 
     .modal-price {
@@ -573,21 +1022,21 @@
 
       font-weight: 700;
 
-      margin: 1rem 0;
+      margin: 15px 0;
     }
 
     .modal-description {
-      line-height: 1.7;
+      line-height: 1.8;
 
-      color: #555;
+      color: #666;
     }
 
     .product-details-list {
       padding-left: 1.2rem;
 
-      color: #555;
+      color: #666;
 
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
     .modal-stock {
@@ -601,75 +1050,22 @@
 
       color: var(--rose-gold);
 
-      font-size: 0.8rem;
+      font-size: 0.78rem;
 
-      font-weight: 600;
+      font-weight: 700;
 
-      margin-bottom: 1rem;
+      margin-bottom: 12px;
     }
 
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .btn-noire {
-      background: var(--rose-gold);
-
-      color: white;
-
-      border: none;
-
-      border-radius: 10px;
-
-      padding: 0.75rem 1.3rem;
-
-      font-weight: 600;
-
-      transition: 0.3s;
-    }
-
-    .btn-noire:hover {
-      background: #9f5d68;
-
-      color: white;
-
-      transform: translateY(-2px);
-    }
-
-    .btn-noire:disabled {
-      background: #bbb;
-
-      cursor: not-allowed;
-
-      transform: none;
-    }
-
-    .btn-favorite {
-      border: 2px solid var(--rose-gold);
-
+    .rating {
       color: var(--rose-gold);
-
-      background: white;
-
-      border-radius: 10px;
-
-      padding: 0.7rem 1.2rem;
-
-      font-weight: 600;
-
-      transition: 0.3s;
+      letter-spacing: 2px;
     }
 
-    .btn-favorite:hover,
-    .btn-favorite.active {
-      background: var(--rose-gold);
 
-      color: white;
-    }
-
-    /* =========================
+    /* =========================================================
        QUANTITY
-    ========================= */
+    ========================================================= */
 
     .quantity-box {
       display: flex;
@@ -678,14 +1074,14 @@
 
       gap: 12px;
 
-      margin: 1rem 0;
+      margin: 22px 0;
     }
 
     .quantity-btn {
-      width: 35px;
-      height: 35px;
+      width: 36px;
+      height: 36px;
 
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
 
       background: white;
 
@@ -710,52 +1106,317 @@
       font-weight: 600;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
 
-    footer {
-      background: var(--champagne);
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
 
-      text-align: center;
+    .btn-noire {
+      background: var(--charcoal);
 
-      padding: 1rem;
+      color: white;
 
-      font-size: 0.9rem;
+      border: none;
 
-      border-top: 2px solid var(--rose-gold);
+      border-radius: 5px;
 
-      font-family: 'Playfair Display', serif;
+      padding: 0.8rem 1.35rem;
+
+      font-weight: 600;
+
+      transition: 0.3s;
+    }
+
+    .btn-noire:hover {
+      background: var(--rose-gold);
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    .btn-noire:disabled {
+      background: #bbb;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    .btn-favorite {
+      border: 1px solid var(--rose-gold);
 
       color: var(--rose-gold);
 
-      width: 100%;
+      background: white;
 
-      margin-top: 4rem;
+      border-radius: 5px;
+
+      padding: 0.75rem 1.2rem;
+
+      font-weight: 600;
+
+      transition: 0.3s;
     }
 
-    footer p {
+    .btn-favorite:hover,
+    .btn-favorite.active {
+      background: var(--rose-gold);
+
+      color: white;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background: var(--charcoal);
+
+      color: white;
+
+      padding: 60px 5% 25px;
+
+      margin-top: 0;
+    }
+
+    .footer-inner {
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 40px;
+
+      padding-bottom: 45px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-brand h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 2rem;
+
+      margin: 0 0 10px;
+    }
+
+    .footer-brand h2 span {
+      color: var(--champagne);
+    }
+
+    .footer-brand p {
+      color: #aaa;
+
+      max-width: 350px;
+
+      line-height: 1.7;
+
       margin: 0;
     }
 
-    /* =========================
+    .footer-links {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-column h4 {
+      font-size: 0.8rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.5px;
+
+      color: var(--champagne);
+
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+
+      color: #aaa;
+
+      text-decoration: none;
+
+      font-size: 0.85rem;
+
+      margin-bottom: 9px;
+
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+
+      color: #777;
+
+      font-size: 0.75rem;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+
+    /* =========================================================
        RESPONSIVE
-    ========================= */
+    ========================================================= */
 
-    @media (max-width: 768px) {
+    @media (max-width: 1050px) {
 
-      nav a {
-        display: inline-block;
-
-        margin: 5px 8px;
+      .nav-links {
+        gap: 16px;
       }
 
-      .hero h2 {
+      .skin-grid {
+        grid-template-columns:
+          repeat(3, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
+
+
+    @media (max-width: 850px) {
+
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        justify-content: flex-start;
+
+        padding-top: 5px;
+
+        padding-bottom: 4px;
+      }
+
+      .shop-hero {
+        grid-template-columns: 1fr;
+
+        padding-top: 60px;
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .products-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .announcement-bar {
+        font-size: 0.65rem;
+      }
+
+      .main-nav {
+        padding: 14px 4%;
+      }
+
+      .logo {
+        font-size: 1.7rem;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .shop-hero {
+        padding:
+          55px 6%
+          60px;
+      }
+
+      .shop-hero h1 {
+        font-size: 3.3rem;
+      }
+
+      .hero-visual {
+        min-height: 290px;
+      }
+
+      .skin-section {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+
+      .skin-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .skin-card {
+        min-height: 160px;
+      }
+
+      .products-section {
+        padding:
+          65px 6%
+          75px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image-wrapper {
+        height: 300px;
+      }
+
+      .modal-body {
+        padding: 28px 24px;
+      }
+
+      .modal-product-title {
         font-size: 2rem;
       }
 
       .modal-product-image {
-        min-height: 280px;
+        min-height: 300px;
+      }
+
+      .footer-links {
+        gap: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
       }
 
     }
@@ -768,223 +1429,345 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- =========================================================
+     ANNOUNCEMENT
+========================================================= -->
 
-<header>
+<div class="announcement-bar">
+  <span>FREE SHIPPING</span>
+  on orders over ₱1,500
+</div>
 
-  <h1>Noiré</h1>
 
-</header>
-
-
-<!-- =========================
+<!-- =========================================================
      NAVIGATION
-========================= -->
+========================================================= -->
 
-<nav>
+<nav class="main-nav">
 
-  <a href="index.html">Home</a>
+  <div class="nav-inner">
 
-  <a href="about.html">About</a>
+    <a href="index.html" class="logo">
+      Noir<span>é</span>
+    </a>
 
-  <a href="shop.html">Shop</a>
+    <div class="nav-links">
 
-  <a href="routine.html">Routine Builder</a>
+      <a href="index.html">
+        Home
+      </a>
 
-  <a href="blog.html">Blog</a>
+      <a href="about.html">
+        About
+      </a>
 
-  <a href="contact.html">Contact</a>
+      <a href="shop.html" class="active">
+        Shop
+      </a>
 
-  <a href="account.html">Account</a>
+      <a href="routine.html">
+        Routine Builder
+      </a>
 
-  <a href="cart.html">Cart 🛒</a>
+      <a href="blog.html">
+        Journal
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+    </div>
+
+    <div class="nav-actions">
+
+      <a
+        href="account.html"
+        class="nav-icon"
+        title="Account"
+      >
+        ♡
+      </a>
+
+      <a
+        href="cart.html"
+        class="nav-icon"
+        title="Cart"
+      >
+        🛒
+      </a>
+
+    </div>
+
+  </div>
 
 </nav>
 
 
-<!-- =========================
+<!-- =========================================================
      HERO
-========================= -->
+========================================================= -->
 
-<section class="hero">
+<section class="shop-hero">
 
-  <h2>Shop by Skin Type</h2>
+  <div>
 
-  <p>
-    Discover skincare carefully selected
-    for your skin's unique needs.
-  </p>
+    <div class="hero-eyebrow">
+      The Noiré Collection
+    </div>
+
+    <h1>
+      Skincare made<br>
+      <em>for you.</em>
+    </h1>
+
+    <p>
+      Discover thoughtfully selected skincare
+      designed around your skin's unique needs.
+      From everyday essentials to targeted care,
+      find the ritual that feels like yours.
+    </p>
+
+    <a
+      href="#products"
+      class="hero-button"
+    >
+      Explore Collection
+      <span>→</span>
+    </a>
+
+  </div>
+
+
+  <div class="hero-visual">
+
+    <div class="hero-bottle"></div>
+
+    <div class="hero-bottle-small"></div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================
-     SKIN TYPES
-========================= -->
+<!-- =========================================================
+     SKIN TYPE SECTION
+========================================================= -->
 
-<div class="container my-4">
+<section class="skin-section">
 
-  <div class="row g-4 justify-content-center">
+  <div class="section-intro">
 
-
-    <div class="col-md-4 col-sm-6">
-
-      <div
-        class="skin-card"
-        data-skin="Dry Skin"
-        onclick="filterProducts('Dry Skin')"
-      >
-
-        <h3>Dry Skin</h3>
-
-        <p>
-          Hydrating products for soft,
-          comfortable and moisturized skin.
-        </p>
-
-      </div>
-
+    <div class="section-eyebrow">
+      Find Your Match
     </div>
 
-
-    <div class="col-md-4 col-sm-6">
-
-      <div
-        class="skin-card"
-        data-skin="Oily Skin"
-        onclick="filterProducts('Oily Skin')"
-      >
-
-        <h3>Oily Skin</h3>
-
-        <p>
-          Lightweight products designed
-          to help balance excess oil.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="col-md-4 col-sm-6">
-
-      <div
-        class="skin-card"
-        data-skin="Combination Skin"
-        onclick="filterProducts('Combination Skin')"
-      >
-
-        <h3>Combination Skin</h3>
-
-        <p>
-          Balancing skincare for areas
-          with different skin needs.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="col-md-4 col-sm-6">
-
-      <div
-        class="skin-card"
-        data-skin="Sensitive Skin"
-        onclick="filterProducts('Sensitive Skin')"
-      >
-
-        <h3>Sensitive Skin</h3>
-
-        <p>
-          Gentle products for delicate
-          and easily irritated skin.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="col-md-4 col-sm-6">
-
-      <div
-        class="skin-card"
-        data-skin="Normal Skin"
-        onclick="filterProducts('Normal Skin')"
-      >
-
-        <h3>Normal Skin</h3>
-
-        <p>
-          Everyday skincare for maintaining
-          a healthy-looking glow.
-        </p>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     PRODUCTS
-========================= -->
-
-<div class="container">
-
-  <div class="products-heading">
-
-    <h2
-      id="productsTitle"
-      class="section-title"
-    >
-      Featured Products
+    <h2 class="section-heading">
+      Shop by skin type.
     </h2>
 
-    <p id="productsSubtitle">
-      Explore our skincare collection.
+    <p class="section-description">
+      Start with what your skin needs most.
     </p>
-
-    <span
-      id="filterStatus"
-      class="filter-status"
-      style="display:none;"
-    ></span>
 
   </div>
 
 
-  <div
-    class="row g-4"
-    id="productContainer"
-  >
+  <div class="skin-grid">
 
-    <div class="loading-products">
 
-      <div class="spinner"></div>
+    <div
+      class="skin-card"
+      data-skin="Dry Skin"
+      onclick="filterProducts('Dry Skin')"
+    >
+
+      <div class="skin-icon">
+        💧
+      </div>
+
+      <h3>
+        Dry Skin
+      </h3>
 
       <p>
-        Loading our skincare collection...
+        Hydration and comfort
+        for thirsty skin.
       </p>
 
     </div>
 
+
+    <div
+      class="skin-card"
+      data-skin="Oily Skin"
+      onclick="filterProducts('Oily Skin')"
+    >
+
+      <div class="skin-icon">
+        ✨
+      </div>
+
+      <h3>
+        Oily Skin
+      </h3>
+
+      <p>
+        Lightweight care to
+        balance excess oil.
+      </p>
+
+    </div>
+
+
+    <div
+      class="skin-card"
+      data-skin="Combination Skin"
+      onclick="filterProducts('Combination Skin')"
+    >
+
+      <div class="skin-icon">
+        🌿
+      </div>
+
+      <h3>
+        Combination
+      </h3>
+
+      <p>
+        Balanced care for
+        changing skin needs.
+      </p>
+
+    </div>
+
+
+    <div
+      class="skin-card"
+      data-skin="Sensitive Skin"
+      onclick="filterProducts('Sensitive Skin')"
+    >
+
+      <div class="skin-icon">
+        🌸
+      </div>
+
+      <h3>
+        Sensitive
+      </h3>
+
+      <p>
+        Gentle essentials for
+        delicate skin.
+      </p>
+
+    </div>
+
+
+    <div
+      class="skin-card"
+      data-skin="Normal Skin"
+      onclick="filterProducts('Normal Skin')"
+    >
+
+      <div class="skin-icon">
+        ☀
+      </div>
+
+      <h3>
+        Normal Skin
+      </h3>
+
+      <p>
+        Everyday essentials for
+        a healthy glow.
+      </p>
+
+    </div>
+
+
   </div>
 
-</div>
+</section>
 
 
-<!-- =========================
+<!-- =========================================================
+     PRODUCTS
+========================================================= -->
+
+<section
+  class="products-section"
+  id="products"
+>
+
+  <div class="products-inner">
+
+
+    <div class="products-heading">
+
+      <div class="products-heading-left">
+
+        <div class="section-eyebrow">
+          Curated For Your Ritual
+        </div>
+
+        <h2
+          id="productsTitle"
+          class="section-title"
+        >
+          Our Products
+        </h2>
+
+        <p id="productsSubtitle">
+          Explore our skincare collection.
+        </p>
+
+        <span
+          id="filterStatus"
+          class="filter-status"
+          style="display:none;"
+        ></span>
+
+        <br>
+
+        <button
+          id="clearFilter"
+          class="clear-filter"
+          onclick="showAllProducts()"
+        >
+          ← View all products
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="product-grid"
+      id="productContainer"
+    >
+
+      <div class="loading-products">
+
+        <div class="spinner"></div>
+
+        <p>
+          Loading our skincare collection...
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
      PRODUCT MODAL
-========================= -->
+========================================================= -->
 
 <div
   class="modal fade"
@@ -1033,7 +1816,6 @@
             <div
               id="modalRating"
               class="rating"
-              style="color:var(--rose-gold);"
             >
               ★★★★★
             </div>
@@ -1057,27 +1839,15 @@
             ></p>
 
 
-            <h6>Benefits</h6>
+            <h6>
+              Benefits
+            </h6>
 
 
             <ul
               id="modalBenefits"
               class="product-details-list"
-            >
-
-              <li>
-                Carefully selected for your skincare routine
-              </li>
-
-              <li>
-                Designed for everyday use
-              </li>
-
-              <li>
-                Part of the Noiré collection
-              </li>
-
-            </ul>
+            ></ul>
 
 
             <div class="quantity-box">
@@ -1110,7 +1880,6 @@
 
             <div class="d-flex gap-2 flex-wrap">
 
-
               <button
                 id="favoriteButton"
                 class="btn-favorite"
@@ -1128,14 +1897,12 @@
                 🛒 Add to Cart
               </button>
 
-
             </div>
 
 
           </div>
 
         </div>
-
 
       </div>
 
@@ -1146,19 +1913,100 @@
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      FOOTER
-========================= -->
+========================================================= -->
 
 <footer>
 
-  <p>
-    &copy; 2026 Noiré Skincare.
-    All rights reserved.
-  </p>
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <h2>
+          Noir<span>é</span>
+        </h2>
+
+        <p>
+          Thoughtful skincare for your
+          everyday ritual. Simple,
+          intentional, beautifully yours.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <div class="footer-column">
+
+          <h4>
+            Explore
+          </h4>
+
+          <a href="about.html">
+            About Noiré
+          </a>
+
+          <a href="shop.html">
+            Shop
+          </a>
+
+          <a href="routine.html">
+            Routine Builder
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            Help
+          </h4>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+          <a href="account.html">
+            My Account
+          </a>
+
+          <a href="cart.html">
+            Cart
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Noiré Skincare.
+        All rights reserved.
+      </span>
+
+      <span>
+        Your skin. Your ritual.
+      </span>
+
+    </div>
+
+  </div>
 
 </footer>
 
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================= -->
 
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -1221,6 +2069,7 @@ const firebaseConfig = {
 ========================================================= */
 
 const app = initializeApp(firebaseConfig);
+
 const db = getDatabase(app);
 
 
@@ -1229,9 +2078,13 @@ const db = getDatabase(app);
 ========================================================= */
 
 let products = [];
+
 let filteredProducts = [];
+
 let currentProduct = null;
+
 let currentQuantity = 1;
+
 let currentFilter = null;
 
 
@@ -1255,7 +2108,9 @@ function getProductImage(productId) {
 
     const imageStorage =
       JSON.parse(
-        localStorage.getItem("noire_product_images")
+        localStorage.getItem(
+          "noire_product_images"
+        )
       ) || {};
 
     return imageStorage[productId] || "";
@@ -1280,17 +2135,6 @@ function getProductImage(productId) {
 
 function getProductPrice(product) {
 
-  /*
-    Firebase may store the price as:
-    - 299
-    - "299"
-    - "299.00"
-    - "₱299"
-    - "₱299.00"
-
-    This function cleans it before displaying it.
-  */
-
   if (
     product &&
     product.price !== undefined &&
@@ -1306,9 +2150,7 @@ function getProductPrice(product) {
     const price =
       parseFloat(rawPrice);
 
-    if (
-      !isNaN(price)
-    ) {
+    if (!isNaN(price)) {
 
       return price.toLocaleString(
         "en-PH",
@@ -1411,13 +2253,6 @@ async function loadProducts() {
       Object.entries(data).forEach(
         ([id, product]) => {
 
-          /*
-            Only display active products.
-
-            If status does not exist,
-            product will still appear.
-          */
-
           if (
             product.status &&
             String(product.status)
@@ -1431,16 +2266,7 @@ async function loadProducts() {
 
           products.push({
 
-            /*
-              Firebase ID
-            */
-
             id: id,
-
-
-            /*
-              PRODUCT INFORMATION
-            */
 
             name:
               product.name ||
@@ -1454,69 +2280,29 @@ async function loadProducts() {
               product.skinType ||
               "All Skin Types",
 
-
-            /*
-              ⭐ IMPORTANT ⭐
-
-              THIS WAS THE MISSING PART.
-
-              We are now getting the price
-              directly from Firebase.
-            */
-
             price:
               product.price !== undefined &&
               product.price !== null
                 ? product.price
                 : 0,
 
-
-            /*
-              STOCK
-            */
-
             stocks:
               Number(product.stocks) || 0,
-
-
-            /*
-              STATUS
-            */
 
             status:
               product.status ||
               "Active",
 
-
-            /*
-              IMAGE
-            */
-
             image:
               getProductImage(id),
-
-
-            /*
-              DESCRIPTION
-            */
 
             description:
               product.description ||
               `${product.productType || "Skincare"} carefully selected for ${product.skinType || "all skin types"}.`,
 
-
-            /*
-              RATING
-            */
-
             rating:
               product.rating ||
               "★★★★★",
-
-
-            /*
-              BENEFITS
-            */
 
             benefits:
 
@@ -1566,7 +2352,7 @@ async function loadProducts() {
 
     container.innerHTML = `
 
-      <div class="empty-products col-12">
+      <div class="empty-products">
 
         <div class="empty-icon">
           ⚠️
@@ -1610,7 +2396,7 @@ function renderProducts() {
 
     container.innerHTML = `
 
-      <div class="empty-products col-12">
+      <div class="empty-products">
 
         <div class="empty-icon">
           🧴
@@ -1662,7 +2448,7 @@ function renderProducts() {
 
 
       cardColumn.className =
-        "col-lg-4 col-md-6";
+        "product-column";
 
 
       cardColumn.innerHTML = `
@@ -1787,15 +2573,14 @@ function renderProducts() {
             <div
               class="rating"
               style="
-                color:var(--rose-gold);
                 margin-top:10px;
               "
             >
-              ★★★★★
+              ${escapeHtml(
+                product.rating
+              )}
             </div>
 
-
-            <!-- ⭐ PRICE FROM FIREBASE ⭐ -->
 
             <div class="product-price">
 
@@ -1821,7 +2606,7 @@ function renderProducts() {
 
 
 /* =========================================================
-   FILTER PRODUCTS BY SKIN TYPE
+   FILTER PRODUCTS
 ========================================================= */
 
 window.filterProducts =
@@ -1902,7 +2687,7 @@ window.filterProducts =
 
 
     status.style.display =
-      "inline-block";
+      "inline-flex";
 
 
     status.textContent =
@@ -1913,7 +2698,20 @@ window.filterProducts =
       } found`;
 
 
+    document.getElementById(
+      "clearFilter"
+    ).style.display =
+      "inline-block";
+
+
     renderProducts();
+
+
+    document
+      .getElementById("products")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
 
   };
 
@@ -1922,46 +2720,53 @@ window.filterProducts =
    SHOW ALL PRODUCTS
 ========================================================= */
 
-function showAllProducts() {
+window.showAllProducts =
+  function() {
 
-  currentFilter = null;
+    currentFilter = null;
 
-  filteredProducts =
-    [...products];
-
-
-  document
-    .querySelectorAll(".skin-card")
-    .forEach(card => {
-
-      card.classList.remove(
-        "active"
-      );
-
-    });
+    filteredProducts =
+      [...products];
 
 
-  document.getElementById(
-    "productsTitle"
-  ).textContent =
-    "Featured Products";
+    document
+      .querySelectorAll(".skin-card")
+      .forEach(card => {
+
+        card.classList.remove(
+          "active"
+        );
+
+      });
 
 
-  document.getElementById(
-    "productsSubtitle"
-  ).textContent =
-    "Explore our skincare collection.";
+    document.getElementById(
+      "productsTitle"
+    ).textContent =
+      "Our Products";
 
 
-  document.getElementById(
-    "filterStatus"
-  ).style.display =
-    "none";
+    document.getElementById(
+      "productsSubtitle"
+    ).textContent =
+      "Explore our skincare collection.";
 
 
-  renderProducts();
+    document.getElementById(
+      "filterStatus"
+    ).style.display =
+      "none";
 
-}
+
+    document.getElementById(
+      "clearFilter"
+    ).style.display =
+      "none";
+
+
+    renderProducts();
+
+  };
 
 
 /* =========================================================
@@ -1989,10 +2794,6 @@ window.openProduct =
     currentQuantity = 1;
 
 
-    /*
-      IMAGE
-    */
-
     const image =
       document.getElementById(
         "modalImage"
@@ -2019,19 +2820,11 @@ window.openProduct =
     }
 
 
-    /*
-      PRODUCT NAME
-    */
-
     document.getElementById(
       "modalTitle"
     ).textContent =
       currentProduct.name;
 
-
-    /*
-      CATEGORY
-    */
 
     document.getElementById(
       "modalCategory"
@@ -2039,19 +2832,11 @@ window.openProduct =
       `${currentProduct.skinType} • ${currentProduct.productType}`;
 
 
-    /*
-      RATING
-    */
-
     document.getElementById(
       "modalRating"
     ).textContent =
       currentProduct.rating;
 
-
-    /*
-      ⭐ PRICE FROM FIREBASE ⭐
-    */
 
     document.getElementById(
       "modalPrice"
@@ -2062,29 +2847,17 @@ window.openProduct =
       );
 
 
-    /*
-      DESCRIPTION
-    */
-
     document.getElementById(
       "modalDescription"
     ).textContent =
       currentProduct.description;
 
 
-    /*
-      QUANTITY
-    */
-
     document.getElementById(
       "quantityNumber"
     ).textContent =
       currentQuantity;
 
-
-    /*
-      STOCK
-    */
 
     const stock =
       document.getElementById(
@@ -2118,10 +2891,6 @@ window.openProduct =
 
     }
 
-
-    /*
-      BENEFITS
-    */
 
     const benefits =
       document.getElementById(
@@ -2190,10 +2959,6 @@ window.changeQuantity =
 
     }
 
-
-    /*
-      Never exceed available stock.
-    */
 
     if (
       currentProduct.stocks > 0 &&
@@ -2403,11 +3168,6 @@ window.addCurrentProductToCart =
     }
 
 
-    /*
-      ⭐ ALWAYS GET THE CURRENT
-      NUMERIC PRICE FROM FIREBASE DATA
-    */
-
     const productPrice =
       getNumericPrice(
         currentProduct
@@ -2420,12 +3180,11 @@ window.addCurrentProductToCart =
         currentQuantity;
 
 
-      /*
-        Keep price synchronized
-      */
-
       existingProduct.price =
         productPrice;
+
+      existingProduct.image =
+        currentProduct.image;
 
     } else {
 
@@ -2436,10 +3195,6 @@ window.addCurrentProductToCart =
 
         name:
           currentProduct.name,
-
-        /*
-          ⭐ PRICE IS NOW SAVED CORRECTLY ⭐
-        */
 
         price:
           productPrice,
@@ -2538,8 +3293,8 @@ function escapeHtml(value) {
 
 loadProducts();
 
-
 </script>
+
 
 </body>
 </html>

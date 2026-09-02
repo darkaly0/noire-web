@@ -1,531 +1,1449 @@
-<!-- okay na this-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noiré Login/Sign Up</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<title>Noiré | Login & Sign Up</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-    :root {
-        --charcoal: #000000;
-        --ivory: #F9F9F6;
-        --champagne: #E6D9C9;
-        --rose-gold: #B76E79;
-        --sage: #A8B5A2;
-        --blush: #F2D6D0;
-    }
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(
-            135deg,
-            var(--champagne),
-            var(--ivory),
-            var(--rose-gold)
-        );
-    
-        font-family: 'Segoe UI', sans-serif;
-        color: var(--charcoal);
-    }
-    .container {
-        position: relative;
-        width: 850px;
-        height: 550px;
-        background: #ffffff;
-        border-radius: 30px;
-        overflow: hidden;
-        box-shadow:
-            0 6px 20px rgba(0, 0, 0, 0.12);
-    }
-    .brand {
-  position: absolute;
-  top: 30px;               /* a bit lower for breathing space */
-  left: 50%;               /* move to horizontal center */
-  transform: translateX(-50%); /* shift back half its width */
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;         /* bigger size */
-  font-weight: 700;
-  color: var(--rose-gold);
-  z-index: 10;
-  text-align: center;
+
+:root {
+    --charcoal: #000000;
+    --ivory: #F9F9F6;
+    --champagne: #F7E7CE;
+    --rose-gold: #B76E79;
+    --sage: #A8B5A2;
+    --blush: #F2D6D0;
+    --white: #ffffff;
+    --gray: #777777;
+    --light-gray: #dddddd;
 }
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--charcoal);
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(247, 231, 206, 0.9),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(242, 214, 208, 0.8),
+            transparent 35%
+        ),
+        var(--ivory);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+/* =========================
+   PAGE DECORATION
+========================= */
+
+.page-decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decoration-one {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(247, 231, 206, 0.45);
+    top: -100px;
+    left: -100px;
+}
+
+.decoration-two {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(242, 214, 208, 0.35);
+    bottom: -150px;
+    right: -100px;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.auth-container {
+
+    position: relative;
+
+    width: 950px;
+    max-width: 100%;
+
+    height: 600px;
+
+    background: var(--white);
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.12);
+
+    z-index: 1;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+
+    position: absolute;
+
+    top: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 20;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: var(--charcoal);
+}
+
+.brand span {
+    color: var(--rose-gold);
+}
+
+/* =========================
+   FORM BOX
+========================= */
+
+.form-box {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 70px 55px 40px;
+
+    background: var(--white);
+
+    transition:
+        left 0.65s ease,
+        right 0.65s ease,
+        opacity 0.4s ease;
+
+    z-index: 1;
+}
+
+.form-content {
+    width: 100%;
+}
+
+/* LOGIN */
+
+.login {
+    right: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* REGISTER */
+
+.register {
+    left: -50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ACTIVE */
+
+.auth-container.active .login {
+    right: -50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-container.active .register {
+    left: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================
+   FORM HEADINGS
+========================= */
+
+.form-box h1 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 38px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: var(--charcoal);
+}
+
+.form-subtitle {
+
+    font-size: 14px;
+
+    color: var(--gray);
+
+    margin-bottom: 25px;
+
+    line-height: 1.6;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.input-box {
+
+    position: relative;
+
+    width: 100%;
+
+    margin: 17px 0;
+}
+
+.input-box input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 50px 0 18px;
+
+    border: 1px solid #dedede;
+
+    border-radius: 12px;
+
+    background: var(--ivory);
+
+    outline: none;
+
+    font-family: 'DM Sans', sans-serif;
+
+    font-size: 14px;
+
+    color: var(--charcoal);
+
+    transition: 0.3s ease;
+}
+
+.input-box input:focus {
+
+    border-color: var(--rose-gold);
+
+    background: var(--white);
+
+    box-shadow:
+        0 0 0 4px rgba(183, 110, 121, 0.08);
+}
+
+.input-box input::placeholder {
+    color: #999999;
+}
+
+.input-box i {
+
+    position: absolute;
+
+    right: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--rose-gold);
+
+    font-size: 16px;
+
+    pointer-events: none;
+}
+
+/* =========================
+   PASSWORD EYE
+========================= */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--gray);
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    z-index: 5;
+}
+
+.password-toggle:hover {
+    color: var(--rose-gold);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--charcoal);
+
+    color: var(--white);
+
+    font-family: 'DM Sans', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn:hover {
+
+    background: var(--rose-gold);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(183, 110, 121, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   GOOGLE BUTTON
+========================= */
+
+.google-btn {
+
+    margin-top: 12px;
+
+    background: var(--white);
+
+    color: var(--charcoal);
+
+    border: 1px solid #dddddd;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.google-btn:hover {
+
+    background: var(--ivory);
+
+    color: var(--charcoal);
+
+    border-color: var(--rose-gold);
+}
+
+.google-btn i {
+    color: var(--rose-gold);
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 18px 0;
+
+    color: #999999;
+
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+
+    content: '';
+
+    height: 1px;
+
+    background: #e5e5e5;
+
+    flex: 1;
+}
+
+/* =========================
+   TOGGLE AREA
+========================= */
+
+.toggle-box {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+/* =========================
+   TOGGLE BACKGROUND
+========================= */
+
+.toggle-box::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--champagne),
+            #eadbd0
+        );
+
+    border-radius:
+        0 180px 180px 0;
+
+    transition:
+        left 0.8s cubic-bezier(.65,.05,.36,1),
+        border-radius 0.8s ease;
+}
+
+.auth-container.active .toggle-box::before {
+
+    left: 50%;
+
+    border-radius:
+        180px 0 0 180px;
+}
+
+/* =========================
+   TOGGLE PANELS
+========================= */
+
+.toggle-panel {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 45px;
+
+    color: var(--white);
+
+    z-index: 10;
+
+    transition:
+        opacity 0.45s ease;
+
+    pointer-events: auto;
+}
+
+/* LEFT */
+
+.toggle-left {
+
+    left: 0;
+
+    opacity: 1;
+}
+
+/* RIGHT */
+
+.toggle-right {
+
+    right: 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+/* ACTIVE */
+
+.auth-container.active .toggle-left {
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.auth-container.active .toggle-right {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+/* =========================
+   TOGGLE CONTENT
+========================= */
+
+.toggle-icon {
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.25);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    font-size: 25px;
+
+    backdrop-filter: blur(5px);
+}
+
+.toggle-panel h2 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 38px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+
+    color: var(--white);
+}
+
+.toggle-panel p {
+
+    max-width: 270px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.9);
+
+    margin-bottom: 25px;
+}
+
+/* TOGGLE BUTTON */
+
+.toggle-panel .btn {
+
+    width: 160px;
+
+    height: 48px;
+
+    background: transparent;
+
+    border: 1px solid var(--white);
+
+    color: var(--white);
+
+    box-shadow: none;
+}
+
+.toggle-panel .btn:hover {
+
+    background: var(--white);
+
+    color: var(--rose-gold);
+
+    transform: translateY(-2px);
+}
+
+/* =========================
+   SMALL TEXT
+========================= */
+
+.terms {
+
+    font-size: 11px;
+
+    color: #888888;
+
+    line-height: 1.5;
+
+    margin-top: 15px;
+
+    text-align: center;
+}
+
+.terms span {
+    color: var(--rose-gold);
+}
+
+/* =========================
+   LOADING STATE
+========================= */
+
+.btn.loading {
+
+    pointer-events: none;
+
+    opacity: 0.7;
+}
+
+.btn.loading::after {
+
+    content: '';
+
+    display: inline-block;
+
+    width: 14px;
+    height: 14px;
+
+    margin-left: 8px;
+
+    border: 2px solid rgba(255,255,255,0.5);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: spin 0.7s linear infinite;
+
+    vertical-align: middle;
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .auth-container {
+
+        width: 100%;
+
+        height: 570px;
+    }
+
     .form-box {
-        position: absolute;
-        top: 0;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 40px;
-        background: #ffffff;
-        transition:
-            left 0.6s ease-in-out,
-            right 0.6s ease-in-out,
-            opacity 0.4s ease-in-out;
-        z-index: 1;
+
+        padding:
+            70px 35px 35px;
     }
-    .login {
-        right: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
-    .register {
-        left: -50%;
-        opacity: 0;
-        pointer-events: none;
-    }
-    .container.active .login {
-        right: -50%;
-        opacity: 0;
-        pointer-events: none;
-    }
-    .container.active .register {
-        left: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
-    .form-box h1 {
-        margin-bottom: 20px;
-        font-family: 'Playfair Display', serif;
-        font-size: 32px;
-        color: var(--rose-gold);
-    }
-    .input-box {
-        position: relative;
-        width: 100%;
-        margin: 25px 0;
-    }
-    .input-box input {
-        width: 100%;
-        padding: 13px 50px 13px 20px;
-        background: var(--ivory);
-        border: 1px solid #dddddd;
-        border-radius: 8px;
-        outline: none;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--charcoal);
-        transition: 0.3s ease;
-    }
-    .input-box input:focus {
-        border-color: var(--rose-gold);
-        box-shadow:
-            0 0 0 2px rgba(183, 110, 121, 0.12);
-    }
-    .input-box input::placeholder {
-        color: #777777;
-    }
-    .input-box i {
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-        font-size: 20px;
-        color: var(--rose-gold);
-        pointer-events: none;
-    }
-    .btn {
-        width: 100%;
-        height: 48px;
-        border: none;
-        border-radius: 8px;
-        background: var(--rose-gold);
-        color: var(--ivory);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition:
-            background 0.3s ease,
-            transform 0.2s ease;
-    }
-    .btn:hover {
-        background: var(--sage);
-        transform: translateY(-1px);
-    }
-    .btn:active {
-        transform: translateY(0);
-    }
-    .google-btn {
-        margin-top: 10px;
-        background: #ffffff;
-        color: var(--charcoal);
-        border: 1px solid #cccccc;
-    }
-    .google-btn:hover {
-        background: var(--ivory);
-    
-        color: var(--charcoal);
-    }
-    .google-btn i {
-        margin-right: 8px;
-        color: var(--rose-gold);
-    }
-    .toggle-box {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 2;
-        pointer-events: none;
-    }
-    .toggle-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50%;
-        height: 100%;
-        background: var(--champagne);
-        border-radius: 0 150px 150px 0;
-        z-index: 1;
-        transition:
-            left 0.8s ease-in-out,
-            border-radius 0.8s ease-in-out;
-    }
-    .container.active .toggle-box::before {
-        left: 50%;
-        border-radius: 150px 0 0 150px;
-    }
+
     .toggle-panel {
-        position: absolute;
-        top: 0;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+
         padding: 30px;
-        color: #ffffff;
-        z-index: 2;
-        transition:
-            opacity 0.4s ease-in-out;
-        pointer-events: auto;
     }
-    .toggle-left {
-        left: 0;
-        opacity: 1;
-    }
-    .toggle-right {
-        right: 0;
-        opacity: 0;
-        pointer-events: none;
-    }
-    .container.active .toggle-left {
-        opacity: 0;
-        pointer-events: none;
-    }
-    .container.active .toggle-right {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    .toggle-panel h1 {
-        margin-bottom: 8px;
-        font-family: 'Playfair Display', serif;
+
+    .toggle-panel h2 {
         font-size: 32px;
-        color: var(--ivory);
     }
-    .toggle-panel p {
-        margin-bottom: 20px;
-        font-size: 15px;
-        color: #ffffff;
+
+    .brand {
+        font-size: 34px;
     }
-    .toggle-panel .btn {
-        width: 160px;
-        height: 46px;
-        background: transparent;
-        border: 2px solid #ffffff;
-        border-radius: 8px;
-        color: #ffffff;
+}
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 15px;
     }
-    .toggle-panel .btn:hover {
-        background: #ffffff;
-    
-        color: var(--rose-gold);
+
+    .auth-container {
+
+        height: 650px;
+
+        border-radius: 22px;
     }
-    @media (max-width: 900px) {
-        .container {
-            width: 90%;
-            height: 550px;
-        }
-        .form-box {
-            padding: 30px;
-        }
-        .toggle-panel {
-            padding: 20px;
-        }
-        .brand {
-            left: 25px;
-            top: 15px;
-            font-size: 26px;
-        }
+
+    .brand {
+
+        top: 18px;
+
+        font-size: 30px;
     }
-    @media (max-width: 600px) {
-        .container {
-            width: 95%;
-            height: 650px;
-            border-radius: 20px;
-        }
-        .form-box {
-            width: 100%;
-            padding: 30px;
-            justify-content: center;
-        }
-        .login,
-        .register {
-            width: 100%;
-        }
-        .container.active .login {
-            right: -100%;
-        }
-        .container.active .register {
-            left: 0;
-        }
-        .toggle-box {
-            display: none;
-        }
-        .brand {
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 24px;
-        }
+
+    /* Hide desktop sliding panel */
+
+    .toggle-box {
+        display: none;
     }
-    </style>
+
+    .form-box {
+
+        width: 100%;
+
+        padding:
+            80px 30px 35px;
+
+        transition:
+            opacity 0.35s ease;
+    }
+
+    .login,
+    .register {
+
+        width: 100%;
+
+        left: 0;
+        right: 0;
+    }
+
+    .register {
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translateX(25px);
+    }
+
+    .login {
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+        transform: translateX(0);
+    }
+
+    .auth-container.active .login {
+
+        left: 0;
+        right: auto;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translateX(-25px);
+    }
+
+    .auth-container.active .register {
+
+        left: 0;
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+        transform: translateX(0);
+    }
+
+    .mobile-toggle {
+
+        display: flex !important;
+    }
+}
+
+/* =========================
+   MOBILE TOGGLE
+========================= */
+
+.mobile-toggle {
+
+    display: none;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    color: var(--gray);
+}
+
+.mobile-toggle button {
+
+    border: none;
+
+    background: none;
+
+    color: var(--rose-gold);
+
+    font-family: inherit;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="brand">Noiré Skin</div>
-<div class="container">
-  <!-- Login Form -->
-  <div class="form-box login">
-    <form>
-      <h1>Login</h1>
-      <div class="input-box">
-        <input type="text" placeholder="Email" required>
-        <i class="fa-regular fa-user"></i>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <button type="button" class="btn">Login</button>
-      <p style="text-align:center;margin-top:10px;">Or</p>
-      <button type="button" class="btn google-btn">
-        <i class="fa-brands fa-google"></i> Sign in with Google
-      </button>
-    </form>
-  </div>
+<!-- Decorative Background -->
 
-  <!-- Register Form -->
-  <div class="form-box register">
-    <form>
-      <h1>Registration</h1>
-      <div class="input-box">
-        <input type="text" placeholder="Username" required>
-        <i class="fa-regular fa-user"></i>
-      </div>
-      <div class="input-box">
-        <input type="email" placeholder="Email" required>
-        <i class="fa-solid fa-envelope"></i>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <button type="button" class="btn">Register</button>
-      <button type="button" class="btn google-btn">
-        <i class="fa-brands fa-google"></i> Sign up with Google
-      </button>
-    </form>
-  </div>
+<div class="page-decoration decoration-one"></div>
+<div class="page-decoration decoration-two"></div>
 
-  <!-- Toggle Panels -->
-  <div class="toggle-box">
-    <div class="toggle-panel toggle-left">
-      <h1>Welcome Back!</h1>
-      <p>Don't have an account yet?</p>
-      <button class="btn register-btn">Register</button>
+<!-- =========================
+         BRAND
+    ========================= -->
+
+    <div class="brand">
+        Noiré Skin
     </div>
-    <div class="toggle-panel toggle-right">
-      <h1>Hello, Welcome!</h1>
-      <p>Already have an Account?</p>
-      <button class="btn login-btn">Login</button>
+
+<!-- =========================
+     AUTH CONTAINER
+========================= -->
+
+<div class="auth-container" id="authContainer">
+
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
+    <div class="form-box login">
+
+        <div class="form-content">
+
+            <form id="loginForm">
+
+                <h1>Welcome back.</h1>
+
+                <p class="form-subtitle">
+                    Sign in to continue your Noiré ritual.
+                </p>
+
+
+                <!-- EMAIL -->
+
+                <div class="input-box">
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-box">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <i
+                        class="fa-solid fa-eye password-toggle"
+                        data-target="loginPassword"
+                    ></i>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="btn"
+                    id="loginButton"
+                >
+                    Login
+                </button>
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+                    or
+                </div>
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    type="button"
+                    class="btn google-btn"
+                    id="googleLogin"
+                >
+                    <i class="fa-brands fa-google"></i>
+                    Continue with Google
+                </button>
+
+
+                <!-- MOBILE TOGGLE -->
+
+                <div class="mobile-toggle">
+
+                    <span>Don't have an account?</span>
+
+                    <button
+                        type="button"
+                        class="mobile-register-btn"
+                    >
+                        Sign up
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-  </div>
+
+
+    <!-- =========================
+         REGISTER
+    ========================= -->
+
+    <div class="form-box register">
+
+        <div class="form-content">
+
+            <form id="registerForm">
+
+                <h1>Create your account.</h1>
+
+                <p class="form-subtitle">
+                    Begin your personalized Noiré skincare journey.
+                </p>
+
+
+                <!-- USERNAME -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        id="registerUsername"
+                        placeholder="Username"
+                        autocomplete="username"
+                        required
+                    >
+
+                    <i class="fa-regular fa-user"></i>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="input-box">
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-box">
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <i
+                        class="fa-solid fa-eye password-toggle"
+                        data-target="registerPassword"
+                    ></i>
+
+                </div>
+
+
+                <!-- REGISTER -->
+
+                <button
+                    type="submit"
+                    class="btn"
+                    id="registerButton"
+                >
+                    Create Account
+                </button>
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+                    or
+                </div>
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    type="button"
+                    class="btn google-btn"
+                    id="googleRegister"
+                >
+                    <i class="fa-brands fa-google"></i>
+                    Sign up with Google
+                </button>
+
+
+                <p class="terms">
+                    By creating an account, you agree to our
+                    <span>Terms</span> and
+                    <span>Privacy Policy</span>.
+                </p>
+
+
+                <!-- MOBILE TOGGLE -->
+
+                <div class="mobile-toggle">
+
+                    <span>Already have an account?</span>
+
+                    <button
+                        type="button"
+                        class="mobile-login-btn"
+                    >
+                        Login
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOGGLE PANELS
+    ========================= -->
+
+    <div class="toggle-box">
+
+
+        <!-- LEFT -->
+
+        <div class="toggle-panel toggle-left">
+
+            <div class="toggle-icon">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </div>
+
+            <h2>Hello, beautiful.</h2>
+
+            <p>
+                New to Noiré?
+                Create an account and make every skincare moment
+                part of your ritual.
+            </p>
+
+            <button
+                class="btn register-btn"
+                type="button"
+            >
+                Create Account
+            </button>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="toggle-panel toggle-right">
+
+            <div class="toggle-icon">
+
+                <i class="fa-solid fa-sparkles"></i>
+
+            </div>
+
+            <h2>Welcome back.</h2>
+
+            <p>
+                Your skin ritual is waiting.
+                Sign in and continue where you left off.
+            </p>
+
+            <button
+                class="btn login-btn"
+                type="button"
+            >
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
-<!--<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  GoogleAuthProvider, 
-  signInWithPopup 
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { 
-  getDatabase, 
-  ref, 
-  set, 
-  get, 
-  child 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"; 
+
+import {
+    getDatabase,
+    ref,
+    set,
+    get
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
-  authDomain: "noire-17ed6.firebaseapp.com",
-  databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
-  projectId: "noire-17ed6",
-  storageBucket: "noire-17ed6.appspot.com",   // ✅ fixed
-  messagingSenderId: "559789891078",
-  appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+
+    apiKey:
+        "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+
+    authDomain:
+        "noire-17ed6.firebaseapp.com",
+
+    databaseURL:
+        "https://noire-17ed6-default-rtdb.firebaseio.com",
+
+    projectId:
+        "noire-17ed6",
+
+    storageBucket:
+        "noire-17ed6.appspot.com",
+
+    messagingSenderId:
+        "559789891078",
+
+    appId:
+        "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
 };
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getDatabase(app);
-    // Register
-    document.querySelector(".register .btn").addEventListener("click", async () => {
-      const username = document.querySelector(".register input[type=text]").value;
-      const email = document.querySelector(".register input[type=email]").value;
-      const password = document.querySelector(".register input[type=password]").value;
-  
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        // Save user data in Realtime DB
-        await set(ref(db, "users/" + user.uid), {
-          username: username,
-          email: email
+
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+const googleProvider =
+    new GoogleAuthProvider();
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const container =
+    document.getElementById("authContainer");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const registerForm =
+    document.getElementById("registerForm");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const registerButton =
+    document.getElementById("registerButton");
+
+
+/* =========================================================
+   LOGIN / REGISTER TOGGLE
+========================================================= */
+
+function showRegister() {
+
+    container.classList.add("active");
+
+}
+
+function showLogin() {
+
+    container.classList.remove("active");
+
+}
+
+
+/* Desktop toggle */
+
+document
+    .querySelector(".register-btn")
+    .addEventListener("click", showRegister);
+
+document
+    .querySelector(".login-btn")
+    .addEventListener("click", showLogin);
+
+
+/* Mobile toggle */
+
+document
+    .querySelector(".mobile-register-btn")
+    .addEventListener("click", showRegister);
+
+document
+    .querySelector(".mobile-login-btn")
+    .addEventListener("click", showLogin);
+
+
+/* =========================================================
+   PASSWORD VISIBILITY
+========================================================= */
+
+document
+    .querySelectorAll(".password-toggle")
+    .forEach(icon => {
+
+        icon.addEventListener("click", () => {
+
+            const targetId =
+                icon.dataset.target;
+
+            const input =
+                document.getElementById(targetId);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove(
+                    "fa-eye"
+                );
+
+                icon.classList.add(
+                    "fa-eye-slash"
+                );
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                icon.classList.add(
+                    "fa-eye"
+                );
+
+            }
+
         });
-        alert("Registration successful!");
-      } catch (error) {
-        alert(error.message);
-      }
+
     });
-    // Login
-    document.querySelector(".login .btn").addEventListener("click", async () => {
-      const email = document.querySelector(".login input[type=text]").value;
-      const password = document.querySelector(".login input[type=password]").value;
-  
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        // Fetch user data from DB
-        const snapshot = await get(child(ref(db), "users/" + user.uid));
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          alert("Welcome back, " + userData.username + "!");
-        } else {
-          alert("No user data found.");
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    });
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector('.container');
-  const registerBtn = document.querySelector('.register-btn');
-  const loginBtn = document.querySelector('.login-btn');
-
-  registerBtn.addEventListener('click', () => {
-    container.classList.add('active');
-  });
-
-  loginBtn.addEventListener('click', () => {
-    container.classList.remove('active');
-  });
-});
-  </script>-->
-  <script type="module">
-
-    // ==============================
-    // FIREBASE IMPORTS
-    // ==============================
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-    import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        GoogleAuthProvider,
-        signInWithPopup
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    import {
-        getDatabase,
-        ref,
-        set,
-        get
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-    // ==============================
-    // FIREBASE CONFIG
-    // ==============================
+/* =========================================================
+   REGISTER
+========================================================= */
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
-        authDomain: "noire-17ed6.firebaseapp.com",
-        databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
-        projectId: "noire-17ed6",
-        storageBucket: "noire-17ed6.appspot.com",
-        messagingSenderId: "559789891078",
-        appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
-    };
+registerForm.addEventListener(
+    "submit",
+    async (event) => {
 
+        event.preventDefault();
 
-    // ==============================
-    // INITIALIZE FIREBASE
-    // ==============================
-
-    const app = initializeApp(firebaseConfig);
-
-    const auth = getAuth(app);
-
-    const db = getDatabase(app);
-
-    const googleProvider = new GoogleAuthProvider();
-
-
-    // ==============================
-    // REGISTER WITH EMAIL/PASSWORD
-    // ==============================
-
-    document.querySelector(".register .btn").addEventListener("click", async () => {
 
         const username =
-            document.querySelector(".register input[type=text]").value.trim();
+            document
+                .getElementById("registerUsername")
+                .value
+                .trim();
 
         const email =
-            document.querySelector(".register input[type=email]").value.trim();
+            document
+                .getElementById("registerEmail")
+                .value
+                .trim();
 
         const password =
-            document.querySelector(".register input[type=password]").value;
+            document
+                .getElementById("registerPassword")
+                .value;
 
 
         if (!username || !email || !password) {
-            alert("Please fill in all fields.");
+
+            alert(
+                "Please fill in all fields."
+            );
+
             return;
         }
 
 
+        if (password.length < 6) {
+
+            alert(
+                "Password must be at least 6 characters."
+            );
+
+            return;
+        }
+
+
+        registerButton.classList.add("loading");
+
+        registerButton.disabled = true;
+
+
         try {
 
-            // Create Firebase Authentication account
+            /* Create Firebase Auth account */
+
             const userCredential =
                 await createUserWithEmailAndPassword(
                     auth,
@@ -533,56 +1451,151 @@ document.addEventListener("DOMContentLoaded", () => {
                     password
                 );
 
-            const user = userCredential.user;
+
+            const user =
+                userCredential.user;
 
 
-            // Save additional information in Realtime Database
+            /* Save user profile */
+
             await set(
-                ref(db, "users/" + user.uid),
+                ref(
+                    db,
+                    "users/" + user.uid
+                ),
                 {
-                    username: username,
-                    email: email
+
+                    username:
+                        username,
+
+                    email:
+                        email,
+
+                    createdAt:
+                        new Date().toISOString(),
+
+                    skinType:
+                        "",
+
+                    skinCondition:
+                        ""
+
                 }
             );
 
 
-            alert("Registration successful! 🎉");
+            alert(
+                "Welcome to Noiré, " +
+                username +
+                "! 🎉"
+            );
 
-            console.log("Registered user:", user.uid);
+
+            /* Go to account */
+
+            window.location.href =
+                "account.html";
+
 
         } catch (error) {
 
-            console.error("Registration error:", error);
+            console.error(
+                "Registration error:",
+                error
+            );
 
-            alert(error.message);
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                alert(
+                    "An account already exists with this email."
+                );
+
+            } else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+            } else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                alert(
+                    "Your password is too weak. Please use at least 6 characters."
+                );
+
+            } else {
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        } finally {
+
+            registerButton.classList.remove(
+                "loading"
+            );
+
+            registerButton.disabled =
+                false;
+
         }
 
-    });
+    }
+);
 
 
-    // ==============================
-    // LOGIN WITH EMAIL/PASSWORD
-    // ==============================
+/* =========================================================
+   LOGIN
+========================================================= */
 
-    document.querySelector(".login .btn").addEventListener("click", async () => {
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
 
         const email =
-            document.querySelector(".login input[type=text]").value.trim();
+            document
+                .getElementById("loginEmail")
+                .value
+                .trim();
 
         const password =
-            document.querySelector(".login input[type=password]").value;
+            document
+                .getElementById("loginPassword")
+                .value;
 
 
         if (!email || !password) {
-            alert("Please enter your email and password.");
+
+            alert(
+                "Please enter your email and password."
+            );
+
             return;
         }
 
 
+        loginButton.classList.add("loading");
+
+        loginButton.disabled = true;
+
+
         try {
 
-            // STEP 1:
-            // Firebase Authentication checks the email/password
+            /* Firebase Authentication */
 
             const userCredential =
                 await signInWithEmailAndPassword(
@@ -591,213 +1604,307 @@ document.addEventListener("DOMContentLoaded", () => {
                     password
                 );
 
-            const user = userCredential.user;
 
-            console.log("Firebase Auth successful:", user.uid);
-
-
-            // STEP 2:
-            // Get the user's information from Realtime Database
-
-            const userRef = ref(db, "users/" + user.uid);
-
-            const snapshot = await get(userRef);
+            const user =
+                userCredential.user;
 
 
-            // STEP 3:
-            // Check whether the user's database record exists
+            console.log(
+                "Firebase login successful:",
+                user.uid
+            );
+
+
+            /* Get user profile */
+
+            const userRef =
+                ref(
+                    db,
+                    "users/" + user.uid
+                );
+
+
+            const snapshot =
+                await get(userRef);
+
 
             if (snapshot.exists()) {
 
-                const userData = snapshot.val();
+                const userData =
+                    snapshot.val();
 
-                console.log("User data:", userData);
 
                 alert(
                     "Welcome back, " +
-                    userData.username +
+                    (
+                        userData.username ||
+                        user.displayName ||
+                        "beautiful"
+                    ) +
                     "! 💗"
                 );
-                 // Redirect to account page
-                window.location.href = "account.html";
 
-                // OPTIONAL:
-                // Redirect after successful login
-                //
-                // window.location.href = "home.html";
+
+                window.location.href =
+                    "account.html";
 
 
             } else {
 
-                console.log("No database record found for:", user.uid);
+                /*
+                 * Authentication worked,
+                 * but profile doesn't exist.
+                 *
+                 * Create one automatically
+                 * so the account isn't stuck.
+                 */
+
+                await set(
+                    userRef,
+                    {
+
+                        username:
+                            user.displayName ||
+                            email.split("@")[0],
+
+                        email:
+                            user.email,
+
+                        createdAt:
+                            new Date().toISOString(),
+
+                        skinType:
+                            "",
+
+                        skinCondition:
+                            ""
+
+                    }
+                );
+
 
                 alert(
-                    "Your account is authenticated, but no user profile was found."
+                    "Welcome to Noiré! 💗"
                 );
+
+
+                window.location.href =
+                    "account.html";
             }
 
 
         } catch (error) {
 
-            console.error("Login error:", error);
+            console.error(
+                "Login error:",
+                error
+            );
 
-            // User-friendly Firebase errors
 
-            if (error.code === "auth/invalid-credential") {
+            if (
+                error.code ===
+                "auth/invalid-credential"
+            ) {
 
-                alert("Incorrect email or password.");
+                alert(
+                    "Incorrect email or password."
+                );
 
-            } else if (error.code === "auth/user-not-found") {
+            } else if (
+                error.code ===
+                "auth/user-not-found"
+            ) {
 
-                alert("No account exists with this email.");
+                alert(
+                    "No account exists with this email."
+                );
 
-            } else if (error.code === "auth/wrong-password") {
+            } else if (
+                error.code ===
+                "auth/wrong-password"
+            ) {
 
-                alert("Incorrect password.");
+                alert(
+                    "Incorrect password."
+                );
+
+            } else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
 
             } else {
 
-                alert(error.message);
+                alert(
+                    error.message
+                );
+
             }
+
+        } finally {
+
+            loginButton.classList.remove(
+                "loading"
+            );
+
+            loginButton.disabled =
+                false;
 
         }
 
-    });
+    }
+);
 
 
-    // ==============================
-    // GOOGLE SIGN-IN / SIGN-UP
-    // ==============================
+/* =========================================================
+   GOOGLE LOGIN / SIGN UP
+========================================================= */
 
-    const googleButtons =
-        document.querySelectorAll(".google-btn");
+async function handleGoogleAuth() {
 
+    try {
 
-    googleButtons.forEach((button) => {
-
-        button.addEventListener("click", async () => {
-
-            try {
-
-                // Open Google login window
-
-                const result =
-                    await signInWithPopup(
-                        auth,
-                        googleProvider
-                    );
+        const result =
+            await signInWithPopup(
+                auth,
+                googleProvider
+            );
 
 
-                const user = result.user;
-
-                console.log("Google authentication successful:", user);
-
-
-                // Check whether this Google user
-                // already has a database profile
-
-                const userRef =
-                    ref(db, "users/" + user.uid);
-
-                const snapshot =
-                    await get(userRef);
+        const user =
+            result.user;
 
 
-                if (!snapshot.exists()) {
-
-                    // First-time Google user
-                    // Create their database profile
-
-                    await set(
-                        userRef,
-                        {
-                            username:
-                                user.displayName || "Google User",
-
-                            email:
-                                user.email,
-
-                            photoURL:
-                                user.photoURL || ""
-                        }
-                    );
+        console.log(
+            "Google authentication successful:",
+            user
+        );
 
 
-                    alert(
-                        "Google account registered successfully! 🎉"
-                    );
+        const userRef =
+            ref(
+                db,
+                "users/" + user.uid
+            );
 
-                    window.location.href = "account.html";
 
-                } else {
+        const snapshot =
+            await get(userRef);
 
-                    // Existing Google user
 
-                    const userData =
-                        snapshot.val();
+        /* First-time Google user */
 
-                    alert(
-                        "Welcome back, " +
-                        userData.username +
-                        "! 💗"
-                    );
+        if (!snapshot.exists()) {
 
-                    window.location.href = "account.html";
+            await set(
+                userRef,
+                {
+
+                    username:
+                        user.displayName ||
+                        "Google User",
+
+                    email:
+                        user.email,
+
+                    photoURL:
+                        user.photoURL ||
+                        "",
+
+                    createdAt:
+                        new Date().toISOString(),
+
+                    skinType:
+                        "",
+
+                    skinCondition:
+                        ""
+
                 }
+            );
 
 
-                // OPTIONAL:
-                // Redirect after Google login
-
-                // window.location.href = "home.html";
-
-
-            } catch (error) {
-
-                console.error(
-                    "Google authentication error:",
-                    error
-                );
-
-                alert(error.message);
-            }
-
-        });
-
-    });
+            alert(
+                "Welcome to Noiré! 🎉"
+            );
 
 
-    // ==============================
-    // LOGIN / REGISTER TOGGLE
-    // ==============================
+        } else {
 
-    document.addEventListener("DOMContentLoaded", () => {
+            /* Existing Google user */
 
-        const container =
-            document.querySelector(".container");
-
-        const registerBtn =
-            document.querySelector(".register-btn");
-
-        const loginBtn =
-            document.querySelector(".login-btn");
+            const userData =
+                snapshot.val();
 
 
-        registerBtn.addEventListener("click", () => {
+            alert(
+                "Welcome back, " +
+                (
+                    userData.username ||
+                    user.displayName ||
+                    "beautiful"
+                ) +
+                "! 💗"
+            );
 
-            container.classList.add("active");
-
-        });
+        }
 
 
-        loginBtn.addEventListener("click", () => {
+        /* Redirect */
 
-            container.classList.remove("active");
+        window.location.href =
+            "account.html";
 
-        });
 
-    });
+    } catch (error) {
+
+        console.error(
+            "Google authentication error:",
+            error
+        );
+
+
+        if (
+            error.code ===
+            "auth/popup-closed-by-user"
+        ) {
+
+            return;
+
+        }
+
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* Google buttons */
+
+document
+    .getElementById("googleLogin")
+    .addEventListener(
+        "click",
+        handleGoogleAuth
+    );
+
+document
+    .getElementById("googleRegister")
+    .addEventListener(
+        "click",
+        handleGoogleAuth
+    );
+
 
 </script>
+
 </body>
 </html>

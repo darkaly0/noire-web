@@ -1,133 +1,1668 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <title>Contact Noiré</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Noiré | We'd Love to Hear From You</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
+    /* =========================================================
+       NOIRÉ CONTACT
+    ========================================================= */
+
     :root {
       --charcoal: #000000;
       --ivory: #F9F9F6;
       --champagne: #F7E7CE;
       --rose-gold: #B76E79;
       --sage: #A8B5A2;
+      --blush: #F2D6D0;
+      --white: #ffffff;
+      --soft-gray: #777;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       background: var(--ivory);
       color: var(--charcoal);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
+      font-family: 'DM Sans', 'Segoe UI', sans-serif;
     }
 
-    header {
-      background: var(--champagne);
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--rose-gold);
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--rose-gold);
-      margin: 0;
-    }
-
-    nav {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    nav a {
-      margin: 0 15px;
+    a {
       text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* =========================================================
+       ANNOUNCEMENT BAR
+    ========================================================= */
+
+    .announcement-bar {
+      background: var(--charcoal);
+      color: white;
+      text-align: center;
+      padding: 9px 20px;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+      height: 78px;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 5%;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      letter-spacing: 4px;
       font-weight: 600;
       color: var(--charcoal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+
+      color: #333;
+
       transition: color 0.3s ease;
     }
-    nav a:hover {
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--rose-gold);
     }
 
-    .hero {
-      background: linear-gradient(135deg, var(--champagne), var(--ivory), var(--rose-gold));
-      padding: 3rem;
-      border-radius: 20px;
-      margin: 2rem auto;
-      max-width: 700px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-      text-align: center;
-    }
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--rose-gold);
-      margin-bottom: 1.5rem;
-    }
+    .nav-links a.active::after {
+      content: "";
 
-    .btn-rose {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: -9px;
+
+      height: 1px;
+
       background: var(--rose-gold);
-      color: var(--ivory);
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background 0.3s ease, transform 0.2s ease;
     }
-    .btn-rose:hover {
-      background: var(--sage);
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-icon {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      background: var(--ivory);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 1rem;
+
+      transition: 0.3s ease;
+    }
+
+    .nav-icon:hover {
+      background: var(--champagne);
       transform: translateY(-2px);
     }
 
-    footer {
-      width: 100%;              /* span full width */
-      background: var(--champagne); /* or any brand color */
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .contact-hero {
+      padding: 90px 7% 70px;
+
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(242,214,208,0.8),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(247,231,206,0.9),
+          transparent 35%
+        ),
+        var(--ivory);
+
       text-align: center;
-      padding: 1rem;
-      font-family: 'Playfair Display', serif;
+    }
+
+    .hero-label {
       color: var(--rose-gold);
-      border-top: 2px solid var(--rose-gold);
-      position: relative;       /* keeps it in flow */
+
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      margin-bottom: 18px;
+    }
+
+    .contact-hero h1 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(3.3rem, 6vw, 5.5rem);
+
+      font-weight: 500;
+
+      line-height: 1;
+
+      margin: 0 auto 22px;
+
+      max-width: 850px;
+    }
+
+    .contact-hero h1 span {
+      color: var(--rose-gold);
+      font-style: italic;
+    }
+
+    .contact-hero p {
+      max-width: 650px;
+
+      margin: auto;
+
+      color: var(--soft-gray);
+
+      line-height: 1.8;
+
+      font-size: 1rem;
+    }
+
+
+    /* =========================================================
+       CONTACT CONTENT
+    ========================================================= */
+
+    .contact-section {
+      padding: 30px 7% 100px;
+
+      background: var(--ivory);
+    }
+
+    .contact-wrapper {
+      max-width: 1180px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: 0.85fr 1.15fr;
+
+      gap: 30px;
+    }
+
+
+    /* =========================================================
+       CONTACT INFO
+    ========================================================= */
+
+    .contact-info {
+      background: var(--charcoal);
+
+      color: white;
+
+      border-radius: 28px;
+
+      padding: 55px 45px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .contact-info::before {
+      content: "";
+
+      position: absolute;
+
+      width: 260px;
+      height: 260px;
+
+      border-radius: 50%;
+
+      background: rgba(247,231,206,0.08);
+
+      top: -100px;
+      right: -80px;
+    }
+
+    .contact-info::after {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border-radius: 50%;
+
+      background: rgba(183,110,121,0.12);
+
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .contact-info-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-info-label {
+      color: var(--champagne);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2.5px;
+
+      font-size: 0.68rem;
+
+      font-weight: 700;
+
+      margin-bottom: 18px;
+    }
+
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 2.8rem;
+
+      font-weight: 400;
+
+      line-height: 1.15;
+
+      margin: 0 0 22px;
+    }
+
+    .contact-info > p {
+      color: #aaa;
+
+      line-height: 1.8;
+
+      font-size: 0.9rem;
+
+      margin-bottom: 45px;
+    }
+
+
+    /* CONTACT DETAILS */
+
+    .contact-detail {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 18px;
+
+      margin-bottom: 28px;
+    }
+
+    .contact-detail-icon {
+      width: 42px;
+      height: 42px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.08);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 1rem;
+    }
+
+    .contact-detail h4 {
+      margin: 0 0 5px;
+
+      font-size: 0.72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.5px;
+
+      color: var(--champagne);
+    }
+
+    .contact-detail p {
+      margin: 0;
+
+      color: #aaa;
+
+      font-size: 0.85rem;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       CONTACT FORM
+    ========================================================= */
+
+    .contact-form-card {
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 28px;
+
+      padding: 55px;
+
+      box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+    }
+
+    .form-heading {
+      margin-bottom: 35px;
+    }
+
+    .form-heading small {
+      color: var(--rose-gold);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 0.68rem;
+
+      font-weight: 700;
+    }
+
+    .form-heading h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 2.4rem;
+
+      font-weight: 500;
+
+      margin: 10px 0 10px;
+    }
+
+    .form-heading p {
+      color: var(--soft-gray);
+
+      font-size: 0.88rem;
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+
+    /* FORM ROW */
+
+    .form-row {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      color: #444;
+    }
+
+    .form-control {
+      width: 100%;
+
+      border: 1px solid #ddd;
+
+      border-radius: 12px;
+
+      padding: 14px 16px;
+
+      font-family: inherit;
+
+      font-size: 0.9rem;
+
+      background: #fff;
+
+      color: var(--charcoal);
+
+      outline: none;
+
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--rose-gold);
+
+      box-shadow:
+        0 0 0 3px rgba(183,110,121,0.10);
+    }
+
+    .form-control::placeholder {
+      color: #aaa;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+
+      min-height: 145px;
+    }
+
+    select.form-control {
+      cursor: pointer;
+    }
+
+
+    /* =========================================================
+       SUBMIT BUTTON
+    ========================================================= */
+
+    .submit-button {
+      width: 100%;
+
+      border: none;
+
+      background: var(--charcoal);
+
+      color: white;
+
+      border-radius: 50px;
+
+      padding: 16px 25px;
+
+      font-family: inherit;
+
+      font-size: 0.75rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.5px;
+
+      cursor: pointer;
+
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background: var(--rose-gold);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       SUCCESS MESSAGE
+    ========================================================= */
+
+    .success-message {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px 18px;
+
+      border-radius: 12px;
+
+      background: #edf3eb;
+
+      color: #53634f;
+
+      font-size: 0.82rem;
+
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+
+    /* =========================================================
+       FAQ / HELP SECTION
+    ========================================================= */
+
+    .help-section {
+      padding: 100px 7%;
+
+      background: white;
+    }
+
+    .section-heading {
+      text-align: center;
+
+      max-width: 700px;
+
+      margin: 0 auto 50px;
+    }
+
+    .section-heading small {
+      color: var(--rose-gold);
+
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      font-size: 0.68rem;
+
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
+
+      font-weight: 500;
+
+      margin: 12px 0 15px;
+    }
+
+    .section-heading p {
+      color: var(--soft-gray);
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+    .help-grid {
+      max-width: 1050px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .help-card {
+      padding: 35px 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      text-align: center;
+
+      transition: 0.3s ease;
+    }
+
+    .help-card:hover {
+      border-color: var(--rose-gold);
+
+      transform: translateY(-5px);
+
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    }
+
+    .help-icon {
+      width: 50px;
+      height: 50px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 50%;
+
+      background: var(--champagne);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 1.2rem;
+    }
+
+    .help-card h3 {
+      font-family: 'Playfair Display', serif;
+
+      font-size: 1.4rem;
+
+      font-weight: 500;
+
+      margin: 0 0 10px;
+    }
+
+    .help-card p {
+      color: var(--soft-gray);
+
+      font-size: 0.82rem;
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+
+    /* =========================================================
+       QUOTE
+    ========================================================= */
+
+    .contact-quote {
+      background: var(--champagne);
+
+      text-align: center;
+
+      padding: 85px 7%;
+    }
+
+    .contact-quote h2 {
+      max-width: 800px;
+
+      margin: auto;
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(2rem, 4vw, 3.5rem);
+
+      font-weight: 400;
+
+      line-height: 1.25;
+    }
+
+    .contact-quote span {
+      color: var(--rose-gold);
+
+      font-style: italic;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background: var(--charcoal);
+
+      color: white;
+
+      padding: 65px 7% 30px;
+    }
+
+    .footer-grid {
+      max-width: 1180px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+      gap: 50px;
+
+      padding-bottom: 50px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .footer-brand h2 {
+      font-family: 'Playfair Display', serif;
+
+      letter-spacing: 4px;
+
+      font-weight: 500;
+
+      margin: 0 0 15px;
+    }
+
+    .footer-brand p {
+      color: #aaa;
+
+      max-width: 300px;
+
+      line-height: 1.7;
+
+      font-size: 0.85rem;
+    }
+
+    .footer-column h4 {
+      font-size: 0.7rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      color: var(--champagne);
+
+      margin-bottom: 20px;
+    }
+
+    .footer-column a {
+      display: block;
+
+      color: #aaa;
+
+      font-size: 0.85rem;
+
+      margin-bottom: 12px;
+
+      transition: 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: white;
+
+      transform: translateX(3px);
+    }
+
+    .footer-bottom {
+      max-width: 1180px;
+
+      margin: 25px auto 0;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      color: #777;
+
+      font-size: 0.75rem;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1000px) {
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 0.68rem;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .help-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .navbar {
+        height: auto;
+
+        min-height: 72px;
+
+        padding: 15px 5%;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+      }
+
+      .logo {
+        font-size: 1.45rem;
+      }
+
+      .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding-bottom: 5px;
+
+        justify-content: flex-start;
+
+        gap: 22px;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+      }
+
+      .nav-icons {
+        margin-left: auto;
+      }
+
+      .contact-hero {
+        padding: 70px 6% 55px;
+      }
+
+      .contact-hero h1 {
+        font-size: 3.3rem;
+      }
+
+      .contact-section {
+        padding: 20px 6% 75px;
+      }
+
+      .contact-info {
+        padding: 40px 30px;
+      }
+
+      .contact-form-card {
+        padding: 35px 25px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .help-section {
+        padding: 75px 6%;
+      }
+
+      .help-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-quote {
+        padding: 70px 6%;
+      }
+
+      footer {
+        padding: 55px 6% 25px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+      }
+
     }
 
   </style>
+
 </head>
+
+
 <body>
-<header><h1>Contact Us</h1></header>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="shop.html">Shop</a>
-  <a href="routine.html">Routine Builder</a>
-  <a href="blog.html">Blog</a>
-  <a href="contact.html">Contact</a>
-  <a href="account.html">Account</a>
-  <a href="cart.html">Cart</a>
-</nav>
 
-<section class="hero">
-  <h2>We’d Love to Hear From You</h2>
-  <form class="text-start">
-    <div class="mb-3">
-      <label class="form-label">Name:</label>
-      <input type="text" class="form-control" placeholder="Enter your name">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Email:</label>
-      <input type="email" class="form-control" placeholder="Enter your email">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Message:</label>
-      <textarea class="form-control" rows="4" placeholder="Write your message"></textarea>
-    </div>
-    <button type="submit" class="btn btn-rose">Send</button>
-  </form>
-</section>
 
-<footer>
-  <p>&copy; 2026 Noiré Skincare. All rights reserved.</p>
-</footer>
+  <!-- =========================================================
+       ANNOUNCEMENT BAR
+  ========================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <div class="announcement-bar">
+    ✦ FREE SHIPPING ON ORDERS OVER ₱1,500 ✦
+  </div>
+
+
+
+  <!-- =========================================================
+       NAVBAR
+  ========================================================== -->
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      NOIRÉ
+    </a>
+
+
+    <div class="nav-links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="shop.html">
+        Shop
+      </a>
+
+      <a href="routine.html">
+        Routine Builder
+      </a>
+
+      <a href="blog.html">
+        Journal
+      </a>
+
+      <a href="contact.html" class="active">
+        Contact
+      </a>
+
+    </div>
+
+
+    <div class="nav-icons">
+
+      <a
+        href="account.html"
+        class="nav-icon"
+        title="Account"
+      >
+        ♡
+      </a>
+
+      <a
+        href="cart.html"
+        class="nav-icon"
+        title="Cart"
+      >
+        🛒
+      </a>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+
+  <section class="contact-hero">
+
+    <div class="hero-label">
+      Get in touch
+    </div>
+
+    <h1>
+      Let's start a
+      <span>conversation.</span>
+    </h1>
+
+    <p>
+      Have a question about your skincare routine, an order,
+      or simply want to say hello? We'd love to hear from you.
+    </p>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       CONTACT SECTION
+  ========================================================== -->
+
+  <section class="contact-section">
+
+    <div class="contact-wrapper">
+
+
+      <!-- =====================================================
+           CONTACT INFORMATION
+      ====================================================== -->
+
+      <div class="contact-info">
+
+        <div class="contact-info-content">
+
+          <div class="contact-info-label">
+            Contact Noiré
+          </div>
+
+          <h2>
+            We're here
+            for you.
+          </h2>
+
+          <p>
+            Whether you need help choosing a product or
+            simply have a question about Noiré, our team
+            is always happy to help.
+          </p>
+
+
+          <!-- EMAIL -->
+
+          <div class="contact-detail">
+
+            <div class="contact-detail-icon">
+              ✉
+            </div>
+
+            <div>
+
+              <h4>
+                Email
+              </h4>
+
+              <p>
+                hello@noireskincare.com
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- HOURS -->
+
+          <div class="contact-detail">
+
+            <div class="contact-detail-icon">
+              ◷
+            </div>
+
+            <div>
+
+              <h4>
+                Hours
+              </h4>
+
+              <p>
+                Monday – Friday<br>
+                9:00 AM – 6:00 PM
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- SOCIAL -->
+
+          <div class="contact-detail">
+
+            <div class="contact-detail-icon">
+              ◎
+            </div>
+
+            <div>
+
+              <h4>
+                Follow Noiré
+              </h4>
+
+              <p>
+                Instagram · Facebook · TikTok
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           CONTACT FORM
+      ====================================================== -->
+
+      <div class="contact-form-card">
+
+        <div class="form-heading">
+
+          <small>
+            Send us a message
+          </small>
+
+          <h2>
+            How can we help?
+          </h2>
+
+          <p>
+            Fill out the form below and our team will
+            get back to you as soon as possible.
+          </p>
+
+        </div>
+
+
+        <form id="contactForm">
+
+
+          <!-- NAME + EMAIL -->
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="name">
+                Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                placeholder="Your name"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+
+          <!-- SUBJECT -->
+
+          <div class="form-group">
+
+            <label for="subject">
+              What can we help with?
+            </label>
+
+            <select
+              id="subject"
+              class="form-control"
+              required
+            >
+
+              <option value="">
+                Select a topic
+              </option>
+
+              <option value="product">
+                Product Question
+              </option>
+
+              <option value="order">
+                Order & Shipping
+              </option>
+
+              <option value="routine">
+                Skincare Routine
+              </option>
+
+              <option value="account">
+                Account Help
+              </option>
+
+              <option value="other">
+                Something Else
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- MESSAGE -->
+
+          <div class="form-group">
+
+            <label for="message">
+              Message
+            </label>
+
+            <textarea
+              id="message"
+              class="form-control"
+              placeholder="Tell us how we can help..."
+              required
+            ></textarea>
+
+          </div>
+
+
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            class="submit-button"
+          >
+            Send Message
+            <span> →</span>
+          </button>
+
+
+          <div
+            class="success-message"
+            id="successMessage"
+          >
+            ✨ Thank you for reaching out to Noiré.
+            Your message has been received and we'll
+            get back to you soon.
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       HELP SECTION
+  ========================================================== -->
+
+  <section class="help-section">
+
+    <div class="section-heading">
+
+      <small>
+        Before you reach out
+      </small>
+
+      <h2>
+        Maybe we can help right away.
+      </h2>
+
+      <p>
+        Looking for something specific?
+        These pages might have exactly what you need.
+      </p>
+
+    </div>
+
+
+    <div class="help-grid">
+
+
+      <!-- SHOP -->
+
+      <a href="shop.html" class="help-card">
+
+        <div class="help-icon">
+          ✨
+        </div>
+
+        <h3>
+          Explore Products
+        </h3>
+
+        <p>
+          Browse our skincare collection
+          and find products suited to your skin.
+        </p>
+
+      </a>
+
+
+
+      <!-- ROUTINE -->
+
+      <a href="routine.html" class="help-card">
+
+        <div class="help-icon">
+          ♡
+        </div>
+
+        <h3>
+          Build Your Routine
+        </h3>
+
+        <p>
+          Not sure where to start?
+          Let our Routine Builder guide you.
+        </p>
+
+      </a>
+
+
+
+      <!-- JOURNAL -->
+
+      <a href="blog.html" class="help-card">
+
+        <div class="help-icon">
+          ✦
+        </div>
+
+        <h3>
+          Read the Journal
+        </h3>
+
+        <p>
+          Discover skincare guides,
+          ingredient science, and wellness tips.
+        </p>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       QUOTE
+  ========================================================== -->
+
+  <section class="contact-quote">
+
+    <h2>
+      Your questions matter.
+      Your skin deserves
+      <span>thoughtful care.</span>
+    </h2>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
+  <footer>
+
+    <div class="footer-grid">
+
+
+      <div class="footer-brand">
+
+        <h2>
+          NOIRÉ
+        </h2>
+
+        <p>
+          Thoughtful skincare for your skin,
+          your ritual, and your everyday moments.
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Explore
+        </h4>
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="shop.html">
+          Shop
+        </a>
+
+        <a href="routine.html">
+          Routine Builder
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Journal
+        </h4>
+
+        <a href="blog.html">
+          Glow Guides
+        </a>
+
+        <a href="blog.html">
+          Ingredient Science
+        </a>
+
+        <a href="blog.html">
+          Lifestyle & Wellness
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Help
+        </h4>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+        <a href="account.html">
+          My Account
+        </a>
+
+        <a href="cart.html">
+          Cart
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Noiré Skincare. All rights reserved.
+      </span>
+
+      <span>
+        Made with intention.
+      </span>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script>
+
+    const contactForm =
+      document.getElementById("contactForm");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+
+    contactForm.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      const name =
+        document.getElementById("name").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const subject =
+        document.getElementById("subject").value;
+
+      const message =
+        document.getElementById("message").value.trim();
+
+
+      if (
+        !name ||
+        !email ||
+        !subject ||
+        !message
+      ) {
+        return;
+      }
+
+
+      /*
+        Save the message locally.
+
+        This allows the contact form to work on the
+        front-end even without a backend/email service.
+      */
+
+      const contactMessage = {
+
+        name: name,
+
+        email: email,
+
+        subject: subject,
+
+        message: message,
+
+        date: new Date().toISOString()
+
+      };
+
+
+      const existingMessages =
+        JSON.parse(
+          localStorage.getItem("noireContactMessages")
+        ) || [];
+
+
+      existingMessages.push(contactMessage);
+
+
+      localStorage.setItem(
+        "noireContactMessages",
+        JSON.stringify(existingMessages)
+      );
+
+
+      /* Show success message */
+
+      successMessage.classList.add("show");
+
+
+      /* Reset form */
+
+      contactForm.reset();
+
+
+      /* Hide success message after a few seconds */
+
+      setTimeout(function() {
+
+        successMessage.classList.remove("show");
+
+      }, 6000);
+
+    });
+
+  </script>
+
+
 </body>
 </html>
