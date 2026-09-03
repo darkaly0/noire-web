@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- Google Fonts -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -57,7 +59,6 @@
       font-family: inherit;
     }
 
-
     /* =====================================================
        ANNOUNCEMENT BAR
     ===================================================== */
@@ -75,7 +76,6 @@
       color: var(--champagne);
       font-weight: 600;
     }
-
 
     /* =====================================================
        NAVIGATION
@@ -152,7 +152,6 @@
       color: var(--rose);
       transform: translateY(-2px);
     }
-
 
     /* =====================================================
        HERO
@@ -306,7 +305,6 @@
       margin-top: 8px;
     }
 
-
     /* =====================================================
        PROMOTION
     ===================================================== */
@@ -367,7 +365,6 @@
       z-index: 2;
     }
 
-
     /* =====================================================
        SECTION
     ===================================================== */
@@ -409,7 +406,6 @@
       border-color: var(--rose);
     }
 
-
     /* =====================================================
        PRODUCT GRID
     ===================================================== */
@@ -425,6 +421,7 @@
       position: relative;
       overflow: hidden;
       transition: 0.35s;
+      border: 1px solid transparent;
     }
 
     .product-card:hover {
@@ -528,11 +525,30 @@
       min-height: 38px;
     }
 
+    .product-skin {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--blush);
+      color: var(--rose);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .product-rating {
+      color: var(--rose);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-top: 7px;
+    }
+
     .product-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 15px;
+      gap: 8px;
     }
 
     .price {
@@ -555,6 +571,27 @@
       background: var(--rose);
     }
 
+    .add-cart:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    .empty-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.6);
+      border: 1px dashed var(--border);
+    }
+
+    .empty-products strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--black);
+      margin-bottom: 7px;
+    }
 
     /* =====================================================
        SKIN TYPES
@@ -620,7 +657,6 @@
       color: var(--muted);
     }
 
-
     /* =====================================================
        WHY NOIRÉ
     ===================================================== */
@@ -665,7 +701,6 @@
       font-size: 12px;
       color: var(--muted);
     }
-
 
     /* =====================================================
        NEWSLETTER
@@ -713,7 +748,6 @@
       cursor: pointer;
       font-weight: 700;
     }
-
 
     /* =====================================================
        FOOTER
@@ -774,7 +808,6 @@
       text-align: center;
     }
 
-
     /* =====================================================
        ANIMATIONS
     ===================================================== */
@@ -800,7 +833,6 @@
         transform: translateY(0);
       }
     }
-
 
     /* =====================================================
        MOBILE
@@ -893,6 +925,23 @@
         height: 150px;
       }
 
+      .product-info {
+        padding: 13px;
+      }
+
+      .product-name {
+        font-size: 17px;
+      }
+
+      .product-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .add-cart {
+        width: 100%;
+      }
+
       .skin-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -917,6 +966,7 @@
     }
 
   </style>
+
 </head>
 
 <body>
@@ -929,14 +979,13 @@
   ✦ <span>FREE SHIPPING</span> on orders over ₱1,500 ✦
 </div>
 
-
 <!-- =====================================================
      NAVIGATION
 ===================================================== -->
 
 <nav class="navbar">
 
-  <a href="index.html" class="logo">Noiré</a>
+<a href="index.html" class="logo">Noiré</a>
 
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -954,7 +1003,6 @@
 
 </nav>
 
-
 <!-- =====================================================
      HERO
 ===================================================== -->
@@ -963,50 +1011,50 @@
 
   <div class="hero-content">
 
-    <div class="eyebrow">
-      Luxury skincare, made personal
-    </div>
+<div class="eyebrow">
+  Luxury skincare, made personal
+</div>
 
-    <h1>
-      Your skin.<br>
-      Your <em>ritual.</em>
-    </h1>
+<h1>
+  Your skin.<br>
+  Your <em>ritual.</em>
+</h1>
 
-    <p class="hero-description">
-      Discover minimalist skincare designed to adapt to your unique skin type.
-      Thoughtfully formulated for dry, oily, combination, sensitive, and normal skin.
-    </p>
+<p class="hero-description">
+  Discover minimalist skincare designed to adapt to your unique skin type.
+  Thoughtfully formulated for dry, oily, combination, sensitive, and normal skin.
+</p>
 
-    <div class="hero-buttons">
-      <a href="shop.html" class="btn-primary">
-        SHOP COLLECTION
-      </a>
+<div class="hero-buttons">
 
-      <a href="routine.html" class="btn-outline">
-        FIND YOUR ROUTINE
-      </a>
-    </div>
+  <a href="shop.html" class="btn-primary">
+    SHOP COLLECTION
+  </a>
+
+  <a href="routine.html" class="btn-outline">
+    FIND YOUR ROUTINE
+  </a>
+
+</div>
 
   </div>
 
-
   <div class="hero-visual">
 
-    <div class="hero-circle"></div>
+<div class="hero-circle"></div>
 
-    <div class="hero-product">
+<div class="hero-product">
 
-      <div class="hero-product-inner">
-        <strong>NOIRÉ</strong>
-        <small>SKINCARE</small>
-      </div>
+  <div class="hero-product-inner">
+    <strong>NOIRÉ</strong>
+    <small>SKINCARE</small>
+  </div>
 
-    </div>
+</div>
 
   </div>
 
 </section>
-
 
 <!-- =====================================================
      DYNAMIC PROMOTION
@@ -1016,17 +1064,17 @@
 
   <div class="promo-text">
 
-    <div class="promo-label" id="promoLabel">
-      LIMITED OFFER
-    </div>
+<div class="promo-label" id="promoLabel">
+  LIMITED OFFER
+</div>
 
-    <h2 id="promoTitle">
-      Glow starts here.
-    </h2>
+<h2 id="promoTitle">
+  Glow starts here.
+</h2>
 
-    <p id="promoDescription">
-      Enjoy exclusive savings on selected Noiré essentials.
-    </p>
+<p id="promoDescription">
+  Enjoy exclusive savings on selected Noiré essentials.
+</p>
 
   </div>
 
@@ -1036,65 +1084,81 @@
 
 </section>
 
-
 <!-- =====================================================
      NEW ARRIVALS
+     PRODUCTS ARE LOADED FROM FIREBASE
 ===================================================== -->
 
 <section class="section">
 
   <div class="section-header">
 
-    <div>
-      <h2 class="section-title">
-        New Arrivals
-      </h2>
+<div>
 
-      <p class="section-subtitle">
-        Fresh additions to your skincare ritual.
-        Meet the newest members of the Noiré collection.
-      </p>
-    </div>
+  <h2 class="section-title">
+    New Arrivals
+  </h2>
 
-    <a href="shop.html" class="view-all">
-      VIEW ALL →
-    </a>
+  <p class="section-subtitle">
+    Fresh additions to your skincare ritual.
+    Meet the newest members of the Noiré collection.
+  </p>
+
+</div>
+
+<a href="shop.html" class="view-all">
+  VIEW ALL →
+</a>
 
   </div>
 
-  <div class="products" id="newArrivals"></div>
+  <div class="products" id="newArrivals">
+
+<div class="empty-products">
+  <strong>Loading Noiré...</strong>
+  Please wait while we prepare the newest arrivals.
+</div>
+
+  </div>
 
 </section>
 
-
 <!-- =====================================================
-     POPULAR PRODUCTS
+     MOST LOVED / FEATURED PRODUCTS
 ===================================================== -->
 
 <section class="section" style="padding-top: 20px;">
 
   <div class="section-header">
 
-    <div>
-      <h2 class="section-title">
-        Most Loved
-      </h2>
+<div>
 
-      <p class="section-subtitle">
-        Customer favorites that deserve a place in your routine.
-      </p>
-    </div>
+  <h2 class="section-title">
+    Most Loved
+  </h2>
 
-    <a href="shop.html" class="view-all">
-      SHOP BESTSELLERS →
-    </a>
+  <p class="section-subtitle">
+    Customer favorites that deserve a place in your routine.
+  </p>
+
+</div>
+
+<a href="shop.html" class="view-all">
+  SHOP HERE →
+</a>
 
   </div>
 
-  <div class="products" id="popularProducts"></div>
+  <div class="products" id="popularProducts">
+
+<div class="empty-products">
+  <strong>Loading favorites...</strong>
+  Discovering the products selected for Most Loved.
+</div>
+
+  </div>
 
 </section>
-
 
 <!-- =====================================================
      SKIN TYPES
@@ -1104,55 +1168,90 @@
 
   <div class="section-header">
 
-    <div>
-      <h2 class="section-title">
-        Find Your Skin Match
-      </h2>
+<div>
 
-      <p class="section-subtitle">
-        Because skincare should feel personal.
-        Explore products curated for your skin type.
-      </p>
-    </div>
+  <h2 class="section-title">
+    Find Your Skin Match
+  </h2>
+
+  <p class="section-subtitle">
+    Because skincare should feel personal.
+    Explore products curated for your skin type.
+  </p>
+
+</div>
 
   </div>
 
   <div class="skin-grid">
 
-    <a href="shop.html?skin=dry" class="skin-card">
-      <div class="skin-icon">💧</div>
-      <h3>Dry</h3>
-      <p>Deep hydration & nourishment</p>
-    </a>
+<a href="shop.html?skin=dry" class="skin-card">
 
-    <a href="shop.html?skin=oily" class="skin-card">
-      <div class="skin-icon">✨</div>
-      <h3>Oily</h3>
-      <p>Balance & oil control</p>
-    </a>
+  <div class="skin-icon">💧</div>
 
-    <a href="shop.html?skin=combination" class="skin-card">
-      <div class="skin-icon">🌸</div>
-      <h3>Combination</h3>
-      <p>Balance without compromise</p>
-    </a>
+  <h3>Dry</h3>
 
-    <a href="shop.html?skin=sensitive" class="skin-card">
-      <div class="skin-icon">🌿</div>
-      <h3>Sensitive</h3>
-      <p>Gentle & soothing care</p>
-    </a>
+  <p>
+    Deep hydration & nourishment
+  </p>
 
-    <a href="shop.html?skin=normal" class="skin-card">
-      <div class="skin-icon">🤍</div>
-      <h3>Normal</h3>
-      <p>Maintain your natural glow</p>
-    </a>
+</a>
+
+
+<a href="shop.html?skin=oily" class="skin-card">
+
+  <div class="skin-icon">✨</div>
+
+  <h3>Oily</h3>
+
+  <p>
+    Balance & oil control
+  </p>
+
+</a>
+
+
+<a href="shop.html?skin=combination" class="skin-card">
+
+  <div class="skin-icon">🌸</div>
+
+  <h3>Combination</h3>
+
+  <p>
+    Balance without compromise
+  </p>
+
+</a>
+
+
+<a href="shop.html?skin=sensitive" class="skin-card">
+
+  <div class="skin-icon">🌿</div>
+
+  <h3>Sensitive</h3>
+
+  <p>
+    Gentle & soothing care
+  </p>
+
+</a>
+
+
+<a href="shop.html?skin=normal" class="skin-card">
+
+  <div class="skin-icon">🤍</div>
+
+  <h3>Normal</h3>
+
+  <p>
+    Maintain your natural glow
+  </p>
+
+</a>
 
   </div>
 
 </section>
-
 
 <!-- =====================================================
      WHY NOIRÉ
@@ -1172,42 +1271,68 @@
 
   <div class="benefits">
 
-    <div class="benefit">
-      <div class="benefit-icon">✦</div>
-      <h3>Thoughtfully Formulated</h3>
-      <p>
-        Carefully selected ingredients made with your skin in mind.
-      </p>
-    </div>
+<div class="benefit">
 
-    <div class="benefit">
-      <div class="benefit-icon">♡</div>
-      <h3>Cruelty-Free</h3>
-      <p>
-        Beautiful skincare without compromising compassion.
-      </p>
-    </div>
+  <div class="benefit-icon">✦</div>
 
-    <div class="benefit">
-      <div class="benefit-icon">✧</div>
-      <h3>Skin-Focused</h3>
-      <p>
-        Products designed around different skin needs and concerns.
-      </p>
-    </div>
+  <h3>
+    Thoughtfully Formulated
+  </h3>
 
-    <div class="benefit">
-      <div class="benefit-icon">♢</div>
-      <h3>Minimalist Rituals</h3>
-      <p>
-        Simple routines that make caring for your skin effortless.
-      </p>
-    </div>
+  <p>
+    Carefully selected ingredients made with your skin in mind.
+  </p>
+
+</div>
+
+
+<div class="benefit">
+
+  <div class="benefit-icon">♡</div>
+
+  <h3>
+    Cruelty-Free
+  </h3>
+
+  <p>
+    Beautiful skincare without compromising compassion.
+  </p>
+
+</div>
+
+
+<div class="benefit">
+
+  <div class="benefit-icon">✧</div>
+
+  <h3>
+    Skin-Focused
+  </h3>
+
+  <p>
+    Products designed around different skin needs and concerns.
+  </p>
+
+</div>
+
+
+<div class="benefit">
+
+  <div class="benefit-icon">♢</div>
+
+  <h3>
+    Minimalist Rituals
+  </h3>
+
+  <p>
+    Simple routines that make caring for your skin effortless.
+  </p>
+
+</div>
 
   </div>
 
 </section>
-
 
 <!-- =====================================================
      NEWSLETTER
@@ -1225,20 +1350,19 @@
 
   <form class="newsletter-form" onsubmit="subscribe(event)">
 
-    <input
-      type="email"
-      placeholder="Your email address"
-      required
-    >
+<input
+  type="email"
+  placeholder="Your email address"
+  required
+>
 
-    <button type="submit">
-      JOIN US
-    </button>
+<button type="submit">
+  JOIN US
+</button>
 
   </form>
 
 </section>
-
 
 <!-- =====================================================
      FOOTER
@@ -1248,63 +1372,125 @@
 
   <div class="footer-grid">
 
-    <div>
+<div>
 
-      <div class="footer-logo">
-        Noiré
-      </div>
-
-      <p class="footer-description">
-        Luxury skincare that adapts to you.
-        Discover a ritual designed for your skin.
-      </p>
-
-    </div>
-
-
-    <div>
-
-      <h4>SHOP</h4>
-
-      <ul>
-        <li><a href="shop.html">All Products</a></li>
-        <li><a href="shop.html?category=cleanser">Cleansers</a></li>
-        <li><a href="shop.html?category=serum">Serums</a></li>
-        <li><a href="shop.html?category=moisturizer">Moisturizers</a></li>
-      </ul>
-
-    </div>
-
-
-    <div>
-
-      <h4>DISCOVER</h4>
-
-      <ul>
-        <li><a href="routine.html">Routine Builder</a></li>
-        <li><a href="blog.html">Journal</a></li>
-        <li><a href="about.html">About Noiré</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-    </div>
-
-
-    <div>
-
-      <h4>ACCOUNT</h4>
-
-      <ul>
-        <li><a href="account.html">My Account</a></li>
-        <li><a href="cart.html">Shopping Bag</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-      </ul>
-
-    </div>
-
+  <div class="footer-logo">
+    Noiré
   </div>
 
+  <p class="footer-description">
+    Luxury skincare that adapts to you.
+    Discover a ritual designed for your skin.
+  </p>
+
+</div>
+
+
+<div>
+
+  <h4>SHOP</h4>
+
+  <ul>
+
+    <li>
+      <a href="shop.html">
+        All Products
+      </a>
+    </li>
+
+    <li>
+      <a href="shop.html?category=cleanser">
+        Cleansers
+      </a>
+    </li>
+
+    <li>
+      <a href="shop.html?category=serum">
+        Serums
+      </a>
+    </li>
+
+    <li>
+      <a href="shop.html?category=moisturizer">
+        Moisturizers
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+
+<div>
+
+  <h4>DISCOVER</h4>
+
+  <ul>
+
+    <li>
+      <a href="routine.html">
+        Routine Builder
+      </a>
+    </li>
+
+    <li>
+      <a href="blog.html">
+        Journal
+      </a>
+    </li>
+
+    <li>
+      <a href="about.html">
+        About Noiré
+      </a>
+    </li>
+
+    <li>
+      <a href="contact.html">
+        Contact
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+
+<div>
+
+  <h4>ACCOUNT</h4>
+
+  <ul>
+
+    <li>
+      <a href="account.html">
+        My Account
+      </a>
+    </li>
+
+    <li>
+      <a href="cart.html">
+        Shopping Bag
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Privacy
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        Terms
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+  </div>
 
   <div class="copyright">
     © 2026 Noiré Skincare. All rights reserved.
@@ -1312,191 +1498,572 @@
 
 </footer>
 
-
 <!-- =====================================================
-     JAVASCRIPT
+     FIREBASE + JAVASCRIPT
 ===================================================== -->
 
-<script>
+<script type="module">
 
   /* =====================================================
-     DYNAMIC PROMOTIONS
+     FIREBASE IMPORTS
   ===================================================== */
 
-  const promotions = [
-    {
-      label: "NEW SEASON",
-      title: "Your glow, elevated.",
-      description: "Discover our newest skincare essentials."
-    },
+  import {
+    initializeApp,
+    getApps
+  } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 
-    {
-      label: "LIMITED OFFER",
-      title: "Glow starts here.",
-      description: "Enjoy exclusive savings on selected Noiré essentials."
-    },
+  import {
+    getDatabase,
+    ref,
+    get
+  } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-    {
-      label: "NOIRÉ FAVORITES",
-      title: "Meet your new ritual.",
-      description: "Shop the products our community loves most."
+
+  /* =====================================================
+     FIREBASE CONFIG
+  ===================================================== */
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lftkKMC8",
+
+    authDomain: "noire-17ed6.firebaseapp.com",
+
+    databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
+
+    projectId: "noire-17ed6",
+
+    storageBucket: "noire-17ed6.appspot.com",
+
+    messagingSenderId: "559789891078",
+
+    appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+
+  };
+
+
+  /* =====================================================
+     INITIALIZE FIREBASE
+  ===================================================== */
+
+  const app = getApps().length
+    ? getApps()[0]
+    : initializeApp(firebaseConfig);
+
+  const db = getDatabase(app);
+
+
+  /* =====================================================
+     LOCAL IMAGE STORAGE
+     
+     Admin currently stores product images locally using:
+     noire_product_images
+     
+     Firebase stores the actual product information.
+  ===================================================== */
+
+  function getLocalImages() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("noire_product_images")
+      ) || {};
+
+    } catch (error) {
+
+      console.warn(
+        "Could not read local product images.",
+        error
+      );
+
+      return {};
+
     }
-  ];
 
-  let promoIndex = 0;
-
-  function rotatePromotion() {
-
-    promoIndex++;
-
-    if (promoIndex >= promotions.length) {
-      promoIndex = 0;
-    }
-
-    const promo = promotions[promoIndex];
-
-    document.getElementById("promoLabel").textContent = promo.label;
-    document.getElementById("promoTitle").textContent = promo.title;
-    document.getElementById("promoDescription").textContent = promo.description;
   }
 
-  setInterval(rotatePromotion, 5000);
+
+  /* =====================================================
+     HELPER FUNCTIONS
+  ===================================================== */
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function getNumericPrice(product) {
+
+    const raw = String(
+      product.price ?? "0"
+    )
+      .replace(/₱/g, "")
+      .replace(/,/g, "")
+      .trim();
+
+    const price = parseFloat(raw);
+
+    return Number.isFinite(price)
+      ? price
+      : 0;
+
+  }
+
+
+  function formatPrice(product) {
+
+    return "₱" +
+      getNumericPrice(product).toLocaleString(
+        "en-PH",
+        {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 2
+        }
+      );
+
+  }
+
+
+  function normalizeBoolean(value) {
+
+    if (value === true) {
+      return true;
+    }
+
+    if (
+      value === "true" ||
+      value === "True" ||
+      value === "TRUE" ||
+      value === 1 ||
+      value === "1"
+    ) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+
+  function isActiveProduct(product) {
+
+    const status = String(
+      product.status ?? "Active"
+    )
+      .trim()
+      .toLowerCase();
+
+    return status === "active";
+
+  }
 
 
   /* =====================================================
-     PRODUCT DATA
-     CHANGE THESE PRODUCTS ANYTIME
+     LOAD PRODUCTS FROM FIREBASE
   ===================================================== */
 
-  const newArrivals = [
+  async function loadHomepageProducts() {
 
-    {
-      name: "Hydrating Cleanser",
-      category: "Cleanser",
-      description: "A gentle cleanser for soft, hydrated skin.",
-      price: 499,
-      image: "images/cleanser.jpg",
-      badge: "NEW"
-    },
+    const newArrivalsContainer =
+      document.getElementById("newArrivals");
 
-    {
-      name: "Soothing Serum",
-      category: "Serum",
-      description: "A calming serum for sensitive skin.",
-      price: 699,
-      image: "images/serum.jpg",
-      badge: "NEW"
-    },
+    const popularContainer =
+      document.getElementById("popularProducts");
 
-    {
-      name: "Daily Barrier Cream",
-      category: "Moisturizer",
-      description: "Comforting hydration for your everyday ritual.",
-      price: 599,
-      image: "images/moisturizer.jpg",
-      badge: "NEW"
-    },
 
-    {
-      name: "Radiance Essence",
-      category: "Essence",
-      description: "Lightweight hydration for a luminous finish.",
-      price: 649,
-      image: "images/essence.jpg",
-      badge: "NEW"
+    try {
+
+      const snapshot =
+        await get(ref(db, "products"));
+
+
+      if (!snapshot.exists()) {
+
+        showEmptyState(
+          newArrivalsContainer,
+          "No New Arrivals Yet",
+          "Products marked as New Arrival in Admin will appear here."
+        );
+
+        showEmptyState(
+          popularContainer,
+          "No Featured Products Yet",
+          "Products marked as Featured in Admin will appear here."
+        );
+
+        return;
+
+      }
+
+
+      const data = snapshot.val();
+
+      const imageStorage =
+        getLocalImages();
+
+
+      /* =================================================
+         CONVERT FIREBASE OBJECT TO PRODUCT ARRAY
+      ================================================= */
+
+      const products = Object.entries(data)
+        .map(([id, product]) => {
+
+          return {
+
+            id,
+
+            name:
+              product.name ||
+              "Unnamed Product",
+
+            price:
+              product.price ?? 0,
+
+            productType:
+              product.productType ||
+              "Skincare",
+
+            skinType:
+              product.skinType ||
+              "All Skin Types",
+
+            status:
+              product.status ||
+              "Active",
+
+            stocks:
+              Number(product.stocks) || 0,
+
+            rating:
+              product.rating ||
+              "★★★★★",
+
+            description:
+              product.description ||
+              "",
+
+            benefits:
+              Array.isArray(product.benefits)
+                ? product.benefits
+                : [],
+
+            isFeatured:
+              normalizeBoolean(
+                product.isFeatured
+              ),
+
+            isNewArrival:
+              normalizeBoolean(
+                product.isNewArrival
+              ),
+
+            createdAt:
+              product.createdAt ||
+              0,
+
+            image:
+              imageStorage[id] ||
+              product.image ||
+              ""
+
+          };
+
+        });
+
+
+      /* =================================================
+         ONLY ACTIVE PRODUCTS APPEAR ON HOMEPAGE
+      ================================================= */
+
+      const activeProducts =
+        products.filter(
+          product =>
+            isActiveProduct(product)
+        );
+
+
+      /* =================================================
+         NEW ARRIVALS
+         
+         ADMIN:
+         ☑ New Arrival
+      ================================================= */
+
+      const newArrivals =
+        activeProducts
+          .filter(
+            product =>
+              product.isNewArrival === true
+          )
+          .sort(
+            sortNewestFirst
+          );
+
+
+      /* =================================================
+         MOST LOVED / FEATURED
+         
+         ADMIN:
+         ☑ Featured Product
+      ================================================= */
+
+      const popularProducts =
+        activeProducts
+          .filter(
+            product =>
+              product.isFeatured === true
+          )
+          .sort(
+            sortFeatured
+          );
+
+
+      /* =================================================
+         LIMIT HOMEPAGE DISPLAY
+         
+         Only show 4 cards so the homepage stays clean.
+         VIEW ALL still goes to Shop.
+      ================================================= */
+
+      renderProducts(
+        newArrivals.slice(0, 4),
+        "newArrivals",
+        "NEW"
+      );
+
+
+      renderProducts(
+        popularProducts.slice(0, 4),
+        "popularProducts",
+        "FEATURED"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Error loading homepage products:",
+        error
+      );
+
+
+      showEmptyState(
+        newArrivalsContainer,
+        "Unable to Load Products",
+        "Please check your Firebase connection and try again."
+      );
+
+
+      showEmptyState(
+        popularContainer,
+        "Unable to Load Products",
+        "Please check your Firebase connection and try again."
+      );
+
     }
 
-  ];
+  }
 
 
-  const popularProducts = [
+  /* =====================================================
+     SORT NEWEST PRODUCTS
+  ===================================================== */
 
-    {
-      name: "Oil Control Gel",
-      category: "Moisturizer",
-      description: "A lightweight gel designed for oily skin.",
-      price: 549,
-      image: "images/gel.jpg",
-      badge: "BESTSELLER"
-    },
+  function sortNewestFirst(a, b) {
 
-    {
-      name: "Soothing Serum",
-      category: "Serum",
-      description: "Helps calm and comfort sensitive skin.",
-      price: 699,
-      image: "images/serum.jpg",
-      badge: "BESTSELLER"
-    },
+    const aTime =
+      Number(a.createdAt) || 0;
 
-    {
-      name: "Hydrating Cleanser",
-      category: "Cleanser",
-      description: "Gentle daily cleansing without stripping the skin.",
-      price: 499,
-      image: "images/cleanser.jpg",
-      badge: "POPULAR"
-    },
+    const bTime =
+      Number(b.createdAt) || 0;
 
-    {
-      name: "Daily Barrier Cream",
-      category: "Moisturizer",
-      description: "Rich yet lightweight daily hydration.",
-      price: 599,
-      image: "images/moisturizer.jpg",
-      badge: "POPULAR"
-    }
+    return bTime - aTime;
 
-  ];
+  }
+
+
+  /* =====================================================
+     SORT FEATURED PRODUCTS
+     
+     Newer featured products first.
+  ===================================================== */
+
+  function sortFeatured(a, b) {
+
+    const aTime =
+      Number(a.createdAt) || 0;
+
+    const bTime =
+      Number(b.createdAt) || 0;
+
+    return bTime - aTime;
+
+  }
 
 
   /* =====================================================
      RENDER PRODUCTS
   ===================================================== */
 
-  function renderProducts(products, containerId) {
+  function renderProducts(
+    products,
+    containerId,
+    defaultBadge
+  ) {
 
-    const container = document.getElementById(containerId);
+    const container =
+      document.getElementById(containerId);
+
+
+    if (!container) {
+      return;
+    }
+
 
     container.innerHTML = "";
 
-    products.forEach((product, index) => {
 
-      const card = document.createElement("div");
+    if (!products.length) {
 
-      card.className = "product-card";
+      if (containerId === "newArrivals") {
+
+        showEmptyState(
+          container,
+          "No New Arrivals Yet",
+          "Products marked as New Arrival in Admin will appear here."
+        );
+
+      } else {
+
+        showEmptyState(
+          container,
+          "No Featured Products Yet",
+          "Products marked as Featured in Admin will appear here."
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    products.forEach(product => {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "product-card";
+
+
+      const stocks =
+        Number(product.stocks) || 0;
+
+
+      const isOutOfStock =
+        stocks <= 0;
+
+
+      /* ================================================
+         DETERMINE BADGE
+      ================================================= */
+
+      let badge =
+        defaultBadge;
+
+
+      if (
+        product.isNewArrival &&
+        product.isFeatured
+      ) {
+
+        badge =
+          "NEW · FEATURED";
+
+      } else if (
+        product.isFeatured
+      ) {
+
+        badge =
+          "FEATURED";
+
+      } else if (
+        product.isNewArrival
+      ) {
+
+        badge =
+          "NEW";
+
+      }
+
+
+      /* ================================================
+         IMAGE
+      ================================================= */
+
+      let imageHTML = "";
+
+
+      if (product.image) {
+
+        imageHTML = `
+
+          <img
+            src="${escapeHTML(product.image)}"
+            alt="${escapeHTML(product.name)}"
+            onerror="
+              this.style.display='none';
+              const placeholder=this.parentElement.querySelector('.product-placeholder');
+              if(placeholder) placeholder.style.display='flex';
+            "
+          >
+
+        `;
+
+      }
+
+
+      /* ================================================
+         PRODUCT CARD
+      ================================================= */
 
       card.innerHTML = `
 
         <div class="product-image">
 
           <span class="badge">
-            ${product.badge}
+            ${escapeHTML(badge)}
           </span>
+
 
           <button
             class="favorite"
-            onclick="toggleFavorite(this)"
-            aria-label="Add to favorites"
+            type="button"
+            aria-label="Add ${escapeHTML(product.name)} to favorites"
+            data-product-id="${escapeHTML(product.id)}"
           >
             ♡
           </button>
 
-          ${
-            product.image
-            ?
-            `<img
-              src="${product.image}"
-              alt="${product.name}"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-            >`
-            :
-            ""
-          }
+
+          ${imageHTML}
+
 
           <div
             class="product-placeholder"
-            style="${product.image ? 'display:none;' : ''}"
+            style="${product.image ? "display:none;" : "display:flex;"}"
           >
             <span>NOIRÉ</span>
           </div>
@@ -1507,28 +2074,62 @@
         <div class="product-info">
 
           <div class="product-category">
-            ${product.category}
+            ${escapeHTML(
+              product.productType ||
+              "Skincare"
+            )}
           </div>
 
+
           <h3 class="product-name">
-            ${product.name}
+            ${escapeHTML(
+              product.name
+            )}
           </h3>
 
+
           <p class="product-description">
-            ${product.description}
+            ${escapeHTML(
+              product.description ||
+              `Beautifully selected ${product.productType || "skincare"} for ${product.skinType || "your skin"}.`
+            )}
           </p>
+
+
+          <span class="product-skin">
+            ${escapeHTML(
+              product.skinType ||
+              "All Skin Types"
+            )}
+          </span>
+
+
+          <div class="product-rating">
+            ${escapeHTML(
+              product.rating ||
+              "★★★★★"
+            )}
+          </div>
+
 
           <div class="product-bottom">
 
             <span class="price">
-              ₱${product.price.toLocaleString()}
+              ${formatPrice(product)}
             </span>
+
 
             <button
               class="add-cart"
-              onclick="addToCart('${product.name}', ${product.price})"
+              type="button"
+              data-product-id="${escapeHTML(product.id)}"
+              ${isOutOfStock ? "disabled" : ""}
             >
-              ADD TO CART
+              ${
+                isOutOfStock
+                  ? "OUT OF STOCK"
+                  : "ADD TO CART"
+              }
             </button>
 
           </div>
@@ -1537,6 +2138,80 @@
 
       `;
 
+
+      /* ================================================
+         FAVORITE BUTTON
+      ================================================= */
+
+      const favoriteButton =
+        card.querySelector(".favorite");
+
+
+      if (favoriteButton) {
+
+        const favorites =
+          getFavorites();
+
+
+        if (
+          favorites.includes(
+            String(product.id)
+          )
+        ) {
+
+          favoriteButton.classList.add(
+            "active"
+          );
+
+          favoriteButton.innerHTML =
+            "♥";
+
+        }
+
+
+        favoriteButton.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            toggleFavorite(
+              String(product.id),
+              favoriteButton
+            );
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         ADD TO CART
+      ================================================= */
+
+      const addButton =
+        card.querySelector(".add-cart");
+
+
+      if (addButton) {
+
+        addButton.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            addProductToCart(
+              product
+            );
+
+          }
+        );
+
+      }
+
+
       container.appendChild(card);
 
     });
@@ -1544,61 +2219,251 @@
   }
 
 
-  renderProducts(newArrivals, "newArrivals");
-  renderProducts(popularProducts, "popularProducts");
-
-
   /* =====================================================
-     FAVORITES
+     EMPTY STATE
   ===================================================== */
 
-  function toggleFavorite(button) {
+  function showEmptyState(
+    container,
+    title,
+    message
+  ) {
 
-    button.classList.toggle("active");
-
-    if (button.classList.contains("active")) {
-      button.innerHTML = "♥";
-    } else {
-      button.innerHTML = "♡";
+    if (!container) {
+      return;
     }
+
+
+    container.innerHTML = `
+
+      <div class="empty-products">
+
+        <strong>
+          ${escapeHTML(title)}
+        </strong>
+
+        ${escapeHTML(message)}
+
+      </div>
+
+    `;
 
   }
 
 
   /* =====================================================
-     ADD TO CART
+     FAVORITES
+     
+     Uses the same localStorage key as Shop and Account:
+     noireFavorites
   ===================================================== */
 
-  function addToCart(name, price) {
+  function getFavorites() {
 
-    let cart = JSON.parse(
-      localStorage.getItem("noireCart")
-    ) || [];
+    try {
 
-    const existing = cart.find(
-      item => item.name === name
+      const favorites =
+        JSON.parse(
+          localStorage.getItem(
+            "noireFavorites"
+          )
+        ) || [];
+
+
+      return favorites.map(
+        id => String(id)
+      );
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function toggleFavorite(
+    productId,
+    button
+  ) {
+
+    let favorites =
+      getFavorites();
+
+
+    const id =
+      String(productId);
+
+
+    const index =
+      favorites.indexOf(id);
+
+
+    if (index === -1) {
+
+      favorites.push(id);
+
+      button.classList.add(
+        "active"
+      );
+
+      button.innerHTML =
+        "♥";
+
+    } else {
+
+      favorites.splice(
+        index,
+        1
+      );
+
+      button.classList.remove(
+        "active"
+      );
+
+      button.innerHTML =
+        "♡";
+
+    }
+
+
+    localStorage.setItem(
+      "noireFavorites",
+      JSON.stringify(
+        favorites
+      )
     );
+
+  }
+
+
+  /* =====================================================
+     ADD PRODUCT TO CART
+     
+     Uses the same noireCart format used by Shop:
+     
+     {
+       id,
+       name,
+       price,
+       image,
+       quantity
+     }
+  ===================================================== */
+
+  function addProductToCart(product) {
+
+    const stocks =
+      Number(product.stocks) || 0;
+
+
+    if (stocks <= 0) {
+
+      alert(
+        "Sorry, this product is currently out of stock."
+      );
+
+      return;
+
+    }
+
+
+    let cart = [];
+
+
+    try {
+
+      cart =
+        JSON.parse(
+          localStorage.getItem(
+            "noireCart"
+          )
+        ) || [];
+
+    } catch (error) {
+
+      cart = [];
+
+    }
+
+
+    const existing =
+      cart.find(
+        item =>
+          String(item.id) ===
+          String(product.id)
+      );
+
+
+    const existingQuantity =
+      existing
+        ? Number(existing.quantity) || 0
+        : 0;
+
+
+    if (
+      existingQuantity + 1 >
+      stocks
+    ) {
+
+      alert(
+        `Only ${stocks} item(s) are available.`
+      );
+
+      return;
+
+    }
+
+
+    const price =
+      getNumericPrice(product);
+
 
     if (existing) {
 
-      existing.quantity += 1;
+      existing.quantity =
+        existingQuantity + 1;
+
+      existing.price =
+        price;
+
+      existing.image =
+        product.image || "";
 
     } else {
 
       cart.push({
-        name: name,
-        price: price,
-        quantity: 1
+
+        id:
+          product.id,
+
+        name:
+          product.name,
+
+        price:
+          price,
+
+        image:
+          product.image || "",
+
+        quantity:
+          1
+
       });
 
     }
+
 
     localStorage.setItem(
       "noireCart",
       JSON.stringify(cart)
     );
 
-    alert(name + " has been added to your cart! 🛍");
+
+    alert(
+      `${product.name} has been added to your cart! 🛍`
+    );
 
   }
 
@@ -1607,25 +2472,128 @@
      NEWSLETTER
   ===================================================== */
 
-  function subscribe(event) {
+  window.subscribe =
+    function(event) {
 
-    event.preventDefault();
+      event.preventDefault();
 
-    const email =
-      event.target.querySelector("input").value;
 
-    localStorage.setItem(
-      "noireNewsletter",
-      email
-    );
+      const email =
+        event.target
+          .querySelector("input")
+          .value;
 
-    alert(
-      "Welcome to the Noiré ritual! ✨"
-    );
 
-    event.target.reset();
+      localStorage.setItem(
+        "noireNewsletter",
+        email
+      );
+
+
+      alert(
+        "Welcome to the Noiré ritual! ✨"
+      );
+
+
+      event.target.reset();
+
+    };
+
+
+  /* =====================================================
+     ROTATING PROMOTIONS
+  ===================================================== */
+
+  const promotions = [
+
+    {
+      label: "NEW SEASON",
+
+      title: "Your glow, elevated.",
+
+      description:
+        "Discover our newest skincare essentials."
+
+    },
+
+
+    {
+      label: "LIMITED OFFER",
+
+      title: "Glow starts here.",
+
+      description:
+        "Enjoy exclusive savings on selected Noiré essentials."
+
+    },
+
+
+    {
+      label: "NOIRÉ FAVORITES",
+
+      title: "Meet your new ritual.",
+
+      description:
+        "Shop the products our community loves most."
+
+    }
+
+  ];
+
+
+  let promoIndex = 0;
+
+
+  function rotatePromotion() {
+
+    promoIndex++;
+
+
+    if (
+      promoIndex >=
+      promotions.length
+    ) {
+
+      promoIndex = 0;
+
+    }
+
+
+    const promo =
+      promotions[promoIndex];
+
+
+    document.getElementById(
+      "promoLabel"
+    ).textContent =
+      promo.label;
+
+
+    document.getElementById(
+      "promoTitle"
+    ).textContent =
+      promo.title;
+
+
+    document.getElementById(
+      "promoDescription"
+    ).textContent =
+      promo.description;
 
   }
+
+
+  setInterval(
+    rotatePromotion,
+    5000
+  );
+
+
+  /* =====================================================
+     START HOMEPAGE
+  ===================================================== */
+
+  loadHomepageProducts();
 
 </script>
 

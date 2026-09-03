@@ -435,6 +435,190 @@
     }
 
     /* =====================================================
+       EDITABLE ACCOUNT DETAILS
+    ===================================================== */
+
+    .edit-btn {
+      border: 1px solid var(--line);
+      background: var(--ivory);
+      color: var(--charcoal);
+      border-radius: 8px;
+      padding: 8px 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .edit-btn:hover {
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+    }
+
+    .edit-btn.cancel {
+      background: transparent;
+    }
+
+    .edit-form {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .edit-form.active {
+      display: block;
+      animation: fadeUp 0.25s ease both;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #888;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #DDD8D0;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--rose-gold);
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.08);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 5px;
+    }
+
+    .save-btn {
+      border: none;
+      background: var(--black);
+      color: white;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      background: var(--rose-gold);
+    }
+
+    .details-section {
+      margin-top: 28px;
+    }
+
+    .details-section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .details-section-title h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .details-section-title span {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .address-box {
+      border: 1px solid var(--line);
+      background: var(--ivory);
+      border-radius: 13px;
+      padding: 16px;
+    }
+
+    .address-box + .address-box {
+      margin-top: 12px;
+    }
+
+    .address-display {
+      color: var(--charcoal);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .address-display strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+
+    .address-empty {
+      color: #999;
+      font-size: 12px;
+    }
+
+    .secure-note {
+      margin-top: 9px;
+      color: #999;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 28px 0 0;
+    }
+
+    .save-status {
+      display: none;
+      margin-top: 10px;
+      color: #5f7a5b;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .save-status.show {
+      display: block;
+    }
+
+    /* =====================================================
        PROFILE
     ===================================================== */
 
@@ -478,6 +662,304 @@
       color: #aaa !important;
       font-weight: 400;
     }
+
+
+
+    /* =====================================================
+       FAVORITES
+    ===================================================== */
+
+    .favorites-card {
+      grid-column: 1 / -1;
+    }
+
+    .favorites-count {
+      margin-left: auto;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: var(--blush);
+      color: var(--rose-gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .favorite-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .favorite-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+    }
+
+    .favorite-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      background: var(--ivory);
+    }
+
+    .favorite-placeholder {
+      height: 190px;
+      background: linear-gradient(135deg, var(--blush), var(--champagne));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+    }
+
+    .favorite-remove {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.94);
+      color: var(--rose-gold);
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+
+    .favorite-remove:hover {
+      background: var(--rose-gold);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .favorite-info {
+      padding: 16px;
+    }
+
+    .favorite-category {
+      color: var(--rose-gold);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin-bottom: 5px;
+    }
+
+    .favorite-name {
+      color: var(--charcoal);
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 7px;
+    }
+
+    .favorite-skin {
+      color: var(--muted);
+      font-size: 10px;
+      display: block;
+      margin-bottom: 9px;
+    }
+
+    .favorite-price {
+      color: var(--charcoal);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .favorites-empty {
+      text-align: center;
+      padding: 42px 20px;
+      border: 1px dashed #D9D3CA;
+      border-radius: 16px;
+      background: #FCFBF8;
+    }
+
+    .favorites-empty-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: var(--blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose-gold);
+      font-size: 23px;
+    }
+
+    .favorites-empty h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .favorites-empty p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .favorite-shop-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--black);
+      color: white;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .favorite-shop-btn:hover {
+      background: var(--rose-gold);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       FAVORITE PRODUCT MODAL
+    ===================================================== */
+    .favorite-modal-overlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(17,17,17,0.58);
+      backdrop-filter:blur(5px);
+      -webkit-backdrop-filter:blur(5px);
+      z-index:3000;
+      padding:20px;
+      align-items:center;
+      justify-content:center;
+    }
+    .favorite-modal-overlay.show { display:flex; animation:fadeModal 0.2s ease both; }
+    .favorite-modal {
+      width:min(900px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:22px;
+      box-shadow:0 25px 70px rgba(0,0,0,0.2);
+      display:grid;
+      grid-template-columns:0.9fr 1.1fr;
+      position:relative;
+    }
+    .favorite-modal-image {
+      min-height:480px;
+      background:linear-gradient(135deg,var(--champagne),var(--blush));
+      overflow:hidden;
+    }
+    .favorite-modal-image img { width:100%; height:100%; min-height:480px; object-fit:cover; display:block; }
+    .favorite-modal-placeholder { width:100%; height:100%; min-height:480px; display:flex; align-items:center; justify-content:center; font-size:80px; }
+    .favorite-modal-content { padding:42px 38px; }
+    .favorite-modal-close {
+      position:absolute; top:14px; right:14px; width:38px; height:38px; border:0; border-radius:50%;
+      background:rgba(255,255,255,0.95); color:var(--charcoal); font-size:22px; cursor:pointer; z-index:3;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    .favorite-modal-close:hover { background:var(--black); color:#fff; }
+    .favorite-modal-category { color:var(--rose-gold); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px; }
+    .favorite-modal-title { font-family:'Playfair Display',serif; font-size:34px; line-height:1.1; margin-bottom:10px; }
+    .favorite-modal-rating { color:var(--rose-gold); letter-spacing:2px; margin-bottom:8px; }
+    .favorite-modal-price { font-size:22px; font-weight:700; margin:10px 0 16px; }
+    .favorite-modal-stock { display:inline-block; padding:6px 11px; border-radius:20px; background:var(--blush); color:var(--rose-gold); font-size:10px; font-weight:700; margin-bottom:16px; }
+    .favorite-modal-description { color:var(--muted); font-size:13px; line-height:1.8; margin-bottom:20px; }
+    .favorite-modal-content h4 { font-family:'Playfair Display',serif; font-size:17px; margin-bottom:8px; }
+    .favorite-modal-benefits { padding-left:18px; color:var(--muted); font-size:12px; line-height:1.8; margin-bottom:20px; }
+    .favorite-quantity { display:flex; align-items:center; gap:12px; margin:18px 0; }
+    .favorite-quantity button { width:35px; height:35px; border:1px solid #ddd; background:#fff; border-radius:8px; font-weight:700; cursor:pointer; }
+    .favorite-quantity button:hover { border-color:var(--rose-gold); color:var(--rose-gold); }
+    .favorite-quantity span { min-width:24px; text-align:center; font-weight:700; }
+    .favorite-modal-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+
+    /* Same Noiré button styling used throughout the Shop page */
+    .favorite-add-cart,
+    .favorite-remove-modal {
+      min-height:48px;
+      padding:13px 20px;
+      border-radius:999px;
+      font-family:inherit;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all .25s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .favorite-add-cart {
+      flex:1 1 190px;
+      border:1px solid var(--charcoal);
+      background:var(--charcoal);
+      color:var(--ivory);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .favorite-add-cart:hover {
+      background:var(--rose-gold);
+      border-color:var(--rose-gold);
+      color:#fff;
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px rgba(183,110,121,.22);
+    }
+
+    .favorite-add-cart:active {
+      transform:translateY(0);
+    }
+
+    .favorite-add-cart:disabled {
+      background:#bbb;
+      border-color:#bbb;
+      color:#fff;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
+
+    .favorite-remove-modal {
+      flex:1 1 190px;
+      border:1px solid var(--rose-gold);
+      background:var(--ivory);
+      color:var(--rose-gold);
+    }
+
+    .favorite-remove-modal:hover {
+      background:var(--rose-gold);
+      border-color:var(--rose-gold);
+      color:#fff;
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px rgba(183,110,121,.18);
+    }
+
+    .favorite-remove-modal:active {
+      transform:translateY(0);
+    }
+    @keyframes fadeModal { from{opacity:0} to{opacity:1} }
 
     /* =====================================================
        LOGOUT
@@ -934,6 +1416,41 @@
         padding: 24px;
       }
 
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .favorite-modal {
+        grid-template-columns: 1fr;
+        max-height: 92vh;
+      }
+
+      .favorite-modal-image,
+      .favorite-modal-placeholder {
+        min-height: 250px;
+        height: 250px;
+      }
+
+      .favorite-modal-image img {
+        min-height: 250px;
+      }
+
+      .favorite-modal-content {
+        padding: 28px 24px 30px;
+      }
+
+      .favorite-modal-title {
+        font-size: 28px;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .details-section-title {
+        align-items: flex-start;
+      }
+
       .profile-detail {
         align-items: flex-start;
         flex-direction: column;
@@ -1110,7 +1627,7 @@
 
 
       <!-- =================================================
-           PROFILE
+           PROFILE / PERSONAL INFORMATION
       ================================================== -->
 
       <section class="account-card fade-up delay-1">
@@ -1119,74 +1636,270 @@
 
           <div class="card-heading-left">
 
-            <div class="card-icon">
-              ♡
-            </div>
+            <div class="card-icon">♡</div>
 
             <div>
+              <h2>Profile</h2>
+              <p>Your personal and account information</p>
+            </div>
 
-              <h2>
-                Profile
-              </h2>
+          </div>
 
-              <p>
-                Your account information
-              </p>
+          <button class="edit-btn" id="editPersonalBtn" type="button">
+            Edit
+          </button>
 
+        </div>
+
+        <!-- VIEW MODE -->
+        <div id="personalView">
+
+          <div class="profile-details">
+
+            <div class="profile-detail">
+              <span class="profile-label">First Name</span>
+              <span id="firstNameValue" class="profile-value loading">Loading...</span>
+            </div>
+
+            <div class="profile-detail">
+              <span class="profile-label">Last Name</span>
+              <span id="lastNameValue" class="profile-value loading">Loading...</span>
+            </div>
+
+            <div class="profile-detail">
+              <span class="profile-label">Username</span>
+              <span id="usernameValue" class="profile-value loading">Loading...</span>
+            </div>
+
+            <div class="profile-detail">
+              <span class="profile-label">Email</span>
+              <span id="emailValue" class="profile-value loading">Loading...</span>
+            </div>
+
+            <div class="profile-detail">
+              <span class="profile-label">Phone</span>
+              <span id="phoneValue" class="profile-value loading">Loading...</span>
+            </div>
+
+            <div class="profile-detail">
+              <span class="profile-label">Birth Date</span>
+              <span id="birthDateValue" class="profile-value loading">Loading...</span>
             </div>
 
           </div>
 
         </div>
 
+        <!-- EDIT MODE -->
+        <form id="personalForm" class="edit-form">
 
-        <div class="profile-details">
+          <div class="form-grid">
 
+            <div class="form-group">
+              <label for="firstNameInput">First Name</label>
+              <input id="firstNameInput" type="text" maxlength="60">
+            </div>
 
-          <div class="profile-detail">
+            <div class="form-group">
+              <label for="lastNameInput">Last Name</label>
+              <input id="lastNameInput" type="text" maxlength="60">
+            </div>
 
-            <span class="profile-label">
-              Name
-            </span>
+            <div class="form-group">
+              <label for="usernameInput">Username</label>
+              <input id="usernameInput" type="text" maxlength="40">
+            </div>
 
-            <span
-              id="usernameValue"
-              class="profile-value loading"
-            >
-              Loading...
-            </span>
+            <div class="form-group">
+              <label for="phoneInput">Phone</label>
+              <input id="phoneInput" type="tel" maxlength="30" placeholder="09XX XXX XXXX">
+            </div>
 
-          </div>
-
-
-          <div class="profile-detail">
-
-            <span class="profile-label">
-              Email
-            </span>
-
-            <span
-              id="emailValue"
-              class="profile-value loading"
-            >
-              Loading...
-            </span>
+            <div class="form-group full">
+              <label for="birthDateInput">Birth Date</label>
+              <input id="birthDateInput" type="date">
+            </div>
 
           </div>
 
+          <div class="form-actions">
+            <button class="save-btn" type="submit">Save Changes</button>
+            <button class="edit-btn cancel" id="cancelPersonalBtn" type="button">Cancel</button>
+          </div>
+
+          <div class="save-status" id="personalStatus"></div>
+
+          <p class="secure-note">
+            Your login email is managed by Firebase Authentication and is displayed here for reference.
+          </p>
+
+        </form>
+
+
+        <!-- SHIPPING ADDRESS -->
+        <div class="details-section">
+
+          <div class="details-section-title">
+            <div>
+              <h3>Shipping Address</h3>
+              <span>Where your Noiré orders will be delivered</span>
+            </div>
+            <button class="edit-btn" id="editShippingBtn" type="button">Edit</button>
+          </div>
+
+          <div id="shippingView" class="address-box">
+            <div id="shippingDisplay" class="address-display address-empty">
+              No shipping address saved yet.
+            </div>
+          </div>
+
+          <form id="shippingForm" class="edit-form address-box">
+
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="shippingFirstName">First Name</label>
+                <input id="shippingFirstName" type="text" maxlength="60">
+              </div>
+
+              <div class="form-group">
+                <label for="shippingLastName">Last Name</label>
+                <input id="shippingLastName" type="text" maxlength="60">
+              </div>
+
+              <div class="form-group full">
+                <label for="shippingPhone">Phone</label>
+                <input id="shippingPhone" type="tel" maxlength="30">
+              </div>
+
+              <div class="form-group full">
+                <label for="shippingAddress">Street / Unit / Building</label>
+                <input id="shippingAddress" type="text" maxlength="150">
+              </div>
+
+              <div class="form-group">
+                <label for="shippingBarangay">Barangay</label>
+                <input id="shippingBarangay" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="shippingCity">City / Municipality</label>
+                <input id="shippingCity" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="shippingProvince">Province</label>
+                <input id="shippingProvince" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="shippingPostal">Postal Code</label>
+                <input id="shippingPostal" type="text" maxlength="10">
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button class="save-btn" type="submit">Save Address</button>
+              <button class="edit-btn cancel" id="cancelShippingBtn" type="button">Cancel</button>
+            </div>
+
+            <div class="save-status" id="shippingStatus"></div>
+
+          </form>
 
         </div>
 
 
-        <button
-          id="logoutBtn"
-          class="logout-btn"
-        >
+        <!-- BILLING DETAILS -->
+        <div class="details-section">
+
+          <div class="details-section-title">
+            <div>
+              <h3>Billing Details</h3>
+              <span>Information used for checkout and receipts</span>
+            </div>
+            <button class="edit-btn" id="editBillingBtn" type="button">Edit</button>
+          </div>
+
+          <div id="billingView" class="address-box">
+            <div id="billingDisplay" class="address-display address-empty">
+              No billing details saved yet.
+            </div>
+            <p class="secure-note">
+              For your security, Noiré does not store full card numbers or CVV codes here.
+            </p>
+          </div>
+
+          <form id="billingForm" class="edit-form address-box">
+
+            <div class="form-grid">
+
+              <div class="form-group full">
+                <label for="billingName">Billing Name</label>
+                <input id="billingName" type="text" maxlength="120">
+              </div>
+
+              <div class="form-group full">
+                <label for="billingAddress">Street / Unit / Building</label>
+                <input id="billingAddress" type="text" maxlength="150">
+              </div>
+
+              <div class="form-group">
+                <label for="billingBarangay">Barangay</label>
+                <input id="billingBarangay" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="billingCity">City / Municipality</label>
+                <input id="billingCity" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="billingProvince">Province</label>
+                <input id="billingProvince" type="text" maxlength="80">
+              </div>
+
+              <div class="form-group">
+                <label for="billingPostal">Postal Code</label>
+                <input id="billingPostal" type="text" maxlength="10">
+              </div>
+
+              <div class="form-group">
+                <label for="billingPayment">Payment Method</label>
+                <select id="billingPayment">
+                  <option value="">Select payment method</option>
+                  <option value="Cash on Delivery">Cash on Delivery</option>
+                  <option value="GCash">GCash</option>
+                  <option value="Maya">Maya</option>
+                  <option value="Credit / Debit Card">Credit / Debit Card</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="billingLast4">Card Last 4 Digits (Optional)</label>
+                <input id="billingLast4" type="text" inputmode="numeric" maxlength="4" placeholder="1234">
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button class="save-btn" type="submit">Save Billing</button>
+              <button class="edit-btn cancel" id="cancelBillingBtn" type="button">Cancel</button>
+            </div>
+
+            <div class="save-status" id="billingStatus"></div>
+
+          </form>
+
+        </div>
+
+
+        <button id="logoutBtn" class="logout-btn" type="button">
           Log Out
         </button>
 
       </section>
-
 
 
       <!-- =================================================
@@ -1254,6 +1967,43 @@
 
 
       <!-- =================================================
+           FAVORITES
+      ================================================== -->
+
+      <section class="account-card favorites-card fade-up delay-3">
+
+        <div class="card-heading">
+
+          <div class="card-heading-left">
+
+            <div class="card-icon">
+              ♥
+            </div>
+
+            <div>
+              <h2>My Favorites</h2>
+              <p>Products you've saved for later</p>
+            </div>
+
+          </div>
+
+          <span id="favoritesCount" class="favorites-count">0</span>
+
+        </div>
+
+        <div id="favoritesContainer">
+          <div class="favorites-empty">
+            <div class="favorites-empty-icon">♡</div>
+            <h3>No favorites yet</h3>
+            <p>Save products you love from the Noiré collection and they'll appear here.</p>
+            <a href="shop.html" class="favorite-shop-btn">Explore the Collection</a>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
            ORDER HISTORY
       ================================================== -->
 
@@ -1315,6 +2065,35 @@
   </main>
 
 
+
+  <!-- =====================================================
+       FAVORITE PRODUCT DETAILS MODAL
+  ====================================================== -->
+  <div id="favoriteProductModal" class="favorite-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="favorite-modal">
+      <button id="favoriteModalClose" class="favorite-modal-close" type="button" aria-label="Close">×</button>
+      <div id="favoriteModalImage" class="favorite-modal-image"></div>
+      <div class="favorite-modal-content">
+        <div id="favoriteModalCategory" class="favorite-modal-category"></div>
+        <h2 id="favoriteModalTitle" class="favorite-modal-title"></h2>
+        <div id="favoriteModalRating" class="favorite-modal-rating">★★★★★</div>
+        <div id="favoriteModalPrice" class="favorite-modal-price"></div>
+        <span id="favoriteModalStock" class="favorite-modal-stock"></span>
+        <p id="favoriteModalDescription" class="favorite-modal-description"></p>
+        <h4>Benefits</h4>
+        <ul id="favoriteModalBenefits" class="favorite-modal-benefits"></ul>
+        <div class="favorite-quantity">
+          <button id="favoriteQtyMinus" type="button">−</button>
+          <span id="favoriteQty">1</span>
+          <button id="favoriteQtyPlus" type="button">+</button>
+        </div>
+        <div class="favorite-modal-actions">
+          <button id="favoriteAddCart" class="btn-noire favorite-add-cart" type="button">🛒 Add to Cart</button>
+          <button id="favoriteRemoveModal" class="btn-favorite active favorite-remove-modal" type="button">♥ Remove Favorite</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- =====================================================
        FOOTER
@@ -1391,280 +2170,757 @@
     import {
       getDatabase,
       ref,
-      get
+      get,
+      update
     } from
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
     /* =====================================================
        FIREBASE CONFIG
-    ====================================================== */
+    ===================================================== */
 
     const firebaseConfig = {
-
-      apiKey:
-        "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
-
-      authDomain:
-        "noire-17ed6.firebaseapp.com",
-
-      databaseURL:
-        "https://noire-17ed6-default-rtdb.firebaseio.com",
-
-      projectId:
-        "noire-17ed6",
-
-      storageBucket:
-        "noire-17ed6.appspot.com",
-
-      messagingSenderId:
-        "559789891078",
-
-      appId:
-        "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
-
+      apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+      authDomain: "noire-17ed6.firebaseapp.com",
+      databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
+      projectId: "noire-17ed6",
+      storageBucket: "noire-17ed6.appspot.com",
+      messagingSenderId: "559789891078",
+      appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
     };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    let currentUser = null;
+    let currentData = {};
 
 
     /* =====================================================
-       INITIALIZE FIREBASE
-    ====================================================== */
+       HELPERS
+    ===================================================== */
 
-    const app =
-      initializeApp(firebaseConfig);
+    const $ = (id) => document.getElementById(id);
 
-    const auth =
-      getAuth(app);
+    function valueOrDash(value) {
+      return value && String(value).trim() ? value : "Not set yet";
+    }
 
-    const db =
-      getDatabase(app);
+    function setText(id, value) {
+      const el = $(id);
+      if (!el) return;
+      el.textContent = valueOrDash(value);
+      el.classList.remove("loading");
+    }
 
+    function safe(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function setStatus(id, message, success = true) {
+      const el = $(id);
+      if (!el) return;
+      el.textContent = message;
+      el.style.color = success ? "#5f7a5b" : "#a44b4b";
+      el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 3500);
+    }
+
+    function toggleEdit(viewId, formId, buttonId, editing) {
+      $(viewId).style.display = editing ? "none" : "";
+      $(formId).classList.toggle("active", editing);
+      $(buttonId).textContent = editing ? "Close" : "Edit";
+    }
+
+    function addressText(data, type) {
+      const a = data[type] || {};
+      const name = type === "shipping"
+        ? `${a.firstName || ""} ${a.lastName || ""}`.trim()
+        : a.name || "";
+
+      const lines = [
+        name,
+        a.address,
+        a.barangay,
+        [a.city, a.province, a.postalCode].filter(Boolean).join(", "),
+        type === "shipping" ? a.phone : null
+      ].filter(Boolean);
+
+      if (!lines.length) {
+        return `<span class="address-empty">No ${type} details saved yet.</span>`;
+      }
+
+      return `
+        <strong>${safe(lines[0])}</strong>
+        ${lines.slice(1).map(line => `<div>${safe(line)}</div>`).join("")}
+      `;
+    }
+
+    function billingText(data) {
+      const b = data.billing || {};
+      const lines = [
+        b.name,
+        b.address,
+        b.barangay,
+        [b.city, b.province, b.postalCode].filter(Boolean).join(", "),
+        b.paymentMethod
+          ? `Payment: ${b.paymentMethod}${b.last4 ? ` •••• ${b.last4}` : ""}`
+          : null
+      ].filter(Boolean);
+
+      if (!lines.length) {
+        return `<span class="address-empty">No billing details saved yet.</span>`;
+      }
+
+      return `
+        <strong>${safe(lines[0])}</strong>
+        ${lines.slice(1).map(line => `<div>${safe(line)}</div>`).join("")}
+      `;
+    }
+
+    function populateForms(data) {
+      const shipping = data.shipping || {};
+      const billing = data.billing || {};
+
+      $("firstNameInput").value = data.firstName || "";
+      $("lastNameInput").value = data.lastName || "";
+      $("usernameInput").value = data.username || "";
+      $("phoneInput").value = data.phone || "";
+      $("birthDateInput").value = data.birthDate || "";
+
+      $("shippingFirstName").value = shipping.firstName || data.firstName || "";
+      $("shippingLastName").value = shipping.lastName || data.lastName || "";
+      $("shippingPhone").value = shipping.phone || data.phone || "";
+      $("shippingAddress").value = shipping.address || "";
+      $("shippingBarangay").value = shipping.barangay || "";
+      $("shippingCity").value = shipping.city || "";
+      $("shippingProvince").value = shipping.province || "";
+      $("shippingPostal").value = shipping.postalCode || "";
+
+      $("billingName").value =
+        billing.name ||
+        [data.firstName, data.lastName].filter(Boolean).join(" ");
+
+      $("billingAddress").value = billing.address || "";
+      $("billingBarangay").value = billing.barangay || "";
+      $("billingCity").value = billing.city || "";
+      $("billingProvince").value = billing.province || "";
+      $("billingPostal").value = billing.postalCode || "";
+      $("billingPayment").value = billing.paymentMethod || "";
+      $("billingLast4").value = billing.last4 || "";
+    }
+
+    function getLocalProductImages() {
+      try {
+        return JSON.parse(localStorage.getItem("noire_product_images")) || {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function getLocalFavorites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("noireFavorites")) || [];
+        return Array.isArray(saved) ? saved.map(String) : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function formatFavoritePrice(product) {
+      const raw = String(product.price ?? "0")
+        .replace(/₱/g, "")
+        .replace(/,/g, "")
+        .trim();
+      const price = parseFloat(raw);
+      return Number.isFinite(price)
+        ? price.toLocaleString("en-PH", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : "0.00";
+    }
+
+    async function loadFavorites() {
+      const container = $("favoritesContainer");
+      const countEl = $("favoritesCount");
+      if (!container || !countEl) return;
+
+      const favoriteIds = getLocalFavorites();
+      countEl.textContent = favoriteIds.length;
+
+      if (!favoriteIds.length) {
+        container.innerHTML = `
+          <div class="favorites-empty">
+            <div class="favorites-empty-icon">♡</div>
+            <h3>No favorites yet</h3>
+            <p>Save products you love from the Noiré collection and they'll appear here.</p>
+            <a href="shop.html" class="favorite-shop-btn">Explore the Collection</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `<div class="favorites-grid" id="favoritesGrid"></div>`;
+      const grid = $("favoritesGrid");
+      const imageStorage = getLocalProductImages();
+
+      try {
+        const snapshot = await get(ref(db, "products"));
+        const data = snapshot.exists() ? snapshot.val() : {};
+        const products = [];
+
+        favoriteIds.forEach(id => {
+          const product = data[id];
+          if (!product) return;
+          if (product.status && String(product.status).toLowerCase() !== "active") return;
+
+          products.push({
+            id,
+            name: product.name || "Unnamed Product",
+            productType: product.productType || "Skincare",
+            skinType: product.skinType || "All Skin Types",
+            price: product.price ?? 0,
+            stocks: Number(product.stocks) || 0,
+            rating: product.rating || "★★★★★",
+            description: product.description || "",
+            benefits: Array.isArray(product.benefits) ? product.benefits : [],
+            image: imageStorage[id] || ""
+          });
+        });
+
+        countEl.textContent = products.length;
+
+        if (!products.length) {
+          container.innerHTML = `
+            <div class="favorites-empty">
+              <div class="favorites-empty-icon">♡</div>
+              <h3>Your favorites are no longer available</h3>
+              <p>Some saved products may have been removed or are currently unavailable.</p>
+              <a href="shop.html" class="favorite-shop-btn">Browse Products</a>
+            </div>
+          `;
+          return;
+        }
+
+        products.forEach(product => {
+          const imageMarkup = product.image
+            ? `<img src="${safe(product.image)}" class="favorite-image" alt="${safe(product.name)}">`
+            : `<div class="favorite-placeholder">🧴</div>`;
+
+          const item = document.createElement("article");
+          item.className = "favorite-item";
+          item.setAttribute("role", "button");
+          item.setAttribute("tabindex", "0");
+          item.setAttribute("aria-label", `View ${product.name}`);
+          item.innerHTML = `
+            ${imageMarkup}
+            <button class="favorite-remove" type="button" title="Remove from favorites" aria-label="Remove ${safe(product.name)} from favorites">♥</button>
+            <div class="favorite-info">
+              <div class="favorite-category">${safe(product.productType)}</div>
+              <h3 class="favorite-name">${safe(product.name)}</h3>
+              <span class="favorite-skin">${safe(product.skinType)}</span>
+              <div class="favorite-price">₱${formatFavoritePrice(product)}</div>
+            </div>
+          `;
+
+          item.addEventListener("click", () => openFavoriteProduct(product));
+          item.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openFavoriteProduct(product);
+            }
+          });
+
+          item.querySelector(".favorite-remove").addEventListener("click", (event) => {
+            event.stopPropagation();
+            const updated = getLocalFavorites().filter(id => id !== String(product.id));
+            localStorage.setItem("noireFavorites", JSON.stringify(updated));
+            loadFavorites();
+          });
+
+          grid.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Error loading favorites:", error);
+        container.innerHTML = `
+          <div class="favorites-empty">
+            <div class="favorites-empty-icon">⚠️</div>
+            <h3>We couldn't load your favorites</h3>
+            <p>Please refresh the page and try again.</p>
+          </div>
+        `;
+      }
+    }
+
+    /* =====================================================
+       FAVORITE PRODUCT DETAILS + CART
+    ===================================================== */
+    let favoriteModalProduct = null;
+    let favoriteModalQuantity = 1;
+
+    function getFavoriteNumericPrice(product) {
+      const raw = String(product.price ?? "0").replace(/₱/g, "").replace(/,/g, "").trim();
+      const price = parseFloat(raw);
+      return Number.isFinite(price) ? price : 0;
+    }
+
+    function openFavoriteProduct(product) {
+      favoriteModalProduct = product;
+      favoriteModalQuantity = 1;
+
+      const overlay = $("favoriteProductModal");
+      const imageBox = $("favoriteModalImage");
+      const benefits = Array.isArray(product.benefits) ? product.benefits : [
+        `Suitable for ${product.skinType || "all skin types"}`,
+        `Designed as a ${product.productType || "skincare"} product`,
+        "Part of the Noiré skincare collection"
+      ];
+
+      imageBox.innerHTML = product.image
+        ? `<img src="${safe(product.image)}" alt="${safe(product.name)}">`
+        : `<div class="favorite-modal-placeholder">🧴</div>`;
+
+      $("favoriteModalCategory").textContent = `${product.skinType} • ${product.productType}`;
+      $("favoriteModalTitle").textContent = product.name;
+      $("favoriteModalRating").textContent = product.rating || "★★★★★";
+      $("favoriteModalPrice").textContent = `₱${formatFavoritePrice(product)}`;
+      $("favoriteModalDescription").textContent = product.description || `${product.productType || "Skincare"} carefully selected for ${product.skinType || "all skin types"}.`;
+      $("favoriteQty").textContent = favoriteModalQuantity;
+      $("favoriteModalBenefits").innerHTML = benefits.map(b => `<li>${safe(b)}</li>`).join("");
+
+      const stock = Number(product.stocks) || 0;
+      const stockEl = $("favoriteModalStock");
+      const addBtn = $("favoriteAddCart");
+      if (stock <= 0) {
+        stockEl.textContent = "Out of Stock";
+        stockEl.style.background = "#ead5d5";
+        stockEl.style.color = "#9a4d4d";
+        addBtn.disabled = true;
+        addBtn.textContent = "Out of Stock";
+      } else {
+        stockEl.textContent = `${stock} available`;
+        stockEl.style.background = "var(--blush)";
+        stockEl.style.color = "var(--rose-gold)";
+        addBtn.disabled = false;
+        addBtn.textContent = "🛒 Add to Cart";
+      }
+
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeFavoriteProduct() {
+      const overlay = $("favoriteProductModal");
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      favoriteModalProduct = null;
+    }
+
+    function updateFavoriteQuantity(amount) {
+      if (!favoriteModalProduct) return;
+      const stock = Number(favoriteModalProduct.stocks) || 0;
+      favoriteModalQuantity += amount;
+      if (favoriteModalQuantity < 1) favoriteModalQuantity = 1;
+      if (stock > 0 && favoriteModalQuantity > stock) favoriteModalQuantity = stock;
+      $("favoriteQty").textContent = favoriteModalQuantity;
+    }
+
+    function addFavoriteProductToCart() {
+      if (!favoriteModalProduct) return;
+      const stock = Number(favoriteModalProduct.stocks) || 0;
+      if (stock <= 0) { alert("Sorry, this product is currently out of stock."); return; }
+
+      let cart = [];
+      try { cart = JSON.parse(localStorage.getItem("noireCart")) || []; } catch (error) { cart = []; }
+
+      const existing = cart.find(item => String(item.id) === String(favoriteModalProduct.id));
+      const existingQuantity = existing ? Number(existing.quantity) || 0 : 0;
+      if (existingQuantity + favoriteModalQuantity > stock) {
+        alert(`Only ${stock} item(s) are available.`);
+        return;
+      }
+
+      const price = getFavoriteNumericPrice(favoriteModalProduct);
+      if (existing) {
+        existing.quantity = existingQuantity + favoriteModalQuantity;
+        existing.price = price;
+        existing.image = favoriteModalProduct.image || "";
+      } else {
+        cart.push({
+          id: favoriteModalProduct.id,
+          name: favoriteModalProduct.name,
+          price,
+          image: favoriteModalProduct.image || "",
+          quantity: favoriteModalQuantity
+        });
+      }
+
+      localStorage.setItem("noireCart", JSON.stringify(cart));
+      alert(`${favoriteModalProduct.name} has been added to your cart! 🛒`);
+      closeFavoriteProduct();
+    }
+
+    function removeFavoriteFromModal() {
+      if (!favoriteModalProduct) return;
+      const updated = getLocalFavorites().filter(id => id !== String(favoriteModalProduct.id));
+      localStorage.setItem("noireFavorites", JSON.stringify(updated));
+      closeFavoriteProduct();
+      loadFavorites();
+    }
+
+    $("favoriteModalClose").addEventListener("click", closeFavoriteProduct);
+    $("favoriteQtyMinus").addEventListener("click", () => updateFavoriteQuantity(-1));
+    $("favoriteQtyPlus").addEventListener("click", () => updateFavoriteQuantity(1));
+    $("favoriteAddCart").addEventListener("click", addFavoriteProductToCart);
+    $("favoriteRemoveModal").addEventListener("click", removeFavoriteFromModal);
+    $("favoriteProductModal").addEventListener("click", (event) => {
+      if (event.target.id === "favoriteProductModal") closeFavoriteProduct();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeFavoriteProduct();
+    });
+
+    function renderAccount(data, user) {
+      currentData = data || {};
+
+      const firstName = currentData.firstName || "";
+      const lastName = currentData.lastName || "";
+      const username =
+        currentData.username ||
+        [firstName, lastName].filter(Boolean).join(" ") ||
+        user.displayName ||
+        "User";
+
+      setText("firstNameValue", firstName);
+      setText("lastNameValue", lastName);
+      setText("usernameValue", username);
+      setText("emailValue", currentData.email || user.email || "No email");
+      setText("phoneValue", currentData.phone);
+      setText("birthDateValue", currentData.birthDate);
+
+      $("welcomeName").textContent = username + ".";
+
+      setText(
+        "skinTypeValue",
+        currentData.skinType || "Not set yet"
+      );
+
+      setText(
+        "skinConditionValue",
+        currentData.skinCondition || "Not set yet"
+      );
+
+      $("shippingDisplay").innerHTML = addressText(currentData, "shipping");
+      $("billingDisplay").innerHTML = billingText(currentData);
+
+      populateForms(currentData);
+    }
 
 
     /* =====================================================
        LOAD ACCOUNT
-    ====================================================== */
+    ===================================================== */
 
     onAuthStateChanged(auth, async (user) => {
 
-      if (user) {
+      if (!user) {
+        alert("Please log in first.");
+        window.location.href = "signuplogin.html";
+        return;
+      }
 
-        console.log(
-          "Currently logged in:",
-          user.uid
-        );
+      currentUser = user;
 
+      try {
+        const userRef = ref(db, "users/" + user.uid);
+        const snapshot = await get(userRef);
 
-        try {
+        let data = snapshot.exists() ? snapshot.val() : {};
 
-          const userRef =
-            ref(db, "users/" + user.uid);
-
-          const snapshot =
-            await get(userRef);
-
-
-          if (snapshot.exists()) {
-
-            const userData =
-              snapshot.val();
-
-
-            /* ============================
-               USERNAME
-            ============================ */
-
-            const username =
-              userData.username ||
-              user.displayName ||
-              "User";
-
-
-            document.getElementById(
-              "usernameValue"
-            ).textContent = username;
-
-
-            document.getElementById(
-              "welcomeName"
-            ).textContent =
-              username + ".";
-
-
-            /* ============================
-               EMAIL
-            ============================ */
-
-            document.getElementById(
-              "emailValue"
-            ).textContent =
-              userData.email ||
-              user.email ||
-              "No email";
-
-
-            /* ============================
-               SKIN TYPE
-            ============================ */
-
-            document.getElementById(
-              "skinTypeValue"
-            ).textContent =
-              userData.skinType ||
-              "Not set yet";
-
-
-            /* ============================
-               SKIN CONDITION
-            ============================ */
-
-            document.getElementById(
-              "skinConditionValue"
-            ).textContent =
-              userData.skinCondition ||
-              "Not set yet";
-
-
-          } else {
-
-            console.log(
-              "No profile found in Realtime Database."
-            );
-
-
-            const username =
-              user.displayName ||
-              "User";
-
-
-            document.getElementById(
-              "usernameValue"
-            ).textContent =
-              username;
-
-
-            document.getElementById(
-              "welcomeName"
-            ).textContent =
-              username + ".";
-
-
-            document.getElementById(
-              "emailValue"
-            ).textContent =
-              user.email ||
-              "No email";
-
-
-            document.getElementById(
-              "skinTypeValue"
-            ).textContent =
-              "Not set yet";
-
-
-            document.getElementById(
-              "skinConditionValue"
-            ).textContent =
-              "Not set yet";
-
-          }
-
-
-        } catch (error) {
-
-          console.error(
-            "Error loading account:",
-            error
-          );
-
-
-          document.getElementById(
-            "usernameValue"
-          ).textContent =
-            "Unable to load";
-
-
-          document.getElementById(
-            "emailValue"
-          ).textContent =
-            "Unable to load";
-
-
-          document.getElementById(
-            "skinTypeValue"
-          ).textContent =
-            "Unable to load";
-
-
-          document.getElementById(
-            "skinConditionValue"
-          ).textContent =
-            "Unable to load";
-
+        // Keep the authenticated email available in the profile.
+        if (!data.email && user.email) {
+          data.email = user.email;
         }
 
+        renderAccount(data, user);
+        await loadFavorites();
 
-      } else {
+        console.log("Account loaded:", user.uid);
 
-        console.log(
-          "No user logged in."
-        );
+      } catch (error) {
+        console.error("Error loading account:", error);
 
-
-        alert(
-          "Please log in first."
-        );
-
-
-        window.location.href =
-          "signuplogin.html";
-
+        setText("usernameValue", "Unable to load");
+        setText("emailValue", user.email || "Unable to load");
+        setText("skinTypeValue", "Unable to load");
+        setText("skinConditionValue", "Unable to load");
+        setText("firstNameValue", "Unable to load");
+        setText("lastNameValue", "Unable to load");
+        setText("phoneValue", "Unable to load");
+        setText("birthDateValue", "Unable to load");
       }
 
     });
 
 
+    /* =====================================================
+       PERSONAL INFORMATION — EDIT / SAVE
+    ===================================================== */
+
+    $("editPersonalBtn").addEventListener("click", () => {
+      const editing = !$("personalForm").classList.contains("active");
+      toggleEdit(
+        "personalView",
+        "personalForm",
+        "editPersonalBtn",
+        editing
+      );
+
+      if (editing) populateForms(currentData);
+    });
+
+    $("cancelPersonalBtn").addEventListener("click", () => {
+      populateForms(currentData);
+      toggleEdit(
+        "personalView",
+        "personalForm",
+        "editPersonalBtn",
+        false
+      );
+    });
+
+    $("personalForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!currentUser) return;
+
+      const firstName = $("firstNameInput").value.trim();
+      const lastName = $("lastNameInput").value.trim();
+      const username = $("usernameInput").value.trim();
+      const phone = $("phoneInput").value.trim();
+      const birthDate = $("birthDateInput").value;
+
+      if (!username) {
+        setStatus("personalStatus", "Please enter a username.", false);
+        return;
+      }
+
+      try {
+        await update(ref(db, "users/" + currentUser.uid), {
+          firstName,
+          lastName,
+          username,
+          phone,
+          birthDate,
+          email: currentUser.email || currentData.email || ""
+        });
+
+        currentData = {
+          ...currentData,
+          firstName,
+          lastName,
+          username,
+          phone,
+          birthDate,
+          email: currentUser.email || currentData.email || ""
+        };
+
+        renderAccount(currentData, currentUser);
+
+        toggleEdit(
+          "personalView",
+          "personalForm",
+          "editPersonalBtn",
+          false
+        );
+
+        setStatus("personalStatus", "Personal information saved successfully.");
+
+      } catch (error) {
+        console.error("Personal information save error:", error);
+        setStatus("personalStatus", "Unable to save changes. Please try again.", false);
+      }
+    });
+
+
+    /* =====================================================
+       SHIPPING ADDRESS — EDIT / SAVE
+    ===================================================== */
+
+    $("editShippingBtn").addEventListener("click", () => {
+      const editing = !$("shippingForm").classList.contains("active");
+      $("shippingView").style.display = editing ? "none" : "";
+      $("shippingForm").classList.toggle("active", editing);
+      $("editShippingBtn").textContent = editing ? "Close" : "Edit";
+
+      if (editing) {
+        populateForms(currentData);
+      }
+    });
+
+    $("cancelShippingBtn").addEventListener("click", () => {
+      populateForms(currentData);
+      $("shippingView").style.display = "";
+      $("shippingForm").classList.remove("active");
+      $("editShippingBtn").textContent = "Edit";
+    });
+
+    $("shippingForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!currentUser) return;
+
+      const shipping = {
+        firstName: $("shippingFirstName").value.trim(),
+        lastName: $("shippingLastName").value.trim(),
+        phone: $("shippingPhone").value.trim(),
+        address: $("shippingAddress").value.trim(),
+        barangay: $("shippingBarangay").value.trim(),
+        city: $("shippingCity").value.trim(),
+        province: $("shippingProvince").value.trim(),
+        postalCode: $("shippingPostal").value.trim()
+      };
+
+      if (!shipping.address || !shipping.city || !shipping.province) {
+        setStatus(
+          "shippingStatus",
+          "Please complete the street, city, and province fields.",
+          false
+        );
+        return;
+      }
+
+      try {
+        await update(ref(db, "users/" + currentUser.uid), {
+          shipping
+        });
+
+        currentData = {
+          ...currentData,
+          shipping
+        };
+
+        $("shippingDisplay").innerHTML = addressText(currentData, "shipping");
+        $("shippingView").style.display = "";
+        $("shippingForm").classList.remove("active");
+        $("editShippingBtn").textContent = "Edit";
+
+        setStatus("shippingStatus", "Shipping address saved successfully.");
+
+      } catch (error) {
+        console.error("Shipping save error:", error);
+        setStatus("shippingStatus", "Unable to save address. Please try again.", false);
+      }
+    });
+
+
+    /* =====================================================
+       BILLING DETAILS — EDIT / SAVE
+    ===================================================== */
+
+    $("editBillingBtn").addEventListener("click", () => {
+      const editing = !$("billingForm").classList.contains("active");
+      $("billingView").style.display = editing ? "none" : "";
+      $("billingForm").classList.toggle("active", editing);
+      $("editBillingBtn").textContent = editing ? "Close" : "Edit";
+
+      if (editing) {
+        populateForms(currentData);
+      }
+    });
+
+    $("cancelBillingBtn").addEventListener("click", () => {
+      populateForms(currentData);
+      $("billingView").style.display = "";
+      $("billingForm").classList.remove("active");
+      $("editBillingBtn").textContent = "Edit";
+    });
+
+    $("billingForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!currentUser) return;
+
+      const last4 = $("billingLast4").value.trim();
+
+      if (last4 && !/^\d{4}$/.test(last4)) {
+        setStatus(
+          "billingStatus",
+          "Card last 4 digits must contain exactly four numbers.",
+          false
+        );
+        return;
+      }
+
+      const billing = {
+        name: $("billingName").value.trim(),
+        address: $("billingAddress").value.trim(),
+        barangay: $("billingBarangay").value.trim(),
+        city: $("billingCity").value.trim(),
+        province: $("billingProvince").value.trim(),
+        postalCode: $("billingPostal").value.trim(),
+        paymentMethod: $("billingPayment").value,
+        last4
+      };
+
+      if (!billing.name || !billing.address || !billing.city || !billing.province) {
+        setStatus(
+          "billingStatus",
+          "Please complete the billing name, address, city, and province.",
+          false
+        );
+        return;
+      }
+
+      try {
+        await update(ref(db, "users/" + currentUser.uid), {
+          billing
+        });
+
+        currentData = {
+          ...currentData,
+          billing
+        };
+
+        $("billingDisplay").innerHTML = billingText(currentData);
+        $("billingView").style.display = "";
+        $("billingForm").classList.remove("active");
+        $("editBillingBtn").textContent = "Edit";
+
+        setStatus("billingStatus", "Billing details saved successfully.");
+
+      } catch (error) {
+        console.error("Billing save error:", error);
+        setStatus("billingStatus", "Unable to save billing details. Please try again.", false);
+      }
+    });
+
 
     /* =====================================================
        LOGOUT
-    ====================================================== */
+    ===================================================== */
 
-    document
-      .getElementById("logoutBtn")
-      .addEventListener(
-        "click",
-        async () => {
+    $("logoutBtn").addEventListener("click", async () => {
 
-          try {
+      try {
+        await signOut(auth);
+        alert("You have been logged out. 💗");
+        window.location.href = "signuplogin.html";
 
-            await signOut(auth);
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert(error.message);
+      }
 
-
-            alert(
-              "You have been logged out. 💗"
-            );
-
-
-            window.location.href =
-              "signuplogin.html";
-
-
-          } catch (error) {
-
-            console.error(
-              "Logout error:",
-              error
-            );
-
-
-            alert(
-              error.message
-            );
-
-          }
-
-        }
-      );
+    });
 
   </script>
 

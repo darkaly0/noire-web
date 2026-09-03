@@ -2628,17 +2628,37 @@ window.filterProducts =
             .toLowerCase();
 
 
-          const selectedSkin =
-            String(
-              skinType
-            )
-            .trim()
-            .toLowerCase();
+          const normalizeSkin = (value) => {
+            const skin = String(value || "")
+              .trim()
+              .toLowerCase();
 
+            const map = {
+              "normal": "normal",
+              "normal skin": "normal",
+              "dry": "dry",
+              "dry skin": "dry",
+              "oily": "oily",
+              "oily skin": "oily",
+              "combination": "combination",
+              "combination skin": "combination",
+              "sensitive": "sensitive",
+              "sensitive skin": "sensitive",
+              "all skin types": "all"
+            };
+
+            return map[skin] || skin;
+          };
+
+          const selectedSkin =
+            normalizeSkin(skinType);
+
+          const normalizedProductSkin =
+            normalizeSkin(product.skinType);
 
           return (
-            productSkin ===
-            selectedSkin
+            normalizedProductSkin === selectedSkin ||
+            normalizedProductSkin === "all"
           );
 
         }
@@ -3291,7 +3311,32 @@ function escapeHtml(value) {
    INITIALIZE
 ========================================================= */
 
-loadProducts();
+async function initializeShop() {
+  await loadProducts();
+
+  const params = new URLSearchParams(window.location.search);
+  const skin = params.get("skin");
+
+  if (skin) {
+    const skinMap = {
+      dry: "Dry Skin",
+      oily: "Oily Skin",
+      combination: "Combination Skin",
+      sensitive: "Sensitive Skin",
+      normal: "Normal Skin",
+      "dry skin": "Dry Skin",
+      "oily skin": "Oily Skin",
+      "combination skin": "Combination Skin",
+      "sensitive skin": "Sensitive Skin",
+      "normal skin": "Normal Skin"
+    };
+
+    const selected = skinMap[String(skin).trim().toLowerCase()] || skin;
+    window.filterProducts(selected);
+  }
+}
+
+initializeShop();
 
 </script>
 
