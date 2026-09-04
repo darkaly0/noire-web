@@ -14,17 +14,14 @@
 
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  >
+    rel="stylesheet">
 
   <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 
   <style>
-
     /* =========================================================
        NOIRÉ DESIGN SYSTEM
     ========================================================= */
@@ -38,7 +35,7 @@
       --blush: #F2D6D0;
       --white: #ffffff;
       --soft-gray: #777;
-      --border: rgba(183,110,121,0.14);
+      --border: rgba(183, 110, 121, 0.14);
     }
 
     * {
@@ -91,10 +88,10 @@
       top: 0;
       z-index: 1000;
 
-      background: rgba(255,255,255,0.96);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
 
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
       padding: 18px 5%;
     }
@@ -314,12 +311,10 @@
       border-radius: 30px;
 
       background:
-        linear-gradient(
-          145deg,
+        linear-gradient(145deg,
           var(--champagne),
           #fff,
-          var(--blush)
-        );
+          var(--blush));
 
       overflow: hidden;
 
@@ -328,7 +323,7 @@
       justify-content: center;
 
       box-shadow:
-        0 20px 60px rgba(0,0,0,0.08);
+        0 20px 60px rgba(0, 0, 0, 0.08);
     }
 
     .hero-visual::before {
@@ -341,7 +336,7 @@
 
       border-radius: 50%;
 
-      background: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.5);
 
       top: -80px;
       right: -50px;
@@ -361,7 +356,7 @@
 
       letter-spacing: 4px;
 
-      color: rgba(17,17,17,0.45);
+      color: rgba(17, 17, 17, 0.45);
     }
 
     .hero-bottle {
@@ -371,17 +366,15 @@
       border-radius: 16px 16px 22px 22px;
 
       background:
-        linear-gradient(
-          90deg,
+        linear-gradient(90deg,
           #242424,
           #111,
-          #333
-        );
+          #333);
 
       position: relative;
 
       box-shadow:
-        18px 20px 35px rgba(0,0,0,0.2);
+        18px 20px 35px rgba(0, 0, 0, 0.2);
 
       transform: rotate(-5deg);
 
@@ -440,14 +433,12 @@
 
       border-radius: 12px;
 
-      background: linear-gradient(
-        145deg,
-        #f7e7ce,
-        #fff
-      );
+      background: linear-gradient(145deg,
+          #f7e7ce,
+          #fff);
 
       box-shadow:
-        10px 15px 25px rgba(0,0,0,0.12);
+        10px 15px 25px rgba(0, 0, 0, 0.12);
 
       transform: rotate(7deg);
 
@@ -535,24 +526,22 @@
       transform: translateY(-7px);
 
       box-shadow:
-        0 15px 35px rgba(0,0,0,0.08);
+        0 15px 35px rgba(0, 0, 0, 0.08);
 
       border-color:
-        rgba(183,110,121,0.4);
+        rgba(183, 110, 121, 0.4);
     }
 
     .skin-card.active {
       background:
-        linear-gradient(
-          145deg,
+        linear-gradient(145deg,
           white,
-          #fff7f5
-        );
+          #fff7f5);
 
       border: 1.5px solid var(--rose-gold);
 
       box-shadow:
-        0 15px 35px rgba(183,110,121,0.12);
+        0 15px 35px rgba(183, 110, 121, 0.12);
     }
 
     .skin-icon {
@@ -716,7 +705,7 @@
       overflow: hidden;
 
       box-shadow:
-        0 4px 15px rgba(0,0,0,0.08);
+        0 4px 15px rgba(0, 0, 0, 0.08);
 
       transition:
         all 0.3s ease;
@@ -728,14 +717,14 @@
       position: relative;
 
       border:
-        1px solid rgba(183,110,121,0.12);
+        1px solid rgba(183, 110, 121, 0.12);
     }
 
     .product-card:hover {
       transform: translateY(-7px);
 
       box-shadow:
-        0 12px 28px rgba(0,0,0,0.13);
+        0 12px 28px rgba(0, 0, 0, 0.13);
     }
 
     .product-card.out-of-stock {
@@ -749,11 +738,9 @@
       height: 290px;
 
       background:
-        linear-gradient(
-          135deg,
+        linear-gradient(135deg,
           var(--champagne),
-          var(--ivory)
-        );
+          var(--ivory));
 
       overflow: hidden;
     }
@@ -797,7 +784,7 @@
 
       border-radius: 20px;
 
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
 
       color: #555;
 
@@ -806,7 +793,7 @@
       font-weight: 600;
 
       box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
+        0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .stock-badge.low {
@@ -832,7 +819,7 @@
       border-radius: 50%;
 
       background:
-        rgba(255,255,255,0.95);
+        rgba(255, 255, 255, 0.95);
 
       font-size: 1.3rem;
 
@@ -844,7 +831,7 @@
       z-index: 5;
 
       box-shadow:
-        0 3px 10px rgba(0,0,0,0.08);
+        0 3px 10px rgba(0, 0, 0, 0.08);
     }
 
     .favorite-card-btn:hover {
@@ -974,7 +961,7 @@
       overflow: hidden;
 
       box-shadow:
-        0 25px 70px rgba(0,0,0,0.18);
+        0 25px 70px rgba(0, 0, 0, 0.18);
     }
 
     .modal-product-image {
@@ -1195,7 +1182,7 @@
 
       padding-bottom: 45px;
 
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .footer-brand h2 {
@@ -1359,8 +1346,7 @@
 
       .shop-hero {
         padding:
-          55px 6%
-          60px;
+          55px 6% 60px;
       }
 
       .shop-hero h1 {
@@ -1387,8 +1373,7 @@
 
       .products-section {
         padding:
-          65px 6%
-          75px;
+          65px 6% 75px;
       }
 
       .product-grid {
@@ -1420,7 +1405,6 @@
       }
 
     }
-
   </style>
 
 </head>
@@ -1429,476 +1413,381 @@
 <body>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      ANNOUNCEMENT
 ========================================================= -->
 
-<div class="announcement-bar">
-  <span>FREE SHIPPING</span>
-  on orders over ₱1,500
-</div>
+  <div class="announcement-bar">
+    <span>FREE SHIPPING</span>
+    on orders over ₱1,500
+  </div>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      NAVIGATION
 ========================================================= -->
 
-<nav class="main-nav">
+  <nav class="main-nav">
 
-  <div class="nav-inner">
+    <div class="nav-inner">
 
-    <a href="index.html" class="logo">
-      Noir<span>é</span>
-    </a>
-
-    <div class="nav-links">
-
-      <a href="index.html">
-        Home
+      <a href="index.html" class="logo">
+        Noir<span>é</span>
       </a>
 
-      <a href="about.html">
-        About
-      </a>
+      <div class="nav-links">
 
-      <a href="shop.html" class="active">
-        Shop
-      </a>
+        <a href="index.html">
+          Home
+        </a>
 
-      <a href="routine.html">
-        Routine Builder
-      </a>
+        <a href="about.html">
+          About
+        </a>
 
-      <a href="blog.html">
-        Journal
-      </a>
+        <a href="shop.html" class="active">
+          Shop
+        </a>
 
-      <a href="contact.html">
-        Contact
-      </a>
+        <a href="routine.html">
+          Routine Builder
+        </a>
+
+        <a href="blog.html">
+          Journal
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+
+        <a href="account.html" class="nav-icon" title="Account">
+          ♡
+        </a>
+
+        <a href="cart.html" class="nav-icon" title="Cart">
+          🛒
+        </a>
+
+      </div>
 
     </div>
 
-    <div class="nav-actions">
-
-      <a
-        href="account.html"
-        class="nav-icon"
-        title="Account"
-      >
-        ♡
-      </a>
-
-      <a
-        href="cart.html"
-        class="nav-icon"
-        title="Cart"
-      >
-        🛒
-      </a>
-
-    </div>
-
-  </div>
-
-</nav>
+  </nav>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      HERO
 ========================================================= -->
 
-<section class="shop-hero">
+  <section class="shop-hero">
 
-  <div>
+    <div>
 
-    <div class="hero-eyebrow">
-      The Noiré Collection
+      <div class="hero-eyebrow">
+        The Noiré Collection
+      </div>
+
+      <h1>
+        Skincare made<br>
+        <em>for you.</em>
+      </h1>
+
+      <p>
+        Discover thoughtfully selected skincare
+        designed around your skin's unique needs.
+        From everyday essentials to targeted care,
+        find the ritual that feels like yours.
+      </p>
+
+      <a href="#products" class="hero-button">
+        Explore Collection
+        <span>→</span>
+      </a>
+
     </div>
 
-    <h1>
-      Skincare made<br>
-      <em>for you.</em>
-    </h1>
 
-    <p>
-      Discover thoughtfully selected skincare
-      designed around your skin's unique needs.
-      From everyday essentials to targeted care,
-      find the ritual that feels like yours.
-    </p>
+    <div class="hero-visual">
 
-    <a
-      href="#products"
-      class="hero-button"
-    >
-      Explore Collection
-      <span>→</span>
-    </a>
+      <div class="hero-bottle"></div>
 
-  </div>
+      <div class="hero-bottle-small"></div>
+
+    </div>
+
+  </section>
 
 
-  <div class="hero-visual">
-
-    <div class="hero-bottle"></div>
-
-    <div class="hero-bottle-small"></div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
+  <!-- =========================================================
      SKIN TYPE SECTION
 ========================================================= -->
 
-<section class="skin-section">
+  <section class="skin-section">
 
-  <div class="section-intro">
+    <div class="section-intro">
 
-    <div class="section-eyebrow">
-      Find Your Match
-    </div>
-
-    <h2 class="section-heading">
-      Shop by skin type.
-    </h2>
-
-    <p class="section-description">
-      Start with what your skin needs most.
-    </p>
-
-  </div>
-
-
-  <div class="skin-grid">
-
-
-    <div
-      class="skin-card"
-      data-skin="Dry Skin"
-      onclick="filterProducts('Dry Skin')"
-    >
-
-      <div class="skin-icon">
-        💧
+      <div class="section-eyebrow">
+        Find Your Match
       </div>
 
-      <h3>
-        Dry Skin
-      </h3>
+      <h2 class="section-heading">
+        Shop by skin type.
+      </h2>
 
-      <p>
-        Hydration and comfort
-        for thirsty skin.
+      <p class="section-description">
+        Start with what your skin needs most.
       </p>
 
     </div>
 
 
-    <div
-      class="skin-card"
-      data-skin="Oily Skin"
-      onclick="filterProducts('Oily Skin')"
-    >
+    <div class="skin-grid">
 
-      <div class="skin-icon">
-        ✨
+
+      <div class="skin-card" data-skin="Dry Skin" onclick="filterProducts('Dry Skin')">
+
+        <div class="skin-icon">
+          💧
+        </div>
+
+        <h3>
+          Dry Skin
+        </h3>
+
+        <p>
+          Hydration and comfort
+          for thirsty skin.
+        </p>
+
       </div>
 
-      <h3>
-        Oily Skin
-      </h3>
 
-      <p>
-        Lightweight care to
-        balance excess oil.
-      </p>
+      <div class="skin-card" data-skin="Oily Skin" onclick="filterProducts('Oily Skin')">
+
+        <div class="skin-icon">
+          ✨
+        </div>
+
+        <h3>
+          Oily Skin
+        </h3>
+
+        <p>
+          Lightweight care to
+          balance excess oil.
+        </p>
+
+      </div>
+
+
+      <div class="skin-card" data-skin="Combination Skin" onclick="filterProducts('Combination Skin')">
+
+        <div class="skin-icon">
+          🌿
+        </div>
+
+        <h3>
+          Combination
+        </h3>
+
+        <p>
+          Balanced care for
+          changing skin needs.
+        </p>
+
+      </div>
+
+
+      <div class="skin-card" data-skin="Sensitive Skin" onclick="filterProducts('Sensitive Skin')">
+
+        <div class="skin-icon">
+          🌸
+        </div>
+
+        <h3>
+          Sensitive
+        </h3>
+
+        <p>
+          Gentle essentials for
+          delicate skin.
+        </p>
+
+      </div>
+
+
+      <div class="skin-card" data-skin="Normal Skin" onclick="filterProducts('Normal Skin')">
+
+        <div class="skin-icon">
+          ☀
+        </div>
+
+        <h3>
+          Normal Skin
+        </h3>
+
+        <p>
+          Everyday essentials for
+          a healthy glow.
+        </p>
+
+      </div>
+
 
     </div>
 
-
-    <div
-      class="skin-card"
-      data-skin="Combination Skin"
-      onclick="filterProducts('Combination Skin')"
-    >
-
-      <div class="skin-icon">
-        🌿
-      </div>
-
-      <h3>
-        Combination
-      </h3>
-
-      <p>
-        Balanced care for
-        changing skin needs.
-      </p>
-
-    </div>
+  </section>
 
 
-    <div
-      class="skin-card"
-      data-skin="Sensitive Skin"
-      onclick="filterProducts('Sensitive Skin')"
-    >
-
-      <div class="skin-icon">
-        🌸
-      </div>
-
-      <h3>
-        Sensitive
-      </h3>
-
-      <p>
-        Gentle essentials for
-        delicate skin.
-      </p>
-
-    </div>
-
-
-    <div
-      class="skin-card"
-      data-skin="Normal Skin"
-      onclick="filterProducts('Normal Skin')"
-    >
-
-      <div class="skin-icon">
-        ☀
-      </div>
-
-      <h3>
-        Normal Skin
-      </h3>
-
-      <p>
-        Everyday essentials for
-        a healthy glow.
-      </p>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
+  <!-- =========================================================
      PRODUCTS
 ========================================================= -->
 
-<section
-  class="products-section"
-  id="products"
->
+  <section class="products-section" id="products">
 
-  <div class="products-inner">
+    <div class="products-inner">
 
 
-    <div class="products-heading">
+      <div class="products-heading">
 
-      <div class="products-heading-left">
+        <div class="products-heading-left">
 
-        <div class="section-eyebrow">
-          Curated For Your Ritual
+          <div class="section-eyebrow">
+            Curated For Your Ritual
+          </div>
+
+          <h2 id="productsTitle" class="section-title">
+            Our Products
+          </h2>
+
+          <p id="productsSubtitle">
+            Explore our skincare collection.
+          </p>
+
+          <span id="filterStatus" class="filter-status" style="display:none;"></span>
+
+          <br>
+
+          <button id="clearFilter" class="clear-filter" onclick="showAllProducts()">
+            ← View all products
+          </button>
+
         </div>
 
-        <h2
-          id="productsTitle"
-          class="section-title"
-        >
-          Our Products
-        </h2>
+      </div>
 
-        <p id="productsSubtitle">
-          Explore our skincare collection.
-        </p>
 
-        <span
-          id="filterStatus"
-          class="filter-status"
-          style="display:none;"
-        ></span>
+      <div class="product-grid" id="productContainer">
 
-        <br>
+        <div class="loading-products">
 
-        <button
-          id="clearFilter"
-          class="clear-filter"
-          onclick="showAllProducts()"
-        >
-          ← View all products
-        </button>
+          <div class="spinner"></div>
+
+          <p>
+            Loading our skincare collection...
+          </p>
+
+        </div>
 
       </div>
 
     </div>
 
-
-    <div
-      class="product-grid"
-      id="productContainer"
-    >
-
-      <div class="loading-products">
-
-        <div class="spinner"></div>
-
-        <p>
-          Loading our skincare collection...
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
+  </section>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      PRODUCT MODAL
 ========================================================= -->
 
-<div
-  class="modal fade"
-  id="productModal"
-  tabindex="-1"
->
+  <div class="modal fade" id="productModal" tabindex="-1">
 
-  <div
-    class="modal-dialog modal-lg modal-dialog-centered"
-  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
 
-    <div class="modal-content">
+      <div class="modal-content">
 
-      <div class="row g-0">
+        <div class="row g-0">
 
 
-        <div class="col-md-5">
+          <div class="col-md-5">
 
-          <img
-            id="modalImage"
-            class="modal-product-image"
-            src=""
-            alt="Product"
-          >
+            <img id="modalImage" class="modal-product-image" src="" alt="Product">
 
-        </div>
+          </div>
 
 
-        <div class="col-md-7">
+          <div class="col-md-7">
 
-          <div class="modal-body">
-
-
-            <div
-              id="modalCategory"
-              class="modal-product-category"
-            ></div>
+            <div class="modal-body">
 
 
-            <h2
-              id="modalTitle"
-              class="modal-product-title"
-            ></h2>
+              <div id="modalCategory" class="modal-product-category"></div>
 
 
-            <div
-              id="modalRating"
-              class="rating"
-            >
-              ★★★★★
-            </div>
+              <h2 id="modalTitle" class="modal-product-title"></h2>
 
 
-            <div
-              id="modalPrice"
-              class="modal-price"
-            ></div>
+              <div id="modalRating" class="rating">
+                ★★★★★
+              </div>
 
 
-            <div
-              id="modalStock"
-              class="modal-stock"
-            ></div>
+              <div id="modalPrice" class="modal-price"></div>
 
 
-            <p
-              id="modalDescription"
-              class="modal-description"
-            ></p>
+              <div id="modalStock" class="modal-stock"></div>
 
 
-            <h6>
-              Benefits
-            </h6>
+              <p id="modalDescription" class="modal-description"></p>
 
 
-            <ul
-              id="modalBenefits"
-              class="product-details-list"
-            ></ul>
+              <h6>
+                Benefits
+              </h6>
 
 
-            <div class="quantity-box">
-
-              <button
-                class="quantity-btn"
-                onclick="changeQuantity(-1)"
-              >
-                −
-              </button>
+              <ul id="modalBenefits" class="product-details-list"></ul>
 
 
-              <span
-                id="quantityNumber"
-                class="quantity-number"
-              >
-                1
-              </span>
+              <div class="quantity-box">
+
+                <button class="quantity-btn" onclick="changeQuantity(-1)">
+                  −
+                </button>
 
 
-              <button
-                class="quantity-btn"
-                onclick="changeQuantity(1)"
-              >
-                +
-              </button>
+                <span id="quantityNumber" class="quantity-number">
+                  1
+                </span>
+
+
+                <button class="quantity-btn" onclick="changeQuantity(1)">
+                  +
+                </button>
+
+              </div>
+
+
+              <div class="d-flex gap-2 flex-wrap">
+
+                <button id="favoriteButton" class="btn-favorite" onclick="toggleFavoriteFromModal()">
+                  ♡ Favorite
+                </button>
+
+
+                <button id="addCartButton" class="btn-noire" onclick="addCurrentProductToCart()">
+                  🛒 Add to Cart
+                </button>
+
+              </div>
+
 
             </div>
-
-
-            <div class="d-flex gap-2 flex-wrap">
-
-              <button
-                id="favoriteButton"
-                class="btn-favorite"
-                onclick="toggleFavoriteFromModal()"
-              >
-                ♡ Favorite
-              </button>
-
-
-              <button
-                id="addCartButton"
-                class="btn-noire"
-                onclick="addCurrentProductToCart()"
-              >
-                🛒 Add to Cart
-              </button>
-
-            </div>
-
 
           </div>
 
@@ -1910,313 +1799,309 @@
 
   </div>
 
-</div>
 
-
-<!-- =========================================================
+  <!-- =========================================================
      FOOTER
 ========================================================= -->
 
-<footer>
+  <footer>
 
-  <div class="footer-inner">
+    <div class="footer-inner">
 
-    <div class="footer-top">
+      <div class="footer-top">
 
-      <div class="footer-brand">
+        <div class="footer-brand">
 
-        <h2>
-          Noir<span>é</span>
-        </h2>
+          <h2>
+            Noir<span>é</span>
+          </h2>
 
-        <p>
-          Thoughtful skincare for your
-          everyday ritual. Simple,
-          intentional, beautifully yours.
-        </p>
+          <p>
+            Thoughtful skincare for your
+            everyday ritual. Simple,
+            intentional, beautifully yours.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <div class="footer-column">
+
+            <h4>
+              Explore
+            </h4>
+
+            <a href="about.html">
+              About Noiré
+            </a>
+
+            <a href="shop.html">
+              Shop
+            </a>
+
+            <a href="routine.html">
+              Routine Builder
+            </a>
+
+          </div>
+
+
+          <div class="footer-column">
+
+            <h4>
+              Help
+            </h4>
+
+            <a href="contact.html">
+              Contact
+            </a>
+
+            <a href="account.html">
+              My Account
+            </a>
+
+            <a href="cart.html">
+              Cart
+            </a>
+
+          </div>
+
+        </div>
 
       </div>
 
 
-      <div class="footer-links">
+      <div class="footer-bottom">
 
-        <div class="footer-column">
+        <span>
+          © 2026 Noiré Skincare.
+          All rights reserved.
+        </span>
 
-          <h4>
-            Explore
-          </h4>
-
-          <a href="about.html">
-            About Noiré
-          </a>
-
-          <a href="shop.html">
-            Shop
-          </a>
-
-          <a href="routine.html">
-            Routine Builder
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h4>
-            Help
-          </h4>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-          <a href="account.html">
-            My Account
-          </a>
-
-          <a href="cart.html">
-            Cart
-          </a>
-
-        </div>
+        <span>
+          Your skin. Your ritual.
+        </span>
 
       </div>
 
     </div>
 
-
-    <div class="footer-bottom">
-
-      <span>
-        © 2026 Noiré Skincare.
-        All rights reserved.
-      </span>
-
-      <span>
-        Your skin. Your ritual.
-      </span>
-
-    </div>
-
-  </div>
-
-</footer>
+  </footer>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      BOOTSTRAP
 ========================================================= -->
 
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-<!-- =========================================================
+  <!-- =========================================================
      FIREBASE
 ========================================================= -->
 
-<script type="module">
+  <script type="module">
 
-/* =========================================================
-   FIREBASE IMPORTS
-========================================================= */
+    /* =========================================================
+       FIREBASE IMPORTS
+    ========================================================= */
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
-  getDatabase,
-  ref,
-  get
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
-
-  authDomain:
-    "noire-17ed6.firebaseapp.com",
-
-  databaseURL:
-    "https://noire-17ed6-default-rtdb.firebaseio.com",
-
-  projectId:
-    "noire-17ed6",
-
-  storageBucket:
-    "noire-17ed6.appspot.com",
-
-  messagingSenderId:
-    "559789891078",
-
-  appId:
-    "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
-
-};
+    import {
+      getDatabase,
+      ref,
+      get
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
+    /* =========================================================
+       FIREBASE CONFIG
+    ========================================================= */
 
-const app = initializeApp(firebaseConfig);
+    const firebaseConfig = {
 
-const db = getDatabase(app);
+      apiKey:
+        "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
 
+      authDomain:
+        "noire-17ed6.firebaseapp.com",
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+      databaseURL:
+        "https://noire-17ed6-default-rtdb.firebaseio.com",
 
-let products = [];
+      projectId:
+        "noire-17ed6",
 
-let filteredProducts = [];
+      storageBucket:
+        "noire-17ed6.appspot.com",
 
-let currentProduct = null;
+      messagingSenderId:
+        "559789891078",
 
-let currentQuantity = 1;
+      appId:
+        "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
 
-let currentFilter = null;
-
-
-/* =========================================================
-   BOOTSTRAP MODAL
-========================================================= */
-
-const productModal =
-  new bootstrap.Modal(
-    document.getElementById("productModal")
-  );
+    };
 
 
-/* =========================================================
-   PRODUCT IMAGE STORAGE
-========================================================= */
+    /* =========================================================
+       INITIALIZE FIREBASE
+    ========================================================= */
 
-function getProductImage(productId) {
+    const app = initializeApp(firebaseConfig);
 
-  try {
-
-    const imageStorage =
-      JSON.parse(
-        localStorage.getItem(
-          "noire_product_images"
-        )
-      ) || {};
-
-    return imageStorage[productId] || "";
-
-  } catch (error) {
-
-    console.error(
-      "Error loading product image:",
-      error
-    );
-
-    return "";
-
-  }
-
-}
+    const db = getDatabase(app);
 
 
-/* =========================================================
-   GET PRODUCT PRICE
-========================================================= */
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
 
-function getProductPrice(product) {
+    let products = [];
 
-  if (
-    product &&
-    product.price !== undefined &&
-    product.price !== null
-  ) {
+    let filteredProducts = [];
 
-    let rawPrice =
-      String(product.price)
-        .replace(/₱/g, "")
-        .replace(/,/g, "")
-        .trim();
+    let currentProduct = null;
 
-    const price =
-      parseFloat(rawPrice);
+    let currentQuantity = 1;
 
-    if (!isNaN(price)) {
+    let currentFilter = null;
 
-      return price.toLocaleString(
-        "en-PH",
-        {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
+
+    /* =========================================================
+       BOOTSTRAP MODAL
+    ========================================================= */
+
+    const productModal =
+      new bootstrap.Modal(
+        document.getElementById("productModal")
       );
+
+
+    /* =========================================================
+       PRODUCT IMAGE STORAGE
+    ========================================================= */
+
+    function getProductImage(productId) {
+
+      try {
+
+        const imageStorage =
+          JSON.parse(
+            localStorage.getItem(
+              "noire_product_images"
+            )
+          ) || {};
+
+        return imageStorage[productId] || "";
+
+      } catch (error) {
+
+        console.error(
+          "Error loading product image:",
+          error
+        );
+
+        return "";
+
+      }
 
     }
 
-  }
 
-  return "0.00";
+    /* =========================================================
+       GET PRODUCT PRICE
+    ========================================================= */
 
-}
+    function getProductPrice(product) {
 
+      if (
+        product &&
+        product.price !== undefined &&
+        product.price !== null
+      ) {
 
-/* =========================================================
-   GET NUMERIC PRICE
-========================================================= */
+        let rawPrice =
+          String(product.price)
+            .replace(/₱/g, "")
+            .replace(/,/g, "")
+            .trim();
 
-function getNumericPrice(product) {
+        const price =
+          parseFloat(rawPrice);
 
-  if (
-    !product ||
-    product.price === undefined ||
-    product.price === null
-  ) {
+        if (!isNaN(price)) {
 
-    return 0;
+          return price.toLocaleString(
+            "en-PH",
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          );
 
-  }
+        }
 
+      }
 
-  let rawPrice =
-    String(product.price)
-      .replace(/₱/g, "")
-      .replace(/,/g, "")
-      .trim();
+      return "0.00";
 
-
-  const price =
-    parseFloat(rawPrice);
-
-
-  return isNaN(price)
-    ? 0
-    : price;
-
-}
-
-
-/* =========================================================
-   LOAD PRODUCTS FROM FIREBASE
-========================================================= */
-
-async function loadProducts() {
-
-  const container =
-    document.getElementById(
-      "productContainer"
-    );
+    }
 
 
-  container.innerHTML = `
+    /* =========================================================
+       GET NUMERIC PRICE
+    ========================================================= */
+
+    function getNumericPrice(product) {
+
+      if (
+        !product ||
+        product.price === undefined ||
+        product.price === null
+      ) {
+
+        return 0;
+
+      }
+
+
+      let rawPrice =
+        String(product.price)
+          .replace(/₱/g, "")
+          .replace(/,/g, "")
+          .trim();
+
+
+      const price =
+        parseFloat(rawPrice);
+
+
+      return isNaN(price)
+        ? 0
+        : price;
+
+    }
+
+
+    /* =========================================================
+       LOAD PRODUCTS FROM FIREBASE
+    ========================================================= */
+
+    async function loadProducts() {
+
+      const container =
+        document.getElementById(
+          "productContainer"
+        );
+
+
+      container.innerHTML = `
 
     <div class="loading-products">
 
@@ -2231,126 +2116,126 @@ async function loadProducts() {
   `;
 
 
-  try {
+      try {
 
-    const productsRef =
-      ref(db, "products");
-
-
-    const snapshot =
-      await get(productsRef);
+        const productsRef =
+          ref(db, "products");
 
 
-    products = [];
+        const snapshot =
+          await get(productsRef);
 
 
-    if (snapshot.exists()) {
-
-      const data =
-        snapshot.val();
+        products = [];
 
 
-      Object.entries(data).forEach(
-        ([id, product]) => {
+        if (snapshot.exists()) {
 
-          if (
-            product.status &&
-            String(product.status)
-              .toLowerCase() !== "active"
-          ) {
-
-            return;
-
-          }
+          const data =
+            snapshot.val();
 
 
-          products.push({
+          Object.entries(data).forEach(
+            ([id, product]) => {
 
-            id: id,
+              if (
+                product.status &&
+                String(product.status)
+                  .toLowerCase() !== "active"
+              ) {
 
-            name:
-              product.name ||
-              "Unnamed Product",
+                return;
 
-            productType:
-              product.productType ||
-              "Skincare",
+              }
 
-            skinType:
-              product.skinType ||
-              "All Skin Types",
 
-            price:
-              product.price !== undefined &&
-              product.price !== null
-                ? product.price
-                : 0,
+              products.push({
 
-            stocks:
-              Number(product.stocks) || 0,
+                id: id,
 
-            status:
-              product.status ||
-              "Active",
+                name:
+                  product.name ||
+                  "Unnamed Product",
 
-            image:
-              getProductImage(id),
+                productType:
+                  product.productType ||
+                  "Skincare",
 
-            description:
-              product.description ||
-              `${product.productType || "Skincare"} carefully selected for ${product.skinType || "all skin types"}.`,
+                skinType:
+                  product.skinType ||
+                  "All Skin Types",
 
-            rating:
-              product.rating ||
-              "★★★★★",
+                price:
+                  product.price !== undefined &&
+                    product.price !== null
+                    ? product.price
+                    : 0,
 
-            benefits:
+                stocks:
+                  Number(product.stocks) || 0,
 
-              Array.isArray(product.benefits)
+                status:
+                  product.status ||
+                  "Active",
 
-                ? product.benefits
+                image:
+                  getProductImage(id),
 
-                : [
+                description:
+                  product.description ||
+                  `${product.productType || "Skincare"} carefully selected for ${product.skinType || "all skin types"}.`,
 
-                    `Suitable for ${product.skinType || "all skin types"}`,
+                rating:
+                  product.rating ||
+                  "★★★★★",
 
-                    `Designed as a ${product.productType || "skincare"} product`,
+                benefits:
 
-                    "Part of the Noiré skincare collection"
+                  Array.isArray(product.benefits)
 
-                  ]
+                    ? product.benefits
 
-          });
+                    : [
+
+                      `Suitable for ${product.skinType || "all skin types"}`,
+
+                      `Designed as a ${product.productType || "skincare"} product`,
+
+                      "Part of the Noiré skincare collection"
+
+                    ]
+
+              });
+
+            }
+          );
 
         }
-      );
-
-    }
 
 
-    /*
-      Newest products first
-    */
+        /*
+          Newest products first
+        */
 
-    products.reverse();
-
-
-    filteredProducts =
-      [...products];
+        products.reverse();
 
 
-    renderProducts();
+        filteredProducts =
+          [...products];
 
 
-  } catch (error) {
-
-    console.error(
-      "Error loading products:",
-      error
-    );
+        renderProducts();
 
 
-    container.innerHTML = `
+      } catch (error) {
+
+        console.error(
+          "Error loading products:",
+          error
+        );
+
+
+        container.innerHTML = `
 
       <div class="empty-products">
 
@@ -2370,31 +2255,31 @@ async function loadProducts() {
 
     `;
 
-  }
+      }
 
-}
-
-
-/* =========================================================
-   RENDER PRODUCTS
-========================================================= */
-
-function renderProducts() {
-
-  const container =
-    document.getElementById(
-      "productContainer"
-    );
+    }
 
 
-  container.innerHTML = "";
+    /* =========================================================
+       RENDER PRODUCTS
+    ========================================================= */
+
+    function renderProducts() {
+
+      const container =
+        document.getElementById(
+          "productContainer"
+        );
 
 
-  if (
-    filteredProducts.length === 0
-  ) {
+      container.innerHTML = "";
 
-    container.innerHTML = `
+
+      if (
+        filteredProducts.length === 0
+      ) {
+
+        container.innerHTML = `
 
       <div class="empty-products">
 
@@ -2415,80 +2300,76 @@ function renderProducts() {
 
     `;
 
-    return;
+        return;
 
-  }
-
-
-  const favorites =
-    JSON.parse(
-      localStorage.getItem(
-        "noireFavorites"
-      )
-    ) || [];
+      }
 
 
-  filteredProducts.forEach(
-    product => {
-
-      const isFavorite =
-        favorites.includes(
-          product.id
-        );
-
-
-      const isOutOfStock =
-        product.stocks <= 0;
+      const favorites =
+        JSON.parse(
+          localStorage.getItem(
+            "noireFavorites"
+          )
+        ) || [];
 
 
-      const cardColumn =
-        document.createElement(
-          "div"
-        );
+      filteredProducts.forEach(
+        product => {
+
+          const isFavorite =
+            favorites.includes(
+              product.id
+            );
 
 
-      cardColumn.className =
-        "product-column";
+          const isOutOfStock =
+            product.stocks <= 0;
 
 
-      cardColumn.innerHTML = `
+          const cardColumn =
+            document.createElement(
+              "div"
+            );
+
+
+          cardColumn.className =
+            "product-column";
+
+
+          cardColumn.innerHTML = `
 
         <div
-          class="product-card ${
-            isOutOfStock
+          class="product-card ${isOutOfStock
               ? "out-of-stock"
               : ""
-          }"
+            }"
           onclick="openProduct('${product.id}')"
         >
 
           <div class="product-image-wrapper">
 
             <button
-              class="favorite-card-btn ${
-                isFavorite
-                  ? "active"
-                  : ""
-              }"
+              class="favorite-card-btn ${isFavorite
+              ? "active"
+              : ""
+            }"
               onclick="
                 event.stopPropagation();
                 toggleFavorite('${product.id}')
               "
             >
 
-              ${
-                isFavorite
-                  ? "♥"
-                  : "♡"
-              }
+              ${isFavorite
+              ? "♥"
+              : "♡"
+            }
 
             </button>
 
 
-            ${
-              product.image
+            ${product.image
 
-                ? `
+              ? `
 
                   <img
                     src="${product.image}"
@@ -2498,7 +2379,7 @@ function renderProducts() {
 
                 `
 
-                : `
+              : `
 
                   <div class="image-placeholder">
                     🧴
@@ -2508,10 +2389,9 @@ function renderProducts() {
             }
 
 
-            ${
-              isOutOfStock
+            ${isOutOfStock
 
-                ? `
+              ? `
 
                   <span class="stock-badge out">
                     Out of Stock
@@ -2519,7 +2399,7 @@ function renderProducts() {
 
                 `
 
-                : product.stocks <= 5
+              : product.stocks <= 5
 
                 ? `
 
@@ -2546,8 +2426,8 @@ function renderProducts() {
             <div class="product-category">
 
               ${escapeHtml(
-                product.productType
-              )}
+              product.productType
+            )}
 
             </div>
 
@@ -2555,8 +2435,8 @@ function renderProducts() {
             <h3 class="product-name">
 
               ${escapeHtml(
-                product.name
-              )}
+              product.name
+            )}
 
             </h3>
 
@@ -2564,8 +2444,8 @@ function renderProducts() {
             <span class="product-skin">
 
               ${escapeHtml(
-                product.skinType
-              )}
+              product.skinType
+            )}
 
             </span>
 
@@ -2577,8 +2457,8 @@ function renderProducts() {
               "
             >
               ${escapeHtml(
-                product.rating
-              )}
+              product.rating
+            )}
             </div>
 
 
@@ -2595,751 +2475,795 @@ function renderProducts() {
       `;
 
 
-      container.appendChild(
-        cardColumn
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   FILTER PRODUCTS
-========================================================= */
-
-window.filterProducts =
-  function(skinType) {
-
-    currentFilter =
-      skinType;
-
-
-    filteredProducts =
-      products.filter(
-        product => {
-
-          const productSkin =
-            String(
-              product.skinType || ""
-            )
-            .trim()
-            .toLowerCase();
-
-
-          const normalizeSkin = (value) => {
-            const skin = String(value || "")
-              .trim()
-              .toLowerCase();
-
-            const map = {
-              "normal": "normal",
-              "normal skin": "normal",
-              "dry": "dry",
-              "dry skin": "dry",
-              "oily": "oily",
-              "oily skin": "oily",
-              "combination": "combination",
-              "combination skin": "combination",
-              "sensitive": "sensitive",
-              "sensitive skin": "sensitive",
-              "all skin types": "all"
-            };
-
-            return map[skin] || skin;
-          };
-
-          const selectedSkin =
-            normalizeSkin(skinType);
-
-          const normalizedProductSkin =
-            normalizeSkin(product.skinType);
-
-          return (
-            normalizedProductSkin === selectedSkin ||
-            normalizedProductSkin === "all"
+          container.appendChild(
+            cardColumn
           );
 
         }
       );
 
-
-    document
-      .querySelectorAll(".skin-card")
-      .forEach(card => {
-
-        card.classList.remove(
-          "active"
-        );
+    }
 
 
-        if (
-          card.dataset.skin ===
-          skinType
-        ) {
+    /* =========================================================
+       FILTER PRODUCTS
+    ========================================================= */
 
-          card.classList.add(
-            "active"
+    window.filterProducts =
+      function (skinType) {
+
+        currentFilter =
+          skinType;
+
+
+        filteredProducts =
+          products.filter(
+            product => {
+
+              const productSkin =
+                String(
+                  product.skinType || ""
+                )
+                  .trim()
+                  .toLowerCase();
+
+
+              const normalizeSkin = (value) => {
+                const skin = String(value || "")
+                  .trim()
+                  .toLowerCase();
+
+                const map = {
+                  "normal": "normal",
+                  "normal skin": "normal",
+                  "dry": "dry",
+                  "dry skin": "dry",
+                  "oily": "oily",
+                  "oily skin": "oily",
+                  "combination": "combination",
+                  "combination skin": "combination",
+                  "sensitive": "sensitive",
+                  "sensitive skin": "sensitive",
+                  "all skin types": "all"
+                };
+
+                return map[skin] || skin;
+              };
+
+              const selectedSkin =
+                normalizeSkin(skinType);
+
+              const normalizedProductSkin =
+                normalizeSkin(product.skinType);
+
+              return (
+                normalizedProductSkin === selectedSkin ||
+                normalizedProductSkin === "all"
+              );
+
+            }
           );
 
-        }
 
-      });
+        document
+          .querySelectorAll(".skin-card")
+          .forEach(card => {
 
-
-    document.getElementById(
-      "productsTitle"
-    ).textContent =
-      `${skinType} Products`;
-
-
-    document.getElementById(
-      "productsSubtitle"
-    ).textContent =
-      `Skincare selected for ${skinType.toLowerCase()}.`;
-
-
-    const status =
-      document.getElementById(
-        "filterStatus"
-      );
-
-
-    status.style.display =
-      "inline-flex";
-
-
-    status.textContent =
-      `${filteredProducts.length} product${
-        filteredProducts.length !== 1
-          ? "s"
-          : ""
-      } found`;
-
-
-    document.getElementById(
-      "clearFilter"
-    ).style.display =
-      "inline-block";
-
-
-    renderProducts();
-
-
-    document
-      .getElementById("products")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  };
-
-
-/* =========================================================
-   SHOW ALL PRODUCTS
-========================================================= */
-
-window.showAllProducts =
-  function() {
-
-    currentFilter = null;
-
-    filteredProducts =
-      [...products];
-
-
-    document
-      .querySelectorAll(".skin-card")
-      .forEach(card => {
-
-        card.classList.remove(
-          "active"
-        );
-
-      });
-
-
-    document.getElementById(
-      "productsTitle"
-    ).textContent =
-      "Our Products";
-
-
-    document.getElementById(
-      "productsSubtitle"
-    ).textContent =
-      "Explore our skincare collection.";
-
-
-    document.getElementById(
-      "filterStatus"
-    ).style.display =
-      "none";
-
-
-    document.getElementById(
-      "clearFilter"
-    ).style.display =
-      "none";
-
-
-    renderProducts();
-
-  };
-
-
-/* =========================================================
-   OPEN PRODUCT MODAL
-========================================================= */
-
-window.openProduct =
-  function(id) {
-
-    currentProduct =
-      products.find(
-        product =>
-          String(product.id) ===
-          String(id)
-      );
-
-
-    if (!currentProduct) {
-
-      return;
-
-    }
-
-
-    currentQuantity = 1;
-
-
-    const image =
-      document.getElementById(
-        "modalImage"
-      );
-
-
-    if (currentProduct.image) {
-
-      image.src =
-        currentProduct.image;
-
-      image.style.display =
-        "block";
-
-    } else {
-
-      image.removeAttribute(
-        "src"
-      );
-
-      image.style.display =
-        "none";
-
-    }
-
-
-    document.getElementById(
-      "modalTitle"
-    ).textContent =
-      currentProduct.name;
-
-
-    document.getElementById(
-      "modalCategory"
-    ).textContent =
-      `${currentProduct.skinType} • ${currentProduct.productType}`;
-
-
-    document.getElementById(
-      "modalRating"
-    ).textContent =
-      currentProduct.rating;
-
-
-    document.getElementById(
-      "modalPrice"
-    ).textContent =
-      "₱" +
-      getProductPrice(
-        currentProduct
-      );
-
-
-    document.getElementById(
-      "modalDescription"
-    ).textContent =
-      currentProduct.description;
-
-
-    document.getElementById(
-      "quantityNumber"
-    ).textContent =
-      currentQuantity;
-
-
-    const stock =
-      document.getElementById(
-        "modalStock"
-      );
-
-
-    if (
-      currentProduct.stocks <= 0
-    ) {
-
-      stock.textContent =
-        "Out of Stock";
-
-      stock.style.background =
-        "#ead5d5";
-
-      stock.style.color =
-        "#9a4d4d";
-
-    } else {
-
-      stock.textContent =
-        `${currentProduct.stocks} available`;
-
-      stock.style.background =
-        "var(--blush)";
-
-      stock.style.color =
-        "var(--rose-gold)";
-
-    }
-
-
-    const benefits =
-      document.getElementById(
-        "modalBenefits"
-      );
-
-
-    benefits.innerHTML = "";
-
-
-    currentProduct.benefits
-      .forEach(
-        benefit => {
-
-          const li =
-            document.createElement(
-              "li"
+            card.classList.remove(
+              "active"
             );
 
 
-          li.textContent =
-            benefit;
+            if (
+              card.dataset.skin ===
+              skinType
+            ) {
+
+              card.classList.add(
+                "active"
+              );
+
+            }
+
+          });
 
 
-          benefits.appendChild(
-            li
+        document.getElementById(
+          "productsTitle"
+        ).textContent =
+          `${skinType} Products`;
+
+
+        document.getElementById(
+          "productsSubtitle"
+        ).textContent =
+          `Skincare selected for ${skinType.toLowerCase()}.`;
+
+
+        const status =
+          document.getElementById(
+            "filterStatus"
           );
 
+
+        status.style.display =
+          "inline-flex";
+
+
+        status.textContent =
+          `${filteredProducts.length} product${filteredProducts.length !== 1
+            ? "s"
+            : ""
+          } found`;
+
+
+        document.getElementById(
+          "clearFilter"
+        ).style.display =
+          "inline-block";
+
+
+        renderProducts();
+
+
+        document
+          .getElementById("products")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
+
+      };
+
+
+    /* =========================================================
+       SHOW ALL PRODUCTS
+    ========================================================= */
+
+    window.showAllProducts =
+      function () {
+
+        currentFilter = null;
+
+        filteredProducts =
+          [...products];
+
+
+        document
+          .querySelectorAll(".skin-card")
+          .forEach(card => {
+
+            card.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        document.getElementById(
+          "productsTitle"
+        ).textContent =
+          "Our Products";
+
+
+        document.getElementById(
+          "productsSubtitle"
+        ).textContent =
+          "Explore our skincare collection.";
+
+
+        document.getElementById(
+          "filterStatus"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "clearFilter"
+        ).style.display =
+          "none";
+
+
+        renderProducts();
+
+      };
+
+
+    /* =========================================================
+       OPEN PRODUCT MODAL
+    ========================================================= */
+
+    window.openProduct =
+      function (id) {
+
+        currentProduct =
+          products.find(
+            product =>
+              String(product.id) ===
+              String(id)
+          );
+
+
+        if (!currentProduct) {
+
+          return;
+
         }
-      );
 
 
-    updateFavoriteButton();
-
-    updateCartButton();
+        currentQuantity = 1;
 
 
-    productModal.show();
-
-  };
-
-
-/* =========================================================
-   QUANTITY
-========================================================= */
-
-window.changeQuantity =
-  function(amount) {
-
-    if (!currentProduct) {
-
-      return;
-
-    }
+        const image =
+          document.getElementById(
+            "modalImage"
+          );
 
 
-    currentQuantity +=
-      amount;
+        if (currentProduct.image) {
+
+          image.src =
+            currentProduct.image;
+
+          image.style.display =
+            "block";
+
+        } else {
+
+          image.removeAttribute(
+            "src"
+          );
+
+          image.style.display =
+            "none";
+
+        }
 
 
-    if (
-      currentQuantity < 1
-    ) {
-
-      currentQuantity = 1;
-
-    }
+        document.getElementById(
+          "modalTitle"
+        ).textContent =
+          currentProduct.name;
 
 
-    if (
-      currentProduct.stocks > 0 &&
-      currentQuantity >
-        currentProduct.stocks
-    ) {
-
-      currentQuantity =
-        currentProduct.stocks;
-
-    }
+        document.getElementById(
+          "modalCategory"
+        ).textContent =
+          `${currentProduct.skinType} • ${currentProduct.productType}`;
 
 
-    document.getElementById(
-      "quantityNumber"
-    ).textContent =
-      currentQuantity;
-
-  };
+        document.getElementById(
+          "modalRating"
+        ).textContent =
+          currentProduct.rating;
 
 
-/* =========================================================
-   FAVORITES
-========================================================= */
-
-window.toggleFavorite =
-  function(id) {
-
-    let favorites =
-      JSON.parse(
-        localStorage.getItem(
-          "noireFavorites"
-        )
-      ) || [];
+        document.getElementById(
+          "modalPrice"
+        ).textContent =
+          "₱" +
+          getProductPrice(
+            currentProduct
+          );
 
 
-    if (
-      favorites.includes(id)
-    ) {
+        document.getElementById(
+          "modalDescription"
+        ).textContent =
+          currentProduct.description;
 
-      favorites =
-        favorites.filter(
-          productId =>
-            productId !== id
+
+        document.getElementById(
+          "quantityNumber"
+        ).textContent =
+          currentQuantity;
+
+
+        const stock =
+          document.getElementById(
+            "modalStock"
+          );
+
+
+        if (
+          currentProduct.stocks <= 0
+        ) {
+
+          stock.textContent =
+            "Out of Stock";
+
+          stock.style.background =
+            "#ead5d5";
+
+          stock.style.color =
+            "#9a4d4d";
+
+        } else {
+
+          stock.textContent =
+            `${currentProduct.stocks} available`;
+
+          stock.style.background =
+            "var(--blush)";
+
+          stock.style.color =
+            "var(--rose-gold)";
+
+        }
+
+
+        const benefits =
+          document.getElementById(
+            "modalBenefits"
+          );
+
+
+        benefits.innerHTML = "";
+
+
+        currentProduct.benefits
+          .forEach(
+            benefit => {
+
+              const li =
+                document.createElement(
+                  "li"
+                );
+
+
+              li.textContent =
+                benefit;
+
+
+              benefits.appendChild(
+                li
+              );
+
+            }
+          );
+
+
+        updateFavoriteButton();
+
+        updateCartButton();
+
+
+        productModal.show();
+
+      };
+
+
+    /* =========================================================
+       QUANTITY
+    ========================================================= */
+
+    window.changeQuantity =
+      function (amount) {
+
+        if (!currentProduct) {
+
+          return;
+
+        }
+
+
+        currentQuantity +=
+          amount;
+
+
+        if (
+          currentQuantity < 1
+        ) {
+
+          currentQuantity = 1;
+
+        }
+
+
+        if (
+          currentProduct.stocks > 0 &&
+          currentQuantity >
+          currentProduct.stocks
+        ) {
+
+          currentQuantity =
+            currentProduct.stocks;
+
+        }
+
+
+        document.getElementById(
+          "quantityNumber"
+        ).textContent =
+          currentQuantity;
+
+      };
+
+
+    /* =========================================================
+       FAVORITES
+    ========================================================= */
+
+    window.toggleFavorite =
+      function (id) {
+
+        let favorites =
+          JSON.parse(
+            localStorage.getItem(
+              "noireFavorites"
+            )
+          ) || [];
+
+
+        if (
+          favorites.includes(id)
+        ) {
+
+          favorites =
+            favorites.filter(
+              productId =>
+                productId !== id
+            );
+
+        } else {
+
+          favorites.push(id);
+
+        }
+
+
+        localStorage.setItem(
+          "noireFavorites",
+          JSON.stringify(
+            favorites
+          )
         );
 
-    } else {
 
-      favorites.push(id);
+        renderProducts();
 
-    }
+        updateFavoriteButton();
 
-
-    localStorage.setItem(
-      "noireFavorites",
-      JSON.stringify(
-        favorites
-      )
-    );
+      };
 
 
-    renderProducts();
+    /* =========================================================
+       FAVORITE FROM MODAL
+    ========================================================= */
 
-    updateFavoriteButton();
+    window.toggleFavoriteFromModal =
+      function () {
 
-  };
+        if (!currentProduct) {
 
+          return;
 
-/* =========================================================
-   FAVORITE FROM MODAL
-========================================================= */
-
-window.toggleFavoriteFromModal =
-  function() {
-
-    if (!currentProduct) {
-
-      return;
-
-    }
+        }
 
 
-    toggleFavorite(
-      currentProduct.id
-    );
+        toggleFavorite(
+          currentProduct.id
+        );
 
-  };
-
-
-/* =========================================================
-   UPDATE FAVORITE BUTTON
-========================================================= */
-
-function updateFavoriteButton() {
-
-  if (!currentProduct) {
-
-    return;
-
-  }
+      };
 
 
-  const favorites =
-    JSON.parse(
-      localStorage.getItem(
-        "noireFavorites"
-      )
-    ) || [];
+    /* =========================================================
+       UPDATE FAVORITE BUTTON
+    ========================================================= */
+
+    function updateFavoriteButton() {
+
+      if (!currentProduct) {
+
+        return;
+
+      }
 
 
-  const button =
-    document.getElementById(
-      "favoriteButton"
-    );
-
-
-  if (
-    favorites.includes(
-      currentProduct.id
-    )
-  ) {
-
-    button.textContent =
-      "♥ Favorited";
-
-    button.classList.add(
-      "active"
-    );
-
-  } else {
-
-    button.textContent =
-      "♡ Favorite";
-
-    button.classList.remove(
-      "active"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   ADD TO CART
-========================================================= */
-
-window.addCurrentProductToCart =
-  function() {
-
-    if (!currentProduct) {
-
-      return;
-
-    }
-
-
-    if (
-      currentProduct.stocks <= 0
-    ) {
-
-      alert(
-        "Sorry, this product is currently out of stock."
-      );
-
-      return;
-
-    }
-
-
-    let cart =
-      JSON.parse(
-        localStorage.getItem(
-          "noireCart"
-        )
-      ) || [];
-
-
-    const existingProduct =
-      cart.find(
-        item =>
-          String(item.id) ===
-          String(currentProduct.id)
-      );
-
-
-    const existingQuantity =
-      existingProduct
-        ? Number(
-            existingProduct.quantity
+      const favorites =
+        JSON.parse(
+          localStorage.getItem(
+            "noireFavorites"
           )
-        : 0;
+        ) || [];
 
 
-    if (
-      existingQuantity +
-        currentQuantity >
-      currentProduct.stocks
-    ) {
-
-      alert(
-        `Only ${currentProduct.stocks} item(s) are available.`
-      );
-
-      return;
-
-    }
+      const button =
+        document.getElementById(
+          "favoriteButton"
+        );
 
 
-    const productPrice =
-      getNumericPrice(
-        currentProduct
-      );
+      if (
+        favorites.includes(
+          currentProduct.id
+        )
+      ) {
 
+        button.textContent =
+          "♥ Favorited";
 
-    if (existingProduct) {
+        button.classList.add(
+          "active"
+        );
 
-      existingProduct.quantity +=
-        currentQuantity;
+      } else {
 
+        button.textContent =
+          "♡ Favorite";
 
-      existingProduct.price =
-        productPrice;
+        button.classList.remove(
+          "active"
+        );
 
-      existingProduct.image =
-        currentProduct.image;
-
-    } else {
-
-      cart.push({
-
-        id:
-          currentProduct.id,
-
-        name:
-          currentProduct.name,
-
-        price:
-          productPrice,
-
-        image:
-          currentProduct.image,
-
-        quantity:
-          currentQuantity
-
-      });
+      }
 
     }
 
 
-    localStorage.setItem(
-      "noireCart",
-      JSON.stringify(cart)
-    );
+    /* =========================================================
+       ADD TO CART
+    ========================================================= */
+
+    window.addCurrentProductToCart =
+      function () {
+
+        if (!currentProduct) {
+
+          return;
+
+        }
 
 
-    alert(
-      `${currentProduct.name} has been added to your cart! 🛒`
-    );
+        if (
+          currentProduct.stocks <= 0
+        ) {
+
+          alert(
+            "Sorry, this product is currently out of stock."
+          );
+
+          return;
+
+        }
 
 
-    updateCartButton();
-
-  };
-
-
-/* =========================================================
-   UPDATE CART BUTTON
-========================================================= */
-
-function updateCartButton() {
-
-  const button =
-    document.getElementById(
-      "addCartButton"
-    );
+        let cart =
+          JSON.parse(
+            localStorage.getItem(
+              "noireCart"
+            )
+          ) || [];
 
 
-  if (!currentProduct) {
-
-    return;
-
-  }
-
-
-  if (
-    currentProduct.stocks <= 0
-  ) {
-
-    button.disabled = true;
-
-    button.textContent =
-      "Out of Stock";
-
-  } else {
-
-    button.disabled = false;
-
-    button.textContent =
-      "🛒 Add to Cart";
-
-  }
-
-}
+        const existingProduct =
+          cart.find(
+            item =>
+              String(item.id) ===
+              String(currentProduct.id)
+          );
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(value) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
+        const existingQuantity =
+          existingProduct
+            ? Number(
+              existingProduct.quantity
+            )
+            : 0;
 
 
-  div.textContent =
-    value || "";
+        if (
+          existingQuantity +
+          currentQuantity >
+          currentProduct.stocks
+        ) {
+
+          alert(
+            `Only ${currentProduct.stocks} item(s) are available.`
+          );
+
+          return;
+
+        }
 
 
-  return div.innerHTML;
+        const productPrice =
+          getNumericPrice(
+            currentProduct
+          );
 
-}
+
+        if (existingProduct) {
+
+          existingProduct.quantity +=
+            currentQuantity;
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+          existingProduct.price =
+            productPrice;
 
-async function initializeShop() {
-  await loadProducts();
+          existingProduct.image =
+            currentProduct.image;
 
-  const params = new URLSearchParams(window.location.search);
-  const skin = params.get("skin");
+        } else {
 
-  if (skin) {
-    const skinMap = {
-      dry: "Dry Skin",
-      oily: "Oily Skin",
-      combination: "Combination Skin",
-      sensitive: "Sensitive Skin",
-      normal: "Normal Skin",
-      "dry skin": "Dry Skin",
-      "oily skin": "Oily Skin",
-      "combination skin": "Combination Skin",
-      "sensitive skin": "Sensitive Skin",
-      "normal skin": "Normal Skin"
-    };
+          cart.push({
 
-    const selected = skinMap[String(skin).trim().toLowerCase()] || skin;
-    window.filterProducts(selected);
-  }
-}
+            id:
+              currentProduct.id,
 
-initializeShop();
+            name:
+              currentProduct.name,
 
-</script>
+            price:
+              productPrice,
 
+            image:
+              currentProduct.image,
+
+            quantity:
+              currentQuantity
+
+          });
+
+        }
+
+
+        localStorage.setItem(
+          "noireCart",
+          JSON.stringify(cart)
+        );
+
+
+        alert(
+          `${currentProduct.name} has been added to your cart! 🛒`
+        );
+
+
+        updateCartButton();
+
+      };
+
+
+    /* =========================================================
+       UPDATE CART BUTTON
+    ========================================================= */
+
+    function updateCartButton() {
+
+      const button =
+        document.getElementById(
+          "addCartButton"
+        );
+
+
+      if (!currentProduct) {
+
+        return;
+
+      }
+
+
+      if (
+        currentProduct.stocks <= 0
+      ) {
+
+        button.disabled = true;
+
+        button.textContent =
+          "Out of Stock";
+
+      } else {
+
+        button.disabled = false;
+
+        button.textContent =
+          "🛒 Add to Cart";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       ESCAPE HTML
+    ========================================================= */
+
+    function escapeHtml(value) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.textContent =
+        value || "";
+
+
+      return div.innerHTML;
+
+    }
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    async function initializeShop() {
+      await loadProducts();
+
+      const params = new URLSearchParams(window.location.search);
+      const skin = params.get("skin");
+
+      if (skin) {
+        const skinMap = {
+          dry: "Dry Skin",
+          oily: "Oily Skin",
+          combination: "Combination Skin",
+          sensitive: "Sensitive Skin",
+          normal: "Normal Skin",
+          "dry skin": "Dry Skin",
+          "oily skin": "Oily Skin",
+          "combination skin": "Combination Skin",
+          "sensitive skin": "Sensitive Skin",
+          "normal skin": "Normal Skin"
+        };
+
+        const selected = skinMap[String(skin).trim().toLowerCase()] || skin;
+        window.filterProducts(selected);
+      }
+    }
+
+    initializeShop();
+
+  </script>
+
+  <!-- =====================================================
+     FLOATING CHATBOT WIDGET
+===================================================== -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="chatbotHeading">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-status-dot"></span>
+          <div>
+            <h2 id="chatbotHeading">Welcome to Noiré's Chatbot!</h2>
+            <div class="modal-header-sub">Online • Ready to assist</div>
+          </div>
+        </div>
+        <button id="closeModal" class="modal-close-btn" aria-label="Close Chatbot">&times;</button>
+      </div>
+
+      <iframe src="https://www.chatbase.co/chatbot-iframe/QMtGVjp6LV2lqn9vikm2F" width="100%"
+        style="height: 100%; min-height: 520px; border: 0;" frameborder="0" allow="microphone"></iframe>
+    </div>
+  </div>
+
+  <div id="chatGreeting" class="chat-greeting" role="button" aria-label="Open Noiré Chatbot">
+    <span class="chat-greeting-text">Need help? Chat with Noiré ✨</span>
+    <button id="closeGreeting" class="chat-greeting-close" aria-label="Dismiss greeting">&times;</button>
+  </div>
+
+  <button id="openModal" class="chatbot-trigger" aria-label="Open Noiré Chatbot" title="Chat with Noiré"
+    aria-haspopup="dialog" aria-expanded="false">
+    <div class="chat-icon-wrapper">
+      <svg class="chat-icon-open" width="28" height="28" viewBox="0 0 40 40" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M8 12C8 9.79086 9.79086 8 12 8H28C30.2091 8 32 9.79086 32 12V22C32 24.2091 30.2091 26 28 26H23L16 31V26H12C9.79086 26 8 24.2091 8 22V12ZM14.5 18.5C15.3284 18.5 16 17.8284 16 17C16 16.1716 15.3284 15.5 14.5 15.5C13.6716 15.5 13 16.1716 13 17C13 17.8284 13.6716 18.5 14.5 18.5ZM20 18.5C20.8284 18.5 21.5 17.8284 21.5 17C21.5 16.1716 20.8284 15.5 20 15.5C19.1716 15.5 18.5 16.1716 18.5 17C18.5 17.8284 19.1716 18.5 20 18.5ZM27 17C27 17.8284 26.3284 18.5 25.5 18.5C24.6716 18.5 24 17.8284 24 17C24 16.1716 24.6716 15.5 25.5 15.5C26.3284 15.5 27 16.1716 27 17Z"
+          fill="currentColor" />
+      </svg>
+      <svg class="chat-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+  </button>
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>

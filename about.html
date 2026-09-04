@@ -1292,6 +1292,52 @@
 
 </footer>
 
+  <!-- =====================================================
+     FLOATING CHATBOT WIDGET
+===================================================== -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="chatbotHeading">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-status-dot"></span>
+          <div>
+            <h2 id="chatbotHeading">Welcome to Noiré's Chatbot!</h2>
+            <div class="modal-header-sub">Online • Ready to assist</div>
+          </div>
+        </div>
+        <button id="closeModal" class="modal-close-btn" aria-label="Close Chatbot">&times;</button>
+      </div>
+
+      <iframe src="https://www.chatbase.co/chatbot-iframe/QMtGVjp6LV2lqn9vikm2F" width="100%"
+        style="height: 100%; min-height: 520px; border: 0;" frameborder="0" allow="microphone"></iframe>
+    </div>
+  </div>
+
+  <!-- Greeting Textbox beside floating button -->
+  <div id="chatGreeting" class="chat-greeting" role="button" aria-label="Open Noiré Chatbot">
+    <span class="chat-greeting-text">Need help? Chat with Noiré ✨</span>
+    <button id="closeGreeting" class="chat-greeting-close" aria-label="Dismiss greeting">&times;</button>
+  </div>
+
+  <button id="openModal" class="chatbot-trigger" aria-label="Open Noiré Chatbot" title="Chat with Noiré"
+    aria-haspopup="dialog" aria-expanded="false">
+    <div class="chat-icon-wrapper">
+      <svg class="chat-icon-open" width="28" height="28" viewBox="0 0 40 40" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M8 12C8 9.79086 9.79086 8 12 8H28C30.2091 8 32 9.79086 32 12V22C32 24.2091 30.2091 26 28 26H23L16 31V26H12C9.79086 26 8 24.2091 8 22V12ZM14.5 18.5C15.3284 18.5 16 17.8284 16 17C16 16.1716 15.3284 15.5 14.5 15.5C13.6716 15.5 13 16.1716 13 17C13 17.8284 13.6716 18.5 14.5 18.5ZM20 18.5C20.8284 18.5 21.5 17.8284 21.5 17C21.5 16.1716 20.8284 15.5 20 15.5C19.1716 15.5 18.5 16.1716 18.5 17C18.5 17.8284 19.1716 18.5 20 18.5ZM27 17C27 17.8284 26.3284 18.5 25.5 18.5C24.6716 18.5 24 17.8284 24 17C24 16.1716 24.6716 15.5 25.5 15.5C26.3284 15.5 27 16.1716 27 17Z"
+          fill="currentColor" />
+      </svg>
+      <svg class="chat-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+  </button>
+
+  <!-- Chatbot Script -->
+  <script src="script.js"></script>
 
 </body>
 </html>
