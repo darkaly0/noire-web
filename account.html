@@ -961,6 +961,8 @@
     }
     @keyframes fadeModal { from{opacity:0} to{opacity:1} }
 
+    .orders-list{display:flex;flex-direction:column;gap:16px}.orders-loading{text-align:center;padding:40px;color:#888;font-size:12px}.order-card{border:1px solid var(--line);border-radius:17px;background:var(--ivory);overflow:hidden}.order-card-header{padding:18px 20px;background:#f5f0ea;display:flex;justify-content:space-between;align-items:center;gap:15px}.order-number{font-family:'Playfair Display',serif;font-size:17px;font-weight:600}.order-date{color:#888;font-size:10px;margin-top:4px}.order-status{padding:7px 13px;border-radius:30px;font-size:10px;font-weight:700;white-space:nowrap}.status-pending{background:#f3e5d1;color:#9a7040}.status-processing{background:#e7e1f2;color:#735f9d}.status-shipped{background:#dce8ee;color:#527486}.status-delivered{background:#dce8d9;color:#5f7a5b}.status-cancelled{background:#eadada;color:#9a4d4d}.order-card-body{padding:18px 20px}.order-products{display:flex;flex-direction:column;gap:12px}.order-product{display:flex;align-items:center;justify-content:space-between;gap:15px}.order-product-info{display:flex;align-items:center;gap:12px}.order-product-image,.order-product-placeholder{width:55px;height:55px;border-radius:10px;background:#eee8e0}.order-product-image{object-fit:cover}.order-product-placeholder{display:flex;align-items:center;justify-content:center;font-size:20px}.order-product-name{font-size:12px;font-weight:600}.order-product-qty{font-size:10px;color:#888;margin-top:4px}.order-product-price{font-size:12px;font-weight:600}.order-footer{border-top:1px solid var(--line);margin-top:17px;padding-top:15px;display:flex;justify-content:space-between;align-items:center}.order-payment{color:#888;font-size:10px}.order-total{font-family:'Playfair Display',serif;font-size:19px;font-weight:600}
+
     /* =====================================================
        LOGOUT
     ===================================================== */
@@ -1478,6 +1480,457 @@
         gap: 15px;
       }
 
+    }
+
+  
+    /* =====================================================
+       CLICKABLE ORDER HISTORY
+    ===================================================== */
+
+    .order-card-clickable {
+      width: 100%;
+      display: block;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: inherit;
+      text-align: left;
+      overflow: hidden;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .order-card-clickable:hover {
+      transform: translateY(-3px);
+      border-color: rgba(183,110,121,0.35);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.07);
+    }
+
+    .order-card-clickable:focus-visible {
+      outline: 3px solid rgba(183,110,121,0.25);
+      outline-offset: 3px;
+    }
+
+    .order-preview {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .order-preview-images {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .order-preview-image,
+    .order-preview-placeholder {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #eee8e0;
+      border: 2px solid var(--ivory);
+      margin-left: -8px;
+    }
+
+    .order-preview-images > :first-child {
+      margin-left: 0;
+    }
+
+    .order-preview-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .order-more {
+      width: 52px;
+      height: 52px;
+      margin-left: -8px;
+      border-radius: 10px;
+      border: 2px solid var(--ivory);
+      background: var(--charcoal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .order-preview-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .order-preview-count {
+      color: var(--rose-gold);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .order-preview-names {
+      color: var(--charcoal);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .order-arrow {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .order-card-clickable:hover .order-arrow {
+      transform: translateX(3px);
+      background: var(--blush);
+    }
+
+    /* =====================================================
+       ORDER DETAILS MODAL
+    ===================================================== */
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .order-details-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      padding: 20px;
+      background: rgba(17,17,17,0.62);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .order-details-overlay.show {
+      display: flex;
+      animation: fadeModal 0.2s ease both;
+    }
+
+    .order-details-modal {
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 34px;
+      border-radius: 22px;
+      background: white;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.22);
+    }
+
+    .order-details-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-size: 23px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.2s ease;
+    }
+
+    .order-details-close:hover {
+      background: var(--black);
+      color: white;
+    }
+
+    .order-detail-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-right: 45px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-detail-eyebrow {
+      color: var(--rose-gold);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .order-detail-top h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      line-height: 1.15;
+      margin-bottom: 5px;
+    }
+
+    .order-detail-top p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .order-detail-section {
+      padding: 23px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-detail-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .order-detail-section-heading h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .order-detail-section-heading span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-detail-products {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .order-detail-product {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 10px 0;
+    }
+
+    .order-detail-product-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .order-detail-product-left img,
+    .order-detail-placeholder {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      object-fit: cover;
+      background: #eee8e0;
+    }
+
+    .order-detail-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .order-detail-product-name {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .order-detail-product-qty {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-detail-product > strong {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .order-detail-info-box {
+      padding: 4px 15px;
+      border-radius: 13px;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+    }
+
+    .order-detail-info-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-detail-info-row:last-child {
+      border-bottom: none;
+    }
+
+    .order-detail-info-row span,
+    .order-detail-payment span,
+    .order-detail-summary span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-detail-info-row strong {
+      max-width: 65%;
+      text-align: right;
+      font-size: 11px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .order-detail-payment {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px;
+      border-radius: 13px;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+    }
+
+    .order-detail-payment strong {
+      font-size: 12px;
+    }
+
+    .order-detail-summary {
+      padding-top: 22px;
+    }
+
+    .order-detail-summary > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 8px 0;
+    }
+
+    .order-detail-summary strong {
+      font-size: 12px;
+    }
+
+    .order-detail-grand-total {
+      margin-top: 9px;
+      padding-top: 17px !important;
+      border-top: 1px solid var(--line);
+    }
+
+    .order-detail-grand-total span {
+      color: var(--charcoal);
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .order-detail-grand-total strong {
+      color: var(--rose-gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+    }
+
+    .order-detail-empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+    }
+
+    .order-details-close-btn {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px 18px;
+      border: 1px solid var(--black);
+      border-radius: 10px;
+      background: var(--black);
+      color: white;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .order-details-close-btn:hover {
+      background: var(--rose-gold);
+      border-color: var(--rose-gold);
+    }
+
+    @media (max-width: 650px) {
+      .order-preview {
+        gap: 11px;
+      }
+
+      .order-preview-image,
+      .order-preview-placeholder,
+      .order-more {
+        width: 43px;
+        height: 43px;
+      }
+
+      .order-arrow {
+        width: 32px;
+        height: 32px;
+      }
+
+      .order-details-modal {
+        padding: 26px 20px;
+        border-radius: 18px;
+      }
+
+      .order-detail-top {
+        flex-direction: column;
+      }
+
+      .order-detail-top .order-status {
+        align-self: flex-start;
+      }
+
+      .order-detail-info-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .order-detail-info-row strong {
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .order-detail-product > strong {
+        font-size: 11px;
+      }
     }
 
   </style>
@@ -2036,26 +2489,9 @@
 
         <div class="orders-empty">
 
-          <div class="orders-icon">
-            ♡
-          </div>
+        <div id="ordersContainer"><div class="orders-loading">Loading your orders...</div></div>
 
-          <h3>
-            No orders yet
-          </h3>
-
-          <p>
-            Your future skincare favorites will appear here.
-          </p>
-
-          <a
-            href="shop.html"
-            class="shop-btn"
-          >
-            Explore the Collection
-          </a>
-
-        </div>
+      </div>
 
       </section>
 
@@ -2171,7 +2607,8 @@
       getDatabase,
       ref,
       get,
-      update
+      update,
+      onValue
     } from
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -2196,6 +2633,7 @@
 
     let currentUser = null;
     let currentData = {};
+    let currentOrders = {};
 
 
     /* =====================================================
@@ -2625,6 +3063,285 @@
     }
 
 
+    function formatOrderDate(timestamp){if(!timestamp)return "Date unavailable";return new Date(Number(timestamp)).toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"});}
+    function formatOrderPrice(value){return (Number(value)||0).toLocaleString("en-PH",{style:"currency",currency:"PHP"});}
+    function orderStatusClass(status){return String(status||"Pending").toLowerCase().replace(/\s+/g,"-");}
+    function loadOrderHistory(user) {
+      const container = $("ordersContainer");
+      if (!container) return;
+
+      onValue(ref(db, "orders/" + user.uid), (snapshot) => {
+        if (!snapshot.exists()) {
+          currentOrders = {};
+          container.innerHTML = `
+            <div class="orders-empty">
+              <div class="orders-icon">♡</div>
+              <h3>No orders yet</h3>
+              <p>Your future skincare favorites will appear here.</p>
+              <a href="shop.html" class="shop-btn">Explore the Collection</a>
+            </div>
+          `;
+          return;
+        }
+
+        const orders = Object.entries(snapshot.val())
+          .map(([id, order]) => ({ id, ...order }))
+          .sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0));
+
+        currentOrders = {};
+        orders.forEach(order => {
+          currentOrders[order.id] = order;
+        });
+
+        container.innerHTML = `
+          <div class="orders-list">
+            ${orders.map(order => {
+              const status = order.status || "Pending";
+              const items = Array.isArray(order.items)
+                ? order.items
+                : Object.values(order.items || {});
+
+              const itemCount = items.reduce(
+                (sum, item) => sum + (Number(item.quantity) || 1),
+                0
+              );
+
+              const previewImages = items.slice(0, 3).map(item => {
+                if (item.image) {
+                  return `<img src="${safe(item.image)}" alt="${safe(item.name || "Product")}" class="order-preview-image">`;
+                }
+                return `<div class="order-preview-placeholder">♡</div>`;
+              }).join("");
+
+              const remaining = items.length > 3
+                ? `<span class="order-more">+${items.length - 3}</span>`
+                : "";
+
+              const itemNames = items
+                .slice(0, 2)
+                .map(item => safe(item.name || "Product"))
+                .join(", ");
+
+              const extraNames = items.length > 2
+                ? ` + ${items.length - 2} more`
+                : "";
+
+              return `
+                <button
+                  type="button"
+                  class="order-card order-card-clickable"
+                  data-order-id="${safe(order.id)}"
+                  aria-label="View details for ${safe(order.orderNumber || order.id)}"
+                >
+                  <div class="order-card-header">
+                    <div>
+                      <div class="order-number">${safe(order.orderNumber || order.id)}</div>
+                      <div class="order-date">${formatOrderDate(order.createdAt)}</div>
+                    </div>
+
+                    <span class="order-status status-${orderStatusClass(status)}">
+                      ${safe(status)}
+                    </span>
+                  </div>
+
+                  <div class="order-card-body">
+                    <div class="order-preview">
+                      <div class="order-preview-images">
+                        ${previewImages}
+                        ${remaining}
+                      </div>
+
+                      <div class="order-preview-info">
+                        <div class="order-preview-count">
+                          ${itemCount} ${itemCount === 1 ? "item" : "items"}
+                        </div>
+
+                        <div class="order-preview-names">
+                          ${itemNames || "Your Noiré order"}${extraNames}
+                        </div>
+                      </div>
+
+                      <div class="order-arrow">→</div>
+                    </div>
+
+                    <div class="order-footer">
+                      <span class="order-payment">
+                        ${safe(order.paymentMethod || "Payment method unavailable")}
+                      </span>
+
+                      <strong class="order-total">
+                        ${formatOrderPrice(order.total)}
+                      </strong>
+                    </div>
+                  </div>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        `;
+
+        container.querySelectorAll(".order-card-clickable").forEach(card => {
+          card.addEventListener("click", () => {
+            openOrderDetails(card.dataset.orderId);
+          });
+        });
+      }, (error) => {
+        console.error("Order history error:", error);
+        container.innerHTML = `
+          <div class="orders-empty">
+            <div class="orders-icon">⚠️</div>
+            <h3>Unable to load orders</h3>
+            <p>Please refresh the page and try again.</p>
+          </div>
+        `;
+      });
+    }
+
+    function openOrderDetails(orderId) {
+      const order = currentOrders[orderId];
+      const modal = $("orderDetailsModal");
+      const content = $("orderDetailsContent");
+
+      if (!order || !modal || !content) return;
+
+      const status = order.status || "Pending";
+      const items = Array.isArray(order.items)
+        ? order.items
+        : Object.values(order.items || {});
+
+      const productsHtml = items.length
+        ? items.map(item => `
+            <div class="order-detail-product">
+              <div class="order-detail-product-left">
+                ${
+                  item.image
+                    ? `<img src="${safe(item.image)}" alt="${safe(item.name || "Product")}">`
+                    : `<div class="order-detail-placeholder">♡</div>`
+                }
+                <div>
+                  <div class="order-detail-product-name">${safe(item.name || "Product")}</div>
+                  <div class="order-detail-product-qty">Qty: ${Number(item.quantity) || 1}</div>
+                </div>
+              </div>
+
+              <strong>
+                ${formatOrderPrice(
+                  (Number(item.price) || 0) * (Number(item.quantity) || 1)
+                )}
+              </strong>
+            </div>
+          `).join("")
+        : `<div class="order-detail-empty">No product information available.</div>`;
+
+      const customerName = order.customerName || order.name || "Not provided";
+      const phone = order.phone || "Not provided";
+      const address = order.address || "Not provided";
+      const notes = order.deliveryNotes || "";
+
+      content.innerHTML = `
+        <div class="order-detail-top">
+          <div>
+            <div class="order-detail-eyebrow">Order Details</div>
+            <h2>${safe(order.orderNumber || order.id)}</h2>
+            <p>${formatOrderDate(order.createdAt)}</p>
+          </div>
+
+          <span class="order-status status-${orderStatusClass(status)}">
+            ${safe(status)}
+          </span>
+        </div>
+
+        <div class="order-detail-section">
+          <div class="order-detail-section-heading">
+            <h3>Your Items</h3>
+            <span>${items.length} ${items.length === 1 ? "product" : "products"}</span>
+          </div>
+
+          <div class="order-detail-products">
+            ${productsHtml}
+          </div>
+        </div>
+
+        <div class="order-detail-section">
+          <div class="order-detail-section-heading">
+            <h3>Delivery Information</h3>
+          </div>
+
+          <div class="order-detail-info-box">
+            <div class="order-detail-info-row">
+              <span>Full Name</span>
+              <strong>${safe(customerName)}</strong>
+            </div>
+
+            <div class="order-detail-info-row">
+              <span>Phone</span>
+              <strong>${safe(phone)}</strong>
+            </div>
+
+            <div class="order-detail-info-row">
+              <span>Address</span>
+              <strong>${safe(address)}</strong>
+            </div>
+
+            ${
+              notes
+                ? `
+                  <div class="order-detail-info-row">
+                    <span>Delivery Notes</span>
+                    <strong>${safe(notes)}</strong>
+                  </div>
+                `
+                : ""
+            }
+          </div>
+        </div>
+
+        <div class="order-detail-section">
+          <div class="order-detail-section-heading">
+            <h3>Payment</h3>
+          </div>
+
+          <div class="order-detail-payment">
+            <span>Payment Method</span>
+            <strong>${safe(order.paymentMethod || "Not provided")}</strong>
+          </div>
+        </div>
+
+        <div class="order-detail-summary">
+          <div>
+            <span>Subtotal</span>
+            <strong>${formatOrderPrice(order.subtotal)}</strong>
+          </div>
+
+          <div>
+            <span>Shipping</span>
+            <strong>${Number(order.shipping) === 0 ? "FREE" : formatOrderPrice(order.shipping)}</strong>
+          </div>
+
+          <div class="order-detail-grand-total">
+            <span>Total</span>
+            <strong>${formatOrderPrice(order.total)}</strong>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeOrderDetails() {
+      const modal = $("orderDetailsModal");
+      if (modal) {
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+      }
+      document.body.classList.remove("modal-open");
+    }
+
+    window.openOrderDetails = openOrderDetails;
+    window.closeOrderDetails = closeOrderDetails;
+
     /* =====================================================
        LOAD ACCOUNT
     ===================================================== */
@@ -2652,6 +3369,7 @@
 
         renderAccount(data, user);
         await loadFavorites();
+        loadOrderHistory(user);
 
         console.log("Account loaded:", user.uid);
 
@@ -2922,8 +3640,56 @@
 
     });
 
-  </script>
+  
+    const orderDetailsModal = $("orderDetailsModal");
+    const orderDetailsClose = $("orderDetailsClose");
+    const orderDetailsCloseBtn = $("orderDetailsCloseBtn");
 
+    if (orderDetailsClose) {
+      orderDetailsClose.addEventListener("click", closeOrderDetails);
+    }
+
+    if (orderDetailsCloseBtn) {
+      orderDetailsCloseBtn.addEventListener("click", closeOrderDetails);
+    }
+
+    if (orderDetailsModal) {
+      orderDetailsModal.addEventListener("click", (event) => {
+        if (event.target === orderDetailsModal) {
+          closeOrderDetails();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeOrderDetails();
+      }
+    });
+
+</script>
+
+
+
+  <!-- ORDER DETAILS MODAL -->
+  <div id="orderDetailsModal" class="order-details-overlay" aria-hidden="true">
+    <div class="order-details-modal" role="dialog" aria-modal="true">
+      <button
+        type="button"
+        class="order-details-close"
+        id="orderDetailsClose"
+        aria-label="Close order details"
+      >×</button>
+
+      <div id="orderDetailsContent"></div>
+
+      <button
+        type="button"
+        class="order-details-close-btn"
+        id="orderDetailsCloseBtn"
+      >Close</button>
+    </div>
+  </div>
 
 </body>
 </html>

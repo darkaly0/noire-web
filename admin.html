@@ -992,6 +992,26 @@
 
     }
 
+    /* FIREBASE USERS & ORDERS */
+    .admin-data-table { min-width: 900px; }
+    .admin-data-table td { vertical-align: middle; }
+    .admin-muted { color: var(--soft-gray); font-size: 11px; }
+    .admin-user-name { font-weight: 700; font-size: 12px; }
+    .admin-user-email { color: var(--soft-gray); font-size: 10px; margin-top: 3px; }
+    .order-id-cell { font-family: "Playfair Display", serif; font-weight: 600; font-size: 13px; white-space: nowrap; }
+    .order-items-cell { max-width: 260px; color: #555; line-height: 1.5; }
+    .order-status-select { min-width: 175px; padding: 9px 11px; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: var(--charcoal); font-size: 11px; font-weight: 600; outline: none; cursor: pointer; transition: .2s ease; }
+    .order-status-select:hover, .order-status-select:focus { border-color: var(--rose-gold); box-shadow: 0 0 0 3px rgba(183,110,121,.08); }
+    .order-status-select:disabled { opacity: .6; cursor: wait; }
+    .status-pending { background: #f3e5d1; color: #9a7040; }
+    .status-preparing-order { background: #eee5f5; color: #76568f; }
+    .status-shipped-out { background: #dce8ee; color: #527486; }
+    .status-out-for-delivery { background: #e5e0f3; color: #675b94; }
+    .status-delivered { background: #dce8d9; color: #5f7a5b; }
+    .user-status-btn { min-width: 88px; }
+    .admin-count-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 27px; height: 27px; padding: 0 8px; border-radius: 30px; background: var(--ivory); border: 1px solid var(--border); font-size: 10px; font-weight: 700; }
+    @media (max-width: 700px) { .admin-data-table { min-width: 850px; } }
+
   </style>
 
 </head>
@@ -1380,189 +1400,38 @@
        USERS
   ====================================================== -->
 
-  <div
-    id="users"
-    class="tab-content"
-  >
-
+  <div id="users" class="tab-content">
     <div class="simple-card">
-
       <div class="simple-card-header">
-
-        <h2>
-          Manage Users
-        </h2>
-
-        <p>
-          View and manage Noiré customer accounts.
-        </p>
-
+        <h2>Manage Users</h2>
+        <p>View Noiré customer accounts directly from Firebase.</p>
       </div>
-
       <div class="table-container">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                Name
-              </th>
-
-              <th>
-                Email
-              </th>
-
-              <th>
-                Status
-              </th>
-
-              <th>
-                Actions
-              </th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            <tr>
-
-              <td>
-                Maria Santos
-              </td>
-
-              <td>
-                maria@example.com
-              </td>
-
-              <td>
-
-                <span class="status status-active">
-                  Active
-                </span>
-
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-danger"
-                  onclick="banUser()"
-                >
-                  Ban
-                </button>
-
-              </td>
-
-            </tr>
-
-          </tbody>
-
+        <table class="admin-data-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Skin Type</th><th>Status</th><th>Orders</th><th>Actions</th></tr></thead>
+          <tbody id="usersTableBody"><tr><td colspan="7" class="empty-message">Loading customers...</td></tr></tbody>
         </table>
-
       </div>
-
     </div>
-
   </div>
-
 
   <!-- =====================================================
        ORDERS
   ====================================================== -->
 
-  <div
-    id="orders"
-    class="tab-content"
-  >
-
+  <div id="orders" class="tab-content">
     <div class="simple-card">
-
       <div class="simple-card-header">
-
-        <h2>
-          Manage Orders
-        </h2>
-
-        <p>
-          Keep track of customer orders and fulfillment.
-        </p>
-
+        <h2>Manage Orders</h2>
+        <p>Update order status and keep customers informed in real time.</p>
       </div>
-
       <div class="table-container">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                Order ID
-              </th>
-
-              <th>
-                User
-              </th>
-
-              <th>
-                Status
-              </th>
-
-              <th>
-                Actions
-              </th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            <tr>
-
-              <td>
-                #1001
-              </td>
-
-              <td>
-                Juan Dela Cruz
-              </td>
-
-              <td>
-
-                <span class="status status-inactive">
-                  Pending
-                </span>
-
-              </td>
-
-              <td>
-
-                <button
-                  class="btn"
-                  onclick="updateOrder()"
-                >
-                  Mark Shipped
-                </button>
-
-              </td>
-
-            </tr>
-
-          </tbody>
-
+        <table class="admin-data-table orders-admin-table">
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Update Status</th></tr></thead>
+          <tbody id="ordersTableBody"><tr><td colspan="7" class="empty-message">Loading orders...</td></tr></tbody>
         </table>
-
       </div>
-
     </div>
-
   </div>
 
 
@@ -1932,6 +1801,7 @@
       update,
       remove,
       get,
+      onValue,
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
@@ -2218,6 +2088,8 @@
         setupModalEvents();
 
         loadProducts();
+        loadUsers();
+        loadOrders();
 
       }
     );
@@ -4038,38 +3910,251 @@
 
 
     /* =====================================================
-       USER FUNCTION
+       USERS — FIREBASE
     ====================================================== */
 
-    function banUser() {
+    let usersCache = {};
+    let ordersCache = [];
 
-      alert(
-        "User banned."
-      );
-
+    function getUserDisplayName(user) {
+      if (!user) return "Unknown Customer";
+      return user.username || user.name || user.displayName ||
+        [user.firstName, user.lastName].filter(Boolean).join(" ") ||
+        user.email || "Customer";
     }
 
+    function getOrderItems(order) {
+      if (!order || !order.items) return [];
+      return Array.isArray(order.items) ? order.items : Object.values(order.items);
+    }
 
-    window.banUser =
-      banUser;
+    function formatAdminDate(timestamp) {
+      if (!timestamp) return "—";
+      const date = new Date(Number(timestamp));
+      if (Number.isNaN(date.getTime())) return "—";
+      return date.toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    function formatAdminCurrency(value) {
+      return (Number(value) || 0).toLocaleString("en-PH", { style: "currency", currency: "PHP" });
+    }
+
+    function getStatusClass(status) {
+      return String(status || "Pending").toLowerCase().trim().replace(/\s+/g, "-");
+    }
+
+    function renderUsers(users, orders) {
+      const body = document.getElementById("usersTableBody");
+      if (!body) return;
+
+      const orderCounts = {};
+      orders.forEach(order => {
+        if (!order.userId) return;
+        orderCounts[order.userId] = (orderCounts[order.userId] || 0) + 1;
+      });
+
+      const entries = Object.entries(users || {});
+      const countElement = document.getElementById("userCount");
+
+      if (countElement) countElement.textContent = entries.length;
+
+      if (!entries.length) {
+        body.innerHTML = `<tr><td colspan="7" class="empty-message">No customer accounts found in Firebase.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = entries.map(([uid, user]) => {
+        const name = getUserDisplayName(user);
+        const email = user.email || "—";
+        const phone = user.phone || user.contactNumber || "—";
+        const skinType = user.skinType || "Not set";
+        const active = String(user.status || "Active").toLowerCase() !== "inactive";
+        const count = orderCounts[uid] || 0;
+
+        return `
+          <tr>
+            <td><div class="admin-user-name">${escapeHTML(name)}</div></td>
+            <td><div class="admin-user-email">${escapeHTML(email)}</div></td>
+            <td>${escapeHTML(phone)}</td>
+            <td>${escapeHTML(skinType)}</td>
+            <td><span class="status ${active ? "status-active" : "status-inactive"}">${active ? "Active" : "Inactive"}</span></td>
+            <td><span class="admin-count-badge">${count}</span></td>
+            <td>
+              <button type="button" class="btn ${active ? "btn-danger" : "btn-outline"} user-status-btn" data-user-id="${escapeHTML(uid)}">
+                ${active ? "Deactivate" : "Activate"}
+              </button>
+            </td>
+          </tr>`;
+      }).join("");
+
+      body.querySelectorAll(".user-status-btn").forEach(button => {
+        button.addEventListener("click", () => toggleUserStatus(button.dataset.userId));
+      });
+    }
+
+    function loadUsers() {
+      const body = document.getElementById("usersTableBody");
+      if (!body) return;
+
+      onValue(dbRef(database, "users"), snapshot => {
+        usersCache = snapshot.exists() ? snapshot.val() : {};
+        renderUsers(usersCache, ordersCache);
+        renderOrders(ordersCache);
+      }, error => {
+        console.error("LOAD USERS ERROR:", error);
+        body.innerHTML = `<tr><td colspan="7" class="empty-message">Unable to load users.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
+      });
+    }
+
+    async function toggleUserStatus(uid) {
+      const user = usersCache[uid];
+      if (!user) return;
+
+      const currentlyActive = String(user.status || "Active").toLowerCase() !== "inactive";
+      const nextStatus = currentlyActive ? "Inactive" : "Active";
+
+      if (!confirm(`${nextStatus === "Inactive" ? "Deactivate" : "Activate"} ${getUserDisplayName(user)}?`)) return;
+
+      try {
+        await update(dbRef(database, `users/${uid}`), { status: nextStatus, updatedAt: Date.now() });
+        alert(nextStatus === "Inactive" ? "User marked as inactive." : "User activated successfully.");
+      } catch (error) {
+        console.error("UPDATE USER ERROR:", error);
+        alert("Unable to update user.\n\n" + (error.message || "Firebase error"));
+      }
+    }
+
+    window.toggleUserStatus = toggleUserStatus;
 
 
     /* =====================================================
-       ORDER FUNCTION
+       ORDERS — FIREBASE
     ====================================================== */
 
-    function updateOrder() {
+    const ORDER_STATUSES = [
+      "Pending",
+      "Preparing Order",
+      "Shipped Out",
+      "Out for Delivery",
+      "Delivered"
+    ];
 
-      alert(
-        "Order status updated."
-      );
+    function loadOrders() {
+      const body = document.getElementById("ordersTableBody");
+      if (!body) return;
 
+      onValue(dbRef(database, "orders"), snapshot => {
+        ordersCache = [];
+
+        if (snapshot.exists()) {
+          Object.entries(snapshot.val()).forEach(([uid, userOrders]) => {
+            if (!userOrders || typeof userOrders !== "object") return;
+            Object.entries(userOrders).forEach(([orderId, order]) => {
+              if (!order || typeof order !== "object") return;
+              ordersCache.push({ id: orderId, userId: order.userId || uid, ...order });
+            });
+          });
+        }
+
+        ordersCache.sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0));
+        renderOrders(ordersCache);
+        renderUsers(usersCache, ordersCache);
+
+        const orderCount = document.getElementById("orderCount");
+        if (orderCount) orderCount.textContent = ordersCache.length;
+
+        const revenue = ordersCache
+          .filter(order => String(order.status || "Pending").toLowerCase() !== "cancelled")
+          .reduce((sum, order) => sum + (Number(order.total) || 0), 0);
+        const revenueElement = document.getElementById("revenue");
+        if (revenueElement) revenueElement.textContent = formatAdminCurrency(revenue);
+      }, error => {
+        console.error("LOAD ORDERS ERROR:", error);
+        body.innerHTML = `<tr><td colspan="7" class="empty-message">Unable to load orders.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
+      });
     }
 
+    function renderOrders(orders) {
+      const body = document.getElementById("ordersTableBody");
+      if (!body) return;
 
-    window.updateOrder =
-      updateOrder;
+      if (!orders.length) {
+        body.innerHTML = `<tr><td colspan="7" class="empty-message">No orders have been placed yet.</td></tr>`;
+        return;
+      }
 
+      body.innerHTML = orders.map(order => {
+        const items = getOrderItems(order);
+        const itemCount = items.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
+        const itemNames = items.slice(0, 2).map(item => item.name || "Product").join(", ");
+        const moreItems = items.length > 2 ? ` + ${items.length - 2} more` : "";
+        const status = ORDER_STATUSES.includes(order.status) ? order.status : "Pending";
+        const user = usersCache[order.userId] || {};
+        const customer = order.customerName || getUserDisplayName(user) || order.email || "Customer";
+
+        return `
+          <tr>
+            <td><div class="order-id-cell">${escapeHTML(order.orderNumber || order.id)}</div></td>
+            <td><div class="admin-user-name">${escapeHTML(customer)}</div><div class="admin-user-email">${escapeHTML(order.email || user.email || "")}</div></td>
+            <td class="admin-muted">${formatAdminDate(order.createdAt)}</td>
+            <td class="order-items-cell">${escapeHTML(itemNames || "No product information")}${escapeHTML(moreItems)}<div class="admin-muted">${itemCount} ${itemCount === 1 ? "item" : "items"}</div></td>
+            <td><strong>${formatAdminCurrency(order.total)}</strong></td>
+            <td><span class="status status-${getStatusClass(status)}">${escapeHTML(status)}</span></td>
+            <td>
+              <select class="order-status-select" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}" aria-label="Change status for ${escapeHTML(order.orderNumber || order.id)}">
+                ${ORDER_STATUSES.map(option => `<option value="${escapeHTML(option)}" ${option === status ? "selected" : ""}>${escapeHTML(option)}</option>`).join("")}
+              </select>
+            </td>
+          </tr>`;
+      }).join("");
+
+      body.querySelectorAll(".order-status-select").forEach(select => {
+        select.addEventListener("change", event => {
+          const target = event.currentTarget;
+          updateOrderStatus(target.dataset.userId, target.dataset.orderId, target.value, target);
+        });
+      });
+    }
+
+    async function updateOrderStatus(userId, orderId, newStatus, selectElement) {
+      if (!userId || !orderId || !ORDER_STATUSES.includes(newStatus)) return;
+
+      const currentOrder = ordersCache.find(order => order.id === orderId && order.userId === userId);
+      const previousStatus = currentOrder?.status || "Pending";
+
+      if (!confirm(`Change order status from "${previousStatus}" to "${newStatus}"?\n\nThe customer will see this updated status in Order History.`)) {
+        if (selectElement) selectElement.value = previousStatus;
+        return;
+      }
+
+      if (selectElement) selectElement.disabled = true;
+
+      try {
+        await update(dbRef(database, `orders/${userId}/${orderId}`), {
+          status: newStatus,
+          updatedAt: Date.now()
+        });
+        alert(`Order status updated to "${newStatus}". ✨`);
+      } catch (error) {
+        console.error("UPDATE ORDER ERROR:", error);
+        if (selectElement) selectElement.value = previousStatus;
+        alert("Unable to update the order status.\n\n" + (error.message || "Firebase error"));
+      } finally {
+        if (selectElement) selectElement.disabled = false;
+      }
+    }
+
+    window.updateOrderStatus = updateOrderStatus;
+
+    function banUser() {
+      alert("Please use the Deactivate button beside the customer account.");
+    }
+    window.banUser = banUser;
+
+    function updateOrder() {
+      alert("Please use the status dropdown beside the order.");
+    }
+    window.updateOrder = updateOrder;
 
     /* =====================================================
        ESCAPE HTML
@@ -4114,5 +4199,4 @@
 
 </body>
 </html>
-
 

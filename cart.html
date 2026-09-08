@@ -805,6 +805,8 @@
       transform: translateY(0);
     }
 
+    .checkout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:25px;overflow-y:auto}.checkout-modal{width:min(720px,100%);max-height:92vh;overflow-y:auto;background:var(--ivory);border-radius:22px;padding:38px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.25)}.checkout-close{position:absolute;top:18px;right:20px;width:38px;height:38px;border:0;border-radius:50%;background:#eee9e3;font-size:25px;cursor:pointer}.checkout-header{text-align:center;margin-bottom:30px}.checkout-header>span{font-size:11px;letter-spacing:4px;font-weight:700}.checkout-header h2{font-family:"Playfair Display",serif;font-size:32px;margin:8px 0}.checkout-header p{color:#777;font-size:13px}.checkout-order-summary{background:#f1ece5;border-radius:16px;padding:22px}.checkout-order-summary h3,.checkout-section h3{font-family:"Playfair Display",serif;font-size:21px;margin-bottom:16px}.checkout-items{display:flex;flex-direction:column;gap:12px}.checkout-item{display:flex;justify-content:space-between;gap:20px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.08)}.checkout-item strong{display:block;font-size:13px}.checkout-item small{display:block;color:#888;margin-top:3px;font-size:11px}.checkout-item>span{font-weight:600;white-space:nowrap}.checkout-total-row{display:flex;justify-content:space-between;padding-top:11px;font-size:13px}.checkout-total-row.grand-total{border-top:1px solid rgba(0,0,0,.12);margin-top:12px;padding-top:17px;font-size:16px}.checkout-section{margin-top:28px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checkout-field{display:flex;flex-direction:column;gap:7px}.checkout-field.full{grid-column:1/-1}.checkout-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#777}.checkout-field input,.checkout-field textarea{width:100%;border:1px solid #ddd5cd;background:white;border-radius:10px;padding:13px 14px;font-family:inherit;font-size:13px;outline:none}.checkout-field input:focus,.checkout-field textarea:focus{border-color:var(--rose-gold)}.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.payment-option{display:flex;gap:12px;align-items:flex-start;border:1px solid #ddd5cd;border-radius:13px;padding:15px;background:white;cursor:pointer}.payment-option input{margin-top:3px;accent-color:var(--rose-gold)}.payment-option strong{display:block;font-size:13px}.payment-option small{display:block;color:#888;font-size:11px;margin-top:4px}.place-order-btn{width:100%;border:0;border-radius:12px;padding:16px;margin-top:25px;background:var(--charcoal);color:white;font-size:12px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:.2s}.place-order-btn:hover{transform:translateY(-2px)}.place-order-btn:disabled{opacity:.6;cursor:wait}.success-modal{width:min(460px,100%);background:var(--ivory);border-radius:22px;padding:45px 35px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25)}.success-icon{width:65px;height:65px;margin:0 auto 20px;border-radius:50%;background:var(--blush);color:var(--rose-gold);display:flex;align-items:center;justify-content:center;font-size:28px}.success-eyebrow{font-size:10px;letter-spacing:3px;font-weight:700;color:var(--rose-gold)}.success-modal h2{font-family:"Playfair Display",serif;font-size:30px;margin:10px 0}.success-modal p{color:#777;font-size:13px;line-height:1.7}.order-number-box{margin:25px 0 15px;padding:18px;background:#f1ece5;border-radius:12px}.order-number-box small{display:block;color:#888;font-size:9px;letter-spacing:2px;margin-bottom:7px}.order-number-box strong{font-family:"Playfair Display",serif;font-size:20px}.success-status{display:inline-flex;align-items:center;gap:7px;background:#f3e5d1;color:#9a7040;padding:7px 13px;border-radius:30px;font-size:11px;margin-bottom:10px}.success-status span{width:7px;height:7px;border-radius:50%;background:#c79758}
+
     /* =====================================================
        RESPONSIVE
     ===================================================== */
@@ -1222,7 +1224,15 @@
        JAVASCRIPT
   ====================================================== -->
 
-  <script>
+  <script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig={apiKey:"AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",authDomain:"noire-17ed6.firebaseapp.com",databaseURL:"https://noire-17ed6-default-rtdb.firebaseio.com",projectId:"noire-17ed6",storageBucket:"noire-17ed6.appspot.com",messagingSenderId:"559789891078",appId:"1:559789891078:web:7bf4c52bce62c3b8b9ad87"};
+    const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getDatabase(app); let currentUser=null;
+    onAuthStateChanged(auth,user=>{currentUser=user;});
 
     /* =====================================================
        CART STORAGE
@@ -1660,35 +1670,35 @@
     ====================================================== */
 
     function checkout() {
-
-      const cart =
-        getCart();
-
-
-      if (cart.length === 0) {
-
-        showToast(
-          "Your shopping bag is empty."
-        );
-
-        return;
-
-      }
-
-
-      /*
-        Front-end placeholder.
-
-        You can later connect this
-        to your checkout/payment system.
-      */
-
-      showToast(
-        "Checkout is coming soon ✨"
-      );
-
+      const cart=getCart();
+      if(!cart.length){showToast("Your shopping bag is empty.");return;}
+      if(!currentUser){showToast("Please log in before checking out.");setTimeout(()=>window.location.href="signuplogin.html",1000);return;}
+      const subtotal=cart.reduce((s,i)=>s+(Number(i.price)||0)*(Number(i.quantity)||0),0);
+      const shipping=subtotal>=1500?0:100; const total=subtotal+shipping;
+      document.getElementById("checkoutModal")?.remove();
+      const modal=document.createElement("div"); modal.id="checkoutModal";
+      modal.innerHTML=`<div class="checkout-overlay"><div class="checkout-modal"><button type="button" class="checkout-close" onclick="closeCheckoutModal()">×</button><div class="checkout-header"><span>NOIRÉ</span><h2>Complete Your Order</h2><p>Almost there. Let's prepare your skincare ritual.</p></div><div class="checkout-order-summary"><h3>Your Order</h3><div class="checkout-items">${cart.map(i=>`<div class="checkout-item"><div><strong>${escapeHtml(i.name||"Product")}</strong><small>Qty: ${Number(i.quantity)||1}</small></div><span>${formatPrice((Number(i.price)||0)*(Number(i.quantity)||0))}</span></div>`).join("")}</div><div class="checkout-total-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div><div class="checkout-total-row"><span>Shipping</span><span>${shipping===0?"FREE":formatPrice(shipping)}</span></div><div class="checkout-total-row grand-total"><span>Total</span><strong>${formatPrice(total)}</strong></div></div><form id="checkoutForm"><div class="checkout-section"><h3>Delivery Information</h3><div class="checkout-grid"><div class="checkout-field full"><label>Full Name</label><input id="checkoutName" required placeholder="Your full name"></div><div class="checkout-field full"><label>Phone Number</label><input id="checkoutPhone" type="tel" required placeholder="09XXXXXXXXX"></div><div class="checkout-field full"><label>Complete Address</label><textarea id="checkoutAddress" rows="4" required placeholder="House/Unit No., Street, Barangay, City, Province, Postal Code"></textarea></div><div class="checkout-field full"><label>Delivery Notes</label><textarea id="checkoutNotes" rows="3" placeholder="Optional instructions for delivery"></textarea></div></div></div><div class="checkout-section"><h3>Payment Method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash on Delivery" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="GCash"><span><strong>GCash</strong><small>Payment method recorded with your order.</small></span></label></div></div><button class="place-order-btn" type="submit">Place Order • ${formatPrice(total)}</button></form></div></div>`;
+      document.body.appendChild(modal);
+      document.getElementById("checkoutForm").addEventListener("submit",e=>placeOrder(e,cart,subtotal,shipping,total));
+      document.body.style.overflow="hidden";
     }
 
+    function closeCheckoutModal(){document.getElementById("checkoutModal")?.remove();document.body.style.overflow="";}
+
+    async function placeOrder(e,cart,subtotal,shipping,total){
+      e.preventDefault(); if(!currentUser){showToast("Please log in first.");return;}
+      const name=document.getElementById("checkoutName").value.trim(),phone=document.getElementById("checkoutPhone").value.trim(),address=document.getElementById("checkoutAddress").value.trim(),notes=document.getElementById("checkoutNotes").value.trim(),paymentMethod=document.querySelector('input[name="paymentMethod"]:checked')?.value||"Cash on Delivery";
+      if(!name||!phone||!address){showToast("Please complete your delivery details.");return;}
+      const btn=document.querySelector(".place-order-btn"); if(btn){btn.disabled=true;btn.textContent="Placing your order...";}
+      try{
+        const orderRef=push(ref(db,"orders/"+currentUser.uid)); const orderNumber="NOIRE-"+Date.now().toString().slice(-8);
+        const order={orderId:orderRef.key,orderNumber,userId:currentUser.uid,email:currentUser.email||"",customerName:name,phone,address,deliveryNotes:notes,paymentMethod,items:cart.map(i=>({id:i.id||"",name:i.name||"Product",price:Number(i.price)||0,quantity:Number(i.quantity)||1,image:i.image||""})),subtotal,shipping,total,status:"Pending",createdAt:Date.now()};
+        await set(orderRef,order); localStorage.removeItem(CART_KEY); closeCheckoutModal(); renderCart(); showOrderSuccess(orderNumber);
+      }catch(error){console.error("Order placement error:",error);if(btn){btn.disabled=false;btn.textContent=`Place Order • ${formatPrice(total)}`;}showToast("Unable to place order. Please try again.");}
+    }
+
+    function showOrderSuccess(orderNumber){const modal=document.createElement("div");modal.id="orderSuccessModal";modal.innerHTML=`<div class="checkout-overlay"><div class="success-modal"><div class="success-icon">✓</div><span class="success-eyebrow">ORDER CONFIRMED</span><h2>Thank you for your order.</h2><p>Your Noiré ritual is officially on its way to being prepared.</p><div class="order-number-box"><small>ORDER NUMBER</small><strong>${escapeHtml(orderNumber)}</strong></div><div class="success-status"><span></span>Pending</div><button type="button" class="place-order-btn" onclick="closeSuccessModal()">View My Orders</button></div></div>`;document.body.appendChild(modal);document.body.style.overflow="hidden";}
+    function closeSuccessModal(){document.getElementById("orderSuccessModal")?.remove();document.body.style.overflow="";window.location.href="account.html";}
 
     /* =====================================================
        TOAST
@@ -1724,6 +1734,8 @@
 
     }
 
+
+    window.checkout=checkout; window.closeCheckoutModal=closeCheckoutModal; window.closeSuccessModal=closeSuccessModal; window.changeQuantity=changeQuantity; window.removeItem=removeItem;
 
     /* =====================================================
        INITIALIZE
