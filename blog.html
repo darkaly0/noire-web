@@ -403,7 +403,7 @@
     }
 
     .featured-bottle::after {
-      content: "NOIRÉ";
+      content: "";
       position: absolute;
       left: 0;
       right: 0;
@@ -542,7 +542,7 @@
     }
 
     .article-shape::after {
-      content: "NOIRÉ";
+      content: "";
       position: absolute;
       top: 62px;
       left: 0;
@@ -842,6 +842,157 @@
        RESPONSIVE
     ========================================================= */
 
+    .community-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .read-post-btn,
+    .edit-post-btn,
+    .delete-post-btn {
+      border: 1px solid rgba(0,0,0,0.10);
+      background: white;
+      color: #555;
+      border-radius: 30px;
+      padding: 8px 13px;
+      cursor: pointer;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+    }
+
+    .read-post-btn {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--charcoal);
+    }
+
+    .read-post-btn:hover, .edit-post-btn:hover {
+      background: var(--rose-gold);
+      border-color: var(--rose-gold);
+      color: white;
+    }
+
+    .delete-post-btn:hover {
+      background: #b34b58;
+      border-color: #b34b58;
+      color: white;
+    }
+
+    .community-card-text {
+      max-height: 105px;
+      position: relative;
+    }
+
+    .journal-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .journal-modal.show { display: flex; }
+
+    .journal-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      backdrop-filter: blur(5px);
+    }
+
+    .journal-modal-box {
+      position: relative;
+      z-index: 1;
+      width: min(900px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--ivory);
+      border-radius: 28px;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.25);
+    }
+
+    .journal-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .journal-modal-image {
+      height: 320px;
+      background: radial-gradient(circle at 30% 25%, #fff, transparent 35%), linear-gradient(135deg, var(--blush), var(--champagne));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .journal-modal-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .journal-modal-body { padding: 42px 48px 50px; }
+
+    .journal-modal-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin: 10px 0 12px;
+    }
+
+    .journal-modal-meta { color: #999; font-size: 0.75rem; margin-bottom: 28px; }
+
+    .journal-modal-content {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.9;
+      white-space: pre-line;
+    }
+
+    .edit-mode-note {
+      display: none;
+      margin: 0 0 18px;
+      padding: 12px 15px;
+      background: rgba(183,110,121,0.08);
+      border: 1px solid rgba(183,110,121,0.16);
+      border-radius: 12px;
+      color: var(--rose-gold);
+      font-size: 0.78rem;
+    }
+
+    .edit-mode-note.show { display: block; }
+
+    .cancel-edit-btn {
+      display: none;
+      margin-left: 8px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: white;
+      color: #555;
+      padding: 14px 22px;
+      border-radius: 40px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .cancel-edit-btn.show { display: inline-flex; }
+
     @media (max-width: 1000px) {
 
       .nav-links {
@@ -984,6 +1135,338 @@
       }
     }
 
+    /* =========================================================
+       COMMUNITY JOURNAL / USER POSTS
+    ========================================================= */
+    .community-section {
+      padding: 100px 7%;
+      background: white;
+    }
+
+    .community-panel {
+      max-width: 1180px;
+      margin: 0 auto 55px;
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 42px;
+    }
+
+    .community-panel.logged-out {
+      text-align: center;
+    }
+
+    .community-panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      margin: 0 0 10px;
+    }
+
+    .community-panel p {
+      color: #777;
+      line-height: 1.7;
+      margin: 0 0 25px;
+    }
+
+    .community-form {
+      display: none;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .community-form.show {
+      display: block;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: white;
+      border-radius: 13px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--charcoal);
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--rose-gold);
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.08);
+    }
+
+    .form-group textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    .image-url-note {
+      color: #999;
+      font-size: 0.72rem;
+      margin-top: 7px;
+    }
+
+    .community-submit {
+      border: none;
+      background: var(--charcoal);
+      color: white;
+      padding: 14px 26px;
+      border-radius: 40px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .community-submit:hover {
+      background: var(--rose-gold);
+      transform: translateY(-2px);
+    }
+
+    .community-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .community-status {
+      margin-top: 15px;
+      font-size: 0.82rem;
+      color: var(--rose-gold);
+      min-height: 20px;
+    }
+
+    .community-user {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .community-user.show {
+      display: flex;
+    }
+
+    .community-user strong {
+      font-size: 0.9rem;
+    }
+
+    .community-user span {
+      color: #888;
+      font-size: 0.78rem;
+    }
+
+    .community-login-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--charcoal);
+      color: white;
+      padding: 14px 25px;
+      border-radius: 40px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .community-login-btn:hover {
+      background: var(--rose-gold);
+      color: white;
+    }
+
+    .community-posts {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .community-posts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .community-posts-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .community-posts-header p {
+      color: #888;
+      font-size: 0.82rem;
+      margin: 0;
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .community-card {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: 0.3s ease;
+    }
+
+    .community-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    }
+
+    .community-card-image {
+      height: 210px;
+      background:
+        radial-gradient(circle at 30% 25%, #fff, transparent 35%),
+        linear-gradient(135deg, var(--blush), var(--champagne));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .community-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .community-placeholder {
+      font-family: 'Playfair Display', serif;
+      color: var(--rose-gold);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
+
+    .community-card-content {
+      padding: 25px;
+    }
+
+    .community-card-category {
+      text-transform: uppercase;
+      letter-spacing: 1.7px;
+      font-size: 0.63rem;
+      font-weight: 700;
+      color: var(--rose-gold);
+    }
+
+    .community-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      font-weight: 500;
+      margin: 10px 0 12px;
+    }
+
+    .community-card-text {
+      color: #777;
+      font-size: 0.86rem;
+      line-height: 1.7;
+      white-space: pre-line;
+      max-height: 115px;
+      overflow: hidden;
+    }
+
+    .community-card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: #999;
+      font-size: 0.68rem;
+    }
+
+    .delete-post-btn {
+      border: none;
+      background: transparent;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 0.68rem;
+      padding: 0;
+    }
+
+    .delete-post-btn:hover {
+      color: #b34b58;
+    }
+
+    .empty-community {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      border: 1px dashed rgba(0,0,0,0.15);
+      border-radius: 22px;
+      color: #888;
+    }
+
+    @media (max-width: 1000px) {
+      .community-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .community-section {
+        padding: 75px 6%;
+      }
+
+      .community-panel {
+        padding: 28px 22px;
+      }
+
+      .form-row,
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .community-posts-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .community-user {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
   </style>
 </head>
 
@@ -1103,209 +1586,152 @@
 
 
   <!-- =========================================================
-       FEATURED ARTICLE
+       COMMUNITY JOURNAL
   ========================================================== -->
-
-  <section class="featured-section">
+  <section class="community-section" id="journal">
 
     <div class="section-header">
+      <div class="section-label">Noiré Journal</div>
 
-      <div class="section-label">
-        Featured
-      </div>
-
-      <h2>
-        Your ritual starts here.
-      </h2>
+      <h2>Stories from the Noiré community.</h2>
 
       <p>
-        A closer look at the habits, ingredients, and little
-        moments that make skincare feel less like a routine
-        and more like a ritual.
+        Read real skincare experiences, rituals, discoveries, and tips shared
+        by Noiré members. Log in to publish your own journal entry.
       </p>
-
     </div>
 
+    <div class="community-panel" id="communityPanel">
 
-    <div class="featured-article">
-
-      <div class="featured-image">
-
-        <div class="featured-bottle"></div>
-
+      <div class="community-user" id="communityUser">
+        <div>
+          <strong>Writing as <span id="currentUserName">Noiré Member</span></strong>
+          <div id="currentUserEmail"></div>
+        </div>
+        <span>Your post will appear publicly in the Noiré Journal.</span>
       </div>
 
-
-      <div class="featured-content">
-
-        <div class="article-category">
-          Glow Guides
-        </div>
-
-        <h3>
-          The secret to a
-          healthier-looking glow
-        </h3>
-
+      <div id="communityLogin">
+        <h3>Become a Noiré Journal contributor.</h3>
         <p>
-          Glowing skin doesn't have to mean a complicated
-          12-step routine. Learn how consistency, hydration,
-          gentle cleansing, and the right ingredients can
-          transform the way your skin looks and feels.
+          Log in to your account to share your own skincare stories
+          with the community.
         </p>
 
-        <a href="#" class="read-more">
-          Read Article →
+        <a href="account.html" class="community-login-btn">
+          Log In to Write
         </a>
+      </div>
 
+      <form class="community-form" id="communityForm">
+
+        <h3>Write your journal entry.</h3>
+
+        <p>
+          Share something useful, personal, or inspiring about skincare
+          and self-care.
+        </p>
+
+        <div class="form-row">
+
+          <div class="form-group">
+            <label for="postTitle">Title</label>
+            <input
+              type="text"
+              id="postTitle"
+              maxlength="120"
+              placeholder="Give your story a beautiful title..."
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="postCategory">Category</label>
+            <select id="postCategory" required>
+              <option value="">Choose a category</option>
+              <option value="Glow Guides">Glow Guides</option>
+              <option value="Ingredient Science">Ingredient Science</option>
+              <option value="Lifestyle & Wellness">Lifestyle & Wellness</option>
+              <option value="Skin Stories">Skin Stories</option>
+              <option value="Tips & Tricks">Tips & Tricks</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="postImage">Cover Image URL <span style="font-weight:400;color:#999;">(optional)</span></label>
+          <input
+            type="url"
+            id="postImage"
+            placeholder="https://example.com/your-image.jpg"
+          >
+          <div class="image-url-note">
+            For now, use an image URL so the post stays lightweight and works across devices.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postContent">Your Story</label>
+          <textarea
+            id="postContent"
+            maxlength="5000"
+            placeholder="Tell the Noiré community what you've learned..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="edit-mode-note" id="editModeNote">You are editing your journal entry. Save your changes when you're ready. ✨</div>
+
+        <button type="submit" class="community-submit" id="submitPost">
+          Publish Journal Entry
+        </button>
+        <button type="button" class="cancel-edit-btn" id="cancelEdit">Cancel Edit</button>
+
+        <div class="community-status" id="postStatus"></div>
+
+      </form>
+    </div>
+
+    <div class="community-posts">
+
+      <div class="community-posts-header">
+        <div>
+          <div class="section-label">Latest Journal Entries</div>
+          <h3>Shared by Noiré members.</h3>
+        </div>
+
+        <p>Click Read More to explore the full story.</p>
+      </div>
+
+      <div class="community-grid" id="communityPosts">
+        <div class="empty-community">
+          <div style="font-size:2rem;margin-bottom:10px;">✦</div>
+          Loading community stories...
+        </div>
       </div>
 
     </div>
 
   </section>
-
 
 
   <!-- =========================================================
-       JOURNAL ARTICLES
+       JOURNAL READER MODAL
   ========================================================== -->
-
-  <section class="journal-section" id="journal">
-
-    <div class="section-header">
-
-      <div class="section-label">
-        Latest Stories
+  <div class="journal-modal" id="journalModal" aria-hidden="true">
+    <div class="journal-modal-backdrop" id="journalModalBackdrop"></div>
+    <div class="journal-modal-box" role="dialog" aria-modal="true" aria-labelledby="modalPostTitle">
+      <button class="journal-modal-close" id="closeJournalModal" aria-label="Close">&times;</button>
+      <div class="journal-modal-image" id="modalPostImage"></div>
+      <div class="journal-modal-body">
+        <div class="community-card-category" id="modalPostCategory"></div>
+        <h2 id="modalPostTitle"></h2>
+        <div class="journal-modal-meta" id="modalPostMeta"></div>
+        <div class="journal-modal-content" id="modalPostContent"></div>
       </div>
-
-      <h2>
-        From the Noiré Journal
-      </h2>
-
-      <p>
-        Knowledge for better skin, better rituals,
-        and a little more self-care.
-      </p>
-
     </div>
-
-
-    <div class="journal-grid">
-
-
-      <!-- ARTICLE 1 -->
-
-      <article class="journal-card">
-
-        <div class="article-image glow-image">
-
-          <div class="article-shape"></div>
-
-        </div>
-
-        <div class="journal-content">
-
-          <div class="article-category">
-            Glow Guides
-          </div>
-
-          <h3>
-            5 simple habits for radiant-looking skin
-          </h3>
-
-          <p>
-            Small daily changes can make a surprisingly
-            big difference. Discover five easy habits
-            that support a healthy-looking glow.
-          </p>
-
-          <a href="#" class="journal-link">
-            Read More
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- ARTICLE 2 -->
-
-      <article class="journal-card">
-
-        <div class="article-image ingredient-image">
-
-          <div class="article-shape"></div>
-
-        </div>
-
-        <div class="journal-content">
-
-          <div class="article-category">
-            Ingredient Science
-          </div>
-
-          <h3>
-            Niacinamide: what does it actually do?
-          </h3>
-
-          <p>
-            From supporting the skin barrier to helping
-            balance excess oil, here's why niacinamide
-            has become a skincare favorite.
-          </p>
-
-          <a href="#" class="journal-link">
-            Read More
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- ARTICLE 3 -->
-
-      <article class="journal-card">
-
-        <div class="article-image wellness-image">
-
-          <div class="article-shape"></div>
-
-        </div>
-
-        <div class="journal-content">
-
-          <div class="article-category">
-            Lifestyle & Wellness
-          </div>
-
-          <h3>
-            Why your skincare routine can be self-care
-          </h3>
-
-          <p>
-            Slow down, breathe, and make room for a few
-            intentional minutes with yourself. Your routine
-            can be more than skincare.
-          </p>
-
-          <a href="#" class="journal-link">
-            Read More
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </article>
-
-    </div>
-
-  </section>
-
+  </div>
 
 
   <!-- =========================================================
@@ -1589,6 +2015,295 @@
     }
 
   </script>
+
+
+  <!-- =========================================================
+       FIREBASE COMMUNITY JOURNAL
+  ========================================================== -->
+  <script type="module">
+    import { initializeApp, getApps, getApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+      getDatabase,
+      ref,
+      push,
+      set,
+      update,
+      onValue,
+      remove
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+      authDomain: "noire-17ed6.firebaseapp.com",
+      databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
+      projectId: "noire-17ed6",
+      storageBucket: "noire-17ed6.appspot.com",
+      messagingSenderId: "559789891078",
+      appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+    };
+
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const communityLogin = document.getElementById("communityLogin");
+    const communityForm = document.getElementById("communityForm");
+    const communityUser = document.getElementById("communityUser");
+    const currentUserName = document.getElementById("currentUserName");
+    const currentUserEmail = document.getElementById("currentUserEmail");
+    const communityPosts = document.getElementById("communityPosts");
+    const postStatus = document.getElementById("postStatus");
+    const submitPost = document.getElementById("submitPost");
+    const cancelEdit = document.getElementById("cancelEdit");
+    const editModeNote = document.getElementById("editModeNote");
+
+    const journalModal = document.getElementById("journalModal");
+    const modalPostImage = document.getElementById("modalPostImage");
+    const modalPostCategory = document.getElementById("modalPostCategory");
+    const modalPostTitle = document.getElementById("modalPostTitle");
+    const modalPostMeta = document.getElementById("modalPostMeta");
+    const modalPostContent = document.getElementById("modalPostContent");
+
+    let currentUser = null;
+    let editingPostId = null;
+    let allPosts = {};
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(timestamp) {
+      if (!timestamp) return "Just now";
+      return new Date(timestamp).toLocaleDateString("en-PH", {
+        year: "numeric", month: "short", day: "numeric"
+      });
+    }
+
+    function displayName(user) {
+      return user?.displayName || user?.email?.split("@")[0] || "Noiré Member";
+    }
+
+    function showLoggedInState(user) {
+      communityLogin.style.display = "none";
+      communityForm.classList.add("show");
+      communityUser.classList.add("show");
+      currentUserName.textContent = displayName(user);
+      currentUserEmail.textContent = user?.email || "";
+    }
+
+    function showLoggedOutState() {
+      communityLogin.style.display = "block";
+      communityForm.classList.remove("show");
+      communityUser.classList.remove("show");
+    }
+
+    function resetEditor() {
+      editingPostId = null;
+      communityForm.reset();
+      editModeNote.classList.remove("show");
+      submitPost.textContent = "Publish Journal Entry";
+      cancelEdit.classList.remove("show");
+      postStatus.textContent = "";
+    }
+
+    function startEdit(postId) {
+      const post = allPosts[postId];
+      if (!post || !currentUser || post.authorId !== currentUser.uid) return;
+
+      editingPostId = postId;
+      document.getElementById("postTitle").value = post.title || "";
+      document.getElementById("postCategory").value = post.category || "";
+      document.getElementById("postImage").value = post.imageUrl || "";
+      document.getElementById("postContent").value = post.content || "";
+      editModeNote.classList.add("show");
+      submitPost.textContent = "Update Journal Entry";
+      cancelEdit.classList.add("show");
+      postStatus.textContent = "";
+      communityForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function openPost(postId) {
+      const post = allPosts[postId];
+      if (!post) return;
+
+      modalPostCategory.textContent = post.category || "Journal";
+      modalPostTitle.textContent = post.title || "Untitled Journal Entry";
+      modalPostMeta.textContent = `By ${post.authorName || "Noiré Member"} · ${formatDate(post.createdAt)}${post.updatedAt ? " · Updated " + formatDate(post.updatedAt) : ""}`;
+      modalPostContent.textContent = post.content || "";
+
+      if (post.imageUrl) {
+        modalPostImage.innerHTML = `<img src="${escapeHTML(post.imageUrl)}" alt="${escapeHTML(post.title)}" onerror="this.parentElement.innerHTML='<div class="community-placeholder">NOIRÉ</div>'">`;
+      } else {
+        modalPostImage.innerHTML = '<div class="community-placeholder">NOIRÉ</div>';
+      }
+
+      journalModal.classList.add("show");
+      journalModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePost() {
+      journalModal.classList.remove("show");
+      journalModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    communityForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      if (!currentUser) {
+        postStatus.textContent = "Please log in first to publish a journal entry.";
+        return;
+      }
+
+      const title = document.getElementById("postTitle").value.trim();
+      const category = document.getElementById("postCategory").value;
+      const imageUrl = document.getElementById("postImage").value.trim();
+      const content = document.getElementById("postContent").value.trim();
+
+      if (!title || !category || !content) {
+        postStatus.textContent = "Please complete the title, category, and story.";
+        return;
+      }
+      if (title.length > 120) {
+        postStatus.textContent = "Please keep your title under 120 characters.";
+        return;
+      }
+      if (content.length < 20) {
+        postStatus.textContent = "Your journal entry should be at least 20 characters.";
+        return;
+      }
+
+      submitPost.disabled = true;
+      submitPost.textContent = editingPostId ? "Updating..." : "Publishing...";
+      postStatus.textContent = "";
+
+      try {
+        if (editingPostId) {
+          const existing = allPosts[editingPostId];
+          if (!existing || existing.authorId !== currentUser.uid) throw new Error("Unauthorized");
+
+          await update(ref(db, "communityPosts/" + editingPostId), {
+            title, category, imageUrl, content, updatedAt: Date.now()
+          });
+
+          resetEditor();
+          postStatus.textContent = "Your journal entry has been updated. ✨";
+        } else {
+          const postRef = push(ref(db, "communityPosts"));
+          await set(postRef, {
+            id: postRef.key, title, category, imageUrl, content,
+            authorId: currentUser.uid,
+            authorName: displayName(currentUser),
+            authorEmail: currentUser.email || "",
+            createdAt: Date.now()
+          });
+
+          communityForm.reset();
+          postStatus.textContent = "Your journal entry is now live. ✨";
+        }
+      } catch (error) {
+        console.error(error);
+        postStatus.textContent = editingPostId
+          ? "We couldn't update your journal entry. Please try again."
+          : "We couldn't publish your post. Please check your Firebase Realtime Database setup.";
+      } finally {
+        submitPost.disabled = false;
+        if (!editingPostId) submitPost.textContent = "Publish Journal Entry";
+      }
+    });
+
+    cancelEdit.addEventListener("click", resetEditor);
+
+    document.getElementById("closeJournalModal").addEventListener("click", closePost);
+    document.getElementById("journalModalBackdrop").addEventListener("click", closePost);
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closePost(); });
+
+    onAuthStateChanged(auth, function(user) {
+      currentUser = user;
+      if (user) showLoggedInState(user);
+      else showLoggedOutState();
+      renderPosts();
+    });
+
+    function renderPosts() {
+      const posts = Object.values(allPosts).sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      if (!posts.length) {
+        communityPosts.innerHTML = `
+          <div class="empty-community">
+            <div style="font-size:2rem;margin-bottom:10px;">✦</div>
+            <strong>No journal entries yet.</strong>
+            <p style="margin:8px 0 0;">Be the first Noiré member to share a story.</p>
+          </div>`;
+        return;
+      }
+
+      communityPosts.innerHTML = posts.map(post => {
+        const safeImage = escapeHTML(post.imageUrl || "");
+        const imageHTML = safeImage
+          ? `<img src="${safeImage}" alt="${escapeHTML(post.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><div class="community-placeholder" style="display:none;">NOIRÉ</div>`
+          : `<div class="community-placeholder">NOIRÉ</div>`;
+        const isOwner = currentUser && currentUser.uid === post.authorId;
+
+        return `
+          <article class="community-card">
+            <div class="community-card-image">${imageHTML}</div>
+            <div class="community-card-content">
+              <div class="community-card-category">${escapeHTML(post.category || "Journal")}</div>
+              <h4>${escapeHTML(post.title || "Untitled Journal Entry")}</h4>
+              <div class="community-card-text">${escapeHTML(post.content || "")}</div>
+              <button class="read-post-btn" data-action="read" data-post-id="${escapeHTML(post.id)}">Read More →</button>
+              <div class="community-card-meta">
+                <span>By ${escapeHTML(post.authorName || "Noiré Member")} · ${formatDate(post.createdAt)}${post.updatedAt ? " · Updated" : ""}</span>
+                ${isOwner ? `<div class="community-card-actions"><button class="edit-post-btn" data-action="edit" data-post-id="${escapeHTML(post.id)}">Edit</button><button class="delete-post-btn" data-action="delete" data-post-id="${escapeHTML(post.id)}">Delete</button></div>` : ""}
+              </div>
+            </div>
+          </article>`;
+      }).join("");
+
+      communityPosts.querySelectorAll("[data-action]").forEach(button => {
+        button.addEventListener("click", async function() {
+          const action = this.dataset.action;
+          const postId = this.dataset.postId;
+          const post = allPosts[postId];
+          if (!post) return;
+
+          if (action === "read") openPost(postId);
+          if (action === "edit") startEdit(postId);
+          if (action === "delete") {
+            if (!currentUser || post.authorId !== currentUser.uid) return;
+            if (!confirm("Delete this journal entry? This cannot be undone.")) return;
+            try {
+              await remove(ref(db, "communityPosts/" + postId));
+              if (editingPostId === postId) resetEditor();
+            } catch (error) {
+              console.error(error);
+              alert("Unable to delete the journal entry.");
+            }
+          }
+        });
+      });
+    }
+
+    onValue(ref(db, "communityPosts"), function(snapshot) {
+      allPosts = snapshot.val() || {};
+      renderPosts();
+    });
+  </script>
+
 
   <!-- =====================================================
      FLOATING CHATBOT WIDGET

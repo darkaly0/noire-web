@@ -959,6 +959,219 @@
     .favorite-remove-modal:active {
       transform:translateY(0);
     }
+
+    /* =====================================================
+       PRODUCT RATINGS & REVIEWS
+    ===================================================== */
+    .product-review-section {
+      margin-top: 24px;
+      padding: 23px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .product-review-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 14px;
+    }
+
+    .product-review-heading h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .product-review-heading span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .review-product {
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #FCFBF8;
+      margin-bottom: 12px;
+    }
+
+    .review-product:last-child {
+      margin-bottom: 0;
+    }
+
+    .review-product-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .review-product-image,
+    .review-product-placeholder {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #eee8e0;
+    }
+
+    .review-product-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .review-product-name {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .review-product-note {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 4px;
+      margin: 5px 0 11px;
+    }
+
+    .review-star {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid #DED8D0;
+      border-radius: 50%;
+      background: white;
+      color: #CFC7BD;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+
+    .review-star:hover,
+    .review-star.selected {
+      color: var(--rose-gold);
+      border-color: rgba(183,110,121,.45);
+      background: var(--blush);
+      transform: translateY(-1px);
+    }
+
+    .review-comment {
+      width: 100%;
+      min-height: 78px;
+      resize: vertical;
+      padding: 11px 12px;
+      border: 1px solid #DDD8D0;
+      border-radius: 10px;
+      background: white;
+      color: var(--charcoal);
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .review-comment:focus {
+      border-color: var(--rose-gold);
+      box-shadow: 0 0 0 3px rgba(183,110,121,.08);
+    }
+
+    .review-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .review-submit-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--black);
+      color: white;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+
+    .review-submit-btn:hover {
+      background: var(--rose-gold);
+      transform: translateY(-1px);
+    }
+
+    .review-submit-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .review-status {
+      color: #5f7a5b;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .review-status.error {
+      color: #9a4d4d;
+    }
+
+    .review-saved {
+      padding: 12px 13px;
+      border-radius: 10px;
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .review-saved strong {
+      color: var(--rose-gold);
+    }
+
+    .review-edit-link {
+      margin-left: 7px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--rose-gold);
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .review-empty-note {
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--ivory);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .review-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .review-submit-btn {
+        width: 100%;
+      }
+    }
+
     @keyframes fadeModal { from{opacity:0} to{opacity:1} }
 
     .orders-list{display:flex;flex-direction:column;gap:16px}.orders-loading{text-align:center;padding:40px;color:#888;font-size:12px}.order-card{border:1px solid var(--line);border-radius:17px;background:var(--ivory);overflow:hidden}.order-card-header{padding:18px 20px;background:#f5f0ea;display:flex;justify-content:space-between;align-items:center;gap:15px}.order-number{font-family:'Playfair Display',serif;font-size:17px;font-weight:600}.order-date{color:#888;font-size:10px;margin-top:4px}.order-status{padding:7px 13px;border-radius:30px;font-size:10px;font-weight:700;white-space:nowrap}.status-pending{background:#f3e5d1;color:#9a7040}.status-processing{background:#e7e1f2;color:#735f9d}.status-shipped{background:#dce8ee;color:#527486}.status-delivered{background:#dce8d9;color:#5f7a5b}.status-cancelled{background:#eadada;color:#9a4d4d}.order-card-body{padding:18px 20px}.order-products{display:flex;flex-direction:column;gap:12px}.order-product{display:flex;align-items:center;justify-content:space-between;gap:15px}.order-product-info{display:flex;align-items:center;gap:12px}.order-product-image,.order-product-placeholder{width:55px;height:55px;border-radius:10px;background:#eee8e0}.order-product-image{object-fit:cover}.order-product-placeholder{display:flex;align-items:center;justify-content:center;font-size:20px}.order-product-name{font-size:12px;font-weight:600}.order-product-qty{font-size:10px;color:#888;margin-top:4px}.order-product-price{font-size:12px;font-weight:600}.order-footer{border-top:1px solid var(--line);margin-top:17px;padding-top:15px;display:flex;justify-content:space-between;align-items:center}.order-payment{color:#888;font-size:10px}.order-total{font-family:'Playfair Display',serif;font-size:19px;font-weight:600}
@@ -1933,6 +2146,192 @@
       }
     }
 
+  
+    .status-preparing-order { background:#eee5f5; color:#76568f; }
+    .status-shipped-out { background:#dce8ee; color:#527486; }
+    .status-out-for-delivery { background:#e5e0f3; color:#675b94; }
+    /* =====================================================
+       MY JOURNAL / COMMUNITY POSTS
+    ===================================================== */
+    .journal-card {
+      grid-column: 1 / -1;
+    }
+
+    .journal-count {
+      margin-left: auto;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: var(--blush);
+      color: var(--rose-gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .my-journal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .my-journal-post {
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      overflow: hidden;
+      background: var(--white);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .my-journal-post:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.07);
+    }
+
+    .my-journal-image {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      display: block;
+      background: var(--ivory);
+    }
+
+    .my-journal-placeholder {
+      width: 100%;
+      height: 175px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--blush), var(--champagne));
+      color: var(--rose-gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .my-journal-content {
+      padding: 18px;
+    }
+
+    .my-journal-category {
+      color: var(--rose-gold);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .my-journal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      line-height: 1.25;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .my-journal-excerpt {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+      white-space: pre-line;
+      max-height: 72px;
+      overflow: hidden;
+    }
+
+    .my-journal-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 15px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+      color: #999;
+      font-size: 9px;
+    }
+
+    .my-journal-delete {
+      border: 0;
+      background: transparent;
+      color: #999;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+    }
+
+    .my-journal-delete:hover {
+      color: #a84d59;
+    }
+
+    .journal-empty {
+      text-align: center;
+      padding: 42px 20px;
+      border: 1px dashed #D9D3CA;
+      border-radius: 16px;
+      background: #FCFBF8;
+      grid-column: 1 / -1;
+    }
+
+    .journal-empty-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: var(--blush);
+      color: var(--rose-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .journal-empty h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .journal-empty p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .journal-write-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--black);
+      color: white;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .journal-write-btn:hover {
+      background: var(--rose-gold);
+      color: white;
+    }
+
+    @media (max-width: 900px) {
+      .my-journal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .my-journal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -2456,6 +2855,49 @@
       </section>
 
 
+
+      <!-- =================================================
+           MY JOURNAL
+      ================================================== -->
+
+      <section class="account-card journal-card fade-up delay-3">
+
+        <div class="card-heading">
+
+          <div class="card-heading-left">
+
+            <div class="card-icon">
+              ✦
+            </div>
+
+            <div>
+              <h2>My Journal</h2>
+              <p>Stories you've shared with the Noiré community</p>
+            </div>
+
+          </div>
+
+          <span id="journalCount" class="journal-count">0</span>
+
+        </div>
+
+        <div id="myJournalContainer">
+          <div class="journal-empty">
+            <div class="journal-empty-icon">✦</div>
+            <h3>No journal entries yet</h3>
+            <p>
+              Share a skincare story, ritual, tip, or discovery
+              with the Noiré community.
+            </p>
+            <a href="blog.html#community" class="journal-write-btn">
+              Write a Journal Entry
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+
       <!-- =================================================
            ORDER HISTORY
       ================================================== -->
@@ -2608,7 +3050,8 @@
       ref,
       get,
       update,
-      onValue
+      onValue,
+      remove
     } from
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -3066,6 +3509,321 @@
     function formatOrderDate(timestamp){if(!timestamp)return "Date unavailable";return new Date(Number(timestamp)).toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"});}
     function formatOrderPrice(value){return (Number(value)||0).toLocaleString("en-PH",{style:"currency",currency:"PHP"});}
     function orderStatusClass(status){return String(status||"Pending").toLowerCase().replace(/\s+/g,"-");}
+
+    /* =====================================================
+       PRODUCT RATINGS & REVIEWS
+       Reviews are available only when an order is Delivered.
+       One review is stored per user/product and can be updated.
+    ===================================================== */
+
+    function getReviewProductId(item) {
+      return String(
+        item?.productId ??
+        item?.productID ??
+        item?.product_id ??
+        item?.id ??
+        item?.sku ??
+        ""
+      ).trim();
+    }
+
+    function getReviewProductName(item) {
+      return item?.name || item?.productName || "Product";
+    }
+
+    function getReviewStars(rating) {
+      const value = Math.max(0, Math.min(5, Number(rating) || 0));
+      return "★★★★★".split("").map((star, index) =>
+        index < value ? "★" : "☆"
+      ).join("");
+    }
+
+    async function getExistingProductReview(productId) {
+      if (!currentUser || !productId) return null;
+
+      try {
+        const snapshot = await get(
+          ref(db, `productReviews/${productId}/${currentUser.uid}`)
+        );
+        return snapshot.exists() ? snapshot.val() : null;
+      } catch (error) {
+        console.error("Review lookup error:", error);
+        return null;
+      }
+    }
+
+    function reviewProductMarkup(item, index, existingReview) {
+      const productId = getReviewProductId(item);
+      const productName = getReviewProductName(item);
+      const image = item?.image || "";
+
+      const imageMarkup = image
+        ? `<img src="${safe(image)}" alt="${safe(productName)}" class="review-product-image">`
+        : `<div class="review-product-placeholder">🧴</div>`;
+
+      // If an order item has no stable product ID, still show the product
+      // but disable saving rather than accidentally writing to an invalid path.
+      if (!productId) {
+        return `
+          <div class="review-product">
+            <div class="review-product-top">
+              ${imageMarkup}
+              <div>
+                <div class="review-product-name">${safe(productName)}</div>
+                <div class="review-product-note">Product ID unavailable for review.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (existingReview) {
+        return `
+          <div class="review-product"
+               data-review-product="${safe(productId)}"
+               data-review-name="${safe(productName)}">
+            <div class="review-product-top">
+              ${imageMarkup}
+              <div>
+                <div class="review-product-name">${safe(productName)}</div>
+                <div class="review-product-note">Your review</div>
+              </div>
+            </div>
+
+            <div class="review-saved">
+              <strong>${getReviewStars(existingReview.rating)}</strong>
+              <span style="margin-left:7px;">
+                ${Number(existingReview.rating)}/5
+              </span>
+              <br>
+              ${existingReview.comment
+                ? safe(existingReview.comment)
+                : "<em>No comment added.</em>"}
+              <button
+                type="button"
+                class="review-edit-link"
+                data-edit-review="${safe(productId)}"
+              >Edit review</button>
+            </div>
+
+            <div class="review-editor" id="reviewEditor-${safe(productId)}" style="display:none;">
+              ${reviewEditorMarkup(productId, productName, image, existingReview, index)}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="review-product"
+             data-review-product="${safe(productId)}"
+             data-review-name="${safe(productName)}">
+          <div class="review-product-top">
+            ${imageMarkup}
+            <div>
+              <div class="review-product-name">${safe(productName)}</div>
+              <div class="review-product-note">How was this product?</div>
+            </div>
+          </div>
+
+          ${reviewEditorMarkup(productId, productName, image, null, index)}
+        </div>
+      `;
+    }
+
+    function reviewEditorMarkup(productId, productName, image, existingReview, index) {
+      const rating = Number(existingReview?.rating) || 0;
+      const comment = existingReview?.comment || "";
+
+      return `
+        <div class="review-editor-form"
+             data-review-form="${safe(productId)}">
+          <div class="review-stars"
+               role="radiogroup"
+               aria-label="Rate ${safe(productName)} from 1 to 5 stars">
+            ${[1,2,3,4,5].map(value => `
+              <button
+                type="button"
+                class="review-star ${value <= rating ? "selected" : ""}"
+                data-review-star="${value}"
+                aria-label="${value} star${value > 1 ? "s" : ""}"
+                aria-pressed="${value === rating ? "true" : "false"}"
+              >★</button>
+            `).join("")}
+          </div>
+
+          <textarea
+            class="review-comment"
+            data-review-comment
+            maxlength="1000"
+            placeholder="Tell us about your experience with this product..."
+          >${safe(comment)}</textarea>
+
+          <div class="review-actions">
+            <button
+              type="button"
+              class="review-submit-btn"
+              data-submit-review="${safe(productId)}"
+            >${existingReview ? "Update Review" : "Submit Review"}</button>
+            <span class="review-status" data-review-status></span>
+          </div>
+        </div>
+      `;
+    }
+
+    function setupReviewControls(order) {
+      const modal = $("orderDetailsModal");
+      if (!modal) return;
+
+      modal.querySelectorAll("[data-review-star]").forEach(star => {
+        star.addEventListener("click", () => {
+          const form = star.closest("[data-review-form]");
+          if (!form) return;
+
+          const selected = Number(star.dataset.reviewStar);
+
+          form.querySelectorAll("[data-review-star]").forEach(button => {
+            const value = Number(button.dataset.reviewStar);
+            const active = value <= selected;
+            button.classList.toggle("selected", active);
+            button.setAttribute("aria-pressed", active && value === selected ? "true" : "false");
+          });
+
+          form.dataset.selectedRating = String(selected);
+        });
+      });
+
+      modal.querySelectorAll("[data-submit-review]").forEach(button => {
+        button.addEventListener("click", async () => {
+          const productId = button.dataset.submitReview;
+          const form = modal.querySelector(`[data-review-form="${CSS.escape(productId)}"]`);
+          const statusEl = form?.querySelector("[data-review-status]");
+
+          if (!currentUser || !form || !statusEl) return;
+
+          const rating = Number(form.dataset.selectedRating) ||
+            Number(form.querySelector(".review-star.selected:last-of-type")?.dataset.reviewStar) || 0;
+
+          const comment = form.querySelector("[data-review-comment]")?.value.trim() || "";
+
+          if (rating < 1 || rating > 5) {
+            statusEl.textContent = "Please choose a star rating first.";
+            statusEl.classList.add("error");
+            return;
+          }
+
+          button.disabled = true;
+          statusEl.classList.remove("error");
+          statusEl.textContent = "Saving...";
+
+          try {
+            const reviewRef = ref(
+              db,
+              `productReviews/${productId}/${currentUser.uid}`
+            );
+
+            const existingSnapshot = await get(reviewRef);
+            const existing = existingSnapshot.exists()
+              ? existingSnapshot.val()
+              : null;
+
+            const payload = {
+              productId,
+              productName: form.closest("[data-review-product]")?.dataset.reviewName || "Product",
+              userId: currentUser.uid,
+              userName:
+                currentData.username ||
+                currentUser.displayName ||
+                currentUser.email?.split("@")[0] ||
+                "Noiré Member",
+              userEmail: currentUser.email || "",
+              rating,
+              comment,
+              orderId: order.id,
+              createdAt: existing?.createdAt || Date.now(),
+              updatedAt: Date.now()
+            };
+
+            await update(reviewRef, payload);
+
+            statusEl.textContent = "Review saved ✦";
+
+            // Refresh the order details so the saved review becomes read-only
+            // until the user chooses Edit review.
+            setTimeout(() => {
+              openOrderDetails(order.id);
+            }, 250);
+
+          } catch (error) {
+            console.error("Review save error:", error);
+            statusEl.textContent = "Unable to save. Please try again.";
+            statusEl.classList.add("error");
+            button.disabled = false;
+          }
+        });
+      });
+
+      modal.querySelectorAll("[data-edit-review]").forEach(button => {
+        button.addEventListener("click", () => {
+          const productId = button.dataset.editReview;
+          const editor = modal.querySelector(`#reviewEditor-${CSS.escape(productId)}`);
+          if (editor) {
+            editor.style.display = "block";
+            button.style.display = "none";
+
+            const form = editor.querySelector("[data-review-form]");
+            const selected = form?.querySelector(".review-star.selected:last-of-type");
+            if (form && selected) {
+              form.dataset.selectedRating = selected.dataset.reviewStar;
+            }
+          }
+        });
+      });
+    }
+
+    async function buildDeliveredReviews(order, items) {
+      if (String(order.status || "").trim().toLowerCase() !== "delivered") {
+        return "";
+      }
+
+      if (!items.length) {
+        return `
+          <div class="product-review-section">
+            <div class="product-review-heading">
+              <h3>Rate Your Products</h3>
+            </div>
+            <div class="review-empty-note">
+              There are no product details available to review.
+            </div>
+          </div>
+        `;
+      }
+
+      const reviewEntries = await Promise.all(
+        items.map(async (item, index) => ({
+          item,
+          index,
+          review: await getExistingProductReview(getReviewProductId(item))
+        }))
+      );
+
+      return `
+        <div class="product-review-section">
+          <div class="product-review-heading">
+            <h3>Rate Your Products</h3>
+            <span>Delivered order</span>
+          </div>
+
+          <p style="color:var(--muted);font-size:11px;line-height:1.6;margin-bottom:15px;">
+            Share a 1–5 star rating and optional comments for each product you received.
+          </p>
+
+          ${reviewEntries.map(({item, index, review}) =>
+            reviewProductMarkup(item, index, review)
+          ).join("")}
+        </div>
+      `;
+    }
+
     function loadOrderHistory(user) {
       const container = $("ordersContainer");
       if (!container) return;
@@ -3182,7 +3940,7 @@
 
         container.querySelectorAll(".order-card-clickable").forEach(card => {
           card.addEventListener("click", () => {
-            openOrderDetails(card.dataset.orderId);
+            void openOrderDetails(card.dataset.orderId);
           });
         });
       }, (error) => {
@@ -3197,7 +3955,7 @@
       });
     }
 
-    function openOrderDetails(orderId) {
+    async function openOrderDetails(orderId) {
       const order = currentOrders[orderId];
       const modal = $("orderDetailsModal");
       const content = $("orderDetailsContent");
@@ -3323,11 +4081,17 @@
             <strong>${formatOrderPrice(order.total)}</strong>
           </div>
         </div>
+
+        ${await buildDeliveredReviews(order, items)}
       `;
 
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
+
+      if (String(status).trim().toLowerCase() === "delivered") {
+        setupReviewControls(order);
+      }
     }
 
     function closeOrderDetails() {
@@ -3664,6 +4428,220 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         closeOrderDetails();
+      }
+    });
+
+
+
+    /* =====================================================
+       MY JOURNAL / COMMUNITY POSTS
+       Posts created in blog.html are saved under:
+       communityPosts/{postId}
+       Each post contains authorId, so only the logged-in
+       user's own posts are shown here.
+    ===================================================== */
+
+    function journalSafe(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function journalDate(timestamp) {
+      if (!timestamp) return "Just now";
+
+      return new Date(timestamp).toLocaleDateString("en-PH", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function journalImageHTML(post) {
+      if (!post.imageUrl) {
+        return `<div class="my-journal-placeholder">NOIRÉ</div>`;
+      }
+
+      const image = journalSafe(post.imageUrl);
+      const title = journalSafe(post.title);
+
+      return `
+        <img
+          class="my-journal-image"
+          src="${image}"
+          alt="${title}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        >
+        <div class="my-journal-placeholder" style="display:none;">NOIRÉ</div>
+      `;
+    }
+
+    async function loadMyJournalPosts(user) {
+      const container = document.getElementById("myJournalContainer");
+      const count = document.getElementById("journalCount");
+
+      if (!container || !count || !user) return;
+
+      container.innerHTML = `
+        <div class="journal-empty">
+          <div class="journal-empty-icon">✦</div>
+          <p>Loading your journal entries...</p>
+        </div>
+      `;
+
+      try {
+        const postsSnapshot = await get(ref(db, "communityPosts"));
+        const allPosts = postsSnapshot.exists()
+          ? Object.values(postsSnapshot.val())
+          : [];
+
+        const myPosts = allPosts
+          .filter(post => post && post.authorId === user.uid)
+          .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+        count.textContent = myPosts.length;
+
+        if (!myPosts.length) {
+          container.innerHTML = `
+            <div class="journal-empty">
+              <div class="journal-empty-icon">✦</div>
+              <h3>No journal entries yet</h3>
+              <p>
+                Share a skincare story, ritual, tip, or discovery
+                with the Noiré community.
+              </p>
+              <a href="blog.html#community" class="journal-write-btn">
+                Write a Journal Entry
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="my-journal-grid">
+            ${myPosts.map(post => `
+              <article class="my-journal-post">
+                ${journalImageHTML(post)}
+
+                <div class="my-journal-content">
+
+                  <div class="my-journal-category">
+                    ${journalSafe(post.category || "Journal")}
+                  </div>
+
+                  <div class="my-journal-title">
+                    ${journalSafe(post.title)}
+                  </div>
+
+                  <div class="my-journal-excerpt">
+                    ${journalSafe(post.content)}
+                  </div>
+
+                  <div class="my-journal-meta">
+                    <span>${journalDate(post.createdAt)}</span>
+
+                    <button
+                      type="button"
+                      class="my-journal-delete"
+                      data-journal-id="${journalSafe(post.id)}"
+                    >
+                      Delete
+                    </button>
+                  </div>
+
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        `;
+
+        container.querySelectorAll(".my-journal-delete").forEach(button => {
+          button.addEventListener("click", async () => {
+            const postId = button.dataset.journalId;
+
+            if (!postId) return;
+
+            const confirmed = confirm(
+              "Delete this journal entry? This cannot be undone."
+            );
+
+            if (!confirmed) return;
+
+            try {
+              /*
+                Security check is done here too:
+                the page only deletes a post after confirming that
+                its authorId matches the currently logged-in user.
+              */
+              const postSnapshot = await get(
+                ref(db, "communityPosts/" + postId)
+              );
+
+              if (!postSnapshot.exists()) {
+                await loadMyJournalPosts(user);
+                return;
+              }
+
+              const post = postSnapshot.val();
+
+              if (post.authorId !== user.uid) {
+                alert("You can only delete your own journal entries.");
+                return;
+              }
+
+              await remove(
+                ref(db, "communityPosts/" + postId)
+              );
+
+              await loadMyJournalPosts(user);
+
+            } catch (error) {
+              console.error("Delete journal error:", error);
+              alert(
+                "Unable to delete this journal entry.\n\n" +
+                (error.message || "Please try again.")
+              );
+            }
+          });
+        });
+
+      } catch (error) {
+        console.error("Load journal posts error:", error);
+
+        count.textContent = "0";
+
+        container.innerHTML = `
+          <div class="journal-empty">
+            <div class="journal-empty-icon">!</div>
+            <h3>Unable to load your journal</h3>
+            <p>
+              Please refresh the page and try again.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    /*
+      Run after the existing account authentication listener
+      has identified the logged-in user.
+    */
+    if (typeof currentUser !== "undefined" && currentUser) {
+      loadMyJournalPosts(currentUser);
+    }
+
+    /*
+      If the existing page exposes auth through onAuthStateChanged,
+      this additional listener keeps My Journal synchronized.
+      It does not replace the account page's existing auth logic.
+    */
+    onAuthStateChanged(auth, function(user) {
+      if (user) {
+        loadMyJournalPosts(user);
       }
     });
 
