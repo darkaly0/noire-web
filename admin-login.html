@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noiré Admin Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --charcoal:#000;
+      --ivory:#F9F9F6;
+      --champagne:#F7E7CE;
+      --rose-gold:#B76E79;
+      --border:#e9e3dc;
+      --gray:#777;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top right,rgba(247,231,206,.6),transparent 32%),
+        var(--ivory);
+      font-family:"DM Sans","Segoe UI",sans-serif;
+      color:var(--charcoal);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .login-shell{
+      width:min(440px,100%);
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:26px;
+      padding:42px;
+      box-shadow:0 25px 70px rgba(0,0,0,.09);
+    }
+
+    .brand{text-align:center;margin-bottom:32px}
+
+    .brand-main{
+      font:500 40px/1 "Playfair Display",serif;
+      letter-spacing:7px;
+    }
+
+    .brand-sub{
+      display:block;
+      color:var(--rose-gold);
+      font-size:9px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin-top:9px;
+    }
+
+    .eyebrow{
+      color:var(--rose-gold);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font:500 34px/1.1 "Playfair Display",serif;
+      margin:0 0 9px;
+    }
+
+    p{
+      color:var(--gray);
+      font-size:13px;
+      line-height:1.7;
+      margin:0 0 25px;
+    }
+
+    .form-group{margin-bottom:16px}
+
+    .form-group label{
+      display:block;
+      font-size:11px;
+      font-weight:700;
+      margin-bottom:7px;
+    }
+
+    input{
+      width:100%;
+      padding:13px;
+      border:1px solid #ddd;
+      border-radius:10px;
+      outline:none;
+      font:13px "DM Sans",sans-serif;
+    }
+
+    input:focus{
+      border-color:var(--rose-gold);
+      box-shadow:0 0 0 3px rgba(183,110,121,.08);
+    }
+
+    button{
+      width:100%;
+      border:0;
+      background:#000;
+      color:#fff;
+      border-radius:10px;
+      padding:13px;
+      font:700 12px "DM Sans",sans-serif;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    button:hover{
+      background:var(--rose-gold);
+      transform:translateY(-1px);
+    }
+
+    button:disabled{
+      opacity:.55;
+      cursor:wait;
+      transform:none;
+    }
+
+    .error{
+      display:none;
+      background:#f8e5e5;
+      color:#8b3030;
+      border:1px solid #efcccc;
+      border-radius:10px;
+      padding:11px;
+      font-size:11px;
+      line-height:1.5;
+      margin-bottom:16px;
+    }
+
+    .setup{
+      display:none;
+      margin-top:28px;
+      padding-top:25px;
+      border-top:1px solid var(--border);
+    }
+
+    .setup button{
+      background:#fff;
+      color:#000;
+      border:1px solid var(--border);
+    }
+
+    .setup button:hover{
+      background:var(--ivory);
+      color:var(--rose-gold);
+      border-color:var(--rose-gold);
+    }
+
+    .security-note{
+      margin-top:22px;
+      text-align:center;
+      font-size:10px;
+      color:#aaa;
+      line-height:1.6;
+    }
+
+    @media(max-width:500px){
+      .login-shell{padding:30px 23px}
+      .brand-main{font-size:33px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-shell">
+
+    <div class="brand">
+      <div class="brand-main">NOIRÉ</div>
+      <span class="brand-sub">Skincare Administration</span>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginView">
+
+      <div class="eyebrow">Noiré Control Suite</div>
+
+      <h1>Welcome back.</h1>
+
+      <p>
+        Sign in with your administrator account
+        to manage the Noiré storefront.
+      </p>
+
+      <div id="loginError" class="error"></div>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="email">EMAIL ADDRESS</label>
+          <input
+            id="email"
+            type="email"
+            autocomplete="username"
+            placeholder="admin@noire.com"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">PASSWORD</label>
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            required
+          >
+        </div>
+
+        <button id="loginButton" type="submit">
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="security-note">
+        Protected by Firebase Authentication · Noiré Admin Portal
+      </div>
+
+      <!-- Shown only if no admin profile exists -->
+      <div id="setupSection" class="setup">
+
+        <div class="eyebrow">First-time setup</div>
+
+        <p>
+          No administrator profile exists yet.
+          Create the first Noiré administrator.
+        </p>
+
+        <button type="button" id="setupButton">
+          Create First Admin
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- FIRST ADMIN SETUP -->
+    <div id="setupView" style="display:none">
+
+      <div class="eyebrow">Administrator Setup</div>
+
+      <h1>Create admin.</h1>
+
+      <p>
+        This creates the first administrator account
+        using Firebase Authentication.
+      </p>
+
+      <div id="setupError" class="error"></div>
+
+      <form id="setupForm">
+
+        <div class="form-group">
+          <label for="setupName">FULL NAME</label>
+          <input
+            id="setupName"
+            required
+            placeholder="Your name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="setupEmail">EMAIL ADDRESS</label>
+          <input
+            id="setupEmail"
+            type="email"
+            required
+            placeholder="admin@noire.com"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="setupPassword">PASSWORD</label>
+          <input
+            id="setupPassword"
+            type="password"
+            minlength="6"
+            required
+            placeholder="At least 6 characters"
+          >
+        </div>
+
+        <button id="setupSubmit" type="submit">
+          Create Administrator
+        </button>
+
+      </form>
+
+      <div style="margin-top:12px">
+        <button
+          type="button"
+          id="backButton"
+          style="background:#fff;color:#000;border:1px solid #e9e3dc"
+        >
+          Back to Login
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <script type="module">
+
+    import {
+      initializeApp,
+      getApps
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    import {
+      getDatabase,
+      ref,
+      get,
+      set
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",
+      authDomain: "noire-17ed6.firebaseapp.com",
+      databaseURL: "https://noire-17ed6-default-rtdb.firebaseio.com",
+      projectId: "noire-17ed6",
+      storageBucket: "noire-17ed6.appspot.com",
+      messagingSenderId: "559789891078",
+      appId: "1:559789891078:web:7bf4c52bce62c3b8b9ad87"
+    };
+
+
+    const app =
+      getApps().find(
+        item => item.name === "[DEFAULT]"
+      ) ||
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+    const database =
+      getDatabase(app);
+
+
+    const loginView =
+      document.getElementById("loginView");
+
+    const setupView =
+      document.getElementById("setupView");
+
+    const setupSection =
+      document.getElementById("setupSection");
+
+
+    function showError(
+      id,
+      message
+    ) {
+
+      const box =
+        document.getElementById(id);
+
+      box.textContent =
+        message;
+
+      box.style.display =
+        "block";
+    }
+
+
+    function clearError(id) {
+
+      const box =
+        document.getElementById(id);
+
+      box.textContent =
+        "";
+
+      box.style.display =
+        "none";
+    }
+
+
+    async function checkAdminProfiles() {
+
+      try {
+
+        const snapshot =
+          await get(
+            ref(database, "admins")
+          );
+
+        if (
+          !snapshot.exists() ||
+          !Object.keys(
+            snapshot.val() || {}
+          ).length
+        ) {
+          setupSection.style.display =
+            "block";
+        }
+
+      } catch (error) {
+
+        console.error(
+          "CHECK ADMIN PROFILES ERROR:",
+          error
+        );
+
+      }
+    }
+
+
+    onAuthStateChanged(
+      auth,
+      async user => {
+
+        if (!user) {
+          checkAdminProfiles();
+          return;
+        }
+
+        try {
+
+          const snapshot =
+            await get(
+              ref(
+                database,
+                `admins/${user.uid}`
+              )
+            );
+
+          if (
+            snapshot.exists() &&
+            String(
+              snapshot.val().status ||
+              "Active"
+            ).toLowerCase() === "active"
+          ) {
+
+            window.location.replace(
+              "admin.html"
+            );
+
+          } else {
+
+            await signOut(auth);
+
+            showError(
+              "loginError",
+              "This Firebase account is not registered as an active Noiré administrator."
+            );
+
+          }
+
+        } catch (error) {
+
+          await signOut(auth);
+
+          showError(
+            "loginError",
+            "Unable to verify administrator access."
+          );
+
+        }
+
+      }
+    );
+
+
+    document
+      .getElementById("loginForm")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearError("loginError");
+
+          const button =
+            document.getElementById(
+              "loginButton"
+            );
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Signing In...";
+
+          try {
+
+            const credential =
+              await signInWithEmailAndPassword(
+                auth,
+                document
+                  .getElementById("email")
+                  .value
+                  .trim(),
+                document
+                  .getElementById("password")
+                  .value
+              );
+
+            const snapshot =
+              await get(
+                ref(
+                  database,
+                  `admins/${credential.user.uid}`
+                )
+              );
+
+            if (!snapshot.exists()) {
+
+              await signOut(auth);
+
+              throw new Error(
+                "This account is not registered as a Noiré administrator."
+              );
+            }
+
+            const profile =
+              snapshot.val();
+
+            if (
+              String(
+                profile.status ||
+                "Active"
+              ).toLowerCase() !== "active"
+            ) {
+
+              await signOut(auth);
+
+              throw new Error(
+                "This administrator account is inactive."
+              );
+            }
+
+            window.location.replace(
+              "admin.html"
+            );
+
+          } catch (error) {
+
+            console.error(
+              "ADMIN LOGIN ERROR:",
+              error
+            );
+
+            let message =
+              error.message ||
+              "Unable to sign in.";
+
+            if (
+              error.code ===
+              "auth/invalid-credential"
+            ) {
+              message =
+                "Incorrect email or password.";
+            }
+
+            if (
+              error.code ===
+              "auth/user-not-found"
+            ) {
+              message =
+                "No account was found with that email.";
+            }
+
+            if (
+              error.code ===
+              "auth/wrong-password"
+            ) {
+              message =
+                "Incorrect email or password.";
+            }
+
+            if (
+              error.code ===
+              "auth/too-many-requests"
+            ) {
+              message =
+                "Too many attempts. Please try again later.";
+            }
+
+            showError(
+              "loginError",
+              message
+            );
+
+          } finally {
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Sign In";
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("setupButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          loginView.style.display =
+            "none";
+
+          setupView.style.display =
+            "block";
+
+          clearError(
+            "setupError"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById("backButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          setupView.style.display =
+            "none";
+
+          loginView.style.display =
+            "block";
+
+          checkAdminProfiles();
+
+        }
+      );
+
+
+    document
+      .getElementById("setupForm")
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearError("setupError");
+
+          const button =
+            document.getElementById(
+              "setupSubmit"
+            );
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Creating...";
+
+          try {
+
+            const existing =
+              await get(
+                ref(
+                  database,
+                  "admins"
+                )
+              );
+
+            if (
+              existing.exists() &&
+              Object.keys(
+                existing.val() || {}
+              ).length
+            ) {
+
+              throw new Error(
+                "An administrator already exists. Please use the normal login."
+              );
+
+            }
+
+            const name =
+              document
+                .getElementById("setupName")
+                .value
+                .trim();
+
+            const email =
+              document
+                .getElementById("setupEmail")
+                .value
+                .trim()
+                .toLowerCase();
+
+            const password =
+              document
+                .getElementById("setupPassword")
+                .value;
+
+
+            const credential =
+              await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+              );
+
+
+            await updateProfile(
+              credential.user,
+              {
+                displayName:
+                  name
+              }
+            );
+
+
+            await set(
+              ref(
+                database,
+                `admins/${credential.user.uid}`
+              ),
+              {
+                uid:
+                  credential.user.uid,
+
+                name,
+                email,
+
+                role:
+                  "Super Admin",
+
+                status:
+                  "Active",
+
+                createdAt:
+                  Date.now(),
+
+                createdBy:
+                  credential.user.uid
+              }
+            );
+
+
+            window.location.replace(
+              "admin.html"
+            );
+
+          } catch (error) {
+
+            console.error(
+              "FIRST ADMIN SETUP ERROR:",
+              error
+            );
+
+            let message =
+              error.message ||
+              "Unable to create administrator.";
+
+            if (
+              error.code ===
+              "auth/email-already-in-use"
+            ) {
+              message =
+                "That email address is already registered in Firebase Authentication.";
+            }
+
+            if (
+              error.code ===
+              "auth/weak-password"
+            ) {
+              message =
+                "Password must be at least 6 characters.";
+            }
+
+            showError(
+              "setupError",
+              message
+            );
+
+          } finally {
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Create Administrator";
+
+          }
+
+        }
+      );
+
+  </script>
+
+</body>
+</html>

@@ -992,6 +992,144 @@
 
     }
 
+    /* =====================================================
+       RATINGS & REVIEW INSIGHTS
+    ====================================================== */
+
+    .rating-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .rating-stars {
+      color: var(--rose-gold);
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+
+    .rating-number {
+      font-weight: 700;
+      color: var(--charcoal);
+      font-size: 11px;
+    }
+
+    .rating-count {
+      color: var(--soft-gray);
+      font-size: 10px;
+    }
+
+    .rating-none {
+      color: #aaa;
+      font-size: 10px;
+    }
+
+    .review-comment {
+      max-width: 260px;
+      white-space: normal;
+      line-height: 1.45;
+      color: #555;
+      font-size: 10px;
+    }
+
+    .review-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .review-meta {
+      color: var(--soft-gray);
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .rating-insights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .rating-insight-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.035);
+    }
+
+    .rating-insight-label {
+      color: var(--soft-gray);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 9px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .rating-insight-number {
+      font-family: "Playfair Display", serif;
+      font-size: 29px;
+      line-height: 1;
+      color: var(--charcoal);
+    }
+
+    .rating-distribution-card {
+      margin-top: 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .distribution-row {
+      display: grid;
+      grid-template-columns: 42px 1fr 45px;
+      align-items: center;
+      gap: 10px;
+      margin: 9px 0;
+      font-size: 10px;
+    }
+
+    .distribution-track {
+      height: 7px;
+      background: #f0eeeb;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .distribution-fill {
+      height: 100%;
+      background: var(--rose-gold);
+      border-radius: 20px;
+      min-width: 0;
+    }
+
+    .rating-summary-box {
+      margin-top: 10px;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      background: var(--ivory);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .rating-insights-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .rating-insights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* FIREBASE USERS & ORDERS */
     .admin-data-table { min-width: 900px; }
     .admin-data-table td { vertical-align: middle; }
@@ -1009,6 +1147,7 @@
     .status-out-for-delivery { background: #e5e0f3; color: #675b94; }
     .status-delivered { background: #dce8d9; color: #5f7a5b; }
     .user-status-btn { min-width: 88px; }
+    .action-buttons .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
     .admin-count-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 27px; height: 27px; padding: 0 8px; border-radius: 30px; background: var(--ivory); border: 1px solid var(--border); font-size: 10px; font-weight: 700; }
     @media (max-width: 700px) { .admin-data-table { min-width: 850px; } }
 
@@ -1047,9 +1186,10 @@
 
       </a>
 
-      <span class="admin-label">
-        Admin Panel · 2026
-      </span>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="admin-label">Admin Panel · 2026</span>
+        <button type="button" class="btn btn-outline" onclick="adminLogout()" style="padding:9px 13px;">Log Out</button>
+      </div>
 
     </div>
 
@@ -1112,6 +1252,13 @@
         onclick="openTab('orders')"
       >
         Orders
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="openTab('admins')"
+      >
+        Admins
       </button>
 
     </div>
@@ -1218,6 +1365,47 @@
 
       </div>
 
+    </div>
+
+    <!-- RATING INSIGHTS -->
+    <div class="rating-insights-grid">
+
+      <div class="rating-insight-card">
+        <div class="rating-insight-label">Average Rating</div>
+        <div id="averageRatingInsight" class="rating-insight-number">0.0 ★</div>
+      </div>
+
+      <div class="rating-insight-card">
+        <div class="rating-insight-label">Total Reviews</div>
+        <div id="totalReviewsInsight" class="rating-insight-number">0</div>
+      </div>
+
+      <div class="rating-insight-card">
+        <div class="rating-insight-label">5-Star Reviews</div>
+        <div id="fiveStarInsight" class="rating-insight-number">0</div>
+      </div>
+
+      <div class="rating-insight-card">
+        <div class="rating-insight-label">Rated Products</div>
+        <div id="ratedProductsInsight" class="rating-insight-number">0</div>
+      </div>
+
+    </div>
+
+    <div class="rating-distribution-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;">
+        <div>
+          <h3 style="margin:0;font-family:'Playfair Display',serif;font-size:22px;font-weight:500;">
+            Customer Rating Insights
+          </h3>
+          <p style="margin:5px 0 0;color:var(--soft-gray);font-size:11px;">
+            Ratings submitted from delivered orders.
+          </p>
+        </div>
+        <div id="ratingInsightSummary" class="admin-muted">No reviews yet.</div>
+      </div>
+
+      <div id="ratingDistribution" style="margin-top:16px;"></div>
     </div>
 
   </div>
@@ -1374,6 +1562,10 @@
                 </th>
 
                 <th>
+                  Rating
+                </th>
+
+                <th>
                   Actions
                 </th>
 
@@ -1427,13 +1619,104 @@
       </div>
       <div class="table-container">
         <table class="admin-data-table orders-admin-table">
-          <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Update Status</th></tr></thead>
-          <tbody id="ordersTableBody"><tr><td colspan="7" class="empty-message">Loading orders...</td></tr></tbody>
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Reviews</th><th>Update Status</th></tr></thead>
+          <tbody id="ordersTableBody"><tr><td colspan="8" class="empty-message">Loading orders...</td></tr></tbody>
         </table>
       </div>
     </div>
   </div>
 
+
+  <!-- =====================================================
+       ADMINS
+  ====================================================== -->
+
+  <div id="admins" class="tab-content">
+    <div class="simple-card">
+      <div class="simple-card-header">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+          <div>
+            <h2>Manage Admins</h2>
+            <p>Register, edit, deactivate, and remove Noiré administrator profiles.</p>
+          </div>
+          <button type="button" class="btn" onclick="openAdminModal()">+ Add Admin</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminsTableBody">
+            <tr>
+              <td colspan="6" class="empty-message">Loading administrators...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN MODAL -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-eyebrow">Administrator Management</div>
+        <h2 id="adminModalTitle">Add Admin</h2>
+      </div>
+
+      <form id="adminForm">
+        <input type="hidden" id="adminId">
+        <input type="hidden" id="adminMode" value="add">
+
+        <div class="form-group">
+          <label for="adminName">Full Name</label>
+          <input type="text" id="adminName" placeholder="e.g. Alyanna Claire" required>
+        </div>
+
+        <div class="form-group">
+          <label for="adminEmail">Email Address</label>
+          <input type="email" id="adminEmail" placeholder="admin@noire.com" required>
+        </div>
+
+        <div class="form-group" id="adminPasswordGroup">
+          <label for="adminPassword">Temporary Password</label>
+          <input type="password" id="adminPassword" minlength="6" placeholder="At least 6 characters">
+          <small class="admin-muted">Firebase Authentication securely handles the password.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="adminRole">Role</label>
+          <select id="adminRole" required>
+            <option value="Administrator">Administrator</option>
+            <option value="Manager">Manager</option>
+            <option value="Super Admin">Super Admin</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="adminStatus">Status</label>
+          <select id="adminStatus" required>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeAdminModal()">Cancel</button>
+          <button type="submit" class="btn">Save Admin</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- =====================================================
        PRODUCT MODAL
@@ -1794,6 +2077,14 @@
     } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 
     import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+      createUserWithEmailAndPassword,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    import {
       getDatabase,
       ref as dbRef,
       push,
@@ -1848,12 +2139,86 @@
     const database =
       getDatabase(app);
 
+    const auth = getAuth(app);
+
+    /* =====================================================
+       ADMIN AUTHENTICATION GUARD
+    ====================================================== */
+
+    let currentAdmin = null;
+    let adminsCache = {};
+
+    onAuthStateChanged(auth, async user => {
+      if (!user) {
+        window.location.replace("admin-login.html");
+        return;
+      }
+
+      try {
+        const snapshot = await get(dbRef(database, `admins/${user.uid}`));
+
+        if (!snapshot.exists()) {
+          await signOut(auth);
+          alert("This account is not registered as a Noiré administrator.");
+          window.location.replace("admin-login.html");
+          return;
+        }
+
+        const profile = snapshot.val();
+
+        if (String(profile.status || "Active").toLowerCase() !== "active") {
+          await signOut(auth);
+          alert("This administrator account is inactive.");
+          window.location.replace("admin-login.html");
+          return;
+        }
+
+        currentAdmin = { uid: user.uid, ...profile };
+
+        const welcome = document.querySelector(".dashboard-welcome h2");
+        if (welcome) {
+          welcome.textContent = `Welcome back, ${profile.name || user.email || "Admin"}.`;
+        }
+
+        loadAdmins();
+      } catch (error) {
+        console.error("ADMIN AUTH CHECK ERROR:", error);
+        await signOut(auth);
+        alert("Unable to verify your administrator account.");
+        window.location.replace("admin-login.html");
+      }
+    });
+
+    window.adminLogout = async function () {
+      try {
+        await signOut(auth);
+        window.location.replace("admin-login.html");
+      } catch (error) {
+        alert("Unable to log out.\n\n" + (error.message || "Firebase error"));
+      }
+    };
+
 
     /* =====================================================
        PRODUCT DATA
     ====================================================== */
 
     let products = [];
+
+    /* =====================================================
+       PRODUCT RATINGS & REVIEWS
+       Reads the same structure used by account.html:
+       productReviews/{productId}/{userId}
+    ====================================================== */
+
+    let productReviews = [];
+    let productRatingMap = {};
+    let reviewStats = {
+      totalReviews: 0,
+      averageRating: 0,
+      distribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+    };
+
 
 
     /* =====================================================
@@ -2074,6 +2439,233 @@
 
 
     /* =====================================================
+       PRODUCT RATINGS & REVIEW FUNCTIONS
+    ====================================================== */
+
+    function normalizeRating(value) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return 0;
+      return Math.max(1, Math.min(5, Math.round(n)));
+    }
+
+    function getRatingStatsForProduct(productId) {
+      const id = String(productId || "");
+      const entries = productReviews.filter(review =>
+        String(review.productId || "") === id
+      );
+
+      const ratings = entries
+        .map(review => normalizeRating(review.rating))
+        .filter(Boolean);
+
+      const total = ratings.length;
+      const average = total
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / total
+        : 0;
+
+      return {
+        total,
+        average,
+        reviews: entries
+      };
+    }
+
+    function getRatingStarsHTML(rating) {
+      const value = Number(rating) || 0;
+      const rounded = Math.round(value);
+      return `<span class="rating-stars" aria-label="${value.toFixed(1)} out of 5 stars">${
+        [1,2,3,4,5].map(star => star <= rounded ? "★" : "☆").join("")
+      }</span>`;
+    }
+
+    function renderRatingHTML(productId) {
+      const stats = getRatingStatsForProduct(productId);
+
+      if (!stats.total) {
+        return `<span class="rating-none">No ratings yet</span>`;
+      }
+
+      return `
+        <span class="rating-inline">
+          ${getRatingStarsHTML(stats.average)}
+          <span class="rating-number">${stats.average.toFixed(1)}</span>
+          <span class="rating-count">(${stats.total})</span>
+        </span>
+      `;
+    }
+
+    function findReviewForOrderItem(order, item) {
+      const productId = String(
+        item?.productId ??
+        item?.productID ??
+        item?.product_id ??
+        item?.id ??
+        item?.sku ??
+        ""
+      ).trim();
+
+      if (!productId) return null;
+
+      const exact = productReviews.find(review =>
+        String(review.orderId || "") === String(order.id || "") &&
+        String(review.userId || "") === String(order.userId || "") &&
+        String(review.productId || "") === productId
+      );
+
+      if (exact) return exact;
+
+      // account.html stores one review per user/product, so use that
+      // review as a fallback when the same product was purchased again.
+      return productReviews.find(review =>
+        String(review.userId || "") === String(order.userId || "") &&
+        String(review.productId || "") === productId
+      ) || null;
+    }
+
+    function renderOrderReviewsHTML(order, items) {
+      const reviewItems = items.map(item => ({
+        item,
+        review: findReviewForOrderItem(order, item)
+      })).filter(entry => entry.review);
+
+      if (!reviewItems.length) {
+        return `<span class="rating-none">No reviews yet</span>`;
+      }
+
+      return `
+        <div style="min-width:220px;">
+          ${reviewItems.map(({ item, review }) => `
+            <div class="review-item">
+              <div>
+                <strong style="font-size:10px;">${escapeHTML(item?.name || review.productName || "Product")}</strong>
+              </div>
+              <div class="rating-inline" style="margin-top:3px;">
+                ${getRatingStarsHTML(review.rating)}
+                <span class="rating-number">${Number(review.rating) || 0}/5</span>
+              </div>
+              ${
+                review.comment
+                  ? `<div class="review-comment" style="margin-top:4px;">“${escapeHTML(review.comment)}”</div>`
+                  : `<div class="review-meta">No comment added.</div>`
+              }
+              <div class="review-meta">
+                ${escapeHTML(review.userName || "Customer")}
+                ${review.updatedAt ? ` · ${formatAdminDate(review.updatedAt)}` : ""}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function updateRatingInsights() {
+      const ratings = productReviews
+        .map(review => normalizeRating(review.rating))
+        .filter(Boolean);
+
+      const totalReviews = ratings.length;
+      const averageRating = totalReviews
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / totalReviews
+        : 0;
+
+      const distribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      ratings.forEach(rating => distribution[rating]++);
+
+      const ratedProducts = new Set(
+        productReviews
+          .map(review => String(review.productId || "").trim())
+          .filter(Boolean)
+      ).size;
+
+      reviewStats = {
+        totalReviews,
+        averageRating,
+        distribution
+      };
+
+      const averageEl = document.getElementById("averageRatingInsight");
+      const totalEl = document.getElementById("totalReviewsInsight");
+      const fiveStarEl = document.getElementById("fiveStarInsight");
+      const ratedProductsEl = document.getElementById("ratedProductsInsight");
+      const summaryEl = document.getElementById("ratingInsightSummary");
+      const distributionEl = document.getElementById("ratingDistribution");
+
+      if (averageEl) averageEl.textContent = `${averageRating.toFixed(1)} ★`;
+      if (totalEl) totalEl.textContent = totalReviews;
+      if (fiveStarEl) fiveStarEl.textContent = distribution[5];
+      if (ratedProductsEl) ratedProductsEl.textContent = ratedProducts;
+
+      if (summaryEl) {
+        summaryEl.textContent = totalReviews
+          ? `${totalReviews} customer review${totalReviews === 1 ? "" : "s"} across ${ratedProducts} product${ratedProducts === 1 ? "" : "s"}`
+          : "No reviews yet.";
+      }
+
+      if (distributionEl) {
+        distributionEl.innerHTML = [5,4,3,2,1].map(star => {
+          const count = distribution[star];
+          const percentage = totalReviews ? (count / totalReviews) * 100 : 0;
+
+          return `
+            <div class="distribution-row">
+              <div>${star} ★</div>
+              <div class="distribution-track">
+                <div class="distribution-fill" style="width:${percentage}%;"></div>
+              </div>
+              <div style="text-align:right;color:var(--soft-gray);">${count}</div>
+            </div>
+          `;
+        }).join("");
+      }
+    }
+
+    function renderAllRatingSurfaces() {
+      updateRatingInsights();
+      renderProductTable();
+      renderFeaturedProducts();
+      renderNewArrivals();
+
+      if (ordersCache.length) {
+        renderOrders(ordersCache);
+      }
+    }
+
+    function loadProductReviews() {
+      onValue(
+        dbRef(database, "productReviews"),
+        snapshot => {
+          productReviews = [];
+
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            Object.entries(data || {}).forEach(([productId, userReviews]) => {
+              if (!userReviews || typeof userReviews !== "object") return;
+
+              Object.entries(userReviews).forEach(([userId, review]) => {
+                if (!review || typeof review !== "object") return;
+
+                productReviews.push({
+                  productId,
+                  userId,
+                  ...review
+                });
+              });
+            });
+          }
+
+          renderAllRatingSurfaces();
+        },
+        error => {
+          console.error("LOAD PRODUCT REVIEWS ERROR:", error);
+          productReviews = [];
+          renderAllRatingSurfaces();
+        }
+      );
+    }
+
+
+    /* =====================================================
        INITIALIZE
     ====================================================== */
 
@@ -2090,6 +2682,8 @@
         loadProducts();
         loadUsers();
         loadOrders();
+        loadAdmins();
+        loadProductReviews();
 
       }
     );
@@ -2207,7 +2801,7 @@
           <tr>
 
             <td
-              colspan="9"
+              colspan="10"
               class="empty-message"
             >
 
@@ -2410,6 +3004,10 @@
 
             <td>
               ${stocks}
+            </td>
+
+            <td>
+              ${renderRatingHTML(product.id)}
             </td>
 
             <td>
@@ -2719,6 +3317,10 @@
                 : `Out of Stock`
             }
 
+          </div>
+
+          <div class="rating-summary-box">
+            ${renderRatingHTML(product.id)}
           </div>
 
         </div>
@@ -4070,7 +4672,7 @@
         if (revenueElement) revenueElement.textContent = formatAdminCurrency(revenue);
       }, error => {
         console.error("LOAD ORDERS ERROR:", error);
-        body.innerHTML = `<tr><td colspan="7" class="empty-message">Unable to load orders.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
+        body.innerHTML = `<tr><td colspan="8" class="empty-message">Unable to load orders.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
       });
     }
 
@@ -4079,7 +4681,7 @@
       if (!body) return;
 
       if (!orders.length) {
-        body.innerHTML = `<tr><td colspan="7" class="empty-message">No orders have been placed yet.</td></tr>`;
+        body.innerHTML = `<tr><td colspan="8" class="empty-message">No orders have been placed yet.</td></tr>`;
         return;
       }
 
@@ -4100,6 +4702,7 @@
             <td class="order-items-cell">${escapeHTML(itemNames || "No product information")}${escapeHTML(moreItems)}<div class="admin-muted">${itemCount} ${itemCount === 1 ? "item" : "items"}</div></td>
             <td><strong>${formatAdminCurrency(order.total)}</strong></td>
             <td><span class="status status-${getStatusClass(status)}">${escapeHTML(status)}</span></td>
+            <td>${renderOrderReviewsHTML(order, items)}</td>
             <td>
               <select class="order-status-select" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}" aria-label="Change status for ${escapeHTML(order.orderNumber || order.id)}">
                 ${ORDER_STATUSES.map(option => `<option value="${escapeHTML(option)}" ${option === status ? "selected" : ""}>${escapeHTML(option)}</option>`).join("")}
@@ -4156,6 +4759,539 @@
     }
     window.updateOrder = updateOrder;
 
+
+    /* =====================================================
+       ADMINS — FIREBASE AUTH + REALTIME DATABASE
+    ====================================================== */
+
+    function formatAdminCreatedDate(timestamp) {
+      if (!timestamp) return "—";
+
+      const date = new Date(Number(timestamp));
+
+      if (Number.isNaN(date.getTime())) return "—";
+
+      return date.toLocaleDateString("en-PH", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function renderAdmins(admins) {
+      const body = document.getElementById("adminsTableBody");
+      if (!body) return;
+
+      const entries = Object.entries(admins || {});
+
+      if (!entries.length) {
+        body.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-message">
+              No administrator profiles found.
+              <br><br>
+              <small>Click "+ Add Admin" to register the first administrator.</small>
+            </td>
+          </tr>`;
+        return;
+      }
+
+      body.innerHTML = entries.map(([uid, admin]) => {
+        const active =
+          String(admin.status || "Active").toLowerCase() === "active";
+
+        const isSelf =
+          currentAdmin && currentAdmin.uid === uid;
+
+        return `
+          <tr>
+            <td>
+              <div class="admin-user-name">
+                ${escapeHTML(admin.name || "Unnamed Admin")}
+              </div>
+              ${isSelf ? '<div class="admin-muted">You</div>' : ""}
+            </td>
+
+            <td>
+              <div class="admin-user-email">
+                ${escapeHTML(admin.email || "—")}
+              </div>
+            </td>
+
+            <td>
+              ${escapeHTML(admin.role || "Administrator")}
+            </td>
+
+            <td>
+              <span class="status ${active ? "status-active" : "status-inactive"}">
+                ${active ? "Active" : "Inactive"}
+              </span>
+            </td>
+
+            <td class="admin-muted">
+              ${formatAdminCreatedDate(admin.createdAt)}
+            </td>
+
+            <td>
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="btn edit-admin-btn"
+                  data-id="${escapeHTML(uid)}"
+                >
+                  Edit
+                </button>
+
+                <button
+                  type="button"
+                  class="btn ${active ? "btn-danger" : "btn-outline"} toggle-admin-btn"
+                  data-id="${escapeHTML(uid)}"
+                >
+                  ${active ? "Deactivate" : "Activate"}
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-danger delete-admin-btn"
+                  data-id="${escapeHTML(uid)}"
+                  ${isSelf ? 'disabled title="You cannot delete your own active session."' : ""}
+                >
+                  Delete
+                </button>
+
+              </div>
+            </td>
+          </tr>`;
+      }).join("");
+
+      body.querySelectorAll(".edit-admin-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          openAdminModal(button.dataset.id);
+        });
+      });
+
+      body.querySelectorAll(".toggle-admin-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          toggleAdminStatus(button.dataset.id);
+        });
+      });
+
+      body.querySelectorAll(".delete-admin-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          deleteAdmin(button.dataset.id);
+        });
+      });
+    }
+
+    function loadAdmins() {
+      const body = document.getElementById("adminsTableBody");
+      if (!body) return;
+
+      onValue(
+        dbRef(database, "admins"),
+        snapshot => {
+          adminsCache =
+            snapshot.exists()
+              ? snapshot.val()
+              : {};
+
+          renderAdmins(adminsCache);
+        },
+        error => {
+          console.error("LOAD ADMINS ERROR:", error);
+
+          body.innerHTML = `
+            <tr>
+              <td colspan="6" class="empty-message">
+                Unable to load administrators.
+                <br>
+                <small>
+                  ${escapeHTML(error.message || "Firebase error")}
+                </small>
+              </td>
+            </tr>`;
+        }
+      );
+    }
+
+    function openAdminModal(uid = "") {
+      const modal =
+        document.getElementById("adminModal");
+
+      const form =
+        document.getElementById("adminForm");
+
+      const mode =
+        document.getElementById("adminMode");
+
+      const title =
+        document.getElementById("adminModalTitle");
+
+      const passwordGroup =
+        document.getElementById("adminPasswordGroup");
+
+      const password =
+        document.getElementById("adminPassword");
+
+      if (!modal || !form) return;
+
+      form.reset();
+
+      document.getElementById("adminId").value =
+        uid || "";
+
+      if (uid && adminsCache[uid]) {
+        const admin =
+          adminsCache[uid];
+
+        mode.value = "edit";
+        title.textContent = "Edit Admin";
+
+        document.getElementById("adminName").value =
+          admin.name || "";
+
+        document.getElementById("adminEmail").value =
+          admin.email || "";
+
+        document.getElementById("adminRole").value =
+          admin.role || "Administrator";
+
+        document.getElementById("adminStatus").value =
+          admin.status || "Active";
+
+        passwordGroup.style.display = "none";
+        password.required = false;
+
+        /*
+          Email is intentionally disabled during profile editing.
+          Changing Firebase Auth email requires a recent
+          authentication/re-authentication flow.
+        */
+        document.getElementById("adminEmail").disabled = true;
+
+      } else {
+        mode.value = "add";
+        title.textContent = "Add Admin";
+
+        passwordGroup.style.display = "block";
+        password.required = true;
+
+        document.getElementById("adminEmail").disabled = false;
+
+        document.getElementById("adminStatus").value =
+          "Active";
+
+        document.getElementById("adminRole").value =
+          "Administrator";
+      }
+
+      modal.classList.add("show");
+    }
+
+    function closeAdminModal() {
+      const modal =
+        document.getElementById("adminModal");
+
+      if (modal) {
+        modal.classList.remove("show");
+      }
+    }
+
+    window.openAdminModal = openAdminModal;
+    window.closeAdminModal = closeAdminModal;
+
+    document
+      .getElementById("adminForm")
+      ?.addEventListener("submit", async event => {
+
+        event.preventDefault();
+
+        const mode =
+          document.getElementById("adminMode").value;
+
+        const uid =
+          document.getElementById("adminId").value.trim();
+
+        const name =
+          document.getElementById("adminName").value.trim();
+
+        const email =
+          document.getElementById("adminEmail").value
+            .trim()
+            .toLowerCase();
+
+        const password =
+          document.getElementById("adminPassword").value;
+
+        const role =
+          document.getElementById("adminRole").value;
+
+        const status =
+          document.getElementById("adminStatus").value;
+
+        if (!name || !email || !role || !status) {
+          alert("Please complete all required fields.");
+          return;
+        }
+
+        try {
+
+          /* ---------- EDIT ---------- */
+
+          if (mode === "edit") {
+
+            await update(
+              dbRef(database, `admins/${uid}`),
+              {
+                name,
+                role,
+                status,
+                updatedAt: Date.now()
+              }
+            );
+
+            alert(
+              "Administrator updated successfully. ✨"
+            );
+
+            closeAdminModal();
+            return;
+          }
+
+          /* ---------- ADD ---------- */
+
+          if (!password || password.length < 6) {
+            alert(
+              "The temporary password must be at least 6 characters."
+            );
+            return;
+          }
+
+          /*
+            Use a secondary Firebase app so creating an admin
+            does NOT sign the current administrator out.
+          */
+          const secondaryName =
+            "NoireAdminCreator";
+
+          let secondaryApp =
+            getApps().find(
+              item => item.name === secondaryName
+            );
+
+          if (!secondaryApp) {
+            secondaryApp =
+              initializeApp(
+                firebaseConfig,
+                secondaryName
+              );
+          }
+
+          const secondaryAuth =
+            getAuth(secondaryApp);
+
+          const credential =
+            await createUserWithEmailAndPassword(
+              secondaryAuth,
+              email,
+              password
+            );
+
+          await updateProfile(
+            credential.user,
+            {
+              displayName: name
+            }
+          );
+
+          await set(
+            dbRef(
+              database,
+              `admins/${credential.user.uid}`
+            ),
+            {
+              uid: credential.user.uid,
+              name,
+              email,
+              role,
+              status,
+              createdAt: Date.now(),
+              createdBy:
+                currentAdmin?.uid || ""
+            }
+          );
+
+          await signOut(secondaryAuth);
+
+          alert(
+            "New administrator registered successfully. ✨"
+          );
+
+          closeAdminModal();
+
+        } catch (error) {
+
+          console.error(
+            "SAVE ADMIN ERROR:",
+            error
+          );
+
+          let message =
+            error.message ||
+            "Firebase error";
+
+          if (
+            error.code ===
+            "auth/email-already-in-use"
+          ) {
+            message =
+              "That email address is already registered in Firebase Authentication.";
+          }
+
+          if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+            message =
+              "Please enter a valid email address.";
+          }
+
+          if (
+            error.code ===
+            "auth/weak-password"
+          ) {
+            message =
+              "The password is too weak. Use at least 6 characters.";
+          }
+
+          alert(
+            "Unable to save administrator.\n\n" +
+            message
+          );
+        }
+      });
+
+    async function toggleAdminStatus(uid) {
+      const admin =
+        adminsCache[uid];
+
+      if (!admin) return;
+
+      if (
+        currentAdmin &&
+        currentAdmin.uid === uid
+      ) {
+        alert(
+          "You cannot deactivate the administrator account you are currently using."
+        );
+        return;
+      }
+
+      const active =
+        String(
+          admin.status || "Active"
+        ).toLowerCase() === "active";
+
+      const nextStatus =
+        active
+          ? "Inactive"
+          : "Active";
+
+      if (
+        !confirm(
+          `${nextStatus === "Inactive" ? "Deactivate" : "Activate"} ${admin.name || admin.email}?`
+        )
+      ) {
+        return;
+      }
+
+      try {
+
+        await update(
+          dbRef(database, `admins/${uid}`),
+          {
+            status: nextStatus,
+            updatedAt: Date.now()
+          }
+        );
+
+        alert(
+          `Administrator ${nextStatus === "Inactive" ? "deactivated" : "activated"} successfully.`
+        );
+
+      } catch (error) {
+
+        console.error(
+          "TOGGLE ADMIN ERROR:",
+          error
+        );
+
+        alert(
+          "Unable to update administrator status.\n\n" +
+          (error.message || "Firebase error")
+        );
+      }
+    }
+
+    async function deleteAdmin(uid) {
+      const admin =
+        adminsCache[uid];
+
+      if (!admin) return;
+
+      if (
+        currentAdmin &&
+        currentAdmin.uid === uid
+      ) {
+        alert(
+          "You cannot delete your own active administrator session."
+        );
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Delete the administrator profile for ${admin.name || admin.email}?` +
+          `\n\nThis removes the administrator profile from the Noiré database. ` +
+          `The Firebase Authentication account itself should be removed separately through Firebase Console/Admin SDK.`
+        );
+
+      if (!confirmed) return;
+
+      try {
+
+        await remove(
+          dbRef(
+            database,
+            `admins/${uid}`
+          )
+        );
+
+        alert(
+          "Administrator profile deleted successfully."
+        );
+
+      } catch (error) {
+
+        console.error(
+          "DELETE ADMIN ERROR:",
+          error
+        );
+
+        alert(
+          "Unable to delete administrator profile.\n\n" +
+          (error.message || "Firebase error")
+        );
+      }
+    }
+
+    window.toggleAdminStatus =
+      toggleAdminStatus;
+
+    window.deleteAdmin =
+      deleteAdmin;
+
     /* =====================================================
        ESCAPE HTML
     ====================================================== */
@@ -4199,4 +5335,3 @@
 
 </body>
 </html>
-
