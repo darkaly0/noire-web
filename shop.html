@@ -978,6 +978,31 @@
 
     .modal-body {
       padding: 42px 38px;
+
+      /* Keep product details + reviews inside a scrollable area */
+      max-height: 75vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: var(--rose-gold) #f3eee9;
+    }
+
+    .modal-body::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+      background: #f3eee9;
+      border-radius: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+      background: var(--rose-gold);
+      border-radius: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+      background: #9f5964;
     }
 
     .modal-product-category {
@@ -1047,6 +1072,78 @@
     .rating {
       color: var(--rose-gold);
       letter-spacing: 2px;
+    }
+
+    .rating-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      letter-spacing: 0;
+      flex-wrap: wrap;
+    }
+
+    .rating-stars {
+      color: var(--rose-gold);
+      letter-spacing: 2px;
+      font-size: 0.95rem;
+    }
+
+    .rating-number {
+      color: #444;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .rating-count,
+    .rating-none {
+      color: #888;
+      font-size: 0.78rem;
+      letter-spacing: 0;
+    }
+
+    .modal-rating-summary {
+      margin: 8px 0 18px;
+    }
+
+    .modal-reviews {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid #eee;
+    }
+
+    .modal-reviews h6 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+
+    .review-card {
+      padding: 13px 0;
+      border-bottom: 1px solid #f0ece8;
+    }
+
+    .review-card:last-child {
+      border-bottom: none;
+    }
+
+    .review-card-stars {
+      color: var(--rose-gold);
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+
+    .review-card-comment {
+      color: #555;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      margin-top: 5px;
+    }
+
+    .review-card-meta {
+      color: #999;
+      font-size: 0.72rem;
+      margin-top: 5px;
     }
 
 
@@ -1732,7 +1829,7 @@
               <h2 id="modalTitle" class="modal-product-title"></h2>
 
 
-              <div id="modalRating" class="rating">
+              <div id="modalRating" class="rating modal-rating-summary">
                 ★★★★★
               </div>
 
@@ -1752,6 +1849,8 @@
 
 
               <ul id="modalBenefits" class="product-details-list"></ul>
+
+              <div id="modalReviews" class="modal-reviews"></div>
 
 
               <div class="quantity-box">
@@ -1966,6 +2065,10 @@
 
     let filteredProducts = [];
 
+    // Live customer ratings/reviews from Firebase:
+    // productReviews/{productId}/{userId}
+    let productReviews = [];
+
     let currentProduct = null;
 
     let currentQuantity = 1;
@@ -2086,6 +2189,134 @@
         ? 0
         : price;
 
+    }
+
+
+    /* =========================================================
+       PRODUCT RATINGS & REVIEWS
+    ========================================================= */
+
+    function normalizeRating(value) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return 0;
+      return Math.max(1, Math.min(5, Math.round(n)));
+    }
+
+    function getRatingStatsForProduct(productId) {
+      const id = String(productId || "");
+      const reviews = productReviews.filter(review =>
+        String(review.productId || "") === id
+      );
+
+      const ratings = reviews
+        .map(review => normalizeRating(review.rating))
+        .filter(Boolean);
+
+      const total = ratings.length;
+      const average = total
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / total
+        : 0;
+
+      return { total, average, reviews };
+    }
+
+    function getRatingStarsHTML(rating) {
+      const value = Number(rating) || 0;
+      const rounded = Math.round(value);
+
+      return `<span class="rating-stars" aria-label="${value.toFixed(1)} out of 5 stars">${
+        [1, 2, 3, 4, 5]
+          .map(star => star <= rounded ? "★" : "☆")
+          .join("")
+      }</span>`;
+    }
+
+    function renderRatingHTML(productId) {
+      const stats = getRatingStatsForProduct(productId);
+
+      if (!stats.total) {
+        return `<span class="rating-none">No ratings yet</span>`;
+      }
+
+      return `
+        <span class="rating-inline">
+          ${getRatingStarsHTML(stats.average)}
+          <span class="rating-number">${stats.average.toFixed(1)}</span>
+          <span class="rating-count">(${stats.total} review${stats.total === 1 ? "" : "s"})</span>
+        </span>
+      `;
+    }
+
+    function renderModalReviews(productId) {
+      const container = document.getElementById("modalReviews");
+      if (!container) return;
+
+      const stats = getRatingStatsForProduct(productId);
+
+      if (!stats.total) {
+        container.innerHTML = `
+          <h6>Customer Reviews</h6>
+          <div class="rating-none">No customer reviews yet.</div>
+        `;
+        return;
+      }
+
+      const reviewsHTML = [...stats.reviews]
+        .sort((a, b) => Number(b.updatedAt || b.createdAt || 0) - Number(a.updatedAt || a.createdAt || 0))
+        .map(review => {
+          const comment = String(review.comment || "").trim();
+          const userName = String(review.userName || "Customer");
+          const dateValue = Number(review.updatedAt || review.createdAt || 0);
+          const date = dateValue
+            ? new Date(dateValue).toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" })
+            : "";
+
+          return `
+            <div class="review-card">
+              <div class="review-card-stars">${getRatingStarsHTML(review.rating)}</div>
+              ${comment
+                ? `<div class="review-card-comment">“${escapeHtml(comment)}”</div>`
+                : `<div class="review-card-comment" style="color:#999;">No comment added.</div>`
+              }
+              <div class="review-card-meta">${escapeHtml(userName)}${date ? ` · ${escapeHtml(date)}` : ""}</div>
+            </div>
+          `;
+        })
+        .join("");
+
+      container.innerHTML = `
+        <h6>Customer Reviews</h6>
+        ${reviewsHTML}
+      `;
+    }
+
+    function loadProductReviews() {
+      return get(ref(db, "productReviews"))
+        .then(snapshot => {
+          productReviews = [];
+
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            Object.entries(data || {}).forEach(([productId, userReviews]) => {
+              if (!userReviews || typeof userReviews !== "object") return;
+
+              Object.entries(userReviews).forEach(([userId, review]) => {
+                if (!review || typeof review !== "object") return;
+
+                productReviews.push({
+                  productId,
+                  userId,
+                  ...review
+                });
+              });
+            });
+          }
+        })
+        .catch(error => {
+          console.error("LOAD PRODUCT REVIEWS ERROR:", error);
+          productReviews = [];
+        });
     }
 
 
@@ -2456,9 +2687,7 @@
                 margin-top:10px;
               "
             >
-              ${escapeHtml(
-              product.rating
-            )}
+              ${renderRatingHTML(product.id)}
             </div>
 
 
@@ -2733,8 +2962,11 @@
 
         document.getElementById(
           "modalRating"
-        ).textContent =
-          currentProduct.rating;
+        ).innerHTML =
+          renderRatingHTML(currentProduct.id);
+
+
+        renderModalReviews(currentProduct.id);
 
 
         document.getElementById(
@@ -3191,6 +3423,9 @@
     ========================================================= */
 
     async function initializeShop() {
+      // Load reviews first so the first product render already contains
+      // the latest ratings from accounts.html.
+      await loadProductReviews();
       await loadProducts();
 
       const params = new URLSearchParams(window.location.search);
