@@ -1234,6 +1234,27 @@
     const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getDatabase(app); let currentUser=null;
     onAuthStateChanged(auth,user=>{currentUser=user;});
 
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const auditRef = push(ref(db, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
+
     /* =====================================================
        CART STORAGE
     ====================================================== */
@@ -1512,7 +1533,7 @@
        CHANGE QUANTITY
     ====================================================== */
 
-    function changeQuantity(index, amount) {
+    async function changeQuantity(index, amount) {
 
       const cart =
         getCart();
@@ -1539,6 +1560,12 @@
       cart[index].quantity =
         quantity;
 
+      await logCustomerAudit(
+        "Updated Cart",
+        "Cart",
+        `Changed "${cart[index].name || "Item"}" quantity to ${quantity}`,
+        cart[index].id || ""
+      );
 
       saveCart(cart);
 
@@ -1551,7 +1578,7 @@
        REMOVE ITEM
     ====================================================== */
 
-    function removeItem(index) {
+    async function removeItem(index) {
 
       const cart =
         getCart();
@@ -1565,6 +1592,12 @@
 
 
       cart.splice(index, 1);
+
+      await logCustomerAudit(
+        "Removed from Cart",
+        "Cart",
+        `Removed "${removed}" from the shopping cart`
+      );
 
       saveCart(cart);
 
@@ -1693,7 +1726,14 @@
       try{
         const orderRef=push(ref(db,"orders/"+currentUser.uid)); const orderNumber="NOIRE-"+Date.now().toString().slice(-8);
         const order={orderId:orderRef.key,orderNumber,userId:currentUser.uid,email:currentUser.email||"",customerName:name,phone,address,deliveryNotes:notes,paymentMethod,items:cart.map(i=>({id:i.id||"",name:i.name||"Product",price:Number(i.price)||0,quantity:Number(i.quantity)||1,image:i.image||""})),subtotal,shipping,total,status:"Pending",createdAt:Date.now()};
-        await set(orderRef,order); localStorage.removeItem(CART_KEY); closeCheckoutModal(); renderCart(); showOrderSuccess(orderNumber);
+        await set(orderRef,order);
+        await logCustomerAudit(
+          "Placed Order",
+          "Order",
+          `Placed order "${orderNumber}" for ${formatPrice(total)}`,
+          orderRef.key
+        );
+        localStorage.removeItem(CART_KEY); closeCheckoutModal(); renderCart(); showOrderSuccess(orderNumber);
       }catch(error){console.error("Order placement error:",error);if(btn){btn.disabled=false;btn.textContent=`Place Order • ${formatPrice(total)}`;}showToast("Unable to place order. Please try again.");}
     }
 

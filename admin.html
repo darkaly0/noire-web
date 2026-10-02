@@ -1154,6 +1154,71 @@
     /* =====================================================
        AUDIT TRAIL
     ===================================================== */
+    .audit-subtabs {
+      display: flex;
+      gap: 8px;
+      padding: 10px 20px 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .audit-subtab {
+      border: none;
+      background: transparent;
+      color: #777;
+      padding: 12px 18px;
+      border-radius: 10px 10px 0 0;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s ease;
+      position: relative;
+    }
+
+    .audit-subtab:hover {
+      color: var(--rose-gold);
+      background: var(--ivory);
+    }
+
+    .audit-subtab.active {
+      color: var(--charcoal);
+      background: var(--ivory);
+    }
+
+    .audit-subtab.active::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -1px;
+      height: 2px;
+      border-radius: 4px 4px 0 0;
+      background: var(--rose-gold);
+    }
+
+    .audit-subtab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      margin-left: 6px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--soft-gray);
+      font-size: 9px;
+    }
+
+    .audit-panel {
+      display: none;
+    }
+
+    .audit-panel.active {
+      display: block;
+    }
+
     .audit-toolbar {
       display: flex;
       gap: 10px;
@@ -1239,7 +1304,27 @@
       font-size: 11px;
     }
 
+    .audit-actor-customer {
+      background: #fdf5f3;
+      color: #80535a;
+    }
+
+    .audit-actor-admin {
+      background: #f5f1ea;
+      color: #625548;
+    }
+
     @media (max-width: 700px) {
+      .audit-subtabs {
+        overflow-x: auto;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .audit-subtab {
+        white-space: nowrap;
+      }
+
       .audit-toolbar {
         align-items: stretch;
       }
@@ -1253,7 +1338,163 @@
       }
     }
 
-  </style>
+  
+    /* =====================================================
+       USERS + ORDERS MANAGEMENT ENHANCEMENTS
+    ====================================================== */
+
+    .user-crud-toolbar,
+    .orders-toolbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .admin-search {
+      min-width:240px;
+      max-width:380px;
+      flex:1;
+      height:44px;
+      border:1px solid rgba(145,105,105,.22);
+      border-radius:12px;
+      padding:0 14px;
+      background:#fff;
+      font-family:inherit;
+      outline:none;
+    }
+
+    .admin-search:focus {
+      border-color:var(--rose-gold,#b98f8f);
+      box-shadow:0 0 0 3px rgba(185,143,143,.12);
+    }
+
+    .crud-actions {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn-small {
+      padding:8px 11px !important;
+      font-size:11px !important;
+      min-height:36px;
+    }
+
+    .btn-danger-outline {
+      border:1px solid #b86b6b !important;
+      color:#a44d4d !important;
+      background:#fff !important;
+    }
+
+    .btn-danger-outline:hover {
+      background:#a44d4d !important;
+      color:#fff !important;
+    }
+
+    .user-actions,
+    .order-actions {
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .order-view-btn {
+      white-space:nowrap;
+    }
+
+    .modal.show {
+      display:flex !important;
+    }
+
+    .customer-modal-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .customer-modal-grid .form-group.full {
+      grid-column:1 / -1;
+    }
+
+    .customer-modal-note {
+      margin:0 0 15px;
+      padding:10px 12px;
+      border-radius:10px;
+      background:#faf5f2;
+      color:#756666;
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .order-detail-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:16px 0;
+    }
+
+    .order-detail-card {
+      padding:13px 14px;
+      border:1px solid rgba(145,105,105,.16);
+      border-radius:12px;
+      background:#fffaf8;
+    }
+
+    .order-detail-card span {
+      display:block;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--soft-gray,#8a7d7d);
+      margin-bottom:5px;
+    }
+
+    .order-detail-card strong {
+      font-size:13px;
+      color:var(--dark,#3e3434);
+    }
+
+    .order-detail-items {
+      margin-top:12px;
+      border-top:1px solid rgba(145,105,105,.14);
+    }
+
+    .order-detail-item {
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      padding:10px 0;
+      border-bottom:1px solid rgba(145,105,105,.10);
+      font-size:12px;
+    }
+
+    .order-detail-item small {
+      color:var(--soft-gray,#8a7d7d);
+      display:block;
+      margin-top:3px;
+    }
+
+    @media (max-width:700px) {
+      .customer-modal-grid,
+      .order-detail-grid {
+        grid-template-columns:1fr;
+      }
+
+      .customer-modal-grid .form-group.full {
+        grid-column:auto;
+      }
+
+      .admin-search {
+        min-width:100%;
+        max-width:none;
+      }
+    }
+
+</style>
 
 </head>
 
@@ -1704,13 +1945,43 @@
   <div id="users" class="tab-content">
     <div class="simple-card">
       <div class="simple-card-header">
-        <h2>Manage Users</h2>
-        <p>View Noiré customer accounts directly from Firebase.</p>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+          <div>
+            <h2>Manage Users</h2>
+            <p>Create, view, edit, activate/deactivate, and delete customer profiles stored in Firebase.</p>
+          </div>
+          <button type="button" class="btn" onclick="openUserModal()">+ Add User</button>
+        </div>
       </div>
+
+      <div class="user-crud-toolbar">
+        <input
+          type="search"
+          id="userSearch"
+          class="admin-search"
+          placeholder="Search name, email, phone, or skin type..."
+          autocomplete="off"
+          aria-label="Search customers"
+        >
+        <button type="button" class="btn btn-outline" onclick="loadUsersOnce()">↻ Refresh</button>
+      </div>
+
       <div class="table-container">
         <table class="admin-data-table">
-          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Skin Type</th><th>Status</th><th>Orders</th><th>Actions</th></tr></thead>
-          <tbody id="usersTableBody"><tr><td colspan="7" class="empty-message">Loading customers...</td></tr></tbody>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Skin Type</th>
+              <th>Status</th>
+              <th>Orders</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr><td colspan="7" class="empty-message">Loading customers...</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -1723,13 +1994,44 @@
   <div id="orders" class="tab-content">
     <div class="simple-card">
       <div class="simple-card-header">
-        <h2>Manage Orders</h2>
-        <p>Update order status and keep customers informed in real time.</p>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+          <div>
+            <h2>Manage Orders</h2>
+            <p>Live order records loaded directly from Firebase Realtime Database.</p>
+          </div>
+          <div id="liveOrderCount" class="audit-count">0 orders</div>
+        </div>
       </div>
+
+      <div class="orders-toolbar">
+        <input
+          type="search"
+          id="orderSearch"
+          class="admin-search"
+          placeholder="Search order ID, customer, or email..."
+          autocomplete="off"
+          aria-label="Search orders"
+        >
+        <button type="button" class="btn btn-outline" onclick="loadOrdersOnce()">↻ Refresh</button>
+      </div>
+
       <div class="table-container">
         <table class="admin-data-table orders-admin-table">
-          <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Reviews</th><th>Update Status</th></tr></thead>
-          <tbody id="ordersTableBody"><tr><td colspan="8" class="empty-message">Loading orders...</td></tr></tbody>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Reviews</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr><td colspan="8" class="empty-message">Loading orders...</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -1786,49 +2088,200 @@
         <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
           <div>
             <h2>Audit Trail</h2>
-            <p>Track important administrator activity across the Noiré Control Suite.</p>
+            <p>Track administrator and customer activity across the Noiré storefront.</p>
           </div>
           <div id="auditCount" class="audit-count">0 activities</div>
         </div>
       </div>
 
-      <div class="audit-toolbar">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:11px;font-weight:700;">Filter Activity</span>
-          <select id="auditActionFilter" class="audit-filter">
-            <option value="all">All Activities</option>
-            <option value="product">Products</option>
-            <option value="order">Orders</option>
-            <option value="user">Users</option>
-            <option value="admin">Administrators</option>
-            <option value="system">System</option>
-          </select>
-        </div>
+      <!-- AUDIT SUB-TABS -->
+      <div class="audit-subtabs" role="tablist" aria-label="Audit activity type">
+        <button
+          type="button"
+          class="audit-subtab active"
+          id="adminAuditTab"
+          data-audit-panel="adminAuditPanel"
+          role="tab"
+          aria-selected="true"
+        >
+          Admin Activities
+          <span id="adminAuditCount" class="audit-subtab-count">0</span>
+        </button>
 
-        <button type="button" class="btn btn-outline" onclick="loadAuditTrail()">
-          ↻ Refresh
+        <button
+          type="button"
+          class="audit-subtab"
+          id="customerAuditTab"
+          data-audit-panel="customerAuditPanel"
+          role="tab"
+          aria-selected="false"
+        >
+          Customer Activities
+          <span id="customerAuditCount" class="audit-subtab-count">0</span>
         </button>
       </div>
 
-      <div class="table-container audit-scroll">
-        <table class="admin-data-table audit-table">
-          <thead>
-            <tr>
-              <th>Date & Time</th>
-              <th>Administrator</th>
-              <th>Action</th>
-              <th>Area</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody id="auditTrailTableBody">
-            <tr>
-              <td colspan="5" class="audit-empty">Loading activity history...</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- ADMIN ACTIVITIES -->
+      <section id="adminAuditPanel" class="audit-panel active" role="tabpanel">
+        <div class="audit-toolbar">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:11px;font-weight:700;">Filter Activity</span>
+            <select id="adminAuditActionFilter" class="audit-filter">
+              <option value="all">All Admin Activities</option>
+              <option value="product">Products</option>
+              <option value="order">Orders</option>
+              <option value="user">Users</option>
+              <option value="admin">Administrators</option>
+              <option value="system">System</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-outline" onclick="loadAuditTrail()">
+            ↻ Refresh
+          </button>
+        </div>
+
+        <div class="table-container audit-scroll">
+          <table class="admin-data-table audit-table">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Administrator</th>
+                <th>Action</th>
+                <th>Area</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="adminAuditTableBody">
+              <tr>
+                <td colspan="5" class="audit-empty">Loading administrator activity...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CUSTOMER ACTIVITIES -->
+      <section id="customerAuditPanel" class="audit-panel" role="tabpanel">
+        <div class="audit-toolbar">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:11px;font-weight:700;">Filter Activity</span>
+            <select id="customerAuditActionFilter" class="audit-filter">
+              <option value="all">All Customer Activities</option>
+              <option value="account">Account</option>
+              <option value="product">Products</option>
+              <option value="cart">Cart</option>
+              <option value="wishlist">Wishlist</option>
+              <option value="order">Orders</option>
+              <option value="review">Reviews</option>
+              <option value="system">System</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-outline" onclick="loadAuditTrail()">
+            ↻ Refresh
+          </button>
+        </div>
+
+        <div class="table-container audit-scroll">
+          <table class="admin-data-table audit-table">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Customer</th>
+                <th>Action</th>
+                <th>Area</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="customerAuditTableBody">
+              <tr>
+                <td colspan="5" class="audit-empty">Loading customer activity...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+
+  <!-- CUSTOMER USER MODAL -->
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-eyebrow">Customer Management</div>
+        <h2 id="userModalTitle">Add User</h2>
       </div>
 
+      <p class="customer-modal-note">
+        This manages the customer's Firebase <strong>users</strong> profile record.
+        It does not change Firebase Authentication credentials.
+      </p>
+
+      <form id="userForm">
+        <input type="hidden" id="userId">
+        <input type="hidden" id="userMode" value="add">
+
+        <div class="customer-modal-grid">
+          <div class="form-group">
+            <label for="userName">Full Name</label>
+            <input type="text" id="userName" placeholder="e.g. Alyanna Claire" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userEmail">Email Address</label>
+            <input type="email" id="userEmail" placeholder="customer@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userPhone">Phone</label>
+            <input type="tel" id="userPhone" placeholder="09XXXXXXXXX">
+          </div>
+
+          <div class="form-group">
+            <label for="userSkinType">Skin Type</label>
+            <select id="userSkinType">
+              <option value="">Not set</option>
+              <option value="Normal">Normal</option>
+              <option value="Dry">Dry</option>
+              <option value="Oily">Oily</option>
+              <option value="Combination">Combination</option>
+              <option value="Sensitive">Sensitive</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="userStatus">Status</label>
+            <select id="userStatus">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeUserModal()">Cancel</button>
+          <button type="submit" class="btn" id="userSaveButton">Save User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER DETAILS MODAL -->
+  <div id="orderDetailsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-eyebrow">Order Details</div>
+        <h2 id="orderDetailsTitle">Order</h2>
+      </div>
+
+      <div id="orderDetailsBody"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeOrderDetailsModal()">Close</button>
+      </div>
     </div>
   </div>
 
@@ -2325,6 +2778,38 @@
       return currentAdmin?.email || auth.currentUser?.email || "";
     }
 
+    /*
+      Customer-facing pages can use the same auditTrail structure.
+      Example:
+      await logCustomerAudit(
+        "Added to Cart",
+        "Cart",
+        "Added Hydrating Cleanser to the shopping cart",
+        productId
+      );
+    */
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user || currentAdmin) return;
+
+        const auditRef = push(dbRef(database, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
+
     async function logAudit(action, area, details, entityId = "") {
       try {
         if (!currentAdmin && !auth.currentUser) return;
@@ -2332,6 +2817,7 @@
         const auditRef = push(dbRef(database, "auditTrail"));
 
         await set(auditRef, {
+          actorType: "admin",
           action: String(action || "Activity"),
           area: String(area || "System"),
           details: String(details || ""),
@@ -2363,51 +2849,94 @@
       });
     }
 
-    function renderAuditTrail(logs) {
-      const body = document.getElementById("auditTrailTableBody");
-      const count = document.getElementById("auditCount");
-      const filter = document.getElementById("auditActionFilter")?.value || "all";
+    function renderAuditTable(logs, actorType) {
+      const bodyId = actorType === "admin"
+        ? "adminAuditTableBody"
+        : "customerAuditTableBody";
+
+      const filterId = actorType === "admin"
+        ? "adminAuditActionFilter"
+        : "customerAuditActionFilter";
+
+      const body = document.getElementById(bodyId);
+      const filter = document.getElementById(filterId)?.value || "all";
 
       if (!body) return;
 
       const filtered = filter === "all"
         ? logs
-        : logs.filter(item => String(item.area || "").toLowerCase() === filter);
-
-      if (count) {
-        count.textContent = `${filtered.length} activit${filtered.length === 1 ? "y" : "ies"}`;
-      }
+        : logs.filter(item =>
+            String(item.area || "").toLowerCase() === filter
+          );
 
       if (!filtered.length) {
         body.innerHTML = `
           <tr>
             <td colspan="5" class="audit-empty">
-              No audit activity found for this filter.
+              No ${actorType === "admin" ? "administrator" : "customer"} activity found for this filter.
             </td>
           </tr>
         `;
         return;
       }
 
-      body.innerHTML = filtered.map(item => `
-        <tr>
-          <td class="admin-muted">${escapeHTML(formatAuditDate(item.timestamp))}</td>
-          <td>
-            <div class="audit-admin">${escapeHTML(item.adminName || "Administrator")}</div>
-            <div class="audit-admin-email">${escapeHTML(item.adminEmail || "")}</div>
-          </td>
-          <td>
-            <span class="audit-action">${escapeHTML(item.action || "Activity")}</span>
-          </td>
-          <td>${escapeHTML(item.area || "System")}</td>
-          <td class="audit-details">${escapeHTML(item.details || "—")}</td>
-        </tr>
-      `).join("");
+      body.innerHTML = filtered.map(item => {
+        const displayName = actorType === "admin"
+          ? (item.adminName || "Administrator")
+          : (item.customerName || item.userName || item.customerEmail || "Customer");
+
+        const email = actorType === "admin"
+          ? (item.adminEmail || "")
+          : (item.customerEmail || item.email || "");
+
+        return `
+          <tr>
+            <td class="admin-muted">${escapeHTML(formatAuditDate(item.timestamp))}</td>
+            <td>
+              <div class="audit-admin">${escapeHTML(displayName)}</div>
+              <div class="audit-admin-email">${escapeHTML(email)}</div>
+            </td>
+            <td>
+              <span class="audit-action ${actorType === "customer" ? "audit-actor-customer" : "audit-actor-admin"}">
+                ${escapeHTML(item.action || "Activity")}
+              </span>
+            </td>
+            <td>${escapeHTML(item.area || "System")}</td>
+            <td class="audit-details">${escapeHTML(item.details || "—")}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderAuditTrail(logs) {
+      const adminLogs = logs.filter(item =>
+        String(item.actorType || "admin").toLowerCase() === "admin"
+      );
+
+      const customerLogs = logs.filter(item =>
+        String(item.actorType || "").toLowerCase() === "customer"
+      );
+
+      const totalCount = document.getElementById("auditCount");
+      const adminCount = document.getElementById("adminAuditCount");
+      const customerCount = document.getElementById("customerAuditCount");
+
+      if (totalCount) {
+        totalCount.textContent =
+          `${logs.length} activit${logs.length === 1 ? "y" : "ies"}`;
+      }
+
+      if (adminCount) adminCount.textContent = adminLogs.length;
+      if (customerCount) customerCount.textContent = customerLogs.length;
+
+      renderAuditTable(adminLogs, "admin");
+      renderAuditTable(customerLogs, "customer");
     }
 
     function loadAuditTrail() {
-      const body = document.getElementById("auditTrailTableBody");
-      if (!body) return;
+      const adminBody = document.getElementById("adminAuditTableBody");
+      const customerBody = document.getElementById("customerAuditTableBody");
+      if (!adminBody && !customerBody) return;
 
       onValue(
         dbRef(database, "auditTrail"),
@@ -2422,28 +2951,55 @@
           }
 
           auditTrailCache.sort(
-            (a, b) => (Number(b.timestamp) || 0) - (Number(a.timestamp) || 0)
+            (a, b) =>
+              (Number(b.timestamp) || 0) -
+              (Number(a.timestamp) || 0)
           );
 
           renderAuditTrail(auditTrailCache);
         },
         error => {
           console.error("LOAD AUDIT TRAIL ERROR:", error);
-          body.innerHTML = `
+
+          const message = `
             <tr>
               <td colspan="5" class="audit-empty">
-                Unable to load audit trail.
+                Unable to load activity history.
                 <br><br>
                 <small>${escapeHTML(error.message || "Firebase error")}</small>
               </td>
             </tr>
           `;
+
+          if (adminBody) adminBody.innerHTML = message;
+          if (customerBody) customerBody.innerHTML = message;
         }
       );
     }
 
+    function setAuditSubtab(panelId) {
+      document.querySelectorAll(".audit-subtab").forEach(button => {
+        const active = button.dataset.auditPanel === panelId;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      document.querySelectorAll(".audit-panel").forEach(panel => {
+        panel.classList.toggle("active", panel.id === panelId);
+      });
+    }
+
+    document.querySelectorAll(".audit-subtab").forEach(button => {
+      button.addEventListener("click", () => {
+        setAuditSubtab(button.dataset.auditPanel);
+      });
+    });
+
     document.addEventListener("change", event => {
-      if (event.target?.id === "auditActionFilter") {
+      if (
+        event.target?.id === "adminAuditActionFilter" ||
+        event.target?.id === "customerAuditActionFilter"
+      ) {
         renderAuditTrail(auditTrailCache);
       }
     });
@@ -4680,6 +5236,28 @@
        MODAL EVENTS
     ====================================================== */
 
+
+    document.getElementById("userForm")?.addEventListener("submit", saveUserProfile);
+
+    document.getElementById("userSearch")?.addEventListener("input", event => {
+      userSearchTerm = event.target.value.trim().toLowerCase();
+      renderUsers(usersCache, ordersCache);
+    });
+
+    document.getElementById("orderSearch")?.addEventListener("input", event => {
+      orderSearchTerm = event.target.value.trim().toLowerCase();
+      renderOrders(ordersCache);
+    });
+
+    document.getElementById("userModal")?.addEventListener("click", event => {
+      if (event.target === event.currentTarget) closeUserModal();
+    });
+
+    document.getElementById("orderDetailsModal")?.addEventListener("click", event => {
+      if (event.target === event.currentTarget) closeOrderDetailsModal();
+    });
+
+
     function setupModalEvents() {
 
       const modal =
@@ -4726,6 +5304,13 @@
 
     }
 
+
+
+    document.addEventListener("keydown", event => {
+      if (event.key !== "Escape") return;
+      closeUserModal();
+      closeOrderDetailsModal();
+    });
 
     /* =====================================================
        LOAD PRODUCTS
@@ -4843,11 +5428,13 @@
 
 
     /* =====================================================
-       USERS — FIREBASE
+       USERS + ORDERS — FIREBASE
     ====================================================== */
 
     let usersCache = {};
     let ordersCache = [];
+    let userSearchTerm = "";
+    let orderSearchTerm = "";
 
     function getUserDisplayName(user) {
       if (!user) return "Unknown Customer";
@@ -4865,34 +5452,71 @@
       if (!timestamp) return "—";
       const date = new Date(Number(timestamp));
       if (Number.isNaN(date.getTime())) return "—";
-      return date.toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" });
+      return date.toLocaleDateString("en-PH", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function formatAdminDateTime(timestamp) {
+      if (!timestamp) return "—";
+      const date = new Date(Number(timestamp));
+      if (Number.isNaN(date.getTime())) return "—";
+      return date.toLocaleString("en-PH", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
     }
 
     function formatAdminCurrency(value) {
-      return (Number(value) || 0).toLocaleString("en-PH", { style: "currency", currency: "PHP" });
+      return (Number(value) || 0).toLocaleString("en-PH", {
+        style: "currency",
+        currency: "PHP"
+      });
     }
 
     function getStatusClass(status) {
-      return String(status || "Pending").toLowerCase().trim().replace(/\s+/g, "-");
+      return String(status || "Pending")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-");
+    }
+
+    function getUserOrderCount(uid) {
+      return ordersCache.filter(order => String(order.userId || "") === String(uid)).length;
     }
 
     function renderUsers(users, orders) {
       const body = document.getElementById("usersTableBody");
       if (!body) return;
 
-      const orderCounts = {};
-      orders.forEach(order => {
-        if (!order.userId) return;
-        orderCounts[order.userId] = (orderCounts[order.userId] || 0) + 1;
+      const entries = Object.entries(users || {}).filter(([uid, user]) => {
+        const haystack = [
+          uid,
+          getUserDisplayName(user),
+          user?.email,
+          user?.phone,
+          user?.contactNumber,
+          user?.skinType
+        ].join(" ").toLowerCase();
+
+        return !userSearchTerm || haystack.includes(userSearchTerm);
       });
 
-      const entries = Object.entries(users || {});
       const countElement = document.getElementById("userCount");
-
-      if (countElement) countElement.textContent = entries.length;
+      if (countElement) countElement.textContent = Object.keys(users || {}).length;
 
       if (!entries.length) {
-        body.innerHTML = `<tr><td colspan="7" class="empty-message">No customer accounts found in Firebase.</td></tr>`;
+        body.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-message">
+              ${userSearchTerm ? "No customers match your search." : "No customer profiles found in Firebase."}
+            </td>
+          </tr>`;
         return;
       }
 
@@ -4902,7 +5526,7 @@
         const phone = user.phone || user.contactNumber || "—";
         const skinType = user.skinType || "Not set";
         const active = String(user.status || "Active").toLowerCase() !== "inactive";
-        const count = orderCounts[uid] || 0;
+        const count = getUserOrderCount(uid);
 
         return `
           <tr>
@@ -4910,18 +5534,36 @@
             <td><div class="admin-user-email">${escapeHTML(email)}</div></td>
             <td>${escapeHTML(phone)}</td>
             <td>${escapeHTML(skinType)}</td>
-            <td><span class="status ${active ? "status-active" : "status-inactive"}">${active ? "Active" : "Inactive"}</span></td>
+            <td>
+              <span class="status ${active ? "status-active" : "status-inactive"}">
+                ${active ? "Active" : "Inactive"}
+              </span>
+            </td>
             <td><span class="admin-count-badge">${count}</span></td>
             <td>
-              <button type="button" class="btn ${active ? "btn-danger" : "btn-outline"} user-status-btn" data-user-id="${escapeHTML(uid)}">
-                ${active ? "Deactivate" : "Activate"}
-              </button>
+              <div class="user-actions">
+                <button type="button" class="btn btn-small edit-user-btn" data-user-id="${escapeHTML(uid)}">Edit</button>
+                <button type="button" class="btn btn-small ${active ? "btn-danger" : "btn-outline"} user-status-btn" data-user-id="${escapeHTML(uid)}">
+                  ${active ? "Deactivate" : "Activate"}
+                </button>
+                <button type="button" class="btn btn-small btn-danger-outline delete-user-btn" data-user-id="${escapeHTML(uid)}">
+                  Delete
+                </button>
+              </div>
             </td>
           </tr>`;
       }).join("");
 
+      body.querySelectorAll(".edit-user-btn").forEach(button => {
+        button.addEventListener("click", () => openUserModal(button.dataset.userId));
+      });
+
       body.querySelectorAll(".user-status-btn").forEach(button => {
         button.addEventListener("click", () => toggleUserStatus(button.dataset.userId));
+      });
+
+      body.querySelectorAll(".delete-user-btn").forEach(button => {
+        button.addEventListener("click", () => deleteUserProfile(button.dataset.userId));
       });
     }
 
@@ -4929,27 +5571,160 @@
       const body = document.getElementById("usersTableBody");
       if (!body) return;
 
-      onValue(dbRef(database, "users"), snapshot => {
+      onValue(
+        dbRef(database, "users"),
+        snapshot => {
+          usersCache = snapshot.exists() ? snapshot.val() : {};
+          renderUsers(usersCache, ordersCache);
+          renderOrders(ordersCache);
+        },
+        error => {
+          console.error("LOAD USERS ERROR:", error);
+          body.innerHTML = `
+            <tr>
+              <td colspan="7" class="empty-message">
+                Unable to load users.
+                <br><small>${escapeHTML(error.message || "Firebase error")}</small>
+              </td>
+            </tr>`;
+        }
+      );
+    }
+
+    async function loadUsersOnce() {
+      try {
+        const snapshot = await get(dbRef(database, "users"));
         usersCache = snapshot.exists() ? snapshot.val() : {};
         renderUsers(usersCache, ordersCache);
         renderOrders(ordersCache);
-      }, error => {
-        console.error("LOAD USERS ERROR:", error);
-        body.innerHTML = `<tr><td colspan="7" class="empty-message">Unable to load users.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
-      });
+      } catch (error) {
+        console.error("REFRESH USERS ERROR:", error);
+        alert("Unable to refresh users.\n\n" + (error.message || "Firebase error"));
+      }
+    }
+
+    function openUserModal(uid = "") {
+      const modal = document.getElementById("userModal");
+      const form = document.getElementById("userForm");
+      if (!modal || !form) return;
+
+      form.reset();
+      document.getElementById("userId").value = uid;
+      document.getElementById("userMode").value = uid ? "edit" : "add";
+
+      if (uid && usersCache[uid]) {
+        const user = usersCache[uid];
+        document.getElementById("userModalTitle").textContent = "Edit User";
+        document.getElementById("userName").value =
+          user.name || user.username || user.displayName ||
+          [user.firstName, user.lastName].filter(Boolean).join(" ") || "";
+        document.getElementById("userEmail").value = user.email || "";
+        document.getElementById("userPhone").value = user.phone || user.contactNumber || "";
+        document.getElementById("userSkinType").value = user.skinType || "";
+        document.getElementById("userStatus").value =
+          String(user.status || "Active").toLowerCase() === "inactive"
+            ? "Inactive"
+            : "Active";
+      } else {
+        document.getElementById("userModalTitle").textContent = "Add User";
+        document.getElementById("userStatus").value = "Active";
+      }
+
+      modal.classList.add("show");
+    }
+
+    function closeUserModal() {
+      const modal = document.getElementById("userModal");
+      if (modal) modal.classList.remove("show");
+      const form = document.getElementById("userForm");
+      if (form) form.reset();
+      const id = document.getElementById("userId");
+      if (id) id.value = "";
+    }
+
+    async function saveUserProfile(event) {
+      event.preventDefault();
+
+      const uid = document.getElementById("userId").value.trim();
+      const mode = document.getElementById("userMode").value;
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      const phone = document.getElementById("userPhone").value.trim();
+      const skinType = document.getElementById("userSkinType").value;
+      const status = document.getElementById("userStatus").value;
+
+      if (!name || !email) {
+        alert("Please enter the customer's name and email.");
+        return;
+      }
+
+      const userId = uid || push(dbRef(database, "users")).key;
+      if (!userId) {
+        alert("Unable to create a Firebase user profile ID.");
+        return;
+      }
+
+      const existing = usersCache[userId] || {};
+      const profile = {
+        ...existing,
+        name,
+        username: existing.username || name,
+        email,
+        phone,
+        skinType,
+        status,
+        updatedAt: Date.now()
+      };
+
+      if (mode === "add") {
+        profile.createdAt = Date.now();
+      }
+
+      const saveButton = document.getElementById("userSaveButton");
+      const originalText = saveButton?.textContent || "Save User";
+      if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving...";
+      }
+
+      try {
+        await set(dbRef(database, `users/${userId}`), profile);
+
+        await logAudit(
+          mode === "edit" ? "Updated User" : "Created User",
+          "User",
+          `${mode === "edit" ? "Updated" : "Created"} customer profile "${name}"`,
+          userId
+        );
+
+        closeUserModal();
+        alert(mode === "edit" ? "Customer profile updated successfully." : "Customer profile created successfully.");
+      } catch (error) {
+        console.error("SAVE USER ERROR:", error);
+        alert("Unable to save the customer profile.\n\n" + (error.message || "Firebase error"));
+      } finally {
+        if (saveButton) {
+          saveButton.disabled = false;
+          saveButton.textContent = originalText;
+        }
+      }
     }
 
     async function toggleUserStatus(uid) {
       const user = usersCache[uid];
       if (!user) return;
 
-      const currentlyActive = String(user.status || "Active").toLowerCase() !== "inactive";
+      const currentlyActive =
+        String(user.status || "Active").toLowerCase() !== "inactive";
       const nextStatus = currentlyActive ? "Inactive" : "Active";
 
       if (!confirm(`${nextStatus === "Inactive" ? "Deactivate" : "Activate"} ${getUserDisplayName(user)}?`)) return;
 
       try {
-        await update(dbRef(database, `users/${uid}`), { status: nextStatus, updatedAt: Date.now() });
+        await update(dbRef(database, `users/${uid}`), {
+          status: nextStatus,
+          updatedAt: Date.now()
+        });
 
         await logAudit(
           nextStatus === "Inactive" ? "Deactivated User" : "Activated User",
@@ -4957,16 +5732,47 @@
           `${nextStatus === "Inactive" ? "Deactivated" : "Activated"} customer "${getUserDisplayName(user)}"`,
           uid
         );
-
-        alert(nextStatus === "Inactive" ? "User marked as inactive." : "User activated successfully.");
       } catch (error) {
         console.error("UPDATE USER ERROR:", error);
         alert("Unable to update user.\n\n" + (error.message || "Firebase error"));
       }
     }
 
-    window.toggleUserStatus = toggleUserStatus;
+    async function deleteUserProfile(uid) {
+      const user = usersCache[uid];
+      if (!user) return;
 
+      const name = getUserDisplayName(user);
+      const orderCount = getUserOrderCount(uid);
+
+      const warning = orderCount
+        ? `This will delete the customer profile record, but their ${orderCount} order(s) will remain in Firebase.\n\nContinue?`
+        : "This will permanently delete the customer profile record from Firebase.\n\nContinue?";
+
+      if (!confirm(`Delete "${name}"?\n\n${warning}`)) return;
+
+      try {
+        await remove(dbRef(database, `users/${uid}`));
+
+        await logAudit(
+          "Deleted User",
+          "User",
+          `Deleted customer profile "${name}"`,
+          uid
+        );
+
+        alert("Customer profile deleted successfully.");
+      } catch (error) {
+        console.error("DELETE USER ERROR:", error);
+        alert("Unable to delete the customer profile.\n\n" + (error.message || "Firebase error"));
+      }
+    }
+
+    window.openUserModal = openUserModal;
+    window.closeUserModal = closeUserModal;
+    window.toggleUserStatus = toggleUserStatus;
+    window.deleteUserProfile = deleteUserProfile;
+    window.loadUsersOnce = loadUsersOnce;
 
     /* =====================================================
        ORDERS — FIREBASE
@@ -4980,91 +5786,349 @@
       "Delivered"
     ];
 
+    function getOrderCustomer(order) {
+      const user = usersCache[order.userId] || {};
+      return {
+        user,
+        name: order.customerName || getUserDisplayName(user) || order.email || "Customer",
+        email: order.email || user.email || "—",
+        phone: order.phone || user.phone || user.contactNumber || "—"
+      };
+    }
+
     function loadOrders() {
       const body = document.getElementById("ordersTableBody");
       if (!body) return;
 
-      onValue(dbRef(database, "orders"), snapshot => {
+      onValue(
+        dbRef(database, "orders"),
+        snapshot => {
+          ordersCache = [];
+
+          if (snapshot.exists()) {
+            Object.entries(snapshot.val()).forEach(([uid, userOrders]) => {
+              if (!userOrders || typeof userOrders !== "object") return;
+
+              Object.entries(userOrders).forEach(([orderId, order]) => {
+                if (!order || typeof order !== "object") return;
+
+                ordersCache.push({
+                  id: orderId,
+                  userId: order.userId || uid,
+                  ...order
+                });
+              });
+            });
+          }
+
+          ordersCache.sort(
+            (a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0)
+          );
+
+          renderOrders(ordersCache);
+          renderUsers(usersCache, ordersCache);
+
+          const orderCount = document.getElementById("orderCount");
+          if (orderCount) orderCount.textContent = ordersCache.length;
+
+          const liveOrderCount = document.getElementById("liveOrderCount");
+          if (liveOrderCount) {
+            liveOrderCount.textContent =
+              `${ordersCache.length} ${ordersCache.length === 1 ? "order" : "orders"}`;
+          }
+
+          const revenue = ordersCache
+            .filter(order =>
+              String(order.status || "Pending").toLowerCase() !== "cancelled"
+            )
+            .reduce((sum, order) => sum + (Number(order.total) || 0), 0);
+
+          const revenueElement = document.getElementById("revenue");
+          if (revenueElement) {
+            revenueElement.textContent = formatAdminCurrency(revenue);
+          }
+        },
+        error => {
+          console.error("LOAD ORDERS ERROR:", error);
+          body.innerHTML = `
+            <tr>
+              <td colspan="8" class="empty-message">
+                Unable to load orders.
+                <br><small>${escapeHTML(error.message || "Firebase error")}</small>
+              </td>
+            </tr>`;
+        }
+      );
+    }
+
+    async function loadOrdersOnce() {
+      try {
+        const snapshot = await get(dbRef(database, "orders"));
         ordersCache = [];
 
         if (snapshot.exists()) {
           Object.entries(snapshot.val()).forEach(([uid, userOrders]) => {
             if (!userOrders || typeof userOrders !== "object") return;
+
             Object.entries(userOrders).forEach(([orderId, order]) => {
               if (!order || typeof order !== "object") return;
-              ordersCache.push({ id: orderId, userId: order.userId || uid, ...order });
+
+              ordersCache.push({
+                id: orderId,
+                userId: order.userId || uid,
+                ...order
+              });
             });
           });
         }
 
-        ordersCache.sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0));
+        ordersCache.sort(
+          (a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0)
+        );
+
         renderOrders(ordersCache);
         renderUsers(usersCache, ordersCache);
-
-        const orderCount = document.getElementById("orderCount");
-        if (orderCount) orderCount.textContent = ordersCache.length;
-
-        const revenue = ordersCache
-          .filter(order => String(order.status || "Pending").toLowerCase() !== "cancelled")
-          .reduce((sum, order) => sum + (Number(order.total) || 0), 0);
-        const revenueElement = document.getElementById("revenue");
-        if (revenueElement) revenueElement.textContent = formatAdminCurrency(revenue);
-      }, error => {
-        console.error("LOAD ORDERS ERROR:", error);
-        body.innerHTML = `<tr><td colspan="8" class="empty-message">Unable to load orders.<br><small>${escapeHTML(error.message || "Firebase error")}</small></td></tr>`;
-      });
+      } catch (error) {
+        console.error("REFRESH ORDERS ERROR:", error);
+        alert("Unable to refresh orders.\n\n" + (error.message || "Firebase error"));
+      }
     }
 
     function renderOrders(orders) {
       const body = document.getElementById("ordersTableBody");
       if (!body) return;
 
-      if (!orders.length) {
-        body.innerHTML = `<tr><td colspan="8" class="empty-message">No orders have been placed yet.</td></tr>`;
+      const filteredOrders = orders.filter(order => {
+        const customer = getOrderCustomer(order);
+        const haystack = [
+          order.id,
+          order.orderNumber,
+          customer.name,
+          customer.email,
+          order.status
+        ].join(" ").toLowerCase();
+
+        return !orderSearchTerm || haystack.includes(orderSearchTerm);
+      });
+
+      if (!filteredOrders.length) {
+        body.innerHTML = `
+          <tr>
+            <td colspan="8" class="empty-message">
+              ${orderSearchTerm ? "No orders match your search." : "No orders have been placed yet."}
+            </td>
+          </tr>`;
         return;
       }
 
-      body.innerHTML = orders.map(order => {
+      body.innerHTML = filteredOrders.map(order => {
         const items = getOrderItems(order);
-        const itemCount = items.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
-        const itemNames = items.slice(0, 2).map(item => item.name || "Product").join(", ");
-        const moreItems = items.length > 2 ? ` + ${items.length - 2} more` : "";
-        const status = ORDER_STATUSES.includes(order.status) ? order.status : "Pending";
-        const user = usersCache[order.userId] || {};
-        const customer = order.customerName || getUserDisplayName(user) || order.email || "Customer";
+        const itemCount = items.reduce(
+          (sum, item) => sum + (Number(item.quantity) || 1),
+          0
+        );
+        const itemNames = items
+          .slice(0, 2)
+          .map(item => item.name || "Product")
+          .join(", ");
+        const moreItems = items.length > 2
+          ? ` + ${items.length - 2} more`
+          : "";
+
+        const status = ORDER_STATUSES.includes(order.status)
+          ? order.status
+          : (order.status || "Pending");
+
+        const customer = getOrderCustomer(order);
 
         return `
           <tr>
-            <td><div class="order-id-cell">${escapeHTML(order.orderNumber || order.id)}</div></td>
-            <td><div class="admin-user-name">${escapeHTML(customer)}</div><div class="admin-user-email">${escapeHTML(order.email || user.email || "")}</div></td>
-            <td class="admin-muted">${formatAdminDate(order.createdAt)}</td>
-            <td class="order-items-cell">${escapeHTML(itemNames || "No product information")}${escapeHTML(moreItems)}<div class="admin-muted">${itemCount} ${itemCount === 1 ? "item" : "items"}</div></td>
-            <td><strong>${formatAdminCurrency(order.total)}</strong></td>
-            <td><span class="status status-${getStatusClass(status)}">${escapeHTML(status)}</span></td>
-            <td>${renderOrderReviewsHTML(order, items)}</td>
             <td>
-              <select class="order-status-select" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}" aria-label="Change status for ${escapeHTML(order.orderNumber || order.id)}">
-                ${ORDER_STATUSES.map(option => `<option value="${escapeHTML(option)}" ${option === status ? "selected" : ""}>${escapeHTML(option)}</option>`).join("")}
-              </select>
+              <div class="order-id-cell">
+                ${escapeHTML(order.orderNumber || order.id)}
+              </div>
+            </td>
+
+            <td>
+              <div class="admin-user-name">${escapeHTML(customer.name)}</div>
+              <div class="admin-user-email">${escapeHTML(customer.email)}</div>
+            </td>
+
+            <td class="admin-muted">
+              ${formatAdminDate(order.createdAt)}
+            </td>
+
+            <td class="order-items-cell">
+              ${escapeHTML(itemNames || "No product information")}${escapeHTML(moreItems)}
+              <div class="admin-muted">
+                ${itemCount} ${itemCount === 1 ? "item" : "items"}
+              </div>
+            </td>
+
+            <td>
+              <strong>${formatAdminCurrency(order.total)}</strong>
+            </td>
+
+            <td>
+              <span class="status status-${getStatusClass(status)}">
+                ${escapeHTML(status)}
+              </span>
+            </td>
+
+            <td>
+              ${renderOrderReviewsHTML(order, items)}
+            </td>
+
+            <td>
+              <div class="order-actions">
+                <button
+                  type="button"
+                  class="btn btn-small order-view-btn"
+                  data-order-id="${escapeHTML(order.id)}"
+                  data-user-id="${escapeHTML(order.userId)}"
+                >
+                  View
+                </button>
+
+                <select
+                  class="order-status-select"
+                  data-order-id="${escapeHTML(order.id)}"
+                  data-user-id="${escapeHTML(order.userId)}"
+                  aria-label="Change status for ${escapeHTML(order.orderNumber || order.id)}"
+                >
+                  ${ORDER_STATUSES.map(option => `
+                    <option value="${escapeHTML(option)}" ${option === status ? "selected" : ""}>
+                      ${escapeHTML(option)}
+                    </option>
+                  `).join("")}
+                </select>
+              </div>
             </td>
           </tr>`;
       }).join("");
 
+      body.querySelectorAll(".order-view-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          openOrderDetailsModal(
+            button.dataset.userId,
+            button.dataset.orderId
+          );
+        });
+      });
+
       body.querySelectorAll(".order-status-select").forEach(select => {
         select.addEventListener("change", event => {
           const target = event.currentTarget;
-          updateOrderStatus(target.dataset.userId, target.dataset.orderId, target.value, target);
+          updateOrderStatus(
+            target.dataset.userId,
+            target.dataset.orderId,
+            target.value,
+            target
+          );
         });
       });
     }
 
+    function openOrderDetailsModal(userId, orderId) {
+      const order = ordersCache.find(
+        item => item.id === orderId && String(item.userId) === String(userId)
+      );
+
+      if (!order) {
+        alert("Order could not be found in the current Firebase data.");
+        return;
+      }
+
+      const customer = getOrderCustomer(order);
+      const items = getOrderItems(order);
+      const status = order.status || "Pending";
+      const modal = document.getElementById("orderDetailsModal");
+      const title = document.getElementById("orderDetailsTitle");
+      const body = document.getElementById("orderDetailsBody");
+
+      if (!modal || !title || !body) return;
+
+      title.textContent = order.orderNumber || order.id;
+
+      const itemRows = items.length
+        ? items.map(item => {
+            const quantity = Number(item.quantity) || 1;
+            const price = Number(item.price) || 0;
+            return `
+              <div class="order-detail-item">
+                <div>
+                  <strong>${escapeHTML(item.name || "Product")}</strong>
+                  <small>Qty: ${quantity}</small>
+                </div>
+                <strong>${formatAdminCurrency(price * quantity)}</strong>
+              </div>`;
+          }).join("")
+        : `<div class="admin-muted" style="padding:12px 0;">No item details stored for this order.</div>`;
+
+      body.innerHTML = `
+        <div class="order-detail-grid">
+          <div class="order-detail-card">
+            <span>Customer</span>
+            <strong>${escapeHTML(customer.name)}</strong>
+          </div>
+
+          <div class="order-detail-card">
+            <span>Email</span>
+            <strong>${escapeHTML(customer.email)}</strong>
+          </div>
+
+          <div class="order-detail-card">
+            <span>Phone</span>
+            <strong>${escapeHTML(customer.phone)}</strong>
+          </div>
+
+          <div class="order-detail-card">
+            <span>Date & Time</span>
+            <strong>${escapeHTML(formatAdminDateTime(order.createdAt))}</strong>
+          </div>
+
+          <div class="order-detail-card">
+            <span>Status</span>
+            <strong>${escapeHTML(status)}</strong>
+          </div>
+
+          <div class="order-detail-card">
+            <span>Total</span>
+            <strong>${formatAdminCurrency(order.total)}</strong>
+          </div>
+        </div>
+
+        <div class="order-detail-card">
+          <span>Order Items</span>
+          <div class="order-detail-items">
+            ${itemRows}
+          </div>
+        </div>
+      `;
+
+      modal.classList.add("show");
+    }
+
+    function closeOrderDetailsModal() {
+      const modal = document.getElementById("orderDetailsModal");
+      if (modal) modal.classList.remove("show");
+    }
+
+    window.openOrderDetailsModal = openOrderDetailsModal;
+    window.closeOrderDetailsModal = closeOrderDetailsModal;
+    window.loadOrdersOnce = loadOrdersOnce;
+
     async function updateOrderStatus(userId, orderId, newStatus, selectElement) {
       if (!userId || !orderId || !ORDER_STATUSES.includes(newStatus)) return;
 
-      const currentOrder = ordersCache.find(order => order.id === orderId && order.userId === userId);
+      const currentOrder = ordersCache.find(
+        order => order.id === orderId && String(order.userId) === String(userId)
+      );
       const previousStatus = currentOrder?.status || "Pending";
 
-      if (!confirm(`Change order status from "${previousStatus}" to "${newStatus}"?\n\nThe customer will see this updated status in Order History.`)) {
+      if (!confirm(
+        `Change order status from "${previousStatus}" to "${newStatus}"?\n\nThe customer will see this updated status in Order History.`
+      )) {
         if (selectElement) selectElement.value = previousStatus;
         return;
       }
@@ -5072,10 +6136,13 @@
       if (selectElement) selectElement.disabled = true;
 
       try {
-        await update(dbRef(database, `orders/${userId}/${orderId}`), {
-          status: newStatus,
-          updatedAt: Date.now()
-        });
+        await update(
+          dbRef(database, `orders/${userId}/${orderId}`),
+          {
+            status: newStatus,
+            updatedAt: Date.now()
+          }
+        );
 
         await logAudit(
           "Updated Order Status",
@@ -5083,8 +6150,6 @@
           `Order "${currentOrder?.orderNumber || orderId}" changed from "${previousStatus}" to "${newStatus}"`,
           orderId
         );
-
-        alert(`Order status updated to "${newStatus}". ✨`);
       } catch (error) {
         console.error("UPDATE ORDER ERROR:", error);
         if (selectElement) selectElement.value = previousStatus;
@@ -5097,15 +6162,14 @@
     window.updateOrderStatus = updateOrderStatus;
 
     function banUser() {
-      alert("Please use the Deactivate button beside the customer account.");
+      alert("Please use the Activate/Deactivate controls beside the customer account.");
     }
     window.banUser = banUser;
 
     function updateOrder() {
-      alert("Please use the status dropdown beside the order.");
+      alert("Please use the View button or status dropdown beside the order.");
     }
     window.updateOrder = updateOrder;
-
 
     /* =====================================================
        ADMINS — FIREBASE AUTH + REALTIME DATABASE

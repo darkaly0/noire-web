@@ -3050,6 +3050,8 @@
     import {
       getDatabase,
       ref,
+      push,
+      set,
       get,
       update,
       onValue,
@@ -3075,6 +3077,27 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
+
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const auditRef = push(ref(db, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
 
     /*
       CUSTOMER-ONLY ACCOUNT AUTH
@@ -3336,10 +3359,16 @@
             }
           });
 
-          item.querySelector(".favorite-remove").addEventListener("click", (event) => {
+          item.querySelector(".favorite-remove").addEventListener("click", async (event) => {
             event.stopPropagation();
             const updated = getLocalFavorites().filter(id => id !== String(product.id));
             localStorage.setItem("noireFavorites", JSON.stringify(updated));
+            await logCustomerAudit(
+              "Removed from Wishlist",
+              "Wishlist",
+              `Removed "${product.name}" from favorites`,
+              product.id
+            );
             loadFavorites();
           });
 
@@ -3467,10 +3496,16 @@
       closeFavoriteProduct();
     }
 
-    function removeFavoriteFromModal() {
+    async function removeFavoriteFromModal() {
       if (!favoriteModalProduct) return;
       const updated = getLocalFavorites().filter(id => id !== String(favoriteModalProduct.id));
       localStorage.setItem("noireFavorites", JSON.stringify(updated));
+      await logCustomerAudit(
+        "Removed from Wishlist",
+        "Wishlist",
+        `Removed "${favoriteModalProduct.name}" from favorites`,
+        favoriteModalProduct.id
+      );
       closeFavoriteProduct();
       loadFavorites();
     }
@@ -3762,6 +3797,13 @@
             };
 
             await update(reviewRef, payload);
+
+            await logCustomerAudit(
+              existing ? "Updated Review" : "Submitted Review",
+              "Review",
+              `${existing ? "Updated" : "Submitted"} review for "${payload.productName}"`,
+              productId
+            );
 
             statusEl.textContent = "Review saved ✦";
 
@@ -4275,6 +4317,12 @@
 
         renderAccount(currentData, currentUser);
 
+        await logCustomerAudit(
+          "Updated Profile",
+          "Account",
+          "Updated personal information"
+        );
+
         toggleEdit(
           "personalView",
           "personalForm",
@@ -4349,6 +4397,13 @@
         };
 
         $("shippingDisplay").innerHTML = addressText(currentData, "shipping");
+
+        await logCustomerAudit(
+          "Updated Shipping Address",
+          "Account",
+          "Updated the shipping address"
+        );
+
         $("shippingView").style.display = "";
         $("shippingForm").classList.remove("active");
         $("editShippingBtn").textContent = "Edit";
@@ -4431,6 +4486,13 @@
         };
 
         $("billingDisplay").innerHTML = billingText(currentData);
+
+        await logCustomerAudit(
+          "Updated Billing Details",
+          "Account",
+          "Updated billing details"
+        );
+
         $("billingView").style.display = "";
         $("billingForm").classList.remove("active");
         $("editBillingBtn").textContent = "Edit";
@@ -4451,6 +4513,11 @@
     $("logoutBtn").addEventListener("click", async () => {
 
       try {
+        await logCustomerAudit(
+          "Logged Out",
+          "Account",
+          "Signed out of the Noiré customer account"
+        );
         await signOut(auth);
         alert("You have been logged out. 💗");
         window.location.href = "signuplogin.html";
@@ -4653,6 +4720,13 @@
 
               await remove(
                 ref(db, "communityPosts/" + postId)
+              );
+
+              await logCustomerAudit(
+                "Deleted Journal Entry",
+                "System",
+                `Deleted journal entry "${post.title || "Untitled Journal Entry"}"`,
+                postId
               );
 
               await loadMyJournalPosts(user);

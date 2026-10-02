@@ -684,6 +684,189 @@
 
 
     /* =========================================================
+       SEARCH & ADVANCED FILTERS
+    ========================================================= */
+
+    .shop-filters {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 34px;
+      padding: 22px;
+      background:
+        linear-gradient(145deg, #fffdfc 0%, #fff8f6 100%);
+      border: 1px solid rgba(183, 110, 121, 0.16);
+      border-radius: 20px;
+      box-shadow:
+        0 10px 35px rgba(17, 17, 17, 0.055);
+    }
+
+    .filter-header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 2px;
+    }
+
+    .filter-header-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--charcoal);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .filter-header-title span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blush);
+      color: var(--rose-gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .filter-header-subtitle {
+      margin: 3px 0 0 42px;
+      color: #999;
+      font-size: 0.72rem;
+      line-height: 1.4;
+    }
+
+    .search-box,
+    .filter-control {
+      position: relative;
+    }
+
+    .search-box {
+      grid-column: 1 / -1;
+    }
+
+    .search-box input,
+    .filter-control select {
+      width: 100%;
+      height: 52px;
+      border: 1px solid #e9dfda;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--charcoal);
+      font-family: inherit;
+      font-size: 0.86rem;
+      outline: none;
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .search-box input {
+      padding: 0 18px 0 48px;
+    }
+
+    .filter-control select {
+      padding: 0 40px 0 15px;
+      cursor: pointer;
+      appearance: auto;
+    }
+
+    .search-box input::placeholder {
+      color: #aaa;
+    }
+
+    .search-box input:focus,
+    .filter-control select:focus {
+      border-color: rgba(183, 110, 121, 0.75);
+      box-shadow: 0 0 0 4px rgba(183, 110, 121, 0.09);
+      transform: translateY(-1px);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--rose-gold);
+      font-size: 1.15rem;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .filter-label {
+      display: block;
+      margin: 0 0 7px 3px;
+      color: #777;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .filter-reset {
+      grid-column: 1 / -1;
+      justify-self: end;
+      border: 1px solid rgba(183, 110, 121, 0.28);
+      background: white;
+      color: var(--rose-gold);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      padding: 9px 15px;
+      border-radius: 999px;
+      transition: all 0.25s ease;
+    }
+
+    .filter-reset:hover {
+      background: var(--rose-gold);
+      border-color: var(--rose-gold);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 7px 18px rgba(183, 110, 121, 0.18);
+    }
+
+    @media (max-width: 850px) {
+      .shop-filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-control:last-of-type {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .shop-filters {
+        grid-template-columns: 1fr;
+        padding: 17px;
+        border-radius: 16px;
+      }
+
+      .search-box,
+      .filter-control:last-of-type,
+      .filter-reset {
+        grid-column: auto;
+      }
+
+      .filter-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .filter-reset {
+        justify-self: start;
+      }
+    }
+
+
+    /* =========================================================
        PRODUCT CARD
        KEEPING YOUR ORIGINAL LOOK ❤️
     ========================================================= */
@@ -1779,6 +1962,76 @@
       </div>
 
 
+      <div class="shop-filters">
+
+        <div class="filter-header">
+          <div>
+            <div class="filter-header-title">
+              <span>⌕</span>
+              Find your perfect match
+            </div>
+            <p class="filter-header-subtitle">
+              Search, filter, or sort our skincare collection.
+            </p>
+          </div>
+
+          <button type="button" class="filter-reset" id="resetAdvancedFilters">
+            Reset filters
+          </button>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="productSearch"
+            placeholder="Search by product name, type, skin type, or keyword..."
+            autocomplete="off"
+            aria-label="Search products"
+          >
+        </div>
+
+        <div class="filter-control">
+          <label class="filter-label" for="priceFilter">Price Range</label>
+          <select id="priceFilter">
+            <option value="all">All Prices</option>
+            <option value="0-499">Under ₱500</option>
+            <option value="500-999">₱500 – ₱999</option>
+            <option value="1000-1499">₱1,000 – ₱1,499</option>
+            <option value="1500-999999999">₱1,500 and above</option>
+          </select>
+        </div>
+
+        <div class="filter-control">
+          <label class="filter-label" for="productTypeFilter">Product Type</label>
+          <select id="productTypeFilter">
+            <option value="all">All Product Types</option>
+            <option value="cleanser">Cleanser</option>
+            <option value="toner">Toner</option>
+            <option value="serum">Serum</option>
+            <option value="moisturizer">Moisturizer</option>
+            <option value="sunscreen">Sunscreen</option>
+            <option value="face mask">Face Mask</option>
+            <option value="eye care">Eye Care</option>
+            <option value="lip care">Lip Care</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-control">
+          <label class="filter-label" for="sortFilter">Sort By</label>
+          <select id="sortFilter">
+            <option value="default">Recommended</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name-a-z">Name: A to Z</option>
+            <option value="name-z-a">Name: Z to A</option>
+          </select>
+        </div>
+
+      </div>
+
+
       <div class="product-grid" id="productContainer">
 
         <div class="loading-products">
@@ -2012,8 +2265,15 @@
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
     import {
+      getAuth,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
       getDatabase,
       ref,
+      push,
+      set,
       get
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -2055,6 +2315,30 @@
     const app = initializeApp(firebaseConfig);
 
     const db = getDatabase(app);
+    const auth = getAuth(app);
+    let currentUser = null;
+    onAuthStateChanged(auth, user => { currentUser = user; });
+
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const auditRef = push(ref(db, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
 
 
     /* =========================================================
@@ -2074,6 +2358,11 @@
     let currentQuantity = 1;
 
     let currentFilter = null;
+
+    let searchTerm = "";
+    let selectedPriceRange = "all";
+    let selectedProductType = "all";
+    let selectedSort = "default";
 
 
     /* =========================================================
@@ -2389,8 +2678,9 @@
                   "Unnamed Product",
 
                 productType:
-                  product.productType ||
-                  "Skincare",
+                  normalizeProductType(
+                    product.productType || "other"
+                  ),
 
                 skinType:
                   product.skinType ||
@@ -2454,8 +2744,8 @@
         filteredProducts =
           [...products];
 
-
-        renderProducts();
+        updateProductTypeOptions();
+        applyAllProductFilters();
 
 
       } catch (error) {
@@ -2718,129 +3008,231 @@
        FILTER PRODUCTS
     ========================================================= */
 
+    /* =========================================================
+       SEARCH + PRICE + PRODUCT TYPE FILTERS
+    ========================================================= */
+
+    function normalizeText(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    const PRODUCT_TYPES = [
+      "cleanser",
+      "toner",
+      "serum",
+      "moisturizer",
+      "sunscreen",
+      "face mask",
+      "eye care",
+      "lip care",
+      "other"
+    ];
+
+    function normalizeProductType(value) {
+      const type = normalizeText(value);
+
+      const aliases = {
+        "cleanser": "cleanser",
+        "cleansers": "cleanser",
+        "toner": "toner",
+        "toners": "toner",
+        "serum": "serum",
+        "serums": "serum",
+        "moisturizer": "moisturizer",
+        "moisturiser": "moisturizer",
+        "moisturizers": "moisturizer",
+        "sunscreen": "sunscreen",
+        "sun screen": "sunscreen",
+        "sunblock": "sunscreen",
+        "face mask": "face mask",
+        "facemask": "face mask",
+        "masks": "face mask",
+        "eye care": "eye care",
+        "eye cream": "eye care",
+        "eye creams": "eye care",
+        "lip care": "lip care",
+        "lip balm": "lip care",
+        "lip balms": "lip care"
+      };
+
+      return aliases[type] || "other";
+    }
+
+    function updateProductTypeOptions() {
+      const select = document.getElementById("productTypeFilter");
+      if (!select) return;
+
+      select.innerHTML = `
+        <option value="all">All Product Types</option>
+        ${PRODUCT_TYPES.map(type =>
+          `<option value="${escapeHtml(type)}">${escapeHtml(
+            type.replace(/\b\w/g, char => char.toUpperCase())
+          )}</option>`
+        ).join("")}
+      `;
+
+      selectedProductType = selectedProductType === "all"
+        ? "all"
+        : normalizeProductType(selectedProductType);
+
+      select.value = selectedProductType;
+    }
+
+    function productMatchesSkin(product, skinType) {
+      const normalizeSkin = (value) => {
+        const skin = String(value || "").trim().toLowerCase();
+
+        const map = {
+          "normal": "normal",
+          "normal skin": "normal",
+          "dry": "dry",
+          "dry skin": "dry",
+          "oily": "oily",
+          "oily skin": "oily",
+          "combination": "combination",
+          "combination skin": "combination",
+          "sensitive": "sensitive",
+          "sensitive skin": "sensitive",
+          "all skin types": "all"
+        };
+
+        return map[skin] || skin;
+      };
+
+      const selectedSkin = normalizeSkin(skinType);
+      const normalizedProductSkin = normalizeSkin(product.skinType);
+
+      return (
+        normalizedProductSkin === selectedSkin ||
+        normalizedProductSkin === "all"
+      );
+    }
+
+    function updateFilterStatus() {
+      const status = document.getElementById("filterStatus");
+      const clearButton = document.getElementById("clearFilter");
+      if (!status || !clearButton) return;
+
+      const hasAdvancedFilters =
+        searchTerm ||
+        selectedPriceRange !== "all" ||
+        selectedProductType !== "all" ||
+        selectedSort !== "default";
+
+      if (!currentFilter && !hasAdvancedFilters) {
+        status.style.display = "none";
+        clearButton.style.display = "none";
+        return;
+      }
+
+      status.style.display = "inline-flex";
+      const count = filteredProducts.length;
+      status.textContent = `${count} product${count !== 1 ? "s" : ""} found`;
+      clearButton.style.display = "inline-block";
+    }
+
+    function applyAllProductFilters() {
+      const search = normalizeText(searchTerm);
+
+      filteredProducts = products.filter(product => {
+        const searchableText = [
+          product.name,
+          product.productType,
+          product.skinType,
+          product.description
+        ].map(normalizeText).join(" ");
+
+        const matchesSearch =
+          !search || searchableText.includes(search);
+
+        const price = getNumericPrice(product);
+        let matchesPrice = true;
+
+        if (selectedPriceRange !== "all") {
+          const [min, max] = selectedPriceRange.split("-").map(Number);
+          matchesPrice = price >= min && price <= max;
+        }
+
+        const matchesType =
+          selectedProductType === "all" ||
+          normalizeProductType(product.productType) === normalizeProductType(selectedProductType);
+
+        const matchesSkin =
+          !currentFilter || productMatchesSkin(product, currentFilter);
+
+        return matchesSearch && matchesPrice && matchesType && matchesSkin;
+      });
+
+      if (selectedSort === "price-low") {
+        filteredProducts.sort((a, b) => getNumericPrice(a) - getNumericPrice(b));
+      } else if (selectedSort === "price-high") {
+        filteredProducts.sort((a, b) => getNumericPrice(b) - getNumericPrice(a));
+      } else if (selectedSort === "name-a-z") {
+        filteredProducts.sort((a, b) =>
+          String(a.name || "").localeCompare(String(b.name || ""))
+        );
+      } else if (selectedSort === "name-z-a") {
+        filteredProducts.sort((a, b) =>
+          String(b.name || "").localeCompare(String(a.name || ""))
+        );
+      }
+
+      updateFilterStatus();
+      renderProducts();
+    }
+
+    function resetAdvancedFilters() {
+      searchTerm = "";
+      selectedPriceRange = "all";
+      selectedProductType = "all";
+      selectedSort = "default";
+
+      const searchInput = document.getElementById("productSearch");
+      const priceSelect = document.getElementById("priceFilter");
+      const typeSelect = document.getElementById("productTypeFilter");
+      const sortSelect = document.getElementById("sortFilter");
+
+      if (searchInput) searchInput.value = "";
+      if (priceSelect) priceSelect.value = "all";
+      if (typeSelect) typeSelect.value = "all";
+      if (sortSelect) sortSelect.value = "default";
+
+      applyAllProductFilters();
+    }
+
+
+    /* =========================================================
+       FILTER BY SKIN TYPE
+    ========================================================= */
+
     window.filterProducts =
       function (skinType) {
 
-        currentFilter =
-          skinType;
-
-
-        filteredProducts =
-          products.filter(
-            product => {
-
-              const productSkin =
-                String(
-                  product.skinType || ""
-                )
-                  .trim()
-                  .toLowerCase();
-
-
-              const normalizeSkin = (value) => {
-                const skin = String(value || "")
-                  .trim()
-                  .toLowerCase();
-
-                const map = {
-                  "normal": "normal",
-                  "normal skin": "normal",
-                  "dry": "dry",
-                  "dry skin": "dry",
-                  "oily": "oily",
-                  "oily skin": "oily",
-                  "combination": "combination",
-                  "combination skin": "combination",
-                  "sensitive": "sensitive",
-                  "sensitive skin": "sensitive",
-                  "all skin types": "all"
-                };
-
-                return map[skin] || skin;
-              };
-
-              const selectedSkin =
-                normalizeSkin(skinType);
-
-              const normalizedProductSkin =
-                normalizeSkin(product.skinType);
-
-              return (
-                normalizedProductSkin === selectedSkin ||
-                normalizedProductSkin === "all"
-              );
-
-            }
-          );
-
+        currentFilter = skinType;
 
         document
           .querySelectorAll(".skin-card")
           .forEach(card => {
+            card.classList.remove("active");
 
-            card.classList.remove(
-              "active"
-            );
-
-
-            if (
-              card.dataset.skin ===
-              skinType
-            ) {
-
-              card.classList.add(
-                "active"
-              );
-
+            if (card.dataset.skin === skinType) {
+              card.classList.add("active");
             }
-
           });
 
-
-        document.getElementById(
-          "productsTitle"
-        ).textContent =
+        document.getElementById("productsTitle").textContent =
           `${skinType} Products`;
 
-
-        document.getElementById(
-          "productsSubtitle"
-        ).textContent =
+        document.getElementById("productsSubtitle").textContent =
           `Skincare selected for ${skinType.toLowerCase()}.`;
 
-
-        const status =
-          document.getElementById(
-            "filterStatus"
-          );
-
-
-        status.style.display =
-          "inline-flex";
-
-
-        status.textContent =
-          `${filteredProducts.length} product${filteredProducts.length !== 1
-            ? "s"
-            : ""
-          } found`;
-
-
-        document.getElementById(
-          "clearFilter"
-        ).style.display =
-          "inline-block";
-
-
-        renderProducts();
-
+        applyAllProductFilters();
 
         document
           .getElementById("products")
           .scrollIntoView({
             behavior: "smooth"
           });
-
       };
 
 
@@ -2853,47 +3245,19 @@
 
         currentFilter = null;
 
-        filteredProducts =
-          [...products];
-
-
         document
           .querySelectorAll(".skin-card")
           .forEach(card => {
-
-            card.classList.remove(
-              "active"
-            );
-
+            card.classList.remove("active");
           });
 
-
-        document.getElementById(
-          "productsTitle"
-        ).textContent =
+        document.getElementById("productsTitle").textContent =
           "Our Products";
 
-
-        document.getElementById(
-          "productsSubtitle"
-        ).textContent =
+        document.getElementById("productsSubtitle").textContent =
           "Explore our skincare collection.";
 
-
-        document.getElementById(
-          "filterStatus"
-        ).style.display =
-          "none";
-
-
-        document.getElementById(
-          "clearFilter"
-        ).style.display =
-          "none";
-
-
-        renderProducts();
-
+        applyAllProductFilters();
       };
 
 
@@ -3116,7 +3480,7 @@
     ========================================================= */
 
     window.toggleFavorite =
-      function (id) {
+      async function (id) {
 
         let favorites =
           JSON.parse(
@@ -3150,6 +3514,13 @@
           )
         );
 
+        const product = products.find(item => String(item.id) === String(id));
+        await logCustomerAudit(
+          favorites.includes(id) ? "Added to Wishlist" : "Removed from Wishlist",
+          "Wishlist",
+          `${favorites.includes(id) ? "Added" : "Removed"} "${product?.name || "Product"}" ${favorites.includes(id) ? "to" : "from"} favorites`,
+          id
+        );
 
         renderProducts();
 
@@ -3238,7 +3609,7 @@
     ========================================================= */
 
     window.addCurrentProductToCart =
-      function () {
+      async function () {
 
         if (!currentProduct) {
 
@@ -3346,6 +3717,13 @@
           JSON.stringify(cart)
         );
 
+        await logCustomerAudit(
+          "Added to Cart",
+          "Cart",
+          `Added "${currentProduct.name}" to the shopping cart`,
+          currentProduct.id
+        );
+
 
         alert(
           `${currentProduct.name} has been added to your cart! 🛒`
@@ -3423,6 +3801,31 @@
     ========================================================= */
 
     async function initializeShop() {
+
+      document.getElementById("productSearch")?.addEventListener("input", event => {
+        searchTerm = event.target.value.trim();
+        applyAllProductFilters();
+      });
+
+      document.getElementById("priceFilter")?.addEventListener("change", event => {
+        selectedPriceRange = event.target.value;
+        applyAllProductFilters();
+      });
+
+      document.getElementById("productTypeFilter")?.addEventListener("change", event => {
+        selectedProductType = event.target.value;
+        applyAllProductFilters();
+      });
+
+      document.getElementById("sortFilter")?.addEventListener("change", event => {
+        selectedSort = event.target.value;
+        applyAllProductFilters();
+      });
+
+      document.getElementById("resetAdvancedFilters")?.addEventListener("click", () => {
+        resetAdvancedFilters();
+      });
+
       // Load reviews first so the first product render already contains
       // the latest ratings from accounts.html.
       await loadProductReviews();

@@ -1470,6 +1470,8 @@
     import {
       getDatabase,
       ref,
+      push,
+      set,
       update
     } from
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -1519,6 +1521,27 @@
 
     const db =
       getDatabase(app);
+
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const auditRef = push(ref(db, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
 
 
     /* =========================================
@@ -2283,6 +2306,13 @@
               skinCondition
 
           }
+        );
+
+        await logCustomerAudit(
+          "Completed Skin Quiz",
+          "Account",
+          `Completed the routine quiz · Skin type: ${skinType} · Condition: ${skinCondition}`,
+          currentUser.uid
         );
 
 

@@ -2072,6 +2072,28 @@
     const modalPostContent = document.getElementById("modalPostContent");
 
     let currentUser = null;
+
+    async function logCustomerAudit(action, area, details, entityId = "") {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const auditRef = push(ref(db, "auditTrail"));
+        await set(auditRef, {
+          actorType: "customer",
+          action: String(action || "Activity"),
+          area: String(area || "System"),
+          details: String(details || ""),
+          entityId: String(entityId || ""),
+          customerId: user.uid,
+          customerName: user.displayName || user.email || "Customer",
+          customerEmail: user.email || "",
+          timestamp: Date.now()
+        });
+      } catch (error) {
+        console.error("CUSTOMER AUDIT LOG ERROR:", error);
+      }
+    }
+
     let editingPostId = null;
     let allPosts = {};
 
@@ -2144,9 +2166,9 @@
       modalPostContent.textContent = post.content || "";
 
       if (post.imageUrl) {
-        modalPostImage.innerHTML = `<img src="${escapeHTML(post.imageUrl)}" alt="${escapeHTML(post.title)}" onerror="this.parentElement.innerHTML='<div class="community-placeholder">NOIRÉ</div>'">`;
+        modalPostImage.innerHTML = `<img src="${escapeHTML(post.imageUrl)}" alt="${escapeHTML(post.title)}" onerror="this.style.display='none';">`;
       } else {
-        modalPostImage.innerHTML = '<div class="community-placeholder">NOIRÉ</div>';
+        modalPostImage.innerHTML = '';
       }
 
       journalModal.classList.add("show");
@@ -2199,6 +2221,13 @@
             title, category, imageUrl, content, updatedAt: Date.now()
           });
 
+          await logCustomerAudit(
+            "Updated Journal Entry",
+            "System",
+            `Updated journal entry "${title}"`,
+            editingPostId
+          );
+
           resetEditor();
           postStatus.textContent = "Your journal entry has been updated. ✨";
         } else {
@@ -2210,6 +2239,13 @@
             authorEmail: currentUser.email || "",
             createdAt: Date.now()
           });
+
+          await logCustomerAudit(
+            "Created Journal Entry",
+            "System",
+            `Published journal entry "${title}"`,
+            postRef.key
+          );
 
           communityForm.reset();
           postStatus.textContent = "Your journal entry is now live. ✨";
@@ -2254,8 +2290,8 @@
       communityPosts.innerHTML = posts.map(post => {
         const safeImage = escapeHTML(post.imageUrl || "");
         const imageHTML = safeImage
-          ? `<img src="${safeImage}" alt="${escapeHTML(post.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><div class="community-placeholder" style="display:none;">NOIRÉ</div>`
-          : `<div class="community-placeholder">NOIRÉ</div>`;
+          ? `<img src="${safeImage}" alt="${escapeHTML(post.title)}" onerror="this.style.display='none';">`
+          : '';
         const isOwner = currentUser && currentUser.uid === post.authorId;
 
         return `
@@ -2288,6 +2324,12 @@
             if (!confirm("Delete this journal entry? This cannot be undone.")) return;
             try {
               await remove(ref(db, "communityPosts/" + postId));
+              await logCustomerAudit(
+                "Deleted Journal Entry",
+                "System",
+                `Deleted journal entry "${post.title || "Untitled Journal Entry"}"`,
+                postId
+              );
               if (editingPostId === postId) resetEditor();
             } catch (error) {
               console.error(error);

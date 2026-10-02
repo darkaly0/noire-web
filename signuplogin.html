@@ -383,6 +383,7 @@ import {
 import {
   getDatabase,
   ref,
+  push,
   set,
   get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -400,6 +401,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+
+async function logCustomerAudit(action, area, details, entityId = "") {
+  try {
+    const user = auth.currentUser;
+    if (!user) return;
+    const auditRef = push(ref(db, "auditTrail"));
+    await set(auditRef, {
+      actorType: "customer",
+      action: String(action || "Activity"),
+      area: String(area || "System"),
+      details: String(details || ""),
+      entityId: String(entityId || ""),
+      customerId: user.uid,
+      customerName: user.displayName || user.email || "Customer",
+      customerEmail: user.email || "",
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    console.error("CUSTOMER AUDIT LOG ERROR:", error);
+  }
+}
 
 /*
   IMPORTANT:
@@ -501,6 +523,13 @@ if (registerButton) {
         createdAt: Date.now()
       });
 
+      await logCustomerAudit(
+        "Created Account",
+        "Account",
+        `Created customer account "${username}"`,
+        user.uid
+      );
+
       alert("Registration successful! Welcome to Noiré. ✨");
       redirectToAccount();
 
@@ -574,6 +603,12 @@ if (loginButton) {
         user.displayName ||
         email.split("@")[0];
 
+      await logCustomerAudit(
+        "Logged In",
+        "Account",
+        "Signed in to the Noiré customer account"
+      );
+
       alert("Welcome back, " + displayName + "! ✨");
 
       /*
@@ -633,6 +668,12 @@ googleButtons.forEach((button) => {
           createdAt: Date.now()
         });
       }
+
+      await logCustomerAudit(
+        "Logged In with Google",
+        "Account",
+        "Signed in with Google"
+      );
 
       alert("Welcome to Noiré, " + (user.displayName || "beautiful") + "! ✨");
       redirectToAccount();
