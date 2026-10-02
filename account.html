@@ -3041,7 +3041,9 @@
     import {
       getAuth,
       onAuthStateChanged,
-      signOut
+      signOut,
+      setPersistence,
+      browserLocalPersistence
     } from
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -3073,6 +3075,22 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
+
+    /*
+      CUSTOMER-ONLY ACCOUNT AUTH
+      -----------------------------------------------
+      account.html must never decide that an arbitrary Firebase
+      Auth user is a Noiré customer. Admin accounts use the same
+      Firebase project, so we verify that the authenticated UID
+      actually has a customer record under users/{uid}.
+
+      IMPORTANT:
+      - This page does NOT read admins/{uid}.
+      - Admin authentication is handled by admin.html only.
+      - If the current Firebase session belongs to an admin (or
+        any account without a customer record), this page refuses
+        to load customer data and sends the browser to the login page.
+    */
 
     let currentUser = null;
     let currentData = {};
@@ -4107,24 +4125,61 @@
     window.closeOrderDetails = closeOrderDetails;
 
     /* =====================================================
-       LOAD ACCOUNT
+       LOAD ACCOUNT — CUSTOMER AUTH ONLY
     ===================================================== */
+
+    /*
+      Wait until Firebase has restored its saved authentication
+      state before checking the customer session.
+    */
+    await auth.authStateReady();
 
     onAuthStateChanged(auth, async (user) => {
 
       if (!user) {
-        alert("Please log in first.");
-        window.location.href = "signuplogin.html";
+        currentUser = null;
+        console.warn("No authenticated Noiré customer session found.");
+        window.location.replace("signuplogin.html");
         return;
       }
 
-      currentUser = user;
+      /*
+        DO NOT read admins/{uid} here.
 
+        Customer records live under:
+          users/{uid}
+
+        An admin account that is authenticated through Firebase
+        but has no customer record is therefore rejected by this
+        page instead of being treated as a customer.
+      */
       try {
         const userRef = ref(db, "users/" + user.uid);
         const snapshot = await get(userRef);
 
-        let data = snapshot.exists() ? snapshot.val() : {};
+        if (!snapshot.exists()) {
+          console.warn(
+            "Authenticated Firebase account is not a Noiré customer. " +
+            "Account page will not load admin/non-customer data."
+          );
+
+          currentUser = null;
+
+          /*
+            Sign out only the current Firebase session so this
+            customer-only page cannot continue using an admin UID.
+            The admin page remains responsible for establishing
+            its own admin session when the admin logs in there.
+          */
+          await signOut(auth);
+
+          window.location.replace("signuplogin.html");
+          return;
+        }
+
+        currentUser = user;
+
+        let data = snapshot.val() || {};
 
         // Keep the authenticated email available in the profile.
         if (!data.email && user.email) {
@@ -4134,11 +4189,14 @@
         renderAccount(data, user);
         await loadFavorites();
         loadOrderHistory(user);
+        await loadMyJournalPosts(user);
 
-        console.log("Account loaded:", user.uid);
+        console.log("Customer account loaded:", user.uid);
 
       } catch (error) {
-        console.error("Error loading account:", error);
+        console.error("Error loading customer account:", error);
+
+        currentUser = null;
 
         setText("usernameValue", "Unable to load");
         setText("emailValue", user.email || "Unable to load");
@@ -4627,23 +4685,10 @@
     }
 
     /*
-      Run after the existing account authentication listener
-      has identified the logged-in user.
+      The main Firebase auth listener above is responsible for
+      loading the account and journal data after authentication.
+      Keeping a single auth listener prevents duplicate loads.
     */
-    if (typeof currentUser !== "undefined" && currentUser) {
-      loadMyJournalPosts(currentUser);
-    }
-
-    /*
-      If the existing page exposes auth through onAuthStateChanged,
-      this additional listener keeps My Journal synchronized.
-      It does not replace the account page's existing auth logic.
-    */
-    onAuthStateChanged(auth, function(user) {
-      if (user) {
-        loadMyJournalPosts(user);
-      }
-    });
 
 </script>
 
