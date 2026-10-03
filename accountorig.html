@@ -155,175 +155,6 @@
     }
 
     /* =====================================================
-       NOTIFICATIONS
-    ===================================================== */
-
-    .notification-wrap {
-      position: relative;
-    }
-
-    .notification-button {
-      position: relative;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--charcoal);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all .25s ease;
-    }
-
-    .notification-button:hover,
-    .notification-button.active {
-      background: var(--black);
-      color: #fff;
-      border-color: var(--black);
-      transform: translateY(-2px);
-    }
-
-    .notification-badge {
-      position: absolute;
-      top: -4px;
-      right: -3px;
-      min-width: 17px;
-      height: 17px;
-      padding: 0 4px;
-      border-radius: 999px;
-      background: var(--rose-gold);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 700;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #fff;
-    }
-
-    .notification-panel {
-      position: absolute;
-      top: calc(100% + 13px);
-      right: 0;
-      width: min(390px, calc(100vw - 30px));
-      max-height: 520px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 20px 55px rgba(0,0,0,.14);
-      overflow: hidden;
-      display: none;
-      z-index: 2500;
-    }
-
-    .notification-panel.show {
-      display: block;
-      animation: fadeUp .2s ease both;
-    }
-
-    .notification-header {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .notification-header h3 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-    }
-
-    .notification-mark-all {
-      border: 0;
-      background: transparent;
-      color: var(--rose-gold);
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .notification-list {
-      max-height: 430px;
-      overflow-y: auto;
-    }
-
-    .notification-item {
-      display: block;
-      width: 100%;
-      padding: 15px 18px;
-      border: 0;
-      border-bottom: 1px solid #f0ede8;
-      background: #fff;
-      text-align: left;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
-
-    .notification-item:hover { background: #fcfaf7; }
-    .notification-item.unread { background: #fff8f7; }
-    .notification-item:last-child { border-bottom: 0; }
-
-    .notification-topline {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .notification-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--charcoal);
-    }
-
-    .notification-time {
-      color: #aaa;
-      font-size: 9px;
-      white-space: nowrap;
-    }
-
-    .notification-message {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .notification-type {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: var(--blush);
-      color: var(--rose-gold);
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-    }
-
-    .notification-empty {
-      padding: 42px 20px;
-      text-align: center;
-      color: #999;
-      font-size: 12px;
-    }
-
-    @media (max-width: 700px) {
-      .notification-panel {
-        position: fixed;
-        top: 72px;
-        right: 15px;
-      }
-    }
-
-    /* =====================================================
        PAGE HERO
     ===================================================== */
 
@@ -2318,6 +2149,11 @@
   
     .status-preparing-order { background:#eee5f5; color:#76568f; }
     .status-shipped-out { background:#dce8ee; color:#527486; }
+    .order-status-stack{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+    .pay-badge{display:inline-block;padding:4px 10px;border-radius:30px;font-size:10px;font-weight:600;letter-spacing:.3px;white-space:nowrap}
+    .pay-paid{background:#d4edda;color:#155724}
+    .pay-awaiting{background:#fff3cd;color:#856404}
+    .pay-cod{background:#eee9e3;color:#666}
     .status-out-for-delivery { background:#e5e0f3; color:#675b94; }
     /* =====================================================
        MY JOURNAL / COMMUNITY POSTS
@@ -2566,30 +2402,6 @@
       >
         ♡
       </a>
-
-      <div class="notification-wrap">
-        <button
-          id="notificationButton"
-          class="notification-button"
-          type="button"
-          title="Notifications"
-          aria-label="Notifications"
-          aria-expanded="false"
-        >
-          🔔
-          <span id="notificationBadge" class="notification-badge">0</span>
-        </button>
-
-        <div id="notificationPanel" class="notification-panel" aria-hidden="true">
-          <div class="notification-header">
-            <h3>Notifications</h3>
-            <button id="markAllNotifications" class="notification-mark-all" type="button">Mark all read</button>
-          </div>
-          <div id="notificationList" class="notification-list">
-            <div class="notification-empty">No notifications yet.</div>
-          </div>
-        </div>
-      </div>
 
       <a
         href="cart.html"
@@ -3311,133 +3123,13 @@
     let currentUser = null;
     let currentData = {};
     let currentOrders = {};
-    let notificationsCache = {};
 
-    function formatNotificationTime(timestamp) {
-      if (!timestamp) return "Just now";
-      const date = new Date(Number(timestamp));
-      if (Number.isNaN(date.getTime())) return "Just now";
-      return date.toLocaleString("en-PH", {
-        month: "short", day: "numeric", hour: "numeric", minute: "2-digit"
-      });
-    }
-
-    function escapeNotificationHTML(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/\"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function renderNotifications(data) {
-      notificationsCache = data || {};
-      const list = $("notificationList");
-      const badge = $("notificationBadge");
-      if (!list || !badge) return;
-
-      const notifications = Object.entries(notificationsCache)
-        .map(([id, item]) => ({ id, ...(item || {}) }))
-        .sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0));
-
-      const unread = notifications.filter(item => !item.read).length;
-      badge.textContent = unread > 99 ? "99+" : String(unread);
-      badge.style.display = unread ? "inline-flex" : "none";
-
-      if (!notifications.length) {
-        list.innerHTML = '<div class="notification-empty">You\'re all caught up. ✨</div>';
-        return;
-      }
-
-      list.innerHTML = notifications.map(item => `
-        <button type="button" class="notification-item ${item.read ? "" : "unread"}" data-notification-id="${escapeNotificationHTML(item.id)}">
-          <div class="notification-topline">
-            <span class="notification-title">${escapeNotificationHTML(item.title || "Noiré Update")}</span>
-            <span class="notification-time">${escapeNotificationHTML(formatNotificationTime(item.createdAt))}</span>
-          </div>
-          <div class="notification-message">${escapeNotificationHTML(item.message || "")}</div>
-          <span class="notification-type">${escapeNotificationHTML(item.type || "Update")}</span>
-        </button>
-      `).join("");
-
-      list.querySelectorAll("[data-notification-id]").forEach(button => {
-        button.addEventListener("click", async () => {
-          const id = button.dataset.notificationId;
-          if (!id || !currentUser) return;
-          try {
-            await update(ref(db, `notifications/${currentUser.uid}/${id}`), { read: true, readAt: Date.now() });
-          } catch (error) {
-            console.error("MARK NOTIFICATION READ ERROR:", error);
-          }
-        });
-      });
-    }
-
-    function listenForNotifications(user) {
-      if (!user) return;
-      onValue(
-        ref(db, `notifications/${user.uid}`),
-        snapshot => renderNotifications(snapshot.exists() ? snapshot.val() : {}),
-        error => {
-          console.error("LOAD NOTIFICATIONS ERROR:", error);
-          renderNotifications({});
-        }
-      );
-    }
-
-    async function markAllNotificationsRead() {
-      if (!currentUser) return;
-      const unreadUpdates = {};
-      Object.entries(notificationsCache || {}).forEach(([id, item]) => {
-        if (item && !item.read) {
-          unreadUpdates[`notifications/${currentUser.uid}/${id}/read`] = true;
-          unreadUpdates[`notifications/${currentUser.uid}/${id}/readAt`] = Date.now();
-        }
-      });
-      if (!Object.keys(unreadUpdates).length) return;
-      try { await update(ref(db), unreadUpdates); }
-      catch (error) { console.error("MARK ALL NOTIFICATIONS ERROR:", error); }
-    }
-
-    function setupNotificationUI() {
-      const button = $("notificationButton");
-      const panel = $("notificationPanel");
-      const markAll = $("markAllNotifications");
-      if (!button || !panel) return;
-
-      button.addEventListener("click", event => {
-        event.stopPropagation();
-        const show = !panel.classList.contains("show");
-        panel.classList.toggle("show", show);
-        button.classList.toggle("active", show);
-        button.setAttribute("aria-expanded", show ? "true" : "false");
-        panel.setAttribute("aria-hidden", show ? "false" : "true");
-      });
-
-      markAll?.addEventListener("click", event => {
-        event.stopPropagation();
-        markAllNotificationsRead();
-      });
-
-      document.addEventListener("click", event => {
-        if (!event.target.closest(".notification-wrap")) {
-          panel.classList.remove("show");
-          button.classList.remove("active");
-          button.setAttribute("aria-expanded", "false");
-          panel.setAttribute("aria-hidden", "true");
-        }
-      });
-    }
 
     /* =====================================================
        HELPERS
     ===================================================== */
 
     const $ = (id) => document.getElementById(id);
-
-    // Initialize notification controls only after the $ helper exists.
-    setupNotificationUI();
 
     function valueOrDash(value) {
       return value && String(value).trim() ? value : "Not set yet";
@@ -3875,6 +3567,14 @@
     function formatOrderDate(timestamp){if(!timestamp)return "Date unavailable";return new Date(Number(timestamp)).toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"});}
     function formatOrderPrice(value){return (Number(value)||0).toLocaleString("en-PH",{style:"currency",currency:"PHP"});}
     function orderStatusClass(status){return String(status||"Pending").toLowerCase().replace(/\s+/g,"-");}
+    function paymentBadge(o){
+      const method=o.paymentMethod||""; if(!method) return "";
+      if(method==="GCash"){
+        const paid=o.paymentStatus==="Paid";
+        return `<span class="pay-badge ${paid?"pay-paid":"pay-awaiting"}">${paid?"GCash · Paid":"GCash · Awaiting payment"}</span>`;
+      }
+      return `<span class="pay-badge pay-cod">Cash on Delivery</span>`;
+    }
 
     /* =====================================================
        PRODUCT RATINGS & REVIEWS
@@ -4270,9 +3970,12 @@
                       <div class="order-date">${formatOrderDate(order.createdAt)}</div>
                     </div>
 
-                    <span class="order-status status-${orderStatusClass(status)}">
-                      ${safe(status)}
-                    </span>
+                    <div class="order-status-stack">
+                      <span class="order-status status-${orderStatusClass(status)}">
+                        ${safe(status)}
+                      </span>
+                      ${paymentBadge(order)}
+                    </div>
                   </div>
 
                   <div class="order-card-body">
@@ -4377,9 +4080,12 @@
             <p>${formatOrderDate(order.createdAt)}</p>
           </div>
 
-          <span class="order-status status-${orderStatusClass(status)}">
-            ${safe(status)}
-          </span>
+          <div class="order-status-stack">
+            <span class="order-status status-${orderStatusClass(status)}">
+              ${safe(status)}
+            </span>
+            ${paymentBadge(order)}
+          </div>
         </div>
 
         <div class="order-detail-section">
@@ -4533,7 +4239,6 @@
         }
 
         currentUser = user;
-        listenForNotifications(user);
 
         let data = snapshot.val() || {};
 
