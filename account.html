@@ -2149,6 +2149,11 @@
   
     .status-preparing-order { background:#eee5f5; color:#76568f; }
     .status-shipped-out { background:#dce8ee; color:#527486; }
+    .order-status-stack{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+    .pay-badge{display:inline-block;padding:4px 10px;border-radius:30px;font-size:10px;font-weight:600;letter-spacing:.3px;white-space:nowrap}
+    .pay-paid{background:#d4edda;color:#155724}
+    .pay-awaiting{background:#fff3cd;color:#856404}
+    .pay-cod{background:#eee9e3;color:#666}
     .status-out-for-delivery { background:#e5e0f3; color:#675b94; }
     /* =====================================================
        MY JOURNAL / COMMUNITY POSTS
@@ -3562,6 +3567,14 @@
     function formatOrderDate(timestamp){if(!timestamp)return "Date unavailable";return new Date(Number(timestamp)).toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"});}
     function formatOrderPrice(value){return (Number(value)||0).toLocaleString("en-PH",{style:"currency",currency:"PHP"});}
     function orderStatusClass(status){return String(status||"Pending").toLowerCase().replace(/\s+/g,"-");}
+    function paymentBadge(o){
+      const method=o.paymentMethod||""; if(!method) return "";
+      if(method==="GCash"){
+        const paid=o.paymentStatus==="Paid";
+        return `<span class="pay-badge ${paid?"pay-paid":"pay-awaiting"}">${paid?"GCash · Paid":"GCash · Awaiting payment"}</span>`;
+      }
+      return `<span class="pay-badge pay-cod">Cash on Delivery</span>`;
+    }
 
     /* =====================================================
        PRODUCT RATINGS & REVIEWS
@@ -3957,9 +3970,12 @@
                       <div class="order-date">${formatOrderDate(order.createdAt)}</div>
                     </div>
 
-                    <span class="order-status status-${orderStatusClass(status)}">
-                      ${safe(status)}
-                    </span>
+                    <div class="order-status-stack">
+                      <span class="order-status status-${orderStatusClass(status)}">
+                        ${safe(status)}
+                      </span>
+                      ${paymentBadge(order)}
+                    </div>
                   </div>
 
                   <div class="order-card-body">
@@ -4064,9 +4080,12 @@
             <p>${formatOrderDate(order.createdAt)}</p>
           </div>
 
-          <span class="order-status status-${orderStatusClass(status)}">
-            ${safe(status)}
-          </span>
+          <div class="order-status-stack">
+            <span class="order-status status-${orderStatusClass(status)}">
+              ${safe(status)}
+            </span>
+            ${paymentBadge(order)}
+          </div>
         </div>
 
         <div class="order-detail-section">

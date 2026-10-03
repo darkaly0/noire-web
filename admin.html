@@ -1146,6 +1146,10 @@
     .status-shipped-out { background: #dce8ee; color: #527486; }
     .status-out-for-delivery { background: #e5e0f3; color: #675b94; }
     .status-delivered { background: #dce8d9; color: #5f7a5b; }
+    .pay-badge { display:inline-block; padding:4px 10px; border-radius:30px; font-size:11px; font-weight:600; white-space:nowrap; }
+    .pay-paid { background:#d4edda; color:#155724; }
+    .pay-awaiting { background:#fff3cd; color:#856404; }
+    .pay-cod { background:#eee9e3; color:#666; }
     .user-status-btn { min-width: 88px; }
     .action-buttons .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
     .admin-count-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 27px; height: 27px; padding: 0 8px; border-radius: 30px; background: var(--ivory); border: 1px solid var(--border); font-size: 10px; font-weight: 700; }
@@ -2024,13 +2028,14 @@
               <th>Date</th>
               <th>Items</th>
               <th>Total</th>
+              <th>Payment</th>
               <th>Status</th>
               <th>Reviews</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody id="ordersTableBody">
-            <tr><td colspan="8" class="empty-message">Loading orders...</td></tr>
+            <tr><td colspan="9" class="empty-message">Loading orders...</td></tr>
           </tbody>
         </table>
       </div>
@@ -3069,6 +3074,7 @@
     ====================================================== */
 
     let products = [];
+    let productsListenerStarted = false;
 
     /* =====================================================
        PRODUCT RATINGS & REVIEWS
@@ -5318,112 +5324,52 @@
 
     async function loadProducts() {
 
-      console.log(
-        "Loading products..."
+      console.log("Loading products...");
+
+      if (productsListenerStarted) {
+        return;
+      }
+
+      productsListenerStarted = true;
+
+      const productsRef = dbRef(database, "products");
+
+      onValue(
+        productsRef,
+        snapshot => {
+          products = [];
+
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            Object.entries(data).forEach(([id, product]) => {
+              products.push({
+                id,
+                ...product
+              });
+            });
+          }
+
+          console.log(`${products.length} product(s) loaded.`, products);
+          renderProducts();
+        },
+        error => {
+          console.error("LOAD PRODUCTS ERROR:", error);
+
+          const tableBody = document.getElementById("productTableBody");
+          if (tableBody) {
+            tableBody.innerHTML = `
+              <tr>
+                <td colspan="9" class="empty-message">
+                  Unable to load products.
+                  <br><br>
+                  <small>${escapeHTML(error.message || "Firebase error")}</small>
+                </td>
+              </tr>
+            `;
+          }
+        }
       );
-
-
-      try {
-
-        const productsRef =
-          dbRef(
-            database,
-            "products"
-          );
-
-
-        const snapshot =
-          await get(
-            productsRef
-          );
-
-
-        products = [];
-
-
-        if (
-          snapshot.exists()
-        ) {
-
-          const data =
-            snapshot.val();
-
-
-          Object.entries(data)
-            .forEach(
-              ([id, product]) => {
-
-                products.push({
-
-                  id:
-                    id,
-
-                  ...product
-
-                });
-
-              }
-            );
-
-        }
-
-
-        console.log(
-          `${products.length} product(s) loaded.`,
-          products
-        );
-
-
-        renderProducts();
-
-      }
-
-
-      catch (error) {
-
-        console.error(
-          "LOAD PRODUCTS ERROR:",
-          error
-        );
-
-
-        const tableBody =
-          document.getElementById(
-            "productTableBody"
-          );
-
-
-        if (tableBody) {
-
-          tableBody.innerHTML = `
-
-            <tr>
-
-              <td
-                colspan="9"
-                class="empty-message"
-              >
-
-                Unable to load products.
-
-                <br><br>
-
-                <small>
-                  ${escapeHTML(
-                    error.message
-                  )}
-                </small>
-
-              </td>
-
-            </tr>
-
-          `;
-
-        }
-
-      }
-
     }
 
 
@@ -5839,7 +5785,8 @@
 
           const revenue = ordersCache
             .filter(order =>
-              String(order.status || "Pending").toLowerCase() !== "cancelled"
+              String(order.status || "Pending").toLowerCase() !== "cancelled" &&
+              !(order.paymentMethod === "GCash" && order.paymentStatus !== "Paid")
             )
             .reduce((sum, order) => sum + (Number(order.total) || 0), 0);
 
@@ -5852,7 +5799,7 @@
           console.error("LOAD ORDERS ERROR:", error);
           body.innerHTML = `
             <tr>
-              <td colspan="8" class="empty-message">
+              <td colspan="9" class="empty-message">
                 Unable to load orders.
                 <br><small>${escapeHTML(error.message || "Firebase error")}</small>
               </td>
@@ -5894,6 +5841,16 @@
       }
     }
 
+    function adminPaymentBadge(order) {
+      const method = order.paymentMethod || "";
+      if (!method) return '<span class="admin-muted">—</span>';
+      if (method === "GCash") {
+        const paid = order.paymentStatus === "Paid";
+        return `<span class="pay-badge ${paid ? "pay-paid" : "pay-awaiting"}">GCash · ${paid ? "Paid" : "Awaiting"}</span>`;
+      }
+      return '<span class="pay-badge pay-cod">COD</span>';
+    }
+
     function renderOrders(orders) {
       const body = document.getElementById("ordersTableBody");
       if (!body) return;
@@ -5914,7 +5871,7 @@
       if (!filteredOrders.length) {
         body.innerHTML = `
           <tr>
-            <td colspan="8" class="empty-message">
+            <td colspan="9" class="empty-message">
               ${orderSearchTerm ? "No orders match your search." : "No orders have been placed yet."}
             </td>
           </tr>`;
@@ -5968,6 +5925,8 @@
             <td>
               <strong>${formatAdminCurrency(order.total)}</strong>
             </td>
+
+            <td>${adminPaymentBadge(order)}</td>
 
             <td>
               <span class="status status-${getStatusClass(status)}">
