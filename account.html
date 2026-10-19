@@ -154,174 +154,24 @@
       transform: translateY(-2px);
     }
 
-    /* =====================================================
-       NOTIFICATIONS
-    ===================================================== */
 
-    .notification-wrap {
-      position: relative;
-    }
-
-    .notification-button {
-      position: relative;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--charcoal);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all .25s ease;
-    }
-
-    .notification-button:hover,
-    .notification-button.active {
-      background: var(--black);
-      color: #fff;
-      border-color: var(--black);
-      transform: translateY(-2px);
-    }
-
-    .notification-badge {
-      position: absolute;
-      top: -4px;
-      right: -3px;
-      min-width: 17px;
-      height: 17px;
-      padding: 0 4px;
-      border-radius: 999px;
-      background: var(--rose-gold);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 700;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #fff;
-    }
-
-    .notification-panel {
-      position: absolute;
-      top: calc(100% + 13px);
-      right: 0;
-      width: min(390px, calc(100vw - 30px));
-      max-height: 520px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 20px 55px rgba(0,0,0,.14);
-      overflow: hidden;
-      display: none;
-      z-index: 2500;
-    }
-
-    .notification-panel.show {
-      display: block;
-      animation: fadeUp .2s ease both;
-    }
-
-    .notification-header {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .notification-header h3 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-    }
-
-    .notification-mark-all {
-      border: 0;
-      background: transparent;
-      color: var(--rose-gold);
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .notification-list {
-      max-height: 430px;
-      overflow-y: auto;
-    }
-
-    .notification-item {
-      display: block;
-      width: 100%;
-      padding: 15px 18px;
-      border: 0;
-      border-bottom: 1px solid #f0ede8;
-      background: #fff;
-      text-align: left;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
-
-    .notification-item:hover { background: #fcfaf7; }
-    .notification-item.unread { background: #fff8f7; }
-    .notification-item:last-child { border-bottom: 0; }
-
-    .notification-topline {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .notification-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--charcoal);
-    }
-
-    .notification-time {
-      color: #aaa;
-      font-size: 9px;
-      white-space: nowrap;
-    }
-
-    .notification-message {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .notification-type {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: var(--blush);
-      color: var(--rose-gold);
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-    }
-
-    .notification-empty {
-      padding: 42px 20px;
-      text-align: center;
-      color: #999;
-      font-size: 12px;
-    }
-
-    @media (max-width: 700px) {
-      .notification-panel {
-        position: fixed;
-        top: 72px;
-        right: 15px;
-      }
-    }
+    /* ACCOUNT NOTIFICATIONS */
+    .notification-wrap{position:relative;display:flex;align-items:center}
+    .notification-button{position:relative;cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:var(--charcoal);font-size:17px;transition:all .2s}
+    .notification-button:hover{background:var(--black);color:#fff;border-color:var(--black)}
+    .notification-badge{position:absolute;top:-5px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:#a94b50;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+    .notification-panel{position:absolute;right:0;top:48px;width:min(360px,calc(100vw - 32px));max-height:430px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 18px 45px #21161024;z-index:1500;display:none}
+    .notification-panel.open{display:block}
+    .notification-panel-head{display:flex;justify-content:space-between;align-items:center;padding:15px 17px;border-bottom:1px solid var(--line);font-weight:700;font-size:13px}
+    .notification-mark-read{border:0;background:transparent;color:var(--rose-gold);font-size:10px;font-weight:700;cursor:pointer}
+    .notification-list{padding:0;margin:0;list-style:none}
+    .notification-item{padding:14px 17px;border-bottom:1px solid #f1ece7;cursor:pointer}
+    .notification-item:last-child{border-bottom:0}
+    .notification-item.unread{background:#fbf5f2}
+    .notification-item strong{display:block;font-size:12px;margin-bottom:5px;color:#302826}
+    .notification-item p{font-size:11px;line-height:1.5;color:#716765;margin:0}
+    .notification-item time{display:block;font-size:9px;color:#9a8f8b;margin-top:7px}
+    .notification-empty{padding:26px 18px;text-align:center;color:#8b807b;font-size:12px}
 
     /* =====================================================
        PAGE HERO
@@ -1869,7 +1719,7 @@
        CLICKABLE ORDER HISTORY
     ===================================================== */
 
-    .order-card-clickable {
+    .order-refund-note{font-size:12px;line-height:1.6;color:var(--muted);margin:10px 0}.order-card-clickable {
       width: 100%;
       display: block;
       padding: 0;
@@ -2568,27 +2418,17 @@
       </a>
 
       <div class="notification-wrap">
-        <button
-          id="notificationButton"
-          class="notification-button"
-          type="button"
-          title="Notifications"
-          aria-label="Notifications"
-          aria-expanded="false"
-        >
+        <button type="button" id="accountNotificationButton" class="notification-button" title="Notifications" aria-label="Open notifications" aria-expanded="false">
           🔔
-          <span id="notificationBadge" class="notification-badge">0</span>
+          <span id="accountNotificationBadge" class="notification-badge" hidden>0</span>
         </button>
-
-        <div id="notificationPanel" class="notification-panel" aria-hidden="true">
-          <div class="notification-header">
-            <h3>Notifications</h3>
-            <button id="markAllNotifications" class="notification-mark-all" type="button">Mark all read</button>
+        <section id="accountNotificationPanel" class="notification-panel" aria-label="Notifications">
+          <div class="notification-panel-head">
+            <span>Notifications</span>
+            <button type="button" id="accountMarkNotificationsRead" class="notification-mark-read">Mark all read</button>
           </div>
-          <div id="notificationList" class="notification-list">
-            <div class="notification-empty">No notifications yet.</div>
-          </div>
-        </div>
+          <ul id="accountNotificationList" class="notification-list"><li class="notification-empty">Sign in to view your notifications.</li></ul>
+        </section>
       </div>
 
       <a
@@ -3311,133 +3151,13 @@
     let currentUser = null;
     let currentData = {};
     let currentOrders = {};
-    let notificationsCache = {};
 
-    function formatNotificationTime(timestamp) {
-      if (!timestamp) return "Just now";
-      const date = new Date(Number(timestamp));
-      if (Number.isNaN(date.getTime())) return "Just now";
-      return date.toLocaleString("en-PH", {
-        month: "short", day: "numeric", hour: "numeric", minute: "2-digit"
-      });
-    }
-
-    function escapeNotificationHTML(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/\"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function renderNotifications(data) {
-      notificationsCache = data || {};
-      const list = $("notificationList");
-      const badge = $("notificationBadge");
-      if (!list || !badge) return;
-
-      const notifications = Object.entries(notificationsCache)
-        .map(([id, item]) => ({ id, ...(item || {}) }))
-        .sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0));
-
-      const unread = notifications.filter(item => !item.read).length;
-      badge.textContent = unread > 99 ? "99+" : String(unread);
-      badge.style.display = unread ? "inline-flex" : "none";
-
-      if (!notifications.length) {
-        list.innerHTML = '<div class="notification-empty">You\'re all caught up. ✨</div>';
-        return;
-      }
-
-      list.innerHTML = notifications.map(item => `
-        <button type="button" class="notification-item ${item.read ? "" : "unread"}" data-notification-id="${escapeNotificationHTML(item.id)}">
-          <div class="notification-topline">
-            <span class="notification-title">${escapeNotificationHTML(item.title || "Noiré Update")}</span>
-            <span class="notification-time">${escapeNotificationHTML(formatNotificationTime(item.createdAt))}</span>
-          </div>
-          <div class="notification-message">${escapeNotificationHTML(item.message || "")}</div>
-          <span class="notification-type">${escapeNotificationHTML(item.type || "Update")}</span>
-        </button>
-      `).join("");
-
-      list.querySelectorAll("[data-notification-id]").forEach(button => {
-        button.addEventListener("click", async () => {
-          const id = button.dataset.notificationId;
-          if (!id || !currentUser) return;
-          try {
-            await update(ref(db, `notifications/${currentUser.uid}/${id}`), { read: true, readAt: Date.now() });
-          } catch (error) {
-            console.error("MARK NOTIFICATION READ ERROR:", error);
-          }
-        });
-      });
-    }
-
-    function listenForNotifications(user) {
-      if (!user) return;
-      onValue(
-        ref(db, `notifications/${user.uid}`),
-        snapshot => renderNotifications(snapshot.exists() ? snapshot.val() : {}),
-        error => {
-          console.error("LOAD NOTIFICATIONS ERROR:", error);
-          renderNotifications({});
-        }
-      );
-    }
-
-    async function markAllNotificationsRead() {
-      if (!currentUser) return;
-      const unreadUpdates = {};
-      Object.entries(notificationsCache || {}).forEach(([id, item]) => {
-        if (item && !item.read) {
-          unreadUpdates[`notifications/${currentUser.uid}/${id}/read`] = true;
-          unreadUpdates[`notifications/${currentUser.uid}/${id}/readAt`] = Date.now();
-        }
-      });
-      if (!Object.keys(unreadUpdates).length) return;
-      try { await update(ref(db), unreadUpdates); }
-      catch (error) { console.error("MARK ALL NOTIFICATIONS ERROR:", error); }
-    }
-
-    function setupNotificationUI() {
-      const button = $("notificationButton");
-      const panel = $("notificationPanel");
-      const markAll = $("markAllNotifications");
-      if (!button || !panel) return;
-
-      button.addEventListener("click", event => {
-        event.stopPropagation();
-        const show = !panel.classList.contains("show");
-        panel.classList.toggle("show", show);
-        button.classList.toggle("active", show);
-        button.setAttribute("aria-expanded", show ? "true" : "false");
-        panel.setAttribute("aria-hidden", show ? "false" : "true");
-      });
-
-      markAll?.addEventListener("click", event => {
-        event.stopPropagation();
-        markAllNotificationsRead();
-      });
-
-      document.addEventListener("click", event => {
-        if (!event.target.closest(".notification-wrap")) {
-          panel.classList.remove("show");
-          button.classList.remove("active");
-          button.setAttribute("aria-expanded", "false");
-          panel.setAttribute("aria-hidden", "true");
-        }
-      });
-    }
 
     /* =====================================================
        HELPERS
     ===================================================== */
 
     const $ = (id) => document.getElementById(id);
-
-    // Initialize notification controls only after the $ helper exists.
-    setupNotificationUI();
 
     function valueOrDash(value) {
       return value && String(value).trim() ? value : "Not set yet";
@@ -3625,7 +3345,7 @@
             rating: product.rating || "★★★★★",
             description: product.description || "",
             benefits: Array.isArray(product.benefits) ? product.benefits : [],
-            image: imageStorage[id] || ""
+            image: product.imageUrl || product.image || imageStorage[id] || ""
           });
         });
 
@@ -3904,12 +3624,18 @@
       ).join("");
     }
 
-    async function getExistingProductReview(productId) {
-      if (!currentUser || !productId) return null;
+    function getReviewRecordKey(orderId) {
+      // A customer may review the same product again on a different order.
+      // Keep each review attached to its own order instead of overwriting by user.
+      return `${currentUser.uid}_${String(orderId || "").replace(/[.#$\/\[\]]/g, "_")}`;
+    }
+
+    async function getExistingProductReview(productId, orderId) {
+      if (!currentUser || !productId || !orderId) return null;
 
       try {
         const snapshot = await get(
-          ref(db, `productReviews/${productId}/${currentUser.uid}`)
+          ref(db, `productReviews/${productId}/${getReviewRecordKey(orderId)}`)
         );
         return snapshot.exists() ? snapshot.val() : null;
       } catch (error) {
@@ -3918,7 +3644,8 @@
       }
     }
 
-    function reviewProductMarkup(item, index, existingReview) {
+    function reviewProductMarkup(item, index, existingReview, orderId) {
+      const reviewKey = `${getReviewProductId(item)}__${String(orderId || "").replace(/[^a-zA-Z0-9_-]/g, "_")}`;
       const productId = getReviewProductId(item);
       const productName = getReviewProductName(item);
       const image = item?.image || "";
@@ -3946,7 +3673,7 @@
       if (existingReview) {
         return `
           <div class="review-product"
-               data-review-product="${safe(productId)}"
+               data-review-product="${safe(productId)}"\n               data-review-key="${safe(reviewKey)}"
                data-review-name="${safe(productName)}">
             <div class="review-product-top">
               ${imageMarkup}
@@ -3968,12 +3695,12 @@
               <button
                 type="button"
                 class="review-edit-link"
-                data-edit-review="${safe(productId)}"
+                data-edit-review="${safe(reviewKey)}"
               >Edit review</button>
             </div>
 
-            <div class="review-editor" id="reviewEditor-${safe(productId)}" style="display:none;">
-              ${reviewEditorMarkup(productId, productName, image, existingReview, index)}
+            <div class="review-editor" id="reviewEditor-${safe(reviewKey)}" style="display:none;">
+              ${reviewEditorMarkup(productId, reviewKey, productName, image, existingReview, index)}
             </div>
           </div>
         `;
@@ -3981,7 +3708,7 @@
 
       return `
         <div class="review-product"
-             data-review-product="${safe(productId)}"
+             data-review-product="${safe(productId)}"\n               data-review-key="${safe(reviewKey)}"
              data-review-name="${safe(productName)}">
           <div class="review-product-top">
             ${imageMarkup}
@@ -3991,18 +3718,18 @@
             </div>
           </div>
 
-          ${reviewEditorMarkup(productId, productName, image, null, index)}
+          ${reviewEditorMarkup(productId, reviewKey, productName, image, null, index)}
         </div>
       `;
     }
 
-    function reviewEditorMarkup(productId, productName, image, existingReview, index) {
+    function reviewEditorMarkup(productId, reviewKey, productName, image, existingReview, index) {
       const rating = Number(existingReview?.rating) || 0;
       const comment = existingReview?.comment || "";
 
       return `
         <div class="review-editor-form"
-             data-review-form="${safe(productId)}">
+             data-review-form="${safe(reviewKey)}">
           <div class="review-stars"
                role="radiogroup"
                aria-label="Rate ${safe(productName)} from 1 to 5 stars">
@@ -4028,7 +3755,7 @@
             <button
               type="button"
               class="review-submit-btn"
-              data-submit-review="${safe(productId)}"
+              data-submit-review="${safe(reviewKey)}"
             >${existingReview ? "Update Review" : "Submit Review"}</button>
             <span class="review-status" data-review-status></span>
           </div>
@@ -4060,8 +3787,9 @@
 
       modal.querySelectorAll("[data-submit-review]").forEach(button => {
         button.addEventListener("click", async () => {
-          const productId = button.dataset.submitReview;
-          const form = modal.querySelector(`[data-review-form="${CSS.escape(productId)}"]`);
+          const reviewKey = button.dataset.submitReview;
+          const form = modal.querySelector(`[data-review-form="${CSS.escape(reviewKey)}"]`);
+          const productId = form?.closest("[data-review-product]")?.dataset.reviewProduct;
           const statusEl = form?.querySelector("[data-review-status]");
 
           if (!currentUser || !form || !statusEl) return;
@@ -4084,7 +3812,7 @@
           try {
             const reviewRef = ref(
               db,
-              `productReviews/${productId}/${currentUser.uid}`
+              `productReviews/${productId}/${getReviewRecordKey(order.id)}`
             );
 
             const existingSnapshot = await get(reviewRef);
@@ -4175,7 +3903,7 @@
         items.map(async (item, index) => ({
           item,
           index,
-          review: await getExistingProductReview(getReviewProductId(item))
+          review: await getExistingProductReview(getReviewProductId(item), order.id)
         }))
       );
 
@@ -4191,11 +3919,197 @@
           </p>
 
           ${reviewEntries.map(({item, index, review}) =>
-            reviewProductMarkup(item, index, review)
+            reviewProductMarkup(item, index, review, order.id)
           ).join("")}
         </div>
       `;
     }
+
+    function escapeNotificationText(value) {
+      return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+
+    const NOTIFICATION_READ_KEY = "noireAccountReadNotifications";
+    let accountNotificationItems = [];
+    let accountProductNotificationItems = [];
+
+    function getReadNotificationIds() {
+      try { return JSON.parse(localStorage.getItem(NOTIFICATION_READ_KEY) || "[]"); }
+      catch (_) { return []; }
+    }
+
+    function renderAccountNotifications() {
+      const list = document.getElementById("accountNotificationList");
+      const badge = document.getElementById("accountNotificationBadge");
+      if (!list || !badge) return;
+      const readIds = getReadNotificationIds();
+      const unreadCount = accountNotificationItems.filter(item => !readIds.includes(item.id)).length;
+      badge.textContent = unreadCount > 99 ? "99+" : String(unreadCount);
+      badge.hidden = unreadCount === 0;
+      if (!accountNotificationItems.length) {
+        list.innerHTML = `<li class="notification-empty">You're all caught up. No notifications yet.</li>`;
+        return;
+      }
+      list.innerHTML = accountNotificationItems.map(item => `
+        <li class="notification-item ${readIds.includes(item.id) ? "" : "unread"}" data-notification-id="${escapeNotificationText(item.id)}" data-order-id="${escapeNotificationText(item.orderId || "")}">
+          <strong>${escapeNotificationText(item.title)}</strong>
+          <p>${escapeNotificationText(item.message)}</p>
+          <time>${item.timestamp ? new Date(Number(item.timestamp)).toLocaleString("en-PH", {dateStyle:"medium",timeStyle:"short"}) : "Recent"}</time>
+        </li>
+      `).join("");
+      list.querySelectorAll("[data-notification-id]").forEach(row => row.addEventListener("click", () => {
+        const id = row.dataset.notificationId;
+        const nextRead = getReadNotificationIds();
+        if (!nextRead.includes(id)) nextRead.push(id);
+        localStorage.setItem(NOTIFICATION_READ_KEY, JSON.stringify(nextRead));
+        renderAccountNotifications();
+        const orderId = row.dataset.orderId;
+        if (orderId && typeof openOrderDetails === "function" && currentOrders[orderId]) openOrderDetails(orderId);
+      }));
+    }
+
+    function normalizeCustomerOrderStatus(rawStatus) {
+      const raw = String(rawStatus || "Pending").trim().toLowerCase().replace(/[_-]+/g, " ").replace(/\s+/g, " ");
+      const statusMap = {
+        "pending": { key: "pending", label: "Pending" },
+        "processing": { key: "processing", label: "Processing" },
+        "preparing": { key: "preparing", label: "Preparing" },
+        "preparing order": { key: "preparing", label: "Preparing" },
+        "shipped": { key: "shipped", label: "Shipped Out" },
+        "shipped out": { key: "shipped-out", label: "Shipped Out" },
+        "out for delivery": { key: "out-for-delivery", label: "Out for Delivery" },
+        "out for deliver": { key: "out-for-delivery", label: "Out for Delivery" },
+        "delivered": { key: "delivered", label: "Delivered" },
+        "cancelled": { key: "cancelled", label: "Cancelled" },
+        "canceled": { key: "cancelled", label: "Cancelled" },
+        "refunded": { key: "refunded", label: "Refunded" }
+      };
+      return statusMap[raw] || { key: raw.replace(/\s+/g, "-"), label: raw ? raw.replace(/\b\w/g, letter => letter.toUpperCase()) : "Pending" };
+    }
+
+    function buildAccountNotifications(orders) {
+      const notices = [];
+      Object.values(orders || {}).forEach(order => {
+        const id = String(order.id || "");
+        const orderLabel = order.orderNumber || order.id || "your order";
+        const normalizedStatus = normalizeCustomerOrderStatus(order.status);
+        const statusKey = normalizedStatus.key;
+        const statusLabel = normalizedStatus.label;
+        if (["processing", "preparing", "shipped", "shipped-out", "out-for-delivery", "delivered", "cancelled", "refunded"].includes(statusKey)) {
+          const statusMessage = {
+            processing: "is now being processed.",
+            preparing: "is being prepared.",
+            shipped: "has been shipped out.",
+            "shipped-out": "has been shipped out.",
+            "out-for-delivery": "is out for delivery.",
+            delivered: "has been delivered.",
+            cancelled: "has been cancelled.",
+            refunded: "has been marked as refunded."
+          }[statusKey] || `is now ${statusLabel.toLowerCase()}.`;
+          notices.push({id:`order-${id}-${statusKey}`, orderId:id, title:`Order ${statusLabel}`, message:`Your order ${orderLabel} ${statusMessage}`, timestamp:order.updatedAt || order.createdAt || 0});
+        }
+        const refundStatus = String(order.refundRequestStatus || "");
+        if (refundStatus === "Pending") notices.push({id:`refund-${id}-pending`, orderId:id, title:"Refund request received", message:`Your refund request for order ${orderLabel} is awaiting admin review.`, timestamp:order.refundRequestedAt || order.updatedAt || 0});
+        if (refundStatus === "Approved") notices.push({id:`refund-${id}-approved`, orderId:id, title:"Refund request approved", message:`Your refund request for order ${orderLabel} was approved and is awaiting processing.`, timestamp:order.refundReviewedAt || order.updatedAt || 0});
+        if (refundStatus === "Rejected") notices.push({id:`refund-${id}-rejected`, orderId:id, title:"Refund request update", message:`Your refund request for order ${orderLabel} was rejected.${order.refundAdminNote ? " Note: " + order.refundAdminNote : ""}`, timestamp:order.refundReviewedAt || order.updatedAt || 0});
+        if (refundStatus === "Refunded" || String(order.refundStatus || "") === "Refunded" || status === "Refunded") notices.push({id:`refund-${id}-refunded`, orderId:id, title:"Refund issued", message:`A refund of ${formatOrderPrice(order.refundAmount || 0)} was recorded for order ${orderLabel}.`, timestamp:order.refundedAt || order.updatedAt || 0});
+      });
+      accountNotificationItems = [...notices, ...accountProductNotificationItems]
+        .sort((a,b) => Number(b.timestamp || 0) - Number(a.timestamp || 0));
+      renderAccountNotifications();
+    }
+
+    // Watch the shared product catalog so customers are notified when the admin adds a product.
+    // Product IDs already present on the first visit are treated as existing products, not new arrivals.
+    function loadProductNotifications(user) {
+      const seenKey = `noireSeenProductIds_${user.uid}`;
+      const noticesKey = `noireProductNotifications_${user.uid}`;
+      let initialSnapshotHandled = false;
+      onValue(ref(db, "products"), (snapshot) => {
+        const products = snapshot.val() || {};
+        let seenIds = [];
+        let savedNotices = [];
+        try { seenIds = JSON.parse(localStorage.getItem(seenKey) || "[]"); } catch (_) {}
+        try { savedNotices = JSON.parse(localStorage.getItem(noticesKey) || "[]"); } catch (_) {}
+        const seenSet = new Set(seenIds);
+        const productEntries = Object.entries(products);
+
+        if (!initialSnapshotHandled && !localStorage.getItem(seenKey)) {
+          // On first visit, only surface genuinely recent additions instead of the whole catalog.
+          const recentCutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+          productEntries.forEach(([productId, product]) => {
+            seenSet.add(productId);
+            const createdAt = Number(product.createdAt) || 0;
+            if (createdAt >= recentCutoff) {
+              const noticeId = `product-${productId}`;
+              if (!savedNotices.some(item => item.id === noticeId)) {
+                savedNotices.push({
+                  id: noticeId,
+                  title: "New product available",
+                  message: `${product.name || "A new product"} has been added to the Noiré collection. Check it out in the shop.`,
+                  timestamp: createdAt || Date.now(),
+                  productId
+                });
+              }
+            }
+          });
+          initialSnapshotHandled = true;
+          localStorage.setItem(seenKey, JSON.stringify([...seenSet]));
+          localStorage.setItem(noticesKey, JSON.stringify(savedNotices));
+          accountProductNotificationItems = savedNotices;
+          buildAccountNotifications(currentOrders || {});
+          return;
+        }
+
+        initialSnapshotHandled = true;
+        const existingNoticeIds = new Set(savedNotices.map(item => item.id));
+        productEntries.forEach(([productId, product]) => {
+          if (!seenSet.has(productId)) {
+            seenSet.add(productId);
+            const noticeId = `product-${productId}`;
+            if (!existingNoticeIds.has(noticeId)) {
+              savedNotices.push({
+                id: noticeId,
+                title: "New product available",
+                message: `${product.name || "A new product"} has been added to the Noiré collection. Check it out in the shop.`,
+                timestamp: Number(product.createdAt) || Date.now(),
+                productId
+              });
+            }
+          }
+        });
+        localStorage.setItem(seenKey, JSON.stringify([...seenSet]));
+        localStorage.setItem(noticesKey, JSON.stringify(savedNotices));
+        accountProductNotificationItems = savedNotices;
+        buildAccountNotifications(currentOrders || {});
+      });
+    }
+
+    function setupAccountNotifications() {
+      const button = document.getElementById("accountNotificationButton");
+      const panel = document.getElementById("accountNotificationPanel");
+      const markRead = document.getElementById("accountMarkNotificationsRead");
+      if (!button || !panel || button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        const isOpen = panel.classList.toggle("open");
+        button.setAttribute("aria-expanded", String(isOpen));
+      });
+      markRead?.addEventListener("click", () => {
+        localStorage.setItem(NOTIFICATION_READ_KEY, JSON.stringify(accountNotificationItems.map(item => item.id)));
+        renderAccountNotifications();
+      });
+      document.addEventListener("click", event => {
+        if (!event.target.closest(".notification-wrap")) {
+          panel.classList.remove("open");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    setupAccountNotifications();
 
     function loadOrderHistory(user) {
       const container = $("ordersContainer");
@@ -4204,6 +4118,7 @@
       onValue(ref(db, "orders/" + user.uid), (snapshot) => {
         if (!snapshot.exists()) {
           currentOrders = {};
+          buildAccountNotifications({});
           container.innerHTML = `
             <div class="orders-empty">
               <div class="orders-icon">♡</div>
@@ -4223,6 +4138,7 @@
         orders.forEach(order => {
           currentOrders[order.id] = order;
         });
+        buildAccountNotifications(currentOrders);
 
         container.innerHTML = `
           <div class="orders-list">
@@ -4455,12 +4371,70 @@
           </div>
         </div>
 
+        <div class="order-detail-section">
+          <div class="order-detail-section-heading">
+            <h3>Refund Request</h3>
+            <span>${safe(order.refundRequestStatus || order.refundStatus || "Not requested")}</span>
+          </div>
+          ${
+            order.refundStatus === "Refunded" || String(status).toLowerCase() === "refunded"
+              ? `<p class="order-refund-note">This order has been refunded for ${formatOrderPrice(order.refundAmount ?? order.total)}.</p>`
+              : order.refundRequestStatus === "Pending"
+                ? `<p class="order-refund-note">Your refund request is pending admin review. Reason: ${safe(order.refundReason || "Not provided")}</p>`
+                : order.refundRequestStatus === "Rejected"
+                  ? `<p class="order-refund-note">Your refund request was declined. ${safe(order.refundAdminNote || "")}</p>
+                     <button type="button" class="shop-btn" id="requestRefundAgainBtn">Request Refund Again</button>`
+                  : order.refundRequestStatus === "Approved"
+                    ? `<p class="order-refund-note">Your request was approved. The admin is processing your refund.</p>`
+                    : (String(status).toLowerCase() === "delivered"
+                        ? `<label for="refundReasonInput" style="display:block;margin:12px 0 6px;font-size:12px;">Why are you requesting a refund?</label>
+                           <textarea id="refundReasonInput" rows="3" maxlength="500" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--ivory);font:inherit;" placeholder="Please explain the reason for your request (required)."></textarea>
+                           <button type="button" class="shop-btn" id="submitRefundRequestBtn" style="margin-top:10px;">Request Refund</button>
+                           <p class="order-refund-note">Requests are reviewed by our admin team. This does not immediately issue a refund.</p>`
+                        : `<p class="order-refund-note">Refund requests are available after an order is marked Delivered.</p>`)
+          }
+        </div>
+
         ${await buildDeliveredReviews(order, items)}
       `;
 
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
+
+      const refundButton = $("submitRefundRequestBtn") || $("requestRefundAgainBtn");
+      if (refundButton) {
+        refundButton.addEventListener("click", async () => {
+          const reasonInput = $("refundReasonInput");
+          const reason = reasonInput ? reasonInput.value.trim() : (order.refundReason || "");
+          if (!reason) {
+            alert("Please enter a reason for your refund request.");
+            if (reasonInput) reasonInput.focus();
+            return;
+          }
+          if (!auth.currentUser) {
+            alert("Please sign in again to request a refund.");
+            return;
+          }
+          refundButton.disabled = true;
+          try {
+            const requestTime = Date.now();
+            await update(ref(db, "orders/" + auth.currentUser.uid + "/" + orderId), {
+              refundRequestStatus: "Pending",
+              refundReason: reason,
+              refundRequestedAt: requestTime,
+              refundAdminNote: null,
+              updatedAt: requestTime
+            });
+            alert("Your refund request has been submitted for admin review.");
+            await openOrderDetails(orderId);
+          } catch (error) {
+            console.error("REFUND REQUEST ERROR:", error);
+            refundButton.disabled = false;
+            alert("Unable to submit your refund request. " + (error.message || "Please try again."));
+          }
+        });
+      }
 
       if (String(status).trim().toLowerCase() === "delivered") {
         setupReviewControls(order);
@@ -4533,7 +4507,6 @@
         }
 
         currentUser = user;
-        listenForNotifications(user);
 
         let data = snapshot.val() || {};
 
@@ -4545,6 +4518,7 @@
         renderAccount(data, user);
         await loadFavorites();
         loadOrderHistory(user);
+        loadProductNotifications(user);
         await loadMyJournalPosts(user);
 
         console.log("Customer account loaded:", user.uid);

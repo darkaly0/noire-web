@@ -805,28 +805,165 @@
       transform: translateY(0);
     }
 
-    .checkout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:25px;overflow-y:auto}.checkout-modal{width:min(720px,100%);max-height:92vh;overflow-y:auto;background:var(--ivory);border-radius:22px;padding:38px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.25)}.checkout-close{position:absolute;top:18px;right:20px;width:38px;height:38px;border:0;border-radius:50%;background:#eee9e3;font-size:25px;cursor:pointer}.checkout-header{text-align:center;margin-bottom:30px}.checkout-header>span{font-size:11px;letter-spacing:4px;font-weight:700}.checkout-header h2{font-family:"Playfair Display",serif;font-size:32px;margin:8px 0}.checkout-header p{color:#777;font-size:13px}.checkout-order-summary{background:#f1ece5;border-radius:16px;padding:22px}.checkout-order-summary h3,.checkout-section h3{font-family:"Playfair Display",serif;font-size:21px;margin-bottom:16px}.checkout-items{display:flex;flex-direction:column;gap:12px}.checkout-item{display:flex;justify-content:space-between;gap:20px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.08)}.checkout-item strong{display:block;font-size:13px}.checkout-item small{display:block;color:#888;margin-top:3px;font-size:11px}.checkout-item>span{font-weight:600;white-space:nowrap}.checkout-total-row{display:flex;justify-content:space-between;padding-top:11px;font-size:13px}.checkout-total-row.grand-total{border-top:1px solid rgba(0,0,0,.12);margin-top:12px;padding-top:17px;font-size:16px}.checkout-section{margin-top:28px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checkout-field{display:flex;flex-direction:column;gap:7px}.checkout-field.full{grid-column:1/-1}.checkout-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#777}.checkout-field input,.checkout-field textarea{width:100%;border:1px solid #ddd5cd;background:white;border-radius:10px;padding:13px 14px;font-family:inherit;font-size:13px;outline:none}.checkout-field input:focus,.checkout-field textarea:focus{border-color:var(--rose-gold)}.payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.payment-option{display:flex;gap:12px;align-items:flex-start;border:1px solid #ddd5cd;border-radius:13px;padding:15px;background:white;cursor:pointer}.payment-option input{margin-top:3px;accent-color:var(--rose-gold)}.payment-option strong{display:block;font-size:13px}.payment-option small{display:block;color:#888;font-size:11px;margin-top:4px}.place-order-btn{width:100%;border:0;border-radius:12px;padding:16px;margin-top:25px;background:var(--charcoal);color:white;font-size:12px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:.2s}.place-order-btn:hover{transform:translateY(-2px)}.place-order-btn:disabled{opacity:.6;cursor:wait}.success-modal{width:min(460px,100%);background:var(--ivory);border-radius:22px;padding:45px 35px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25)}.success-icon{width:65px;height:65px;margin:0 auto 20px;border-radius:50%;background:var(--blush);color:var(--rose-gold);display:flex;align-items:center;justify-content:center;font-size:28px}.success-eyebrow{font-size:10px;letter-spacing:3px;font-weight:700;color:var(--rose-gold)}.success-modal h2{font-family:"Playfair Display",serif;font-size:30px;margin:10px 0}.success-modal p{color:#777;font-size:13px;line-height:1.7}.order-number-box{margin:25px 0 15px;padding:18px;background:#f1ece5;border-radius:12px}.order-number-box small{display:block;color:#888;font-size:9px;letter-spacing:2px;margin-bottom:7px}.order-number-box strong{font-family:"Playfair Display",serif;font-size:20px}.success-status{display:inline-flex;align-items:center;gap:7px;background:#f3e5d1;color:#9a7040;padding:7px 13px;border-radius:30px;font-size:11px;margin-bottom:10px}.success-status span{width:7px;height:7px;border-radius:50%;background:#c79758}
-    /* GCash awaiting-payment modal */
-    .awaiting-modal{width:min(520px,100%);background:var(--ivory);border-radius:22px;padding:38px 30px;position:relative;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25);border:1px solid rgba(183,110,121,.15)}
-    .gcash-badge-header{display:inline-flex;align-items:center;gap:8px;background:#007DFE;color:#fff;font-weight:700;font-size:11px;letter-spacing:1.5px;padding:6px 14px;border-radius:20px;text-transform:uppercase;margin-bottom:16px}
-    .gcash-badge-header span{font-size:8px}
-    .awaiting-modal h2{font-family:"Playfair Display",serif;font-size:28px;margin:6px 0 10px;color:var(--charcoal)}
+    /* =====================================================
+       Checkout / GCash / Credit Card
+    ===================================================== */
+
+    .checkout-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.68);
+      backdrop-filter:blur(8px);
+      z-index:10000;display:flex;
+      align-items:center;justify-content:center;
+      padding:25px;overflow-y:auto
+    }
+    
+    .checkout-modal{width:min(720px,100%);
+      max-height:92vh;overflow-y:auto;
+      background:var(--ivory);
+      border-radius:22px;
+      padding:38px;
+      position:relative;
+      box-shadow:0 30px 80px rgba(0,0,0,.25)
+    }
+    
+    .checkout-close{
+      position:absolute;
+      top:18px;right:20px;
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
+      background:#eee9e3;
+      font-size:25px;
+      cursor:pointer
+    }
+    
+    .checkout-header{
+      text-align:center;
+      margin-bottom:30px
+    }
+    
+    .checkout-header>span{
+      font-size:11px;
+      letter-spacing:4px;font-weight:700
+    }
+    
+    .checkout-header h2{
+    font-family:"Playfair Display",serif;
+    font-size:32px;
+    margin:8px 0
+  }.checkout-header 
+  
+  p{color:#777;font-size:13px
+  }
+  
+  .checkout-order-summary{
+    background:#f1ece5;
+    border-radius:16px;
+    padding:22px}
+    .checkout-order-summary h3,.checkout-section h3{
+      font-family:"Playfair Display",serif;
+      font-size:21px;margin-bottom:16px
+    }
+    .checkout-items{display:flex;flex-direction:column;gap:12px}.checkout-item{display:flex;justify-content:space-between;gap:20px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.08)}.checkout-item strong{display:block;font-size:13px}.checkout-item small{display:block;color:#888;margin-top:3px;font-size:11px}.checkout-item>span{font-weight:600;white-space:nowrap}.checkout-total-row{display:flex;justify-content:space-between;padding-top:11px;font-size:13px}.checkout-total-row.grand-total{border-top:1px solid rgba(0,0,0,.12);margin-top:12px;padding-top:17px;font-size:16px}.checkout-section{margin-top:28px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checkout-field{display:flex;flex-direction:column;gap:7px}.checkout-field.full{grid-column:1/-1}.checkout-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#777}.checkout-field input,.checkout-field textarea{width:100%;border:1px solid #ddd5cd;background:white;border-radius:10px;padding:13px 14px;font-family:inherit;font-size:13px;outline:none}.checkout-field input:focus,.checkout-field textarea:focus{border-color:var(--rose-gold)}
+    /* UPDATED: supports 3 payment options + highlights the selected one */
+    .payment-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .payment-option:has(input:checked){border-color:var(--rose-gold);background:#fdf6f4}
+    .payment-option{display:flex;gap:12px;align-items:flex-start;border:1px solid #ddd5cd;border-radius:13px;padding:15px;background:white;cursor:pointer}.payment-option input{margin-top:3px;accent-color:var(--rose-gold)}.payment-option strong{display:block;font-size:13px}.payment-option small{display:block;color:#888;font-size:11px;margin-top:4px}.place-order-btn{width:100%;border:0;border-radius:12px;padding:16px;margin-top:25px;background:var(--charcoal);color:white;font-size:12px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:.2s}.place-order-btn:hover{transform:translateY(-2px)}.place-order-btn:disabled{opacity:.6;cursor:wait}.success-modal{width:min(460px,100%);background:var(--ivory);border-radius:22px;padding:45px 35px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.25)}.success-icon{width:65px;height:65px;margin:0 auto 20px;border-radius:50%;background:var(--blush);color:var(--rose-gold);display:flex;align-items:center;justify-content:center;font-size:28px}.success-eyebrow{font-size:10px;letter-spacing:3px;font-weight:700;color:var(--rose-gold)}.success-modal h2{font-family:"Playfair Display",serif;font-size:30px;margin:10px 0}.success-modal p{color:#777;font-size:13px;line-height:1.7}.order-number-box{margin:25px 0 15px;padding:18px;background:#f1ece5;border-radius:12px}.order-number-box small{display:block;color:#888;font-size:9px;letter-spacing:2px;margin-bottom:7px}.order-number-box strong{font-family:"Playfair Display",serif;font-size:20px}.success-status{display:inline-flex;align-items:center;gap:7px;background:#f3e5d1;color:#9a7040;padding:7px 13px;border-radius:30px;font-size:11px;margin-bottom:10px}.success-status span{width:7px;height:7px;border-radius:50%;background:#c79758}
+    /* Credit card details panel */
+    .card-panel{margin-top:16px;padding:20px;background:white;border:1px solid #ddd5cd;border-radius:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card-panel[hidden]{display:none}
+    .card-panel .checkout-field.full{grid-column:1/-1}
+    .card-number-wrap{position:relative}
+    .card-number-wrap input{padding-right:105px}
+    .card-brand-badge{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--rose-gold);text-transform:uppercase;pointer-events:none}
+    .card-error{grid-column:1/-1;color:#b3261e;font-size:12px;line-height:1.5}
+    .card-error:empty{display:none}
+    .card-secure-note{grid-column:1/-1;font-size:11px;color:#888;line-height:1.5}
+    @media (max-width:650px){.card-panel{padding:16px}}
+    /* Awaiting-payment modal (GCash + Credit Card) */
+    
+    .awaiting-modal{
+      width:min(520px,100%);
+      background:var(--ivory);
+      border-radius:22px;
+      padding:38px 30px;
+      position:relative;
+      text-align:center;
+      box-shadow:0 30px 80px rgba(0,0,0,.25);
+      border:1px solid rgba(183,110,121,.15)
+    }
+    
+    .gcash-badge-header{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;background:#007DFE;color:#fff;
+      font-weight:700;font-size:11px;letter-spacing:1.5px;
+      padding:6px 14px;border-radius:20px;
+      text-transform:uppercase;
+      margin-bottom:16px
+    }
+    
+    .gcash-badge-header span{
+      font-size:8px
+    }
+    
+    .awaiting-modal h2{
+      font-family:"Playfair Display",serif;font-size:28px;
+    margin:6px 0 10px;color:var(--charcoal)
+  }
+    
     .awaiting-subtitle{color:#666;font-size:13px;line-height:1.6;margin-bottom:22px}
+    
     .awaiting-card{background:#f1ece5;border-radius:14px;padding:18px;margin-bottom:20px;text-align:left}
+    
     .awaiting-card-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:13px;border-bottom:1px solid rgba(0,0,0,.06)}
+    
     .awaiting-card-row:last-child{border-bottom:none;padding-top:10px;font-weight:700;font-size:15px}
+    
     .awaiting-card-row span.label{color:#777}
+    
     .awaiting-status-pill{display:inline-flex;align-items:center;gap:8px;background:#fff3cd;color:#856404;padding:7px 16px;border-radius:30px;font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:20px}
+    
     .pulsing-dot{width:9px;height:9px;border-radius:50%;background:#e0a800;animation:pulseAwaiting 1.5s infinite ease-in-out}
+    
     @keyframes pulseAwaiting{0%{transform:scale(.85);opacity:.7}50%{transform:scale(1.35);opacity:1;box-shadow:0 0 8px rgba(224,168,0,.7)}100%{transform:scale(.85);opacity:.7}}
+    
     .test-proceed-container{margin-top:20px;padding:16px;background:#fff8f0;border:1.5px dashed #d99b66;border-radius:14px;text-align:center}
+    
     .test-badge{display:inline-block;font-size:10px;letter-spacing:2px;font-weight:700;color:#b35900;text-transform:uppercase;margin-bottom:6px}
+    
     .test-desc{font-size:11px;color:#7a5836;margin-bottom:12px;line-height:1.5}
-    .test-proceed-btn{width:100%;background:#b76e79;color:#fff;border:none;border-radius:10px;padding:13px 16px;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s ease}
-    .test-proceed-btn:hover{background:#a35d68;transform:translateY(-1px)}
-    .test-proceed-btn:disabled{opacity:.6;cursor:wait}
-    .success-status.status-paid{background:#d4edda;color:#155724}
-    .success-status.status-paid span{background:#28a745}
+    
+    .test-proceed-btn{
+      width:100%;background:#b76e79;color:#fff;
+      border:none;border-radius:10px;
+      padding:13px 16px;
+      font-size:12px;font-weight:700;
+      letter-spacing:1px;cursor:pointer;
+      transition:all .2s ease
+    }
+    
+    .test-proceed-btn:hover{
+      background:#a35d68;
+      transform:translateY(-1px)
+    }
+    
+    .test-proceed-btn:disabled{
+      opacity:.6;
+      cursor:wait
+    }
+    
+    .success-status.status-paid{
+      background:#d4edda;
+      color:#155724
+    }
+    
+    .success-status.status-paid span{
+      background:#28a745
+    }
 
 
     /* =====================================================
@@ -1250,7 +1387,7 @@
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getDatabase, ref, push, set, update, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const firebaseConfig={apiKey:"AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",authDomain:"noire-17ed6.firebaseapp.com",databaseURL:"https://noire-17ed6-default-rtdb.firebaseio.com",projectId:"noire-17ed6",storageBucket:"noire-17ed6.appspot.com",messagingSenderId:"559789891078",appId:"1:559789891078:web:7bf4c52bce62c3b8b9ad87"};
     const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getDatabase(app); let currentUser=null;
@@ -1732,9 +1869,10 @@
       const shipping=subtotal>=1500?0:100; const total=subtotal+shipping;
       document.getElementById("checkoutModal")?.remove();
       const modal=document.createElement("div"); modal.id="checkoutModal";
-      modal.innerHTML=`<div class="checkout-overlay"><div class="checkout-modal"><button type="button" class="checkout-close" onclick="closeCheckoutModal()">×</button><div class="checkout-header"><span>NOIRÉ</span><h2>Complete Your Order</h2><p>Almost there. Let's prepare your skincare ritual.</p></div><div class="checkout-order-summary"><h3>Your Order</h3><div class="checkout-items">${cart.map(i=>`<div class="checkout-item"><div><strong>${escapeHtml(i.name||"Product")}</strong><small>Qty: ${Number(i.quantity)||1}</small></div><span>${formatPrice((Number(i.price)||0)*(Number(i.quantity)||0))}</span></div>`).join("")}</div><div class="checkout-total-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div><div class="checkout-total-row"><span>Shipping</span><span>${shipping===0?"FREE":formatPrice(shipping)}</span></div><div class="checkout-total-row grand-total"><span>Total</span><strong>${formatPrice(total)}</strong></div></div><form id="checkoutForm"><div class="checkout-section"><h3>Delivery Information</h3><div class="checkout-grid"><div class="checkout-field full"><label>Full Name</label><input id="checkoutName" required placeholder="Your full name"></div><div class="checkout-field full"><label>Phone Number</label><input id="checkoutPhone" type="tel" required placeholder="09XXXXXXXXX"></div><div class="checkout-field full"><label>Complete Address</label><textarea id="checkoutAddress" rows="4" required placeholder="House/Unit No., Street, Barangay, City, Province, Postal Code"></textarea></div><div class="checkout-field full"><label>Delivery Notes</label><textarea id="checkoutNotes" rows="3" placeholder="Optional instructions for delivery"></textarea></div></div></div><div class="checkout-section"><h3>Payment Method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash on Delivery" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="GCash"><span><strong>GCash (via PayMongo)</strong><small>Instant checkout with your GCash e-wallet.</small></span></label></div></div><button class="place-order-btn" type="submit">Place Order • ${formatPrice(total)}</button></form></div></div>`;
+      modal.innerHTML=`<div class="checkout-overlay"><div class="checkout-modal"><button type="button" class="checkout-close" onclick="closeCheckoutModal()">×</button><div class="checkout-header"><span>NOIRÉ</span><h2>Complete Your Order</h2><p>Almost there. Let's prepare your skincare ritual.</p></div><div class="checkout-order-summary"><h3>Your Order</h3><div class="checkout-items">${cart.map(i=>`<div class="checkout-item"><div><strong>${escapeHtml(i.name||"Product")}</strong><small>Qty: ${Number(i.quantity)||1}</small></div><span>${formatPrice((Number(i.price)||0)*(Number(i.quantity)||0))}</span></div>`).join("")}</div><div class="checkout-total-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div><div class="checkout-total-row"><span>Shipping</span><span>${shipping===0?"FREE":formatPrice(shipping)}</span></div><div class="checkout-total-row grand-total"><span>Total</span><strong>${formatPrice(total)}</strong></div></div><form id="checkoutForm"><div class="checkout-section"><h3>Delivery Information</h3><div class="checkout-grid"><div class="checkout-field full"><label>Full Name</label><input id="checkoutName" required placeholder="Your full name"></div><div class="checkout-field full"><label>Phone Number</label><input id="checkoutPhone" type="tel" required placeholder="09XXXXXXXXX"></div><div class="checkout-field full"><label>Complete Address</label><textarea id="checkoutAddress" rows="4" required placeholder="House/Unit No., Street, Barangay, City, Province, Postal Code"></textarea></div><div class="checkout-field full"><label>Delivery Notes</label><textarea id="checkoutNotes" rows="3" placeholder="Optional instructions for delivery"></textarea></div></div></div><div class="checkout-section"><h3>Payment Method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash on Delivery" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="GCash"><span><strong>GCash</strong><small>Instant checkout with your GCash e-wallet.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="Credit Card"><span><strong>Credit Card</strong><small>Visa, Mastercard or JCB.</small></span></label></div><div class="card-panel" id="cardPanel" hidden><div class="checkout-field full"><label for="cardName">Name on Card</label><input id="cardName" type="text" autocomplete="cc-name" placeholder="As shown on your card"></div><div class="checkout-field full"><label for="cardNumber">Card Number</label><div class="card-number-wrap"><input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456"><span class="card-brand-badge" id="cardBrandBadge"></span></div></div><div class="checkout-field"><label for="cardExpiry">Expiry (MM/YY)</label><input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY"></div><div class="checkout-field"><label for="cardCvc">CVC</label><input id="cardCvc" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123"></div><div class="card-error" id="cardError" role="alert"></div><div class="card-secure-note">🔒 Your card details are sent securely to PayMongo and are never saved on our servers or in your order record.</div></div></div><button class="place-order-btn" type="submit">Place Order • ${formatPrice(total)}</button></form></div></div>`;
       document.body.appendChild(modal);
       document.getElementById("checkoutForm").addEventListener("submit",e=>placeOrder(e,cart,subtotal,shipping,total));
+      setupCardForm();
       document.body.style.overflow="hidden";
     }
 
@@ -1743,527 +1881,199 @@
     // TEST MODE: true = no API needed, a "simulate paid" button appears. Set to false once server.js + PayMongo keys are ready.
     const PAYMONGO_TEST_MODE = true;
     const PAYMONGO_API_URL = "http://localhost:3000/api/paymongo/create-checkout";
+    const PAYMONGO_CARD_API_URL = "http://localhost:3000/api/paymongo/create-card-payment";
+    // PUBLIC key only (pk_...). Never put your secret key (sk_...) in this file.
+    const PAYMONGO_PUBLIC_KEY = "pk_test_REPLACE_WITH_YOUR_PUBLIC_KEY";
 
-    async function requestPayMongoPaymentLink(orderId, orderNumber, total, items, customerInfo) {
+    async function requestPayMongoPaymentLink(orderId, orderNumber, total, items, customerInfo, paymentMethod) {
       const response = await fetch(PAYMONGO_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderId, orderNumber, amount: total, items, customer: customerInfo })
+        body: JSON.stringify({
+          orderId, orderNumber, amount: total, items, customer: customerInfo,
+          paymentMethodTypes: paymentMethod === "Credit Card" ? ["card"] : ["gcash"]
+        })
       });
       const data = await response.json();
       if (!data || !data.checkoutUrl) throw new Error("PayMongo response did not include a checkoutUrl");
       localStorage.removeItem(CART_KEY);
-      window.location.href = data.checkoutUrl; // customer pays on PayMongo's GCash page
+      window.location.href = data.checkoutUrl; // customer pays on PayMongo's hosted page (GCash or card)
     }
 
-/* =====================================================
-   DEDUCT PRODUCT STOCKS
-===================================================== */
-
-async function deductProductStocks(cart) {
-
-const requested = {};
-
-cart.forEach(item => {
-
-  const productId =
-    String(item?.id || "").trim();
-
-  const quantity =
-    Math.max(
-      1,
-      Number(item?.quantity) || 1
-    );
-
-  if (!productId) {
-    throw new Error(
-      `Product ID is missing for "${item?.name || "an item"}".`
-    );
-  }
-
-  requested[productId] =
-    (requested[productId] || 0) + quantity;
-
-});
-
-
-const productsRef =
-  ref(db, "products");
-
-
-const result =
-  await runTransaction(
-    productsRef,
-    products => {
-
-      if (!products) {
-        return products;
-      }
-
-
-      const nextProducts =
-        { ...products };
-
-
-      /* CHECK ALL STOCK FIRST */
-
-      for (
-        const [productId, quantity]
-        of Object.entries(requested)
-      ) {
-
-        const product =
-          nextProducts[productId];
-
-
-        if (!product) {
-
-          throw new Error(
-            `Product "${productId}" could not be found in Firebase.`
-          );
-
-        }
-
-
-        const currentStock =
-          Number(product.stocks);
-
-
-        if (
-          !Number.isFinite(currentStock)
-        ) {
-
-          throw new Error(
-            `The stock value for "${product.name || productId}" is invalid.`
-          );
-
-        }
-
-
-        if (
-          currentStock < quantity
-        ) {
-
-          throw new Error(
-            `Not enough stock for "${product.name || productId}". ` +
-            `Available: ${currentStock}, ` +
-            `Requested: ${quantity}.`
-          );
-
-        }
-
-      }
-
-
-      /* DEDUCT STOCK */
-
-      for (
-        const [productId, quantity]
-        of Object.entries(requested)
-      ) {
-
-        const product =
-          nextProducts[productId];
-
-        const currentStock =
-          Number(product.stocks);
-
-
-        nextProducts[productId] = {
-
-          ...product,
-
-          stocks:
-            currentStock - quantity,
-
-          updatedAt:
-            Date.now()
-
-        };
-
-      }
-
-
-      return nextProducts;
-
-    }
-  );
-
-
-if (!result.committed) {
-
-  throw new Error(
-    "Firebase cancelled the stock update."
-  );
-
-}
-
-}
-
-
-/* =====================================================
- PLACE ORDER
-===================================================== */
-
-async function placeOrder(
-e,
-cart,
-subtotal,
-shipping,
-total
-) {
-
-e.preventDefault();
-
-
-if (!currentUser) {
-
-  showToast(
-    "Please log in first."
-  );
-
-  return;
-
-}
-
-
-const name =
-  document
-    .getElementById("checkoutName")
-    .value
-    .trim();
-
-
-const phone =
-  document
-    .getElementById("checkoutPhone")
-    .value
-    .trim();
-
-
-const address =
-  document
-    .getElementById("checkoutAddress")
-    .value
-    .trim();
-
-
-const notes =
-  document
-    .getElementById("checkoutNotes")
-    .value
-    .trim();
-
-
-const paymentMethod =
-  document
-    .querySelector(
-      'input[name="paymentMethod"]:checked'
-    )
-    ?.value ||
-  "Cash on Delivery";
-
-
-if (
-  !name ||
-  !phone ||
-  !address
-) {
-
-  showToast(
-    "Please complete your delivery details."
-  );
-
-  return;
-
-}
-
-
-const isGcash =
-  paymentMethod === "GCash";
-
-
-const btn =
-  document.querySelector(
-    ".place-order-btn"
-  );
-
-
-if (btn) {
-
-  btn.disabled = true;
-
-  btn.textContent =
-    isGcash
-      ? "Connecting GCash Payment..."
-      : "Placing your order...";
-
-}
-
-
-try {
-
-  /* ==========================================
-     1. DEDUCT STOCK
-  ========================================== */
-
-  await deductProductStocks(cart);
-
-
-  /* ==========================================
-     2. CREATE ORDER
-  ========================================== */
-
-  const orderRef =
-    push(
-      ref(
-        db,
-        "orders/" +
-        currentUser.uid
-      )
-    );
-
-
-  const orderNumber =
-    "NOIRE-" +
-    Date.now()
-      .toString()
-      .slice(-8);
-
-
-  const order = {
-
-    orderId:
-      orderRef.key,
-
-    orderNumber:
-      orderNumber,
-
-    userId:
-      currentUser.uid,
-
-    email:
-      currentUser.email || "",
-
-    customerName:
-      name,
-
-    phone:
-      phone,
-
-    address:
-      address,
-
-    deliveryNotes:
-      notes,
-
-    paymentMethod:
-      paymentMethod,
-
-
-    items:
-      cart.map(item => ({
-
-        id:
-          item.id || "",
-
-        name:
-          item.name || "Product",
-
-        price:
-          Number(item.price) || 0,
-
-        quantity:
-          Number(item.quantity) || 1,
-
-        image:
-          item.image || ""
-
-      })),
-
-
-    subtotal:
-      subtotal,
-
-    shipping:
-      shipping,
-
-    total:
-      total,
-
-
-    status:
-      "Pending",
-
-
-    paymentStatus:
-      isGcash
-        ? "Awaiting Payment"
-        : "Unpaid",
-
-
-    createdAt:
-      Date.now()
-
-  };
-
-
-  await set(
-    orderRef,
-    order
-  );
-
-
-  /* ==========================================
-     3. AUDIT TRAIL
-  ========================================== */
-
-  await logCustomerAudit(
-
-    "Placed Order",
-
-    "Order",
-
-    `Placed order "${orderNumber}" for ${formatPrice(total)}`,
-
-    orderRef.key
-
-  );
-
-
-  /* ==========================================
-     4. GCASH
-  ========================================== */
-
-  if (isGcash) {
-
-    if (!PAYMONGO_TEST_MODE) {
-
-      await requestPayMongoPaymentLink(
-
-        orderRef.key,
-
-        orderNumber,
-
-        total,
-
-        order.items,
-
-        {
-          name,
-          phone,
-          address,
-          email:
-            currentUser.email || "",
-          userId:
-            currentUser.uid
-        }
-
-      );
-
-      return;
-
+    /* =====================================================
+       CREDIT CARD HELPERS
+       Raw card data stays in the form + this request only.
+       It is NEVER written to Firebase or localStorage.
+    ====================================================== */
+
+    function detectCardBrand(digits) {
+      const n2 = Number(digits.slice(0, 2)), n4 = Number(digits.slice(0, 4));
+      if (digits.startsWith("4")) return "Visa";
+      if ((n2 >= 51 && n2 <= 55) || (n4 >= 2221 && n4 <= 2720)) return "Mastercard";
+      if (n4 >= 3528 && n4 <= 3589) return "JCB";
+      return "";
     }
 
+    function luhnValid(num) {
+      let sum = 0, alt = false;
+      for (let i = num.length - 1; i >= 0; i--) {
+        let n = Number(num[i]);
+        if (alt) { n *= 2; if (n > 9) n -= 9; }
+        sum += n; alt = !alt;
+      }
+      return sum % 10 === 0;
+    }
 
-    closeCheckoutModal();
+    function setupCardForm() {
+      const panel = document.getElementById("cardPanel");
+      if (!panel) return;
+      const numberEl = document.getElementById("cardNumber");
+      const expiryEl = document.getElementById("cardExpiry");
+      const cvcEl = document.getElementById("cardCvc");
+      const badge = document.getElementById("cardBrandBadge");
+      const errorEl = document.getElementById("cardError");
 
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+          const selected = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+          panel.hidden = selected !== "Credit Card";
+          if (errorEl) errorEl.textContent = "";
+        });
+      });
 
-    showAwaitingPaymentModal(
+      numberEl.addEventListener("input", () => {
+        const digits = numberEl.value.replace(/\D/g, "").slice(0, 19);
+        numberEl.value = digits.replace(/(.{4})/g, "$1 ").trim();
+        badge.textContent = detectCardBrand(digits);
+      });
 
-      orderRef.key,
+      expiryEl.addEventListener("input", () => {
+        const digits = expiryEl.value.replace(/\D/g, "").slice(0, 4);
+        expiryEl.value = digits.length > 2 ? digits.slice(0, 2) + "/" + digits.slice(2) : digits;
+      });
 
-      orderNumber,
+      cvcEl.addEventListener("input", () => {
+        cvcEl.value = cvcEl.value.replace(/\D/g, "").slice(0, 3);
+      });
+    }
 
-      total,
+    function getCardInput() {
+      const name = (document.getElementById("cardName")?.value || "").trim();
+      const number = (document.getElementById("cardNumber")?.value || "").replace(/\D/g, "");
+      const exp = (document.getElementById("cardExpiry")?.value || "").replace(/\D/g, "");
+      const cvc = (document.getElementById("cardCvc")?.value || "").replace(/\D/g, "");
+      const brand = detectCardBrand(number);
+      const expMonth = Number(exp.slice(0, 2));
+      const expYear = Number(exp.slice(2, 4));
+      const now = new Date();
+      const curYear = now.getFullYear() % 100, curMonth = now.getMonth() + 1;
 
-      order
+      let error = "";
+      if (name.length < 2) error = "Please enter the name on your card.";
+      else if (number.length < 13 || number.length > 19 || !luhnValid(number)) error = "Please enter a valid card number.";
+      else if (!brand) error = "We accept Visa, Mastercard and JCB cards.";
+      else if (exp.length !== 4 || expMonth < 1 || expMonth > 12 || expYear < curYear || (expYear === curYear && expMonth < curMonth)) error = "Please enter a valid expiry date (MM/YY).";
+      else if (cvc.length !== 3) error = "Please enter the 3-digit security code (CVC).";
 
-    );
+      return { error, name, number, expMonth, expYear: 2000 + expYear, cvc, brand, last4: number.slice(-4) };
+    }
 
+    // Live mode: card details go straight to PayMongo (public key), your server only receives a payment method ID.
+    async function payWithCard(orderId, orderNumber, total, customerInfo, card) {
+      const pmResponse = await fetch("https://api.paymongo.com/v1/payment_methods", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa(PAYMONGO_PUBLIC_KEY + ":")
+        },
+        body: JSON.stringify({
+          data: { attributes: {
+            type: "card",
+            details: { card_number: card.number, exp_month: card.expMonth, exp_year: card.expYear, cvc: card.cvc },
+            billing: { name: card.name, email: customerInfo.email || undefined, phone: customerInfo.phone }
+          } }
+        })
+      });
+      const pm = await pmResponse.json();
+      const paymentMethodId = pm?.data?.id;
+      if (!paymentMethodId) {
+        const err = new Error(pm?.errors?.[0]?.detail || "We couldn't verify your card. Please check the details.");
+        err.cardError = true;
+        throw err;
+      }
 
-  } else {
+      const response = await fetch(PAYMONGO_CARD_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderId, orderNumber, amount: total, paymentMethodId, customer: customerInfo,
+          returnUrl: window.location.origin + "/account.html"
+        })
+      });
+      const data = await response.json();
+      if (data.error) {
+        const err = new Error(data.error);
+        err.cardError = true;
+        throw err;
+      }
+      if (data.redirectUrl) { // 3D Secure step
+        localStorage.removeItem(CART_KEY);
+        window.location.href = data.redirectUrl;
+        return "redirect";
+      }
+      return data.status === "succeeded" ? "paid" : "pending";
+    }
 
-    /* ========================================
-       5. CASH ON DELIVERY
-    ======================================== */
+    async function placeOrder(e,cart,subtotal,shipping,total){
+      e.preventDefault(); if(!currentUser){showToast("Please log in first.");return;}
+      const name=document.getElementById("checkoutName").value.trim(),phone=document.getElementById("checkoutPhone").value.trim(),address=document.getElementById("checkoutAddress").value.trim(),notes=document.getElementById("checkoutNotes").value.trim(),paymentMethod=document.querySelector('input[name="paymentMethod"]:checked')?.value||"Cash on Delivery";
+      if(!name||!phone||!address){showToast("Please complete your delivery details.");return;}
+      let cardInfo=null;
+      if(paymentMethod==="Credit Card"){
+        const c=getCardInput(); const errEl=document.getElementById("cardError");
+        if(c.error){ if(errEl) errEl.textContent=c.error; showToast(c.error); return; }
+        if(errEl) errEl.textContent=""; cardInfo=c;
+      }
+      const isOnline = paymentMethod === "GCash" || paymentMethod === "Credit Card";
+      const btn=document.querySelector(".place-order-btn"); if(btn){btn.disabled=true;btn.textContent=isOnline?"Connecting Secure Payment...":"Placing your order...";}
+      try{
+        const orderRef=push(ref(db,"orders/"+currentUser.uid)); const orderNumber="NOIRE-"+Date.now().toString().slice(-8);
+        // status = fulfillment (managed in admin); paymentStatus = money
+        const order={orderId:orderRef.key,orderNumber,userId:currentUser.uid,email:currentUser.email||"",customerName:name,phone,address,deliveryNotes:notes,paymentMethod,items:cart.map(i=>({id:i.id||"",name:i.name||"Product",price:Number(i.price)||0,quantity:Number(i.quantity)||1,image:i.image||""})),subtotal,shipping,total,...(cardInfo?{cardBrand:cardInfo.brand,cardLast4:cardInfo.last4}:{}),status:"Pending",paymentStatus:isOnline?"Awaiting Payment":"Unpaid",createdAt:Date.now()};
+        await set(orderRef,order);
+        await logCustomerAudit(
+          "Placed Order",
+          "Order",
+          `Placed order "${orderNumber}" for ${formatPrice(total)}`,
+          orderRef.key
+        );
+        if(isOnline){
+          if(!PAYMONGO_TEST_MODE){
+            const customerInfo={name, phone, address, email: currentUser.email||"", userId: currentUser.uid};
+            if(cardInfo){
+              // Card details go straight to PayMongo, never to Firebase
+              const result=await payWithCard(orderRef.key, orderNumber, total, customerInfo, cardInfo);
+              cardInfo=null;
+              if(result==="redirect") return; // customer completes 3D Secure
+            }else{
+              // GCash: send the customer to PayMongo's hosted page
+              await requestPayMongoPaymentLink(orderRef.key, orderNumber, total, order.items, customerInfo, paymentMethod);
+              return;
+            }
+          }
+          closeCheckoutModal();
+          showAwaitingPaymentModal(orderRef.key, orderNumber, total, order);
+        }else{
+          localStorage.removeItem(CART_KEY); closeCheckoutModal(); renderCart(); showOrderSuccess(orderNumber,"Pending");
+        }
+      }catch(error){console.error("Order placement error:",error);if(btn){btn.disabled=false;btn.textContent=`Place Order • ${formatPrice(total)}`;}showToast(error&&error.cardError?error.message:"Unable to place order. Please try again.");}
+    }
 
-    localStorage.removeItem(
-      CART_KEY
-    );
-
-
-    closeCheckoutModal();
-
-
-    renderCart();
-
-
-    showOrderSuccess(
-      orderNumber,
-      "Pending"
-    );
-
-  }
-
-
-} catch (error) {
-
-  console.error(
-    "================================"
-  );
-
-  console.error(
-    "ORDER PLACEMENT ERROR:"
-  );
-
-  console.error(
-    error
-  );
-
-  console.error(
-    "ERROR CODE:",
-    error?.code
-  );
-
-  console.error(
-    "ERROR MESSAGE:",
-    error?.message
-  );
-
-  console.error(
-    "================================"
-  );
-
-
-  if (btn) {
-
-    btn.disabled = false;
-
-    btn.textContent =
-      `Place Order • ${formatPrice(total)}`;
-
-  }
-
-
-  /*
-    SHOW THE ACTUAL ERROR
-    INSTEAD OF THE GENERIC MESSAGE
-  */
-
-  showToast(
-    error?.message ||
-    "Unable to place your order. Please try again."
-  );
-
-}
-
-}
-
-    // GCash "waiting for payment" modal + live listener
+    // "Waiting for payment" modal + live listener (GCash and Credit Card)
     let awaitingOrderListener = null;
 
     function showAwaitingPaymentModal(orderId, orderNumber, total, order) {
+      const isCard = order.paymentMethod === "Credit Card";
       document.getElementById("awaitingPaymentModal")?.remove();
       const modal = document.createElement("div");
       modal.id = "awaitingPaymentModal";
@@ -2271,19 +2081,20 @@ try {
         <div class="checkout-overlay">
           <div class="awaiting-modal">
             <button type="button" class="checkout-close" onclick="closeAwaitingPaymentModal()">×</button>
-            <div class="gcash-badge-header"><span>●</span> GCash Official Checkout</div>
+            <div class="gcash-badge-header" style="${isCard ? 'background:#1a1a1a' : ''}"><span>●</span> ${isCard ? "Secure Card Checkout" : "GCash Official Checkout"}</div>
             <h2>Awaiting Payment</h2>
-            <p class="awaiting-subtitle">Your order has been recorded. Complete payment via GCash to confirm your Noiré skincare ritual.</p>
+            <p class="awaiting-subtitle">Your order has been recorded. Complete payment via ${isCard ? "credit card" : "GCash"} to confirm your Noiré skincare ritual.</p>
             <div class="awaiting-status-pill"><span class="pulsing-dot"></span> Awaiting payment</div>
             <div class="awaiting-card">
               <div class="awaiting-card-row"><span class="label">Order Number</span><strong>${escapeHtml(orderNumber)}</strong></div>
-              <div class="awaiting-card-row"><span class="label">Payment Method</span><span>GCash (PayMongo)</span></div>
+              <div class="awaiting-card-row"><span class="label">Payment Method</span><span>${isCard ? "Credit Card" : "GCash"} (PayMongo)</span></div>
+              ${isCard && order.cardLast4 ? `<div class="awaiting-card-row"><span class="label">Card</span><span>${escapeHtml(order.cardBrand || "Card")} •••• ${escapeHtml(order.cardLast4)}</span></div>` : ""}
               <div class="awaiting-card-row"><span class="label">Customer</span><span>${escapeHtml(order.customerName || "Customer")}</span></div>
               <div class="awaiting-card-row"><span class="label">Total Amount</span><span style="color:var(--rose-gold); font-size:16px; font-weight:700;">${formatPrice(total)}</span></div>
             </div>
             ${PAYMONGO_TEST_MODE ? `<div class="test-proceed-container">
               <div class="test-badge">🧪 Testing Mode</div>
-              <p class="test-desc">PayMongo GCash API is currently simulated. Click below to simulate the customer paying with GCash and PayMongo webhook marking the order as Paid.</p>
+              <p class="test-desc">PayMongo payment API is currently simulated. Click below to simulate the customer paying and PayMongo webhook marking the order as Paid.</p>
               <button type="button" class="test-proceed-btn" onclick="simulateGcashPaymentSuccess('${orderId}', '${orderNumber}')">Proceed / Simulate Paid (Test Mode) →</button>
             </div>` : ""}
           </div>
@@ -2314,7 +2125,7 @@ try {
       if (typeof awaitingOrderListener === "function") { awaitingOrderListener(); awaitingOrderListener = null; }
     }
 
-    // TEST ONLY: stands in for the PayMongo webhook
+    // TEST ONLY: stands in for the PayMongo webhook (works for GCash and Credit Card)
     async function simulateGcashPaymentSuccess(orderId, orderNumber) {
       if (!currentUser || !orderId) { showToast("Please log in first."); return; }
       const btn = document.querySelector(".test-proceed-btn");
@@ -2322,7 +2133,7 @@ try {
       try {
         await update(ref(db, `orders/${currentUser.uid}/${orderId}`), { paymentStatus: "Paid", paidAt: Date.now() });
         // the onValue listener above shows the confirmation screen
-        showToast("Payment received via GCash! Order marked as Paid. ✨");
+        showToast("Payment received! Order marked as Paid. ✨");
       } catch (err) {
         console.error("Simulation error:", err);
         if (btn) { btn.disabled = false; btn.textContent = "Proceed / Simulate Paid (Test Mode) →"; }
@@ -2335,7 +2146,7 @@ try {
       const isPaid = status === "Paid";
       const modal = document.createElement("div");
       modal.id = "orderSuccessModal";
-      modal.innerHTML = `<div class="checkout-overlay"><div class="success-modal"><div class="success-icon">✓</div><span class="success-eyebrow">${isPaid ? "PAYMENT VERIFIED" : "ORDER CONFIRMED"}</span><h2>Thank you for your order.</h2><p>${isPaid ? "Your GCash payment has been verified. Your Noiré ritual is officially on its way to being prepared." : "Your Noiré ritual is officially on its way to being prepared."}</p><div class="order-number-box"><small>ORDER NUMBER</small><strong>${escapeHtml(orderNumber)}</strong></div><div class="success-status ${isPaid ? "status-paid" : ""}"><span></span>${isPaid ? "Paid" : "Pending"}</div><button type="button" class="place-order-btn" onclick="closeSuccessModal()">View My Orders</button></div></div>`;
+      modal.innerHTML = `<div class="checkout-overlay"><div class="success-modal"><div class="success-icon">✓</div><span class="success-eyebrow">${isPaid ? "PAYMENT VERIFIED" : "ORDER CONFIRMED"}</span><h2>Thank you for your order.</h2><p>${isPaid ? "Your payment has been verified. Your Noiré ritual is officially on its way to being prepared." : "Your Noiré ritual is officially on its way to being prepared."}</p><div class="order-number-box"><small>ORDER NUMBER</small><strong>${escapeHtml(orderNumber)}</strong></div><div class="success-status ${isPaid ? "status-paid" : ""}"><span></span>${isPaid ? "Paid" : "Pending"}</div><button type="button" class="place-order-btn" onclick="closeSuccessModal()">View My Orders</button></div></div>`;
       document.body.appendChild(modal);
       document.body.style.overflow = "hidden";
     }

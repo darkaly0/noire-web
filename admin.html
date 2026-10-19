@@ -1599,6 +1599,13 @@
 
       <button
         class="tab-btn"
+        onclick="openTab('returnRefund')"
+      >
+        Return/Refund
+      </button>
+
+      <button
+        class="tab-btn"
         onclick="openTab('admins')"
       >
         Admins
@@ -2039,6 +2046,47 @@
 
 
   <!-- =====================================================
+       RETURN / REFUND MANAGEMENT
+  ====================================================== -->
+
+  <div id="returnRefund" class="tab-content">
+    <div class="simple-card">
+      <div class="simple-card-header">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+          <div>
+            <h2>Return/Refund Requests</h2>
+            <p>Review customer requests, approve or reject them, and manually enter the amount to refund.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div id="refundRequestCount" class="audit-count">0 requests</div>
+            <button type="button" class="btn btn-outline" onclick="loadOrdersOnce()">↻ Refresh</button>
+          </div>
+        </div>
+      </div>
+      <div class="orders-toolbar">
+        <input type="search" id="refundRequestSearch" class="admin-search" placeholder="Search order, customer, or reason..." autocomplete="off" aria-label="Search refund requests">
+        <select id="refundRequestFilter" class="admin-search" aria-label="Filter refund requests" style="max-width:220px;">
+          <option value="all">All requests</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Refunded">Refunded</option>
+        </select>
+      </div>
+      <div class="table-container">
+        <table class="admin-data-table orders-admin-table">
+          <thead><tr>
+            <th>Order ID</th><th>Customer</th><th>Order Total</th><th>Reason</th><th>Refund Amount (PHP)</th><th>Status</th><th>Admin Note</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="refundRequestsTableBody">
+            <tr><td colspan="8" class="empty-message">Loading refund requests...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
        ADMINS
   ====================================================== -->
 
@@ -2381,10 +2429,12 @@
           <div class="image-upload-box">
 
             <input
-              type="file"
+              type="url"
               id="productImage"
-              accept="image/*"
+              placeholder="https://example.com/product-image.jpg"
+              autocomplete="url"
             >
+            <small>Paste a direct image URL (for example, a .jpg, .png, or .webp link).</small>
 
             <div
               id="imagePreviewContainer"
@@ -3065,48 +3115,6 @@
 
 
     /* =====================================================
-       CUSTOMER NOTIFICATIONS
-    ====================================================== */
-
-    async function createCustomerNotification(userId, notification) {
-      if (!userId) return;
-      const notificationRef = push(dbRef(database, `notifications/${userId}`));
-      await set(notificationRef, {
-        title: String(notification.title || "Noiré Update"),
-        message: String(notification.message || ""),
-        type: String(notification.type || "Update"),
-        createdAt: Date.now(),
-        read: false
-      });
-    }
-
-    async function notifyAllCustomers(title, message, type = "Promotion") {
-      const snapshot = await get(dbRef(database, "users"));
-      if (!snapshot.exists()) return 0;
-
-      const users = snapshot.val() || {};
-      const writes = {};
-      const now = Date.now();
-      const notificationId = push(dbRef(database, "notifications")).key;
-
-      Object.entries(users).forEach(([uid, user]) => {
-        if (!user || String(user.status || "Active").toLowerCase() === "inactive") return;
-        const id = notificationId || push(dbRef(database, `notifications/${uid}`)).key;
-        writes[`notifications/${uid}/${id}`] = {
-          title: String(title || "Noiré Update"),
-          message: String(message || ""),
-          type: String(type || "Update"),
-          createdAt: now,
-          read: false
-        };
-      });
-
-      if (!Object.keys(writes).length) return 0;
-      await update(dbRef(database), writes);
-      return Object.keys(writes).length;
-    }
-
-    /* =====================================================
        PRODUCT DATA
     ====================================================== */
 
@@ -3286,9 +3294,10 @@
 
     function getProductImage(productId) {
 
-      const images =
-        getLocalImages();
+      const product = products.find(item => String(item.id) === String(productId));
+      if (product && product.imageUrl) return product.imageUrl;
 
+      const images = getLocalImages();
       return images[productId] || "";
 
     }
@@ -3570,8 +3579,6 @@
         }
       );
     }
-
-
 
 
     /* =====================================================
@@ -4556,17 +4563,8 @@
       }
 
 
-      const imageInput =
-        document.getElementById(
-          "productImage"
-        );
-
-
-      if (imageInput) {
-
-        imageInput.value = "";
-
-      }
+      const imageInput = document.getElementById("productImage");
+      if (imageInput) imageInput.value = product.imageUrl || existingImage || "";
 
 
       document.getElementById(
@@ -4587,106 +4585,35 @@
     ====================================================== */
 
     function setupImagePreview() {
-
-      const imageInput =
-        document.getElementById(
-          "productImage"
-        );
-
-
+      const imageInput = document.getElementById("productImage");
       if (!imageInput) return;
 
-
-      imageInput.addEventListener(
-        "change",
-        event => {
-
-          const file =
-            event.target.files[0];
-
-
-          const preview =
-            document.getElementById(
-              "imagePreview"
-            );
-
-
-          const previewContainer =
-            document.getElementById(
-              "imagePreviewContainer"
-            );
-
-
-          if (!file) {
-
-            preview.src = "";
-
-            previewContainer.style.display =
-              "none";
-
-            return;
-
-          }
-
-
-          if (
-            !file.type.startsWith(
-              "image/"
-            )
-          ) {
-
-            alert(
-              "Please select an image file."
-            );
-
-            event.target.value = "";
-
-            return;
-
-          }
-
-
-          if (
-            file.size >
-            5 * 1024 * 1024
-          ) {
-
-            alert(
-              "Image must be smaller than 5 MB."
-            );
-
-            event.target.value = "";
-
-            return;
-
-          }
-
-
-          const reader =
-            new FileReader();
-
-
-          reader.onload =
-            event => {
-
-              preview.src =
-                event.target.result;
-
-              previewContainer.style.display =
-                "block";
-
-            };
-
-
-          reader.readAsDataURL(
-            file
-          );
-
+      const preview = document.getElementById("imagePreview");
+      const previewContainer = document.getElementById("imagePreviewContainer");
+      const updatePreview = () => {
+        const url = imageInput.value.trim();
+        if (!url) {
+          preview.removeAttribute("src");
+          previewContainer.style.display = "none";
+          return;
         }
-      );
-
+        try {
+          const parsed = new URL(url);
+          if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('Invalid protocol');
+          preview.onerror = () => {
+            previewContainer.style.display = "none";
+            alert("This image link could not be loaded. Please use a direct, publicly accessible image URL.");
+          };
+          preview.onload = () => { previewContainer.style.display = "block"; };
+          preview.src = parsed.href;
+        } catch (_) {
+          preview.removeAttribute("src");
+          previewContainer.style.display = "none";
+        }
+      };
+      imageInput.addEventListener("input", updatePreview);
+      imageInput.addEventListener("change", updatePreview);
     }
-
 
     /* =====================================================
        PRODUCT FORM
@@ -4793,9 +4720,7 @@
         );
 
 
-      const selectedImage =
-        imageInput?.files?.[0] ||
-        null;
+      const imageUrl = imageInput?.value?.trim() || "";
 
 
       /* ===================================================
@@ -4927,6 +4852,8 @@
             isNewArrival:
               isNewArrival,
 
+            imageUrl: imageUrl || "",
+
             updatedAt:
               serverTimestamp()
 
@@ -4937,16 +4864,6 @@
             productRef,
             updateData
           );
-
-
-          if (selectedImage) {
-
-            await saveProductImageLocally(
-              id,
-              selectedImage
-            );
-
-          }
 
 
           await logAudit(
@@ -5014,6 +4931,8 @@
               isNewArrival:
                 isNewArrival,
 
+              imageUrl: imageUrl,
+
               createdAt:
                 serverTimestamp(),
 
@@ -5024,46 +4943,12 @@
           );
 
 
-          if (selectedImage) {
-
-            await saveProductImageLocally(
-              newProductId,
-              selectedImage
-            );
-
-          }
-
-
           await logAudit(
             "Added Product",
             "Product",
             `Added product "${name}" · Price ${formatPrice(price)} · Stock ${stocks}`,
             newProductId
           );
-
-          // Notify every customer only when the newly added product is a New Arrival
-          // or a Featured Product. Regular products do not trigger a notification.
-          if (isNewArrival || isFeatured) {
-            try {
-              const collectionLabel = isNewArrival && isFeatured
-                ? "New Arrival & Featured Product"
-                : isNewArrival
-                  ? "New Arrival"
-                  : "Featured Product";
-
-              await notifyAllCustomers(
-                `New ${collectionLabel}: ${name}`,
-                isNewArrival && isFeatured
-                  ? `${name} is now available as a New Arrival and Featured Product in the Noiré collection.`
-                  : isNewArrival
-                    ? `${name} is now available in the Noiré New Arrivals collection.`
-                    : `${name} has been added to the Noiré Featured collection.` ,
-                collectionLabel
-              );
-            } catch (notificationError) {
-              console.error("NEW PRODUCT NOTIFICATION ERROR:", notificationError);
-            }
-          }
 
           alert(
             "Product added successfully! 🧴✨"
@@ -5316,6 +5201,9 @@
       orderSearchTerm = event.target.value.trim().toLowerCase();
       renderOrders(ordersCache);
     });
+
+    document.getElementById("refundRequestSearch")?.addEventListener("input", () => renderRefundRequests(ordersCache));
+    document.getElementById("refundRequestFilter")?.addEventListener("change", () => renderRefundRequests(ordersCache));
 
     document.getElementById("userModal")?.addEventListener("click", event => {
       if (event.target === event.currentTarget) closeUserModal();
@@ -5894,6 +5782,7 @@
           );
 
           renderOrders(ordersCache);
+          renderRefundRequests(ordersCache);
           renderUsers(usersCache, ordersCache);
 
           const orderCount = document.getElementById("orderCount");
@@ -5906,10 +5795,14 @@
           }
 
           const revenue = ordersCache
-            .filter(order =>
-              String(order.status || "Pending").toLowerCase() !== "cancelled"
-            )
-            .reduce((sum, order) => sum + (Number(order.total) || 0), 0);
+            .filter(order => !["cancelled", "canceled"].includes(String(order.status || "Pending").toLowerCase()))
+            .reduce((sum, order) => {
+              const orderTotal = Number(order.total) || 0;
+              const refunded = order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded"
+                ? Math.max(0, Number(order.refundAmount ?? order.total) || 0)
+                : 0;
+              return sum + Math.max(0, orderTotal - refunded);
+            }, 0);
 
           const revenueElement = document.getElementById("revenue");
           if (revenueElement) {
@@ -5955,6 +5848,7 @@
         );
 
         renderOrders(ordersCache);
+        renderRefundRequests(ordersCache);
         renderUsers(usersCache, ordersCache);
       } catch (error) {
         console.error("REFRESH ORDERS ERROR:", error);
@@ -6057,6 +5951,17 @@
                 >
                   View
                 </button>
+                ${order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded" ? `
+                  <span class="status status-inactive">Refunded</span>
+                ` : ""}
+                ${order.refundRequestStatus ? `<span class="status status-${getStatusClass(order.refundRequestStatus)}">Refund: ${escapeHTML(order.refundRequestStatus)}</span>` : ""}
+                ${order.refundRequestStatus === "Pending" ? `
+                  <button type="button" class="btn btn-small refund-approve-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Approve Request</button>
+                  <button type="button" class="btn btn-small refund-reject-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Reject Request</button>
+                ` : ""}
+                ${order.refundRequestStatus === "Approved" && order.refundStatus !== "Refunded" && String(order.status || "").toLowerCase() !== "refunded" ? `
+                  <button type="button" class="btn btn-small order-refund-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Issue Refund</button>
+                ` : ""}
 
                 <select
                   class="order-status-select"
@@ -6084,6 +5989,19 @@
         });
       });
 
+      body.querySelectorAll(".order-refund-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          issueOrderRefund(button.dataset.userId, button.dataset.orderId, button);
+        });
+      });
+
+      body.querySelectorAll(".refund-approve-btn").forEach(button => {
+        button.addEventListener("click", () => updateRefundRequest(button.dataset.userId, button.dataset.orderId, "Approved", button));
+      });
+      body.querySelectorAll(".refund-reject-btn").forEach(button => {
+        button.addEventListener("click", () => updateRefundRequest(button.dataset.userId, button.dataset.orderId, "Rejected", button));
+      });
+
       body.querySelectorAll(".order-status-select").forEach(select => {
         select.addEventListener("change", event => {
           const target = event.currentTarget;
@@ -6095,6 +6013,58 @@
           );
         });
       });
+    }
+
+    function renderRefundRequests(orders) {
+      const body = document.getElementById("refundRequestsTableBody");
+      if (!body) return;
+      const requests = (orders || []).filter(order => !!order.refundRequestStatus);
+      const search = (document.getElementById("refundRequestSearch")?.value || "").trim().toLowerCase();
+      const filter = document.getElementById("refundRequestFilter")?.value || "all";
+      const count = document.getElementById("refundRequestCount");
+      if (count) count.textContent = `${requests.length} ${requests.length === 1 ? "request" : "requests"}`;
+      const filtered = requests.filter(order => {
+        const status = (order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded") ? "Refunded" : String(order.refundRequestStatus || "Pending");
+        if (filter !== "all" && status !== filter) return false;
+        const customer = getOrderCustomer(order);
+        const haystack = [order.id, order.orderNumber, customer.name, customer.email, order.refundReason, order.refundAdminNote].join(" ").toLowerCase();
+        return !search || haystack.includes(search);
+      });
+      if (!filtered.length) {
+        body.innerHTML = `<tr><td colspan="8" class="empty-message">${requests.length ? "No refund requests match your search/filter." : "No return/refund requests have been submitted yet."}</td></tr>`;
+        return;
+      }
+      body.innerHTML = filtered.map(order => {
+        const customer = getOrderCustomer(order);
+        const refunded = order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded";
+        const status = refunded ? "Refunded" : (order.refundRequestStatus || "Pending");
+        const amount = order.refundAmount != null ? Number(order.refundAmount) : 0;
+        const canReview = status === "Pending";
+        const canIssue = status === "Approved" && !refunded;
+        return `<tr>
+          <td><strong>${escapeHTML(order.orderNumber || order.id)}</strong><div class="admin-muted">${formatAdminDate(order.createdAt)}</div></td>
+          <td><div class="admin-user-name">${escapeHTML(customer.name)}</div><div class="admin-user-email">${escapeHTML(customer.email)}</div></td>
+          <td>${formatAdminCurrency(order.total)}</td>
+          <td style="min-width:180px;white-space:normal;">${escapeHTML(order.refundReason || "No reason provided")}</td>
+          <td style="min-width:160px;">
+            ${refunded ? `<strong>${formatAdminCurrency(amount)}</strong>` : canIssue ? `<label class="admin-muted" for="refund-amount-${escapeHTML(order.id)}">Enter amount (PHP)</label><input type="number" min="0.01" max="${Math.max(0, Number(order.total) || 0)}" step="0.01" id="refund-amount-${escapeHTML(order.id)}" class="admin-search refund-amount-input" value="${amount > 0 ? amount : Math.max(0, Number(order.total) || 0)}" style="width:135px;min-width:0;" aria-label="Refund amount for ${escapeHTML(order.orderNumber || order.id)}">` : `<span class="admin-muted">Set after approval</span>`}
+          </td>
+          <td><span class="status status-${getStatusClass(status)}">${escapeHTML(status)}</span></td>
+          <td style="min-width:150px;white-space:normal;">${escapeHTML(order.refundAdminNote || "—")}</td>
+          <td><div class="order-actions">
+            <button type="button" class="btn btn-small order-view-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">View Order</button>
+            ${canReview ? `<button type="button" class="btn btn-small refund-approve-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Approve</button><button type="button" class="btn btn-small refund-reject-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Reject</button>` : ""}
+            ${canIssue ? `<button type="button" class="btn btn-small refund-issue-from-tab-btn" data-order-id="${escapeHTML(order.id)}" data-user-id="${escapeHTML(order.userId)}">Issue Refund</button>` : ""}
+          </div></td>
+        </tr>`;
+      }).join("");
+      body.querySelectorAll(".order-view-btn").forEach(button => button.addEventListener("click", () => openOrderDetailsModal(button.dataset.userId, button.dataset.orderId)));
+      body.querySelectorAll(".refund-approve-btn").forEach(button => button.addEventListener("click", () => updateRefundRequest(button.dataset.userId, button.dataset.orderId, "Approved", button)));
+      body.querySelectorAll(".refund-reject-btn").forEach(button => button.addEventListener("click", () => updateRefundRequest(button.dataset.userId, button.dataset.orderId, "Rejected", button)));
+      body.querySelectorAll(".refund-issue-from-tab-btn").forEach(button => button.addEventListener("click", () => {
+        const input = document.getElementById(`refund-amount-${button.dataset.orderId}`);
+        issueOrderRefund(button.dataset.userId, button.dataset.orderId, button, input?.value);
+      }));
     }
 
     function openOrderDetailsModal(userId, orderId) {
@@ -6172,6 +6142,13 @@
             ${itemRows}
           </div>
         </div>
+        ${order.refundRequestStatus ? `
+          <div class="order-detail-card">
+            <span>Refund Request: ${escapeHTML(order.refundRequestStatus)}</span>
+            <strong>Reason: ${escapeHTML(order.refundReason || "Not provided")}</strong>
+            ${order.refundAdminNote ? `<small>Admin note: ${escapeHTML(order.refundAdminNote)}</small>` : ""}
+          </div>
+        ` : ""}
       `;
 
       modal.classList.add("show");
@@ -6185,6 +6162,71 @@
     window.openOrderDetailsModal = openOrderDetailsModal;
     window.closeOrderDetailsModal = closeOrderDetailsModal;
     window.loadOrdersOnce = loadOrdersOnce;
+
+    async function updateRefundRequest(userId, orderId, decision, button) {
+      const order = ordersCache.find(item => item.id === orderId && String(item.userId) === String(userId));
+      if (!order || order.refundRequestStatus !== "Pending") return alert("No pending refund request was found.");
+      if (!["Approved", "Rejected"].includes(decision)) return;
+      if (!confirm(`${decision} the customer's refund request for order ${order.orderNumber || orderId}?`)) return;
+      const note = decision === "Rejected" ? (prompt("Optional: enter a reason for declining this refund request.") || "") : "";
+      if (button) button.disabled = true;
+      try {
+        const now = Date.now();
+        await update(dbRef(database, `orders/${userId}/${orderId}`), {
+          refundRequestStatus: decision,
+          refundReviewedAt: now,
+          refundReviewedBy: currentAdmin?.uid || auth.currentUser?.uid || "",
+          refundAdminNote: note,
+          updatedAt: now
+        });
+        await logAudit(`${decision} Refund Request`, "Order", `${decision} refund request for order "${order.orderNumber || orderId}"`, orderId);
+        await loadOrdersOnce();
+      } catch (error) {
+        console.error("REFUND REQUEST REVIEW ERROR:", error);
+        if (button) button.disabled = false;
+        alert("Unable to update refund request.\n\n" + (error.message || "Firebase error"));
+      }
+    }
+
+    async function issueOrderRefund(userId, orderId, button, enteredAmount = null) {
+      const order = ordersCache.find(item => item.id === orderId && String(item.userId) === String(userId));
+      if (!order) return alert("Order not found.");
+      if (order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded") {
+        return alert("This order has already been refunded.");
+      }
+      if (order.refundRequestStatus !== "Approved") {
+        return alert("Approve the customer's refund request before issuing a refund.");
+      }
+      const rawAmount = enteredAmount == null ? prompt(`Enter the refund amount in PHP for order ${order.orderNumber || orderId}. Maximum: ${formatAdminCurrency(order.total)}`, String(Number(order.total) || 0)) : enteredAmount;
+      if (rawAmount == null) return;
+      const amount = Number(rawAmount);
+      const orderTotal = Math.max(0, Number(order.total) || 0);
+      if (!Number.isFinite(amount) || amount <= 0) return alert("Enter a valid refund amount greater than ₱0.");
+      if (amount > orderTotal) return alert(`Refund cannot exceed the order total of ${formatAdminCurrency(orderTotal)}.`);
+      if (!confirm(`Issue a refund of ${formatAdminCurrency(amount)} for order ${order.orderNumber || orderId}?
+
+This amount will be deducted from company revenue. This action cannot be repeated.`)) return;
+      if (button) button.disabled = true;
+      try {
+        await update(dbRef(database, `orders/${userId}/${orderId}`), {
+          status: "Refunded",
+          refundStatus: "Refunded",
+          refundAmount: amount,
+          refundRequestStatus: "Refunded",
+          refundedAt: Date.now(),
+          updatedAt: Date.now()
+        });
+        await logAudit("Issued Refund", "Order", `Refunded ${formatAdminCurrency(amount)} for order "${order.orderNumber || orderId}"; company revenue reduced by the same amount`, orderId);
+        await loadOrdersOnce();
+        alert(`Refund recorded: ${formatAdminCurrency(amount)}. Company revenue has been updated. This records the refund in the store; it does not automatically transfer money through a payment provider.`);
+      } catch (error) {
+        console.error("ISSUE REFUND ERROR:", error);
+        if (button) button.disabled = false;
+        alert("Unable to record refund.\n\n" + (error.message || "Firebase error"));
+      }
+    }
+
+    window.issueOrderRefund = issueOrderRefund;
 
     async function updateOrderStatus(userId, orderId, newStatus, selectElement) {
       if (!userId || !orderId || !ORDER_STATUSES.includes(newStatus)) return;
@@ -6211,16 +6253,6 @@
             updatedAt: Date.now()
           }
         );
-
-        try {
-          await createCustomerNotification(userId, {
-            title: `Order ${currentOrder?.orderNumber || orderId} updated`,
-            message: `Your order status changed from ${previousStatus} to ${newStatus}.`,
-            type: "Order Status"
-          });
-        } catch (notificationError) {
-          console.error("ORDER STATUS NOTIFICATION ERROR:", notificationError);
-        }
 
         await logAudit(
           "Updated Order Status",
