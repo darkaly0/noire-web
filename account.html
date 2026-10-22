@@ -3066,6 +3066,8 @@
        FIREBASE
   ====================================================== -->
 
+  <script src="invoice.js"></script>
+
   <script type="module">
 
     import { initializeApp } from
@@ -4014,7 +4016,7 @@
         if (refundStatus === "Pending") notices.push({id:`refund-${id}-pending`, orderId:id, title:"Refund request received", message:`Your refund request for order ${orderLabel} is awaiting admin review.`, timestamp:order.refundRequestedAt || order.updatedAt || 0});
         if (refundStatus === "Approved") notices.push({id:`refund-${id}-approved`, orderId:id, title:"Refund request approved", message:`Your refund request for order ${orderLabel} was approved and is awaiting processing.`, timestamp:order.refundReviewedAt || order.updatedAt || 0});
         if (refundStatus === "Rejected") notices.push({id:`refund-${id}-rejected`, orderId:id, title:"Refund request update", message:`Your refund request for order ${orderLabel} was rejected.${order.refundAdminNote ? " Note: " + order.refundAdminNote : ""}`, timestamp:order.refundReviewedAt || order.updatedAt || 0});
-        if (refundStatus === "Refunded" || String(order.refundStatus || "") === "Refunded" || status === "Refunded") notices.push({id:`refund-${id}-refunded`, orderId:id, title:"Refund issued", message:`A refund of ${formatOrderPrice(order.refundAmount || 0)} was recorded for order ${orderLabel}.`, timestamp:order.refundedAt || order.updatedAt || 0});
+        if (refundStatus === "Refunded" || String(order.refundStatus || "") === "Refunded" || statusKey === "refunded") notices.push({id:`refund-${id}-refunded`, orderId:id, title:"Refund issued", message:`A refund of ${formatOrderPrice(order.refundAmount || 0)} was recorded for order ${orderLabel}.`, timestamp:order.refundedAt || order.updatedAt || 0});
       });
       accountNotificationItems = [...notices, ...accountProductNotificationItems]
         .sort((a,b) => Number(b.timestamp || 0) - Number(a.timestamp || 0));
@@ -4300,6 +4302,17 @@
 
         <div class="order-detail-section">
           <div class="order-detail-section-heading">
+            <h3>Invoice</h3>
+            <span>${safe(window.NoireInvoice ? window.NoireInvoice.ensure(order).invoiceNumber : "")}</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="shop-btn" id="viewInvoiceBtn">View Invoice</button>
+            <button type="button" class="shop-btn" id="downloadInvoiceBtn" style="background:#fff;color:#111;border:1px solid #111;">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="order-detail-section">
+          <div class="order-detail-section-heading">
             <h3>Your Items</h3>
             <span>${items.length} ${items.length === 1 ? "product" : "products"}</span>
           </div>
@@ -4401,6 +4414,9 @@
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
+
+      $("viewInvoiceBtn")?.addEventListener("click", () => window.NoireInvoice?.view(order));
+      $("downloadInvoiceBtn")?.addEventListener("click", () => window.NoireInvoice?.download(order));
 
       const refundButton = $("submitRefundRequestBtn") || $("requestRefundAgainBtn");
       if (refundButton) {

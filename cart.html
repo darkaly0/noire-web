@@ -1383,11 +1383,13 @@
        JAVASCRIPT
   ====================================================== -->
 
+  <script src="invoice.js"></script>
+
   <script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getDatabase, ref, push, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, set, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const firebaseConfig={apiKey:"AIzaSyAxcZCFA9IPIfv-slryJXdPQJ_lfttKMC8",authDomain:"noire-17ed6.firebaseapp.com",databaseURL:"https://noire-17ed6-default-rtdb.firebaseio.com",projectId:"noire-17ed6",storageBucket:"noire-17ed6.appspot.com",messagingSenderId:"559789891078",appId:"1:559789891078:web:7bf4c52bce62c3b8b9ad87"};
     const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getDatabase(app); let currentUser=null;
@@ -1861,10 +1863,11 @@
        CHECKOUT
     ====================================================== */
 
-    function checkout() {
+    async function checkout() {
       const cart=getCart();
       if(!cart.length){showToast("Your shopping bag is empty.");return;}
       if(!currentUser){showToast("Please log in before checking out.");setTimeout(()=>window.location.href="signuplogin.html",1000);return;}
+      const profile=await loadCheckoutProfile();
       const subtotal=cart.reduce((s,i)=>s+(Number(i.price)||0)*(Number(i.quantity)||0),0);
       const shipping=subtotal>=1500?0:100; const total=subtotal+shipping;
       document.getElementById("checkoutModal")?.remove();
@@ -1873,7 +1876,85 @@
       document.body.appendChild(modal);
       document.getElementById("checkoutForm").addEventListener("submit",e=>placeOrder(e,cart,subtotal,shipping,total));
       setupCardForm();
+      prefillCheckout(profile);
       document.body.style.overflow="hidden";
+    }
+
+    /* =====================================================
+       PRE-FILL CHECKOUT FROM THE CUSTOMER'S ACCOUNT
+       Uses users/{uid}: shipping address, billing details
+       (preferred payment method) and profile info saved
+       on account.html. Everything stays editable.
+    ====================================================== */
+
+    async function loadCheckoutProfile() {
+      try {
+        const snap = await get(ref(db, "users/" + currentUser.uid));
+        return snap.exists() ? (snap.val() || {}) : {};
+      } catch (error) {
+        console.error("Unable to load saved account details:", error);
+        return {};
+      }
+    }
+
+    function buildCheckoutDefaults(profile, user) {
+      const p = profile || {};
+      const ship = p.shipping || {};
+      const bill = p.billing || {};
+      const clean = (v) => String(v ?? "").trim();
+
+      const name =
+        [ship.firstName, ship.lastName].map(clean).filter(Boolean).join(" ") ||
+        [p.firstName, p.lastName].map(clean).filter(Boolean).join(" ") ||
+        clean(bill.name) ||
+        clean(p.name) ||
+        clean(user && user.displayName) ||
+        "";
+
+      const phone = clean(ship.phone) || clean(p.phone) || clean(p.contactNumber);
+
+      // Street, Barangay, City, Province, Postal Code
+      const address = [ship.address, ship.barangay, ship.city, ship.province, ship.postalCode]
+        .map(clean).filter(Boolean).join(", ");
+
+      // Saved billing payment method -> checkout options (Maya isn't offered at checkout)
+      const paymentMap = {
+        "cash on delivery": "Cash on Delivery",
+        "gcash": "GCash",
+        "credit / debit card": "Credit Card",
+        "credit card": "Credit Card"
+      };
+      const payment = paymentMap[clean(bill.paymentMethod).toLowerCase()] || "";
+
+      return { name, phone, address, payment, cardName: clean(bill.name) || name };
+    }
+
+    function prefillCheckout(profile) {
+      const d = buildCheckoutDefaults(profile, currentUser);
+      const setValue = (id, value) => { const el = document.getElementById(id); if (el && value) el.value = value; };
+
+      setValue("checkoutName", d.name);
+      setValue("checkoutPhone", d.phone);
+      setValue("checkoutAddress", d.address);
+
+      if (d.payment) {
+        const radio = document.querySelector(`input[name="paymentMethod"][value="${d.payment}"]`);
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event("change", { bubbles: true })); // shows the card panel if needed
+        }
+        if (d.payment === "Credit Card") setValue("cardName", d.cardName);
+      }
+
+      if (d.name || d.phone || d.address) {
+        const heading = document.querySelector("#checkoutForm .checkout-section h3");
+        if (heading) {
+          const note = document.createElement("p");
+          note.style.cssText = "margin:-8px 0 14px;font-size:11px;color:#8a7d7d;line-height:1.5;";
+          note.innerHTML = 'Pre-filled from your account. You can edit anything here for this order, or update your saved details in <a href="account.html" style="color:#B76E79;">My Account</a>.';
+          heading.insertAdjacentElement("afterend", note);
+        }
+      }
     }
 
     function closeCheckoutModal(){document.getElementById("checkoutModal")?.remove();document.body.style.overflow="";}
@@ -2039,7 +2120,8 @@
       try{
         const orderRef=push(ref(db,"orders/"+currentUser.uid)); const orderNumber="NOIRE-"+Date.now().toString().slice(-8);
         // status = fulfillment (managed in admin); paymentStatus = money
-        const order={orderId:orderRef.key,orderNumber,userId:currentUser.uid,email:currentUser.email||"",customerName:name,phone,address,deliveryNotes:notes,paymentMethod,items:cart.map(i=>({id:i.id||"",name:i.name||"Product",price:Number(i.price)||0,quantity:Number(i.quantity)||1,image:i.image||""})),subtotal,shipping,total,...(cardInfo?{cardBrand:cardInfo.brand,cardLast4:cardInfo.last4}:{}),status:"Pending",paymentStatus:isOnline?"Awaiting Payment":"Unpaid",createdAt:Date.now()};
+        const order={orderId:orderRef.key,orderNumber,userId:currentUser.uid,email:currentUser.email||"",customerName:name,phone,address,deliveryNotes:notes,paymentMethod,items:cart.map(i=>({id:i.id||"",name:i.name||"Product",price:Number(i.price)||0,quantity:Number(i.quantity)||1,image:i.image||""})),subtotal,shipping,total,...(cardInfo?{cardBrand:cardInfo.brand,cardLast4:cardInfo.last4}:{}),status:"Pending",paymentStatus:isOnline?"Awaiting Payment":"Unpaid",createdAt:Date.now(),invoiceNumber:"INV-"+orderNumber.replace("NOIRE-",""),invoiceDate:Date.now()};
+        lastPlacedOrder=order;
         await set(orderRef,order);
         await logCustomerAudit(
           "Placed Order",
@@ -2071,6 +2153,7 @@
 
     // "Waiting for payment" modal + live listener (GCash and Credit Card)
     let awaitingOrderListener = null;
+    let lastPlacedOrder = null; // used by the invoice button on the success screen
 
     function showAwaitingPaymentModal(orderId, orderNumber, total, order) {
       const isCard = order.paymentMethod === "Credit Card";
@@ -2144,9 +2227,10 @@
     function showOrderSuccess(orderNumber, status = "Pending") {
       document.getElementById("orderSuccessModal")?.remove();
       const isPaid = status === "Paid";
+      if (lastPlacedOrder && isPaid) lastPlacedOrder.paymentStatus = "Paid";
       const modal = document.createElement("div");
       modal.id = "orderSuccessModal";
-      modal.innerHTML = `<div class="checkout-overlay"><div class="success-modal"><div class="success-icon">✓</div><span class="success-eyebrow">${isPaid ? "PAYMENT VERIFIED" : "ORDER CONFIRMED"}</span><h2>Thank you for your order.</h2><p>${isPaid ? "Your payment has been verified. Your Noiré ritual is officially on its way to being prepared." : "Your Noiré ritual is officially on its way to being prepared."}</p><div class="order-number-box"><small>ORDER NUMBER</small><strong>${escapeHtml(orderNumber)}</strong></div><div class="success-status ${isPaid ? "status-paid" : ""}"><span></span>${isPaid ? "Paid" : "Pending"}</div><button type="button" class="place-order-btn" onclick="closeSuccessModal()">View My Orders</button></div></div>`;
+      modal.innerHTML = `<div class="checkout-overlay"><div class="success-modal"><div class="success-icon">✓</div><span class="success-eyebrow">${isPaid ? "PAYMENT VERIFIED" : "ORDER CONFIRMED"}</span><h2>Thank you for your order.</h2><p>${isPaid ? "Your payment has been verified. Your Noiré ritual is officially on its way to being prepared." : "Your Noiré ritual is officially on its way to being prepared."}</p><div class="order-number-box"><small>ORDER NUMBER</small><strong>${escapeHtml(orderNumber)}</strong></div><div class="success-status ${isPaid ? "status-paid" : ""}"><span></span>${isPaid ? "Paid" : "Pending"}</div><button type="button" class="place-order-btn" style="background:#fff;color:#000;border:1px solid #000;" onclick="viewLastInvoice()">📄 View Invoice</button><button type="button" class="place-order-btn" style="margin-top:12px;" onclick="closeSuccessModal()">View My Orders</button></div></div>`;
       document.body.appendChild(modal);
       document.body.style.overflow = "hidden";
     }
@@ -2188,6 +2272,7 @@
 
 
     window.checkout=checkout; window.closeCheckoutModal=closeCheckoutModal; window.closeSuccessModal=closeSuccessModal; window.changeQuantity=changeQuantity; window.removeItem=removeItem; window.closeAwaitingPaymentModal=closeAwaitingPaymentModal; window.simulateGcashPaymentSuccess=simulateGcashPaymentSuccess;
+    window.viewLastInvoice=function(){ if(lastPlacedOrder && window.NoireInvoice){ window.NoireInvoice.view(lastPlacedOrder); } else { showToast("Invoice is not available yet."); } };
 
     /* =====================================================
        INITIALIZE

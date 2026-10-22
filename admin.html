@@ -2735,6 +2735,8 @@
        FIREBASE SCRIPT
   ====================================================== -->
 
+  <script src="invoice.js"></script>
+
   <script type="module">
 
     /* =====================================================
@@ -5951,6 +5953,14 @@
                 >
                   View
                 </button>
+                <button
+                  type="button"
+                  class="btn btn-small btn-outline order-invoice-btn"
+                  data-order-id="${escapeHTML(order.id)}"
+                  data-user-id="${escapeHTML(order.userId)}"
+                >
+                  Invoice
+                </button>
                 ${order.refundStatus === "Refunded" || String(order.status || "").toLowerCase() === "refunded" ? `
                   <span class="status status-inactive">Refunded</span>
                 ` : ""}
@@ -5986,6 +5996,13 @@
             button.dataset.userId,
             button.dataset.orderId
           );
+        });
+      });
+
+      body.querySelectorAll(".order-invoice-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const found = ordersCache.find(o => o.id === button.dataset.orderId && String(o.userId) === String(button.dataset.userId));
+          if (found && window.NoireInvoice) window.NoireInvoice.view(getInvoiceOrder(found));
         });
       });
 
@@ -6065,6 +6082,16 @@
         const input = document.getElementById(`refund-amount-${button.dataset.orderId}`);
         issueOrderRefund(button.dataset.userId, button.dataset.orderId, button, input?.value);
       }));
+    }
+
+    function getInvoiceOrder(order) {
+      const customer = getOrderCustomer(order);
+      return {
+        ...order,
+        customerName: order.customerName || customer.name,
+        email: order.email || customer.email,
+        phone: order.phone || customer.phone
+      };
     }
 
     function openOrderDetailsModal(userId, orderId) {
@@ -6150,6 +6177,15 @@
           </div>
         ` : ""}
       `;
+
+      body.insertAdjacentHTML("beforeend", `
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+          <button type="button" class="btn" id="adminViewInvoiceBtn">View Invoice</button>
+          <button type="button" class="btn btn-outline" id="adminDownloadInvoiceBtn">Download PDF</button>
+        </div>
+      `);
+      document.getElementById("adminViewInvoiceBtn").addEventListener("click", () => window.NoireInvoice?.view(getInvoiceOrder(order)));
+      document.getElementById("adminDownloadInvoiceBtn").addEventListener("click", () => window.NoireInvoice?.download(getInvoiceOrder(order)));
 
       modal.classList.add("show");
     }
