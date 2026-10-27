@@ -2091,6 +2091,7 @@
 
 
               <div id="modalPrice" class="modal-price"></div>
+              <div id="modalPriceApprox" class="approx-price"></div>
 
 
               <div id="modalStock" class="modal-stock"></div>
@@ -2992,6 +2993,8 @@
 
             </div>
 
+            <div class="approx-price" data-php="${getNumericPrice(product)}"></div>
+
           </div>
 
         </div>
@@ -3345,6 +3348,8 @@
           getProductPrice(
             currentProduct
           );
+
+        document.getElementById("modalPriceApprox").setAttribute("data-php", getNumericPrice(currentProduct));
 
 
         document.getElementById(
@@ -3905,6 +3910,7 @@
     </div>
   </button>
 
+  <script src="currency.js"></script>
   <script src="script.js"></script>
 
 </body>

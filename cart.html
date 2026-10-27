@@ -1242,6 +1242,8 @@
 
       </div>
 
+      <div class="approx-price" id="cartApprox" data-suffix=" · you will be charged in PHP" style="text-align:right;"></div>
+
       <button
         class="checkout-btn"
         id="checkoutBtn"
@@ -1386,6 +1388,7 @@
        JAVASCRIPT
   ====================================================== -->
 
+  <script src="currency.js"></script>
   <script src="invoice.js"></script>
 
   <script type="module">
@@ -1634,6 +1637,8 @@
 
                   </div>
 
+                  <div class="approx-price" data-php="${price}"></div>
+
 
                   <div class="quantity-control">
 
@@ -1669,6 +1674,8 @@
                     ${formatPrice(itemTotal)}
 
                   </div>
+
+                  <div class="approx-price" data-php="${itemTotal}"></div>
 
                   <button
                     class="remove-btn"
@@ -1837,6 +1844,9 @@
       ).textContent =
         formatPrice(total);
 
+      document.getElementById("cartApprox").setAttribute("data-php", total);
+
+
 
       const checkoutBtn =
         document.getElementById(
@@ -1875,7 +1885,7 @@
       const shipping=subtotal>=1500?0:100; const total=subtotal+shipping;
       document.getElementById("checkoutModal")?.remove();
       const modal=document.createElement("div"); modal.id="checkoutModal";
-      modal.innerHTML=`<div class="checkout-overlay"><div class="checkout-modal"><button type="button" class="checkout-close" onclick="closeCheckoutModal()">×</button><div class="checkout-header"><span>NOIRÉ</span><h2>Complete Your Order</h2><p>Almost there. Let's prepare your skincare ritual.</p></div><div class="checkout-order-summary"><h3>Your Order</h3><div class="checkout-items">${cart.map(i=>`<div class="checkout-item"><div><strong>${escapeHtml(i.name||"Product")}</strong><small>Qty: ${Number(i.quantity)||1}</small></div><span>${formatPrice((Number(i.price)||0)*(Number(i.quantity)||0))}</span></div>`).join("")}</div><div class="checkout-total-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div><div class="checkout-total-row"><span>Shipping</span><span>${shipping===0?"FREE":formatPrice(shipping)}</span></div><div class="checkout-total-row grand-total"><span>Total</span><strong>${formatPrice(total)}</strong></div></div><form id="checkoutForm"><div class="checkout-section"><h3>Delivery Information</h3><div class="checkout-grid"><div class="checkout-field full"><label>Full Name</label><input id="checkoutName" required placeholder="Your full name"></div><div class="checkout-field full"><label>Phone Number</label><input id="checkoutPhone" type="tel" required placeholder="09XXXXXXXXX"></div><div class="checkout-field full"><label>Complete Address</label><textarea id="checkoutAddress" rows="4" required placeholder="House/Unit No., Street, Barangay, City, Province, Postal Code"></textarea></div><div class="checkout-field full"><label>Delivery Notes</label><textarea id="checkoutNotes" rows="3" placeholder="Optional instructions for delivery"></textarea></div></div></div><div class="checkout-section"><h3>Payment Method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash on Delivery" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="GCash"><span><strong>GCash</strong><small>Instant checkout with your GCash e-wallet.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="Credit Card"><span><strong>Credit Card</strong><small>Visa, Mastercard or JCB.</small></span></label></div><div class="card-panel" id="cardPanel" hidden><div class="checkout-field full"><label for="cardName">Name on Card</label><input id="cardName" type="text" autocomplete="cc-name" placeholder="As shown on your card"></div><div class="checkout-field full"><label for="cardNumber">Card Number</label><div class="card-number-wrap"><input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456"><span class="card-brand-badge" id="cardBrandBadge"></span></div></div><div class="checkout-field"><label for="cardExpiry">Expiry (MM/YY)</label><input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY"></div><div class="checkout-field"><label for="cardCvc">CVC</label><input id="cardCvc" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123"></div><div class="card-error" id="cardError" role="alert"></div><div class="card-secure-note">🔒 Your card details are sent securely to PayMongo and are never saved on our servers or in your order record.</div></div></div><button class="place-order-btn" type="submit">Place Order • ${formatPrice(total)}</button></form></div></div>`;
+      modal.innerHTML=`<div class="checkout-overlay"><div class="checkout-modal"><button type="button" class="checkout-close" onclick="closeCheckoutModal()">×</button><div class="checkout-header"><span>NOIRÉ</span><h2>Complete Your Order</h2><p>Almost there. Let's prepare your skincare ritual.</p></div><div class="checkout-order-summary"><h3>Your Order</h3><div class="checkout-items">${cart.map(i=>`<div class="checkout-item"><div><strong>${escapeHtml(i.name||"Product")}</strong><small>Qty: ${Number(i.quantity)||1}</small></div><span>${formatPrice((Number(i.price)||0)*(Number(i.quantity)||0))}</span></div>`).join("")}</div><div class="checkout-total-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div><div class="checkout-total-row"><span>Shipping</span><span>${shipping===0?"FREE":formatPrice(shipping)}</span></div><div class="checkout-total-row grand-total"><span>Total</span><strong>${formatPrice(total)}</strong></div><div class="approx-price" data-php="${total}" data-suffix=" · you will be charged in PHP" style="text-align:right;"></div></div><form id="checkoutForm"><div class="checkout-section"><h3>Delivery Information</h3><div class="checkout-grid"><div class="checkout-field full"><label>Full Name</label><input id="checkoutName" required placeholder="Your full name"></div><div class="checkout-field full"><label>Phone Number</label><input id="checkoutPhone" type="tel" required placeholder="09XXXXXXXXX"></div><div class="checkout-field full"><label>Complete Address</label><textarea id="checkoutAddress" rows="4" required placeholder="House/Unit No., Street, Barangay, City, Province, Postal Code"></textarea></div><div class="checkout-field full"><label>Delivery Notes</label><textarea id="checkoutNotes" rows="3" placeholder="Optional instructions for delivery"></textarea></div></div></div><div class="checkout-section"><h3>Payment Method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash on Delivery" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="GCash"><span><strong>GCash</strong><small>Instant checkout with your GCash e-wallet.</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="Credit Card"><span><strong>Credit Card</strong><small>Visa, Mastercard or JCB.</small></span></label></div><div class="card-panel" id="cardPanel" hidden><div class="checkout-field full"><label for="cardName">Name on Card</label><input id="cardName" type="text" autocomplete="cc-name" placeholder="As shown on your card"></div><div class="checkout-field full"><label for="cardNumber">Card Number</label><div class="card-number-wrap"><input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456"><span class="card-brand-badge" id="cardBrandBadge"></span></div></div><div class="checkout-field"><label for="cardExpiry">Expiry (MM/YY)</label><input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY"></div><div class="checkout-field"><label for="cardCvc">CVC</label><input id="cardCvc" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123"></div><div class="card-error" id="cardError" role="alert"></div><div class="card-secure-note">🔒 Your card details are sent securely to PayMongo and are never saved on our servers or in your order record.</div></div></div><button class="place-order-btn" type="submit">Place Order • ${formatPrice(total)}</button></form></div></div>`;
       document.body.appendChild(modal);
       document.getElementById("checkoutForm").addEventListener("submit",e=>placeOrder(e,cart,subtotal,shipping,total));
       setupCardForm();
