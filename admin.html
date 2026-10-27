@@ -1494,7 +1494,14 @@
       }
     }
 
-</style>
+
+    /* PAGE EDITOR */
+    .pages-section { margin: 0 0 16px; }
+    .form-group textarea { width:100%; padding:12px 13px; border:1px solid #ddd; border-radius:9px; background:#fff; color:var(--charcoal); outline:none; transition:.2s ease; font:inherit; font-size:13px; line-height:1.5; resize:vertical; }
+    .form-group textarea:focus { border-color:var(--rose-gold); box-shadow:0 0 0 3px rgba(183,110,121,.08); }
+    .pages-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    #pagesStatus { font-size:12px; color:var(--soft-gray); }
+  </style>
 
 </head>
 
@@ -1609,6 +1616,20 @@
         onclick="openTab('admins')"
       >
         Admins
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="openTab('promotions'); refreshPromoAudience();"
+      >
+        Promotions
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="openTab('pages'); loadPagesEditor();"
+      >
+        Pages
       </button>
 
       <button
@@ -2126,6 +2147,94 @@
 
 
   <!-- =====================================================
+       PROMOTIONS (EMAIL)
+  ====================================================== -->
+
+  <div id="promotions" class="tab-content">
+    <div class="simple-card">
+      <div class="simple-card-header">
+        <h2>Email Promotions</h2>
+        <p>Send a promotional email to customers who opted in on their account page. Emails go out from the Noiré Gmail account.</p>
+      </div>
+
+      <div style="padding:22px;display:grid;gap:14px;max-width:680px;">
+        <div id="promoAudienceInfo" style="font-size:13px;color:#555;"></div>
+
+        <label style="font-size:12px;font-weight:700;letter-spacing:1px;">SUBJECT
+          <input id="promoSubject" type="text" maxlength="120" placeholder="e.g. 20% off all serums this weekend" style="width:100%;margin-top:6px;padding:12px;border:1px solid #ddd;border-radius:8px;font:inherit;">
+        </label>
+
+        <label style="font-size:12px;font-weight:700;letter-spacing:1px;">MESSAGE
+          <textarea id="promoMessage" rows="7" maxlength="2000" placeholder="Write your message. Leave a blank line between paragraphs." style="width:100%;margin-top:6px;padding:12px;border:1px solid #ddd;border-radius:8px;font:inherit;resize:vertical;"></textarea>
+        </label>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <label style="font-size:12px;font-weight:700;letter-spacing:1px;">BUTTON TEXT
+            <input id="promoCtaText" type="text" maxlength="40" placeholder="Shop now" style="width:100%;margin-top:6px;padding:12px;border:1px solid #ddd;border-radius:8px;font:inherit;">
+          </label>
+          <label style="font-size:12px;font-weight:700;letter-spacing:1px;">BUTTON LINK
+            <input id="promoCtaUrl" type="url" placeholder="https://your-site.web.app/shop.html" style="width:100%;margin-top:6px;padding:12px;border:1px solid #ddd;border-radius:8px;font:inherit;">
+          </label>
+        </div>
+
+        <div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:1px;">IMAGE (OPTIONAL)</div>
+          <input id="promoImage" type="file" accept="image/jpeg,image/png,image/gif,image/webp" style="margin-top:8px;font-size:13px;">
+          <div id="promoImagePreview" style="display:none;margin-top:10px;">
+            <img id="promoImagePreviewImg" alt="Promo image preview" style="max-width:280px;width:100%;border-radius:10px;border:1px solid #eee;display:block;">
+            <button type="button" class="btn btn-outline" onclick="clearPromoImage()" style="margin-top:8px;padding:7px 12px;">Remove image</button>
+          </div>
+          <div style="font-size:11px;color:#999;margin-top:6px;">The image is shrunk automatically and shown at the top of the email. It links to your button link.</div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" id="promoTestBtn" class="btn btn-outline" onclick="sendPromo(true)">Send test to me</button>
+          <button type="button" id="promoSendBtn" class="btn" onclick="sendPromo(false)">Send to subscribers</button>
+        </div>
+        <div id="promoResult" style="font-size:13px;"></div>
+        <p style="font-size:11px;color:#999;margin:0;">Gmail allows roughly 100 recipients per day on a regular account. If the audience is bigger, the rest are skipped and reported here.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       PAGES EDITOR (About / Contact)
+  ====================================================== -->
+
+  <div id="pages" class="tab-content">
+    <div class="simple-card">
+      <div class="simple-card-header">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+          <div>
+            <h2>Edit Pages</h2>
+            <p>Change the wording on your About, Contact, and Privacy Policy pages. Clear a field to restore its original text.</p>
+          </div>
+          <a id="pagesViewLink" class="btn btn-outline" href="about.html" target="_blank" rel="noopener">View page ↗</a>
+        </div>
+      </div>
+
+      <div class="audit-subtabs" role="tablist" aria-label="Page to edit">
+        <button type="button" class="audit-subtab pages-subtab active" data-page="about" onclick="switchSitePage('about')">About page</button>
+        <button type="button" class="audit-subtab pages-subtab" data-page="contact" onclick="switchSitePage('contact')">Contact page</button>
+        <button type="button" class="audit-subtab pages-subtab" data-page="privacy" onclick="switchSitePage('privacy')">Privacy Policy</button>
+      </div>
+
+      <div style="padding:22px;">
+        <div id="pagesEditor"></div>
+        <div class="pages-footer">
+          <div id="pagesStatus"></div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="btn btn-outline" onclick="resetSitePage()">Restore original text</button>
+            <button type="button" class="btn" id="pagesSaveBtn" onclick="saveSitePage()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
        AUDIT TRAIL
   ====================================================== -->
 
@@ -2180,6 +2289,7 @@
               <option value="order">Orders</option>
               <option value="user">Users</option>
               <option value="admin">Administrators</option>
+              <option value="page">Pages</option>
               <option value="system">System</option>
             </select>
           </div>
@@ -2736,6 +2846,7 @@
   ====================================================== -->
 
   <script src="invoice.js"></script>
+  <script src="email-client.js"></script>
 
   <script type="module">
 
@@ -6253,6 +6364,7 @@ This amount will be deducted from company revenue. This action cannot be repeate
           updatedAt: Date.now()
         });
         await logAudit("Issued Refund", "Order", `Refunded ${formatAdminCurrency(amount)} for order "${order.orderNumber || orderId}"; company revenue reduced by the same amount`, orderId);
+        sendOrderStatusEmail(userId, orderId);
         await loadOrdersOnce();
         alert(`Refund recorded: ${formatAdminCurrency(amount)}. Company revenue has been updated. This records the refund in the store; it does not automatically transfer money through a payment provider.`);
       } catch (error) {
@@ -6263,6 +6375,126 @@ This amount will be deducted from company revenue. This action cannot be repeate
     }
 
     window.issueOrderRefund = issueOrderRefund;
+
+    async function sendOrderStatusEmail(userId, orderId) {
+      if (!window.NoireMail) return;
+      const result = await window.NoireMail.orderStatus(auth.currentUser, userId, orderId);
+      if (result.skipped) {
+        window.NoireMail.toast("Status saved. Email not sent: set the Apps Script URL in email-client.js.", false);
+      } else if (result.ok) {
+        window.NoireMail.toast("Status saved and customer emailed.", true);
+      } else {
+        window.NoireMail.toast("Status saved, but the email failed: " + (result.error || "unknown error"), false);
+      }
+    }
+
+    function getPromoAudience() {
+      return Object.values(usersCache || {}).filter(u =>
+        u && u.marketingOptIn === true && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(u.email || "")
+      );
+    }
+
+    function refreshPromoAudience() {
+      const el = document.getElementById("promoAudienceInfo");
+      if (!el) return;
+      const total = Object.keys(usersCache || {}).length;
+      el.textContent = `${getPromoAudience().length} of ${total} customers have opted in to promotional emails.`;
+    }
+    window.refreshPromoAudience = refreshPromoAudience;
+
+    let promoImageData = "";
+
+    function clearPromoImage() {
+      promoImageData = "";
+      const input = document.getElementById("promoImage");
+      if (input) input.value = "";
+      const box = document.getElementById("promoImagePreview");
+      if (box) box.style.display = "none";
+    }
+    window.clearPromoImage = clearPromoImage;
+
+    // Shrinks to max 600px wide and re-encodes as JPEG so the email stays light.
+    function resizeImageToDataUrl(file, maxWidth = 600, quality = 0.82) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const scale = Math.min(1, maxWidth / img.width);
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/jpeg", quality));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not read that image.")); };
+        img.src = url;
+      });
+    }
+
+    document.addEventListener("change", async (event) => {
+      if (event.target?.id !== "promoImage") return;
+      const file = event.target.files && event.target.files[0];
+      const out = document.getElementById("promoResult");
+      if (!file) return clearPromoImage();
+      if (!/^image\//.test(file.type)) { clearPromoImage(); out.textContent = "Please choose an image file."; return; }
+      if (file.size > 15 * 1024 * 1024) { clearPromoImage(); out.textContent = "That image is too large (max 15 MB)."; return; }
+      try {
+        promoImageData = await resizeImageToDataUrl(file);
+        document.getElementById("promoImagePreviewImg").src = promoImageData;
+        document.getElementById("promoImagePreview").style.display = "block";
+        out.textContent = "";
+      } catch (err) {
+        clearPromoImage();
+        out.textContent = err.message;
+      }
+    });
+
+    async function sendPromo(testOnly) {
+      const subject = document.getElementById("promoSubject").value.trim();
+      const message = document.getElementById("promoMessage").value.trim();
+      const out = document.getElementById("promoResult");
+      if (!subject || !message) { out.textContent = "Please enter a subject and a message."; return; }
+
+      if (!window.NoireMail) {
+        out.textContent = "email-client.js did not load. Make sure it is in the same folder as admin.html (and deployed), then hard-refresh with Ctrl+Shift+R.";
+        return;
+      }
+
+      const audience = getPromoAudience().length;
+      if (!testOnly) {
+        if (!audience) { out.textContent = "No customers have opted in yet."; return; }
+        if (!confirm(`Send "${subject}" to ${audience} subscriber(s)? This cannot be undone.`)) return;
+      }
+
+      const testBtn = document.getElementById("promoTestBtn");
+      const sendBtn = document.getElementById("promoSendBtn");
+      testBtn.disabled = sendBtn.disabled = true;
+      out.textContent = "Sending… please keep this page open.";
+
+      const result = await window.NoireMail.promo(auth.currentUser, {
+        subject, message, testOnly: !!testOnly, imageData: promoImageData,
+        ctaText: document.getElementById("promoCtaText").value.trim(),
+        ctaUrl: document.getElementById("promoCtaUrl").value.trim()
+      });
+
+      testBtn.disabled = sendBtn.disabled = false;
+      if (result.skipped) { out.textContent = "Set the Apps Script URL in email-client.js first."; return; }
+      if (!result.ok) { out.textContent = "Not sent: " + (result.error || "unknown error"); return; }
+
+      if (testOnly) {
+        out.textContent = "Test email sent to your admin address.";
+      } else {
+        out.textContent = `Sent to ${result.sent} of ${result.audience} subscriber(s)` +
+          (result.failed ? `, ${result.failed} failed` : "") +
+          (result.skippedForQuota ? `, ${result.skippedForQuota} skipped (daily Gmail limit)` : "") + ".";
+        try { await logAudit("Sent Promotion", "Promotion", `Sent "${subject}" to ${result.sent} subscriber(s)`); } catch (e) {}
+      }
+    }
+    window.sendPromo = sendPromo;
 
     async function updateOrderStatus(userId, orderId, newStatus, selectElement) {
       if (!userId || !orderId || !ORDER_STATUSES.includes(newStatus)) return;
@@ -6296,6 +6528,8 @@ This amount will be deducted from company revenue. This action cannot be repeate
           `Order "${currentOrder?.orderNumber || orderId}" changed from "${previousStatus}" to "${newStatus}"`,
           orderId
         );
+
+        sendOrderStatusEmail(userId, orderId);
       } catch (error) {
         console.error("UPDATE ORDER ERROR:", error);
         if (selectElement) selectElement.value = previousStatus;
@@ -6876,6 +7110,129 @@ This amount will be deducted from company revenue. This action cannot be repeate
 
     window.deleteAdmin =
       deleteAdmin;
+
+    /* =====================================================
+       PAGES EDITOR — siteContent/{about|contact}
+    ====================================================== */
+
+    const SITE_PAGES = {"about": {"label": "About page", "file": "about.html", "sections": [{"title": "Hero", "fields": [{"key": "hero_eyebrow", "label": "Small label", "type": "t", "def": "The Noiré story"}, {"key": "hero_title", "label": "Heading (first line)", "type": "t", "def": "Beauty in"}, {"key": "hero_titleEm", "label": "Heading (highlighted)", "type": "t", "def": "simplicity."}, {"key": "hero_text", "label": "Intro text", "type": "a", "def": "Noiré was created with one belief at heart: skincare should adapt to you — not the other way around."}]}, {"title": "Our Story", "fields": [{"key": "story_label", "label": "Small label", "type": "t", "def": "Our Story"}, {"key": "story_title", "label": "Heading", "type": "t", "def": "Skincare should feel"}, {"key": "story_titleEm", "label": "Heading (highlighted)", "type": "t", "def": "personal."}, {"key": "story_p1", "label": "Paragraph 1", "type": "a", "def": "Noiré began with a simple idea: everyone deserves skincare that understands their individual needs."}, {"key": "story_p2", "label": "Paragraph 2", "type": "a", "def": "Instead of creating complicated routines filled with unnecessary steps, we focus on thoughtfully formulated essentials that work beautifully together."}, {"key": "story_p3", "label": "Paragraph 3", "type": "a", "def": "From hydration to oil control, soothing care to everyday maintenance, Noiré creates products designed to meet your skin where it is."}, {"key": "story_quote", "label": "Quote", "type": "a", "def": "\"Your skin is unique. Your ritual should be, too.\""}]}, {"title": "Brand Values", "fields": [{"key": "values_eyebrow", "label": "Small label", "type": "t", "def": "What we believe"}, {"key": "values_title", "label": "Heading", "type": "t", "def": "The Noiré Philosophy"}, {"key": "values_text", "label": "Subtitle", "type": "t", "def": "Three principles guide everything we create."}, {"key": "v1_title", "label": "Value 1 title", "type": "t", "def": "Science Meets Nature"}, {"key": "v1_text", "label": "Value 1 text", "type": "a", "def": "We combine thoughtfully selected active ingredients with carefully chosen botanical extracts to create effective yet comforting skincare."}, {"key": "v2_title", "label": "Value 2 title", "type": "t", "def": "Inclusive Beauty"}, {"key": "v2_text", "label": "Value 2 text", "type": "a", "def": "Skin comes in countless forms. Our philosophy is to create adaptable skincare for different skin types, concerns, and lifestyles."}, {"key": "v3_title", "label": "Value 3 title", "type": "t", "def": "Minimalist Luxury"}, {"key": "v3_text", "label": "Value 3 text", "type": "a", "def": "We believe luxury isn't about having more. It's about having products that truly belong in your routine."}]}, {"title": "Philosophy Banner", "fields": [{"key": "phil_eyebrow", "label": "Small label", "type": "t", "def": "Our philosophy"}, {"key": "phil_title", "label": "Heading", "type": "t", "def": "Less complexity. More"}, {"key": "phil_titleEm", "label": "Heading (highlighted)", "type": "t", "def": "confidence."}, {"key": "phil_text", "label": "Text", "type": "a", "def": "Noiré creates simple, intentional skincare rituals that help you feel comfortable and confident in your skin."}]}, {"title": "Feature Highlights", "fields": [{"key": "f1_title", "label": "Feature 1 title", "type": "t", "def": "Thoughtfully Formulated"}, {"key": "f1_text", "label": "Feature 1 text", "type": "t", "def": "Carefully selected ingredients for purposeful skincare."}, {"key": "f2_title", "label": "Feature 2 title", "type": "t", "def": "Cruelty-Free"}, {"key": "f2_text", "label": "Feature 2 text", "type": "t", "def": "Beautiful skincare without compromising compassion."}, {"key": "f3_title", "label": "Feature 3 title", "type": "t", "def": "Skin-Focused"}, {"key": "f3_text", "label": "Feature 3 text", "type": "t", "def": "Created around different skin needs and concerns."}, {"key": "f4_title", "label": "Feature 4 title", "type": "t", "def": "Effortlessly Elegant"}, {"key": "f4_text", "label": "Feature 4 text", "type": "t", "def": "Simple rituals designed to fit beautifully into your life."}]}, {"title": "Call to Action", "fields": [{"key": "cta_eyebrow", "label": "Small label", "type": "t", "def": "Your ritual starts here"}, {"key": "cta_title", "label": "Heading", "type": "t", "def": "Meet your skin's new favorite."}, {"key": "cta_text", "label": "Text", "type": "a", "def": "Explore the Noiré collection and discover skincare designed around you."}, {"key": "cta_button", "label": "Button text", "type": "t", "def": "EXPLORE THE COLLECTION"}]}]}, "contact": {"label": "Contact page", "file": "contact.html", "sections": [{"title": "Hero", "fields": [{"key": "hero_label", "label": "Small label", "type": "t", "def": "Get in touch"}, {"key": "hero_title", "label": "Heading (first part)", "type": "t", "def": "Let's start a"}, {"key": "hero_titleEm", "label": "Heading (highlighted)", "type": "t", "def": "conversation."}, {"key": "hero_text", "label": "Intro text", "type": "a", "def": "Have a question about your skincare routine, an order, or simply want to say hello? We'd love to hear from you."}]}, {"title": "Contact Details", "fields": [{"key": "info_label", "label": "Small label", "type": "t", "def": "Contact Noiré"}, {"key": "info_title", "label": "Heading", "type": "t", "def": "We're here for you."}, {"key": "info_text", "label": "Text", "type": "a", "def": "Whether you need help choosing a product or simply have a question about Noiré, our team is always happy to help."}, {"key": "info_email", "label": "Email", "type": "t", "def": "hello@noireskincare.com"}, {"key": "info_hours", "label": "Hours (one line per row)", "type": "a", "def": "Monday – Friday\n9:00 AM – 6:00 PM"}, {"key": "info_social", "label": "Social line", "type": "t", "def": "Instagram · Facebook · TikTok"}]}, {"title": "Form Heading", "fields": [{"key": "form_label", "label": "Small label", "type": "t", "def": "Send us a message"}, {"key": "form_title", "label": "Heading", "type": "t", "def": "How can we help?"}, {"key": "form_text", "label": "Text", "type": "a", "def": "Fill out the form below and our team will get back to you as soon as possible."}]}, {"title": "Help Cards", "fields": [{"key": "help_label", "label": "Small label", "type": "t", "def": "Before you reach out"}, {"key": "help_title", "label": "Heading", "type": "t", "def": "Maybe we can help right away."}, {"key": "help_text", "label": "Text", "type": "a", "def": "Looking for something specific? These pages might have exactly what you need."}, {"key": "h1_title", "label": "Card 1 title", "type": "t", "def": "Explore Products"}, {"key": "h1_text", "label": "Card 1 text", "type": "a", "def": "Browse our skincare collection and find products suited to your skin."}, {"key": "h2_title", "label": "Card 2 title", "type": "t", "def": "Build Your Routine"}, {"key": "h2_text", "label": "Card 2 text", "type": "a", "def": "Not sure where to start? Let our Routine Builder guide you."}, {"key": "h3_title", "label": "Card 3 title", "type": "t", "def": "Read the Journal"}, {"key": "h3_text", "label": "Card 3 text", "type": "a", "def": "Discover skincare guides, ingredient science, and wellness tips."}]}, {"title": "Closing Quote", "fields": [{"key": "quote_title", "label": "Quote (first part)", "type": "a", "def": "Your questions matter. Your skin deserves"}, {"key": "quote_titleEm", "label": "Quote (highlighted)", "type": "t", "def": "thoughtful care."}]}]}, "privacy": {"label": "Privacy Policy", "file": "privacy.html", "sections": [{"title": "Intro", "note": "Tip: in the sections below, separate paragraphs with a blank line. Start a line with “- ” to make a bullet (leave a blank line before the first bullet).", "fields": [{"key": "hero_eyebrow", "label": "Small label", "type": "t", "def": "Legal"}, {"key": "hero_title", "label": "Heading", "type": "t", "def": "Privacy"}, {"key": "hero_titleEm", "label": "Heading (highlighted)", "type": "t", "def": "Policy."}, {"key": "hero_updated", "label": "Last updated line", "type": "t", "def": "Last updated: October 28, 2026"}, {"key": "hero_text", "label": "Intro text", "type": "a", "def": "Your privacy matters to us. This policy explains what information we collect, how we use it, and the choices you have."}]}, {"title": "1. Who we are", "fields": [{"key": "s1_title", "label": "Section heading", "type": "t", "def": "Who we are"}, {"key": "s1_body", "label": "Section text", "type": "a", "def": "Noiré Skincare (“Noiré”, “we”, “us”) operates this website. This policy explains how we collect, use, and protect personal information when you browse our store, create an account, place an order, or contact us."}]}, {"title": "2. Information we collect", "fields": [{"key": "s2_title", "label": "Section heading", "type": "t", "def": "Information we collect"}, {"key": "s2_body", "label": "Section text", "type": "a", "def": "We collect the information you give us and the information created when you use the site:\n\n- Account details: your name, email address, phone number, and the skin type you add to your profile.\n- Order details: the items you buy, order totals, delivery details, order status, and any return or refund requests.\n- Reviews and activity: product ratings and comments, wishlist and cart activity, and actions you take while signed in.\n- Messages: anything you send through our contact form or chatbot.\n- Marketing preference: whether you chose to receive promotional emails.\n- Technical data: basic information your browser shares, and preferences saved on your device."}]}, {"title": "3. How we use your information", "fields": [{"key": "s3_title", "label": "Section heading", "type": "t", "def": "How we use your information"}, {"key": "s3_body", "label": "Section text", "type": "a", "def": "We use your information to:\n\n- Create and manage your account.\n- Process, deliver, and update your orders, and handle returns and refunds.\n- Send order status emails.\n- Answer your questions and give support.\n- Suggest products that suit your skin type.\n- Send promotional emails, only if you opted in.\n- Keep the store secure and prevent misuse.\n- Improve our products and website."}]}, {"title": "4. Emails and marketing", "fields": [{"key": "s4_title", "label": "Section heading", "type": "t", "def": "Emails and marketing"}, {"key": "s4_body", "label": "Section text", "type": "a", "def": "Order and account emails are service messages and are sent as needed. We send promotional emails only to customers who opted in. You can change this choice at any time from your account page or by contacting us."}]}, {"title": "5. Who we share it with", "fields": [{"key": "s5_title", "label": "Section heading", "type": "t", "def": "Who we share it with"}, {"key": "s5_body", "label": "Section text", "type": "a", "def": "We do not sell your personal information. We share it only with service providers that help us run Noiré, and only as needed:\n\n- Google Firebase, for sign-in and for storing account, order, and store data.\n- Email delivery services, to send order updates and promotions.\n- Chatbase, which powers our website chatbot.\n- Delivery partners, to fulfil your orders.\n- Authorities, when we are required to by law."}]}, {"title": "6. Cookies and local storage", "fields": [{"key": "s6_title", "label": "Section heading", "type": "t", "def": "Cookies and local storage"}, {"key": "s6_body", "label": "Section text", "type": "a", "def": "We use your browser’s storage and similar technologies to keep you signed in, remember your cart, and make pages load faster. Some third-party content on our site, such as fonts and the chatbot, may set its own cookies or collect technical data under its own policies."}]}, {"title": "7. How long we keep your information", "fields": [{"key": "s7_title", "label": "Section heading", "type": "t", "def": "How long we keep your information"}, {"key": "s7_body", "label": "Section text", "type": "a", "def": "We keep personal information only for as long as we need it for the purposes above, including legal, accounting, and reporting requirements. Order records may be kept longer for those reasons. You can ask us to delete your account at any time."}]}, {"title": "8. Keeping your information safe", "fields": [{"key": "s8_title", "label": "Section heading", "type": "t", "def": "Keeping your information safe"}, {"key": "s8_body", "label": "Section text", "type": "a", "def": "We use reasonable technical and organizational measures to protect your information. Access to our admin tools is limited to authorized staff, and administrator activity is logged. No online service can be completely secure, so we cannot guarantee absolute security."}]}, {"title": "9. Your rights", "fields": [{"key": "s9_title", "label": "Section heading", "type": "t", "def": "Your rights"}, {"key": "s9_body", "label": "Section text", "type": "a", "def": "Under the Data Privacy Act of 2012 (Republic Act No. 10173), you have the right to:\n\n- Be informed about how your data is used.\n- Access the personal information we hold about you.\n- Correct information that is wrong or out of date.\n- Object to certain uses of your data.\n- Ask us to erase or block your data.\n- Receive a copy of your data in a common format.\n- File a complaint with the National Privacy Commission at privacy.gov.ph.\n\nTo use any of these rights, contact us using the details below."}]}, {"title": "10. Children’s privacy", "fields": [{"key": "s10_title", "label": "Section heading", "type": "t", "def": "Children’s privacy"}, {"key": "s10_body", "label": "Section text", "type": "a", "def": "Our site is not meant for children, and we do not knowingly collect their personal information. If you believe a child has given us information, please contact us and we will delete it."}]}, {"title": "11. Changes to this policy", "fields": [{"key": "s11_title", "label": "Section heading", "type": "t", "def": "Changes to this policy"}, {"key": "s11_body", "label": "Section text", "type": "a", "def": "We may update this policy from time to time. When we do, we will change the “last updated” date at the top of this page."}]}, {"title": "12. Contact us", "fields": [{"key": "s12_title", "label": "Section heading", "type": "t", "def": "Contact us"}, {"key": "s12_body", "label": "Section text", "type": "a", "def": "If you have questions about this policy or want to use your rights, reach out:\n\n- Email: hello@noireskincare.com\n- Hours: Monday – Friday, 9:00 AM – 6:00 PM"}]}]}};
+    let sitePagesCache = {};
+    let currentSitePage = "about";
+
+    function setPagesStatus(text, isError) {
+      const el = document.getElementById("pagesStatus");
+      if (!el) return;
+      el.textContent = text || "";
+      el.style.color = isError ? "#8b3030" : "";
+    }
+
+    function renderSitePageEditor() {
+      const wrap = document.getElementById("pagesEditor");
+      if (!wrap) return;
+
+      const page = SITE_PAGES[currentSitePage];
+      const saved = sitePagesCache[currentSitePage] || {};
+
+      document.querySelectorAll(".pages-subtab").forEach(button => {
+        button.classList.toggle("active", button.dataset.page === currentSitePage);
+      });
+
+      const link = document.getElementById("pagesViewLink");
+      if (link) link.href = page.file;
+
+      wrap.innerHTML = page.sections.map(section => `
+        <div class="section-options pages-section">
+          <div class="section-options-title">${escapeHTML(section.title)}</div>
+          ${section.note ? `<p class="admin-muted" style="margin:0 0 12px;">${escapeHTML(section.note)}</p>` : ""}
+          ${section.fields.map(field => {
+            const value = typeof saved[field.key] === "string" ? saved[field.key] : field.def;
+            const control = field.type === "a"
+              ? `<textarea id="pf_${field.key}" rows="${field.def.length > 220 ? 8 : 3}">${escapeHTML(value)}</textarea>`
+              : `<input type="text" id="pf_${field.key}" value="${escapeHTML(value)}">`;
+            return `
+              <div class="form-group">
+                <label for="pf_${field.key}">${escapeHTML(field.label)}</label>
+                ${control}
+              </div>`;
+          }).join("")}
+        </div>
+      `).join("");
+    }
+
+    async function loadPagesEditor() {
+      setPagesStatus("");
+      try {
+        const snapshot = await get(dbRef(database, "siteContent"));
+        sitePagesCache = snapshot.exists() ? snapshot.val() : {};
+      } catch (error) {
+        console.error("LOAD PAGE CONTENT ERROR:", error);
+        setPagesStatus("Unable to load saved content: " + (error.message || "Firebase error"), true);
+      }
+      renderSitePageEditor();
+    }
+
+    function switchSitePage(page) {
+      if (!SITE_PAGES[page]) return;
+      currentSitePage = page;
+      setPagesStatus("");
+      renderSitePageEditor();
+    }
+
+    async function saveSitePageData(data, successText, auditText) {
+      const button = document.getElementById("pagesSaveBtn");
+      if (button) button.disabled = true;
+      setPagesStatus("Saving...");
+
+      try {
+        await set(
+          dbRef(database, `siteContent/${currentSitePage}`),
+          Object.keys(data).length ? data : null
+        );
+        sitePagesCache[currentSitePage] = data;
+        await logAudit("Updated Page", "Page", auditText, currentSitePage);
+        renderSitePageEditor();
+        setPagesStatus(successText);
+      } catch (error) {
+        console.error("SAVE PAGE CONTENT ERROR:", error);
+        setPagesStatus(
+          error.code === "PERMISSION_DENIED"
+            ? "Firebase denied the save. Check that your database rules allow admins to write siteContent."
+            : "Unable to save: " + (error.message || "Firebase error"),
+          true
+        );
+      } finally {
+        if (button) button.disabled = false;
+      }
+    }
+
+    function saveSitePage() {
+      const page = SITE_PAGES[currentSitePage];
+      const data = {};
+
+      page.sections.forEach(section => section.fields.forEach(field => {
+        const control = document.getElementById("pf_" + field.key);
+        const value = (control?.value || "").trim();
+        if (value && value !== field.def) data[field.key] = value;
+      }));
+
+      const count = Object.keys(data).length;
+      saveSitePageData(
+        data,
+        "Saved. Your changes are now live on the " + page.label + ".",
+        `Updated ${page.label} text (${count} customized field${count === 1 ? "" : "s"})`
+      );
+    }
+
+    function resetSitePage() {
+      const page = SITE_PAGES[currentSitePage];
+      if (!confirm(`Restore all original text on the ${page.label}?\n\nYour customized wording will be removed.`)) return;
+      saveSitePageData({}, "Original text restored.", `Restored original text on the ${page.label}`);
+    }
+
+    window.loadPagesEditor = loadPagesEditor;
+    window.switchSitePage = switchSitePage;
+    window.saveSitePage = saveSitePage;
+    window.resetSitePage = resetSitePage;
 
     /* =====================================================
        ESCAPE HTML

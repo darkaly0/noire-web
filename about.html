@@ -761,7 +761,7 @@
 </head>
 
 
-<body>
+<body data-content-page="about">
 
 
 <!-- =====================================================
@@ -835,16 +835,16 @@
 
   <div class="about-hero-content">
 
-    <div class="eyebrow">
+    <div class="eyebrow" data-content="hero_eyebrow">
       The Noiré story
     </div>
 
     <h1>
-      Beauty in<br>
-      <em>simplicity.</em>
+      <span data-content="hero_title">Beauty in</span><br>
+      <em data-content="hero_titleEm">simplicity.</em>
     </h1>
 
-    <p>
+    <p data-content="hero_text">
       Noiré was created with one belief at heart:
       skincare should adapt to you — not the other way around.
     </p>
@@ -888,13 +888,13 @@
 
     <div>
 
-      <div class="story-label">
+      <div class="story-label" data-content="story_label">
         Our Story
       </div>
 
       <h2>
-        Skincare should feel
-        <em>personal.</em>
+        <span data-content="story_title">Skincare should feel</span>
+        <em data-content="story_titleEm">personal.</em>
       </h2>
 
     </div>
@@ -902,24 +902,24 @@
 
     <div class="story-text">
 
-      <p>
+      <p data-content="story_p1">
         Noiré began with a simple idea: everyone deserves
         skincare that understands their individual needs.
       </p>
 
-      <p>
+      <p data-content="story_p2">
         Instead of creating complicated routines filled with
         unnecessary steps, we focus on thoughtfully formulated
         essentials that work beautifully together.
       </p>
 
-      <p>
+      <p data-content="story_p3">
         From hydration to oil control, soothing care to everyday
         maintenance, Noiré creates products designed to meet
         your skin where it is.
       </p>
 
-      <div class="story-quote">
+      <div class="story-quote" data-content="story_quote">
         "Your skin is unique. Your ritual should be, too."
       </div>
 
@@ -938,15 +938,15 @@
 
   <div class="section-heading">
 
-    <div class="eyebrow">
+    <div class="eyebrow" data-content="values_eyebrow">
       What we believe
     </div>
 
-    <h2>
+    <h2 data-content="values_title">
       The Noiré Philosophy
     </h2>
 
-    <p>
+    <p data-content="values_text">
       Three principles guide everything we create.
     </p>
 
@@ -962,11 +962,11 @@
         01
       </div>
 
-      <h3>
+      <h3 data-content="v1_title">
         Science Meets Nature
       </h3>
 
-      <p>
+      <p data-content="v1_text">
         We combine thoughtfully selected active ingredients
         with carefully chosen botanical extracts to create
         effective yet comforting skincare.
@@ -981,11 +981,11 @@
         02
       </div>
 
-      <h3>
+      <h3 data-content="v2_title">
         Inclusive Beauty
       </h3>
 
-      <p>
+      <p data-content="v2_text">
         Skin comes in countless forms. Our philosophy is to
         create adaptable skincare for different skin types,
         concerns, and lifestyles.
@@ -1000,11 +1000,11 @@
         03
       </div>
 
-      <h3>
+      <h3 data-content="v3_title">
         Minimalist Luxury
       </h3>
 
-      <p>
+      <p data-content="v3_text">
         We believe luxury isn't about having more.
         It's about having products that truly belong
         in your routine.
@@ -1024,16 +1024,15 @@
 
 <section class="philosophy">
 
-  <div class="eyebrow">
+  <div class="eyebrow" data-content="phil_eyebrow">
     Our philosophy
   </div>
 
   <h2>
-    Less complexity.
-    More <em>confidence.</em>
+    <span data-content="phil_title">Less complexity. More</span> <em data-content="phil_titleEm">confidence.</em>
   </h2>
 
-  <p>
+  <p data-content="phil_text">
     Noiré creates simple, intentional skincare rituals
     that help you feel comfortable and confident in your skin.
   </p>
@@ -1056,11 +1055,11 @@
         ✦
       </div>
 
-      <h3>
+      <h3 data-content="f1_title">
         Thoughtfully Formulated
       </h3>
 
-      <p>
+      <p data-content="f1_text">
         Carefully selected ingredients for purposeful skincare.
       </p>
 
@@ -1073,11 +1072,11 @@
         ♡
       </div>
 
-      <h3>
+      <h3 data-content="f2_title">
         Cruelty-Free
       </h3>
 
-      <p>
+      <p data-content="f2_text">
         Beautiful skincare without compromising compassion.
       </p>
 
@@ -1090,11 +1089,11 @@
         ✧
       </div>
 
-      <h3>
+      <h3 data-content="f3_title">
         Skin-Focused
       </h3>
 
-      <p>
+      <p data-content="f3_text">
         Created around different skin needs and concerns.
       </p>
 
@@ -1107,11 +1106,11 @@
         ♢
       </div>
 
-      <h3>
+      <h3 data-content="f4_title">
         Effortlessly Elegant
       </h3>
 
-      <p>
+      <p data-content="f4_text">
         Simple rituals designed to fit beautifully into your life.
       </p>
 
@@ -1129,20 +1128,20 @@
 
 <section class="about-cta">
 
-  <div class="eyebrow">
+  <div class="eyebrow" data-content="cta_eyebrow">
     Your ritual starts here
   </div>
 
-  <h2>
+  <h2 data-content="cta_title">
     Meet your skin's new favorite.
   </h2>
 
-  <p>
+  <p data-content="cta_text">
     Explore the Noiré collection and discover skincare
     designed around you.
   </p>
 
-  <a href="shop.html" class="btn-primary">
+  <a href="shop.html" class="btn-primary" data-content="cta_button">
     EXPLORE THE COLLECTION
   </a>
 
@@ -1267,7 +1266,7 @@
         </li>
 
         <li>
-          <a href="#">
+          <a href="privacy.html">
             Privacy
           </a>
         </li>
@@ -1337,6 +1336,7 @@
   </button>
 
   <!-- Chatbot Script -->
+  <script src="site-content.js"></script>
   <script src="script.js"></script>
 
 </body>

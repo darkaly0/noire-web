@@ -2404,6 +2404,10 @@
         Contact
       </a>
 
+      <a href="privacy.html">
+        Privacy Policy
+      </a>
+
     </div>
 
 
@@ -2603,6 +2607,13 @@
             <div class="form-group full">
               <label for="birthDateInput">Birth Date</label>
               <input id="birthDateInput" type="date">
+            </div>
+
+            <div class="form-group full">
+              <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;cursor:pointer;">
+                <input id="marketingOptInInput" type="checkbox" style="width:auto;margin-top:3px;">
+                <span>Email me about new products and promotions (you'll always get order updates either way).</span>
+              </label>
             </div>
 
           </div>
@@ -3252,6 +3263,7 @@
       $("usernameInput").value = data.username || "";
       $("phoneInput").value = data.phone || "";
       $("birthDateInput").value = data.birthDate || "";
+      $("marketingOptInInput").checked = data.marketingOptIn === true;
 
       $("shippingFirstName").value = shipping.firstName || data.firstName || "";
       $("shippingLastName").value = shipping.lastName || data.lastName || "";
@@ -4593,6 +4605,7 @@
       const username = $("usernameInput").value.trim();
       const phone = $("phoneInput").value.trim();
       const birthDate = $("birthDateInput").value;
+      const marketingOptIn = $("marketingOptInInput").checked;
 
       if (!username) {
         setStatus("personalStatus", "Please enter a username.", false);
@@ -4606,6 +4619,7 @@
           username,
           phone,
           birthDate,
+          marketingOptIn,
           email: currentUser.email || currentData.email || ""
         });
 
@@ -4616,6 +4630,7 @@
           username,
           phone,
           birthDate,
+          marketingOptIn,
           email: currentUser.email || currentData.email || ""
         };
 

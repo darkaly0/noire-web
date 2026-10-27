@@ -218,7 +218,7 @@
       max-width: 850px;
     }
 
-    .contact-hero h1 span {
+    .contact-hero h1 .accent {
       color: var(--rose-gold);
       font-style: italic;
     }
@@ -748,7 +748,7 @@
       line-height: 1.25;
     }
 
-    .contact-quote span {
+    .contact-quote .accent {
       color: var(--rose-gold);
 
       font-style: italic;
@@ -975,7 +975,7 @@
 </head>
 
 
-<body>
+<body data-content-page="contact">
 
 
   <!-- =========================================================
@@ -1058,16 +1058,16 @@
 
   <section class="contact-hero">
 
-    <div class="hero-label">
+    <div class="hero-label" data-content="hero_label">
       Get in touch
     </div>
 
     <h1>
-      Let's start a
-      <span>conversation.</span>
+      <span data-content="hero_title">Let's start a</span>
+      <span class="accent" data-content="hero_titleEm">conversation.</span>
     </h1>
 
-    <p>
+    <p data-content="hero_text">
       Have a question about your skincare routine, an order,
       or simply want to say hello? We'd love to hear from you.
     </p>
@@ -1093,16 +1093,16 @@
 
         <div class="contact-info-content">
 
-          <div class="contact-info-label">
+          <div class="contact-info-label" data-content="info_label">
             Contact Noiré
           </div>
 
-          <h2>
+          <h2 data-content="info_title">
             We're here
             for you.
           </h2>
 
-          <p>
+          <p data-content="info_text">
             Whether you need help choosing a product or
             simply have a question about Noiré, our team
             is always happy to help.
@@ -1123,7 +1123,7 @@
                 Email
               </h4>
 
-              <p>
+              <p data-content="info_email">
                 hello@noireskincare.com
               </p>
 
@@ -1146,7 +1146,7 @@
                 Hours
               </h4>
 
-              <p>
+              <p data-content="info_hours" data-multiline>
                 Monday – Friday<br>
                 9:00 AM – 6:00 PM
               </p>
@@ -1170,7 +1170,7 @@
                 Follow Noiré
               </h4>
 
-              <p>
+              <p data-content="info_social">
                 Instagram · Facebook · TikTok
               </p>
 
@@ -1192,15 +1192,15 @@
 
         <div class="form-heading">
 
-          <small>
+          <small data-content="form_label">
             Send us a message
           </small>
 
-          <h2>
+          <h2 data-content="form_title">
             How can we help?
           </h2>
 
-          <p>
+          <p data-content="form_text">
             Fill out the form below and our team will
             get back to you as soon as possible.
           </p>
@@ -1315,11 +1315,17 @@
 
 
 
+          <!-- Spam trap: hidden from people, bots tend to fill it in -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <input type="text" id="website" tabindex="-1" autocomplete="off">
+          </div>
+
           <!-- SUBMIT -->
 
           <button
             type="submit"
             class="submit-button"
+            id="sendButton"
           >
             Send Message
             <span> →</span>
@@ -1353,15 +1359,15 @@
 
     <div class="section-heading">
 
-      <small>
+      <small data-content="help_label">
         Before you reach out
       </small>
 
-      <h2>
+      <h2 data-content="help_title">
         Maybe we can help right away.
       </h2>
 
-      <p>
+      <p data-content="help_text">
         Looking for something specific?
         These pages might have exactly what you need.
       </p>
@@ -1380,11 +1386,11 @@
           ✨
         </div>
 
-        <h3>
+        <h3 data-content="h1_title">
           Explore Products
         </h3>
 
-        <p>
+        <p data-content="h1_text">
           Browse our skincare collection
           and find products suited to your skin.
         </p>
@@ -1401,11 +1407,11 @@
           ♡
         </div>
 
-        <h3>
+        <h3 data-content="h2_title">
           Build Your Routine
         </h3>
 
-        <p>
+        <p data-content="h2_text">
           Not sure where to start?
           Let our Routine Builder guide you.
         </p>
@@ -1422,11 +1428,11 @@
           ✦
         </div>
 
-        <h3>
+        <h3 data-content="h3_title">
           Read the Journal
         </h3>
 
-        <p>
+        <p data-content="h3_text">
           Discover skincare guides,
           ingredient science, and wellness tips.
         </p>
@@ -1446,9 +1452,8 @@
   <section class="contact-quote">
 
     <h2>
-      Your questions matter.
-      Your skin deserves
-      <span>thoughtful care.</span>
+      <span data-content="quote_title">Your questions matter. Your skin deserves</span>
+      <span class="accent" data-content="quote_titleEm">thoughtful care.</span>
     </h2>
 
   </section>
@@ -1542,6 +1547,10 @@
           Cart
         </a>
 
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
       </div>
 
     </div>
@@ -1566,6 +1575,8 @@
   <!-- =========================================================
        JAVASCRIPT
   ========================================================== -->
+
+  <script src="email-client.js"></script>
 
   <script type="module">
 
@@ -1645,51 +1656,55 @@
       }
 
 
-      /*
-        Save the message locally.
-
-        This allows the contact form to work on the
-        front-end even without a backend/email service.
-      */
-
-      const contactMessage = {
-
-        name: name,
-
-        email: email,
-
-        subject: subject,
-
-        message: message,
-
-        date: new Date().toISOString()
-
+      const topicLabels = {
+        product: "Product Question",
+        order: "Order & Shipping",
+        routine: "Skincare Routine",
+        account: "Account Help",
+        other: "Something Else"
       };
 
+      const sendButton = document.getElementById("sendButton");
+      const originalLabel = sendButton.innerHTML;
+      sendButton.disabled = true;
+      sendButton.textContent = "Sending...";
 
-      const existingMessages =
-        JSON.parse(
-          localStorage.getItem("noireContactMessages")
-        ) || [];
+      /* Email the message to the Noiré inbox via the Apps Script backend */
 
+      const result = await window.NoireMail.contact(auth.currentUser, {
+        name: name,
+        email: email,
+        subject: topicLabels[subject] || subject,
+        message: message,
+        website: document.getElementById("website").value
+      });
 
-      existingMessages.push(contactMessage);
+      sendButton.disabled = false;
+      sendButton.innerHTML = originalLabel;
 
-
-      localStorage.setItem(
-        "noireContactMessages",
-        JSON.stringify(existingMessages)
-      );
+      if (!result.ok) {
+        successMessage.style.background = "#f8e9e9";
+        successMessage.style.color = "#8a3b3b";
+        successMessage.textContent = result.skipped
+          ? "Messaging isn't set up yet. Please try again later."
+          : (result.error || "Sorry, your message couldn't be sent. Please try again.");
+        successMessage.classList.add("show");
+        return;
+      }
 
       await logCustomerAudit(
         "Submitted Contact Message",
         "System",
-        `Submitted a contact message about "${subject}"`
+        `Submitted a contact message about "${topicLabels[subject] || subject}"`
       );
 
 
       /* Show success message */
 
+      successMessage.style.background = "";
+      successMessage.style.color = "";
+      successMessage.textContent =
+        "✨ Thank you for reaching out to Noiré. Your message has been received and we'll get back to you soon.";
       successMessage.classList.add("show");
 
 
@@ -1755,6 +1770,7 @@
   </button>
 
   <!-- Chatbot Script -->
+  <script src="site-content.js"></script>
   <script src="script.js"></script>
 
 </body>
